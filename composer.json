@@ -1,6 +1,6 @@
 {
     "name": "andrey-helldar/laravel-actions",
-    "description": "Performing actions while saving the list of called files",
+    "description": "Performing actions with saving the list of called files",
     "type": "library",
     "license": "MIT",
     "keywords": ["laravel", "migrations", "action", "actions"],
