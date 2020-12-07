@@ -2,10 +2,19 @@
 
 namespace Helldar\LaravelActions;
 
-use Helldar\LaravelActions\Console\{Install, Make, Migrate, Refresh, Reset, Rollback, Status};
-use Helldar\LaravelActions\Constants\{Action, Command};
+use Helldar\LaravelActions\Console\Install;
+use Helldar\LaravelActions\Console\Make;
+use Helldar\LaravelActions\Console\Migrate;
+use Helldar\LaravelActions\Console\Refresh;
+use Helldar\LaravelActions\Console\Reset;
+use Helldar\LaravelActions\Console\Rollback;
+use Helldar\LaravelActions\Console\Status;
+use Helldar\LaravelActions\Constants\Action;
+use Helldar\LaravelActions\Constants\Command;
 use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Database\Migrations\{DatabaseMigrationRepository, MigrationCreator, Migrator};
+use Illuminate\Database\Migrations\DatabaseMigrationRepository;
+use Illuminate\Database\Migrations\MigrationCreator;
+use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 final class ServiceProvider extends BaseServiceProvider
@@ -128,7 +137,8 @@ final class ServiceProvider extends BaseServiceProvider
     protected function registerConfig(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/actions.php', 'actions'
+            __DIR__ . '/../config/actions.php',
+            'actions'
         );
     }
 

@@ -51,7 +51,7 @@ final class Refresh extends BaseCommand
 
         if ($this->laravel->bound(Dispatcher::class)) {
             $this->laravel[Dispatcher::class]->dispatch(
-                new DatabaseRefreshed
+                new DatabaseRefreshed()
             );
         }
 
@@ -63,8 +63,6 @@ final class Refresh extends BaseCommand
      *
      * @param  string|null  $database
      * @param  int|null  $step
-     *
-     * @return void
      */
     protected function runRollback(?string $database, ?int $step)
     {
@@ -79,8 +77,6 @@ final class Refresh extends BaseCommand
      * Run the reset command.
      *
      * @param  string|null  $database
-     *
-     * @return void
      */
     protected function runReset(?string $database)
     {

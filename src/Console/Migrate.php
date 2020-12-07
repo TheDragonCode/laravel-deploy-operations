@@ -3,7 +3,8 @@
 namespace Helldar\LaravelActions\Console;
 
 use Helldar\LaravelActions\Constants\Names;
-use Helldar\LaravelActions\Traits\{Database, Optionable};
+use Helldar\LaravelActions\Traits\Database;
+use Helldar\LaravelActions\Traits\Optionable;
 use Illuminate\Database\Console\Migrations\MigrateCommand as BaseCommand;
 
 final class Migrate extends BaseCommand
@@ -54,8 +55,6 @@ final class Migrate extends BaseCommand
 
     /**
      * Prepare the action database for running.
-     *
-     * @return void
      */
     protected function prepareDatabase()
     {
