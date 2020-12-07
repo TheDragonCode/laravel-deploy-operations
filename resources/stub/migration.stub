@@ -1,0 +1,16 @@
+<?php
+
+use Helldar\LaravelActions\Support\Actionable;
+
+final class DummyClass extends Actionable
+{
+    public function up(): void
+    {
+        //
+    }
+
+    public function down(): void
+    {
+        //
+    }
+}
