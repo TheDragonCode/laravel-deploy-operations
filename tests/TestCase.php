@@ -6,7 +6,10 @@ use Helldar\LaravelActions\ServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Tests\Concerns\{Actionable, Database, Files, Settings};
+use Tests\Concerns\Actionable;
+use Tests\Concerns\Database;
+use Tests\Concerns\Files;
+use Tests\Concerns\Settings;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -15,6 +18,14 @@ abstract class TestCase extends BaseTestCase
     use Files;
     use RefreshDatabase;
     use Settings;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->freshDatabase();
+        $this->freshFiles();
+    }
 
     protected function getEnvironmentSetUp($app)
     {
@@ -27,14 +38,6 @@ abstract class TestCase extends BaseTestCase
     protected function getPackageProviders($app): array
     {
         return [ServiceProvider::class];
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->freshDatabase();
-        $this->freshFiles();
     }
 
     protected function table()

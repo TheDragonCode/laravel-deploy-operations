@@ -47,8 +47,6 @@ final class Make extends BaseCommand
      *
      * @param  \Illuminate\Database\Migrations\MigrationCreator  $creator
      * @param  \Illuminate\Support\Composer  $composer
-     *
-     * @return void
      */
     public function __construct(MigrationCreator $creator, Composer $composer)
     {
@@ -82,7 +80,8 @@ final class Make extends BaseCommand
     protected function writeMigration(string $name)
     {
         $file = $this->creator->create(
-            $name, $this->getMigrationPath()
+            $name,
+            $this->getMigrationPath()
         );
 
         $path = pathinfo($file, PATHINFO_FILENAME);
