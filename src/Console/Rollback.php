@@ -40,7 +40,8 @@ final class Rollback extends RollbackCommand
 
         $this->migrator->usingConnection($this->optionDatabase(), function () {
             $this->migrator->setOutput($this->output)->rollback(
-                $this->getMigrationPaths(), [
+                $this->getMigrationPaths(),
+                [
                     'step' => $this->optionStep(),
                 ]
             );
