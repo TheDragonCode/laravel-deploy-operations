@@ -7,19 +7,21 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Tests\Concerns\Actionable;
+use Tests\Concerns\AssertDatabase;
 use Tests\Concerns\Database;
 use Tests\Concerns\Files;
+use Tests\Concerns\Laraveable;
 use Tests\Concerns\Settings;
-use Tests\Concerns\Sleepable;
 
 abstract class TestCase extends BaseTestCase
 {
     use Actionable;
+    use AssertDatabase;
     use Database;
     use Files;
+    use Laraveable;
     use RefreshDatabase;
     use Settings;
-    use Sleepable;
 
     protected function setUp(): void
     {

@@ -21,7 +21,11 @@ final class StatusTest extends TestCase
 
         $this->assertDatabaseCount($this->table, 0);
 
-        $this->artisan('migrate:actions:status')->expectsTable([], [])->run();
+        if ($this->is6x()) {
+            $this->artisan('migrate:actions:status')->run();
+        } else {
+            $this->artisan('migrate:actions:status')->expectsTable([], [])->run();
+        }
 
         $filename = date('Y_m_d_His') . '_status';
 

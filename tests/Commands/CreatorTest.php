@@ -18,7 +18,6 @@ final class CreatorTest extends TestCase
         $this->assertFileDoesNotExist($path);
 
         $this->artisan('make:migration:action', compact('name'))->run();
-        $this->await();
 
         $this->assertFileExists($path);
     }
