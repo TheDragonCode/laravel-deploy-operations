@@ -49,7 +49,7 @@ final class Refresh extends BaseCommand
             '--force'    => true,
         ]));
 
-        if ($this->laravel->bound(Dispatcher::class)) {
+        if ($this->laravel->bound(Dispatcher::class) && class_exists(DatabaseRefreshed::class)) {
             $this->laravel[Dispatcher::class]->dispatch(
                 new DatabaseRefreshed()
             );
