@@ -3,7 +3,7 @@
     "description": "Performing actions with saving the list of called files",
     "type": "library",
     "license": "MIT",
-    "keywords": ["laravel", "migrations", "action", "actions"],
+    "keywords": ["laravel", "migration", "migrations", "action", "actions"],
     "authors": [
         {
             "name": "Andrey Helldar",
