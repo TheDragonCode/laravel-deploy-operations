@@ -28,9 +28,7 @@ jobs:
                 run: composer self-update
 
             -   name: Install dependencies
-                run: |
-                    composer require laravel/framework:^${{ matrix.laravel }}
-                    composer update --prefer-stable --prefer-dist --no-progress --no-interaction
+                run: composer require laravel/framework:^${{ matrix.laravel }}
 
             -   name: Execute tests
                 run: |
