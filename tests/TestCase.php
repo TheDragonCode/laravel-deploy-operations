@@ -10,6 +10,7 @@ use Tests\Concerns\Actionable;
 use Tests\Concerns\Database;
 use Tests\Concerns\Files;
 use Tests\Concerns\Settings;
+use Tests\Concerns\Sleepable;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -18,6 +19,7 @@ abstract class TestCase extends BaseTestCase
     use Files;
     use RefreshDatabase;
     use Settings;
+    use Sleepable;
 
     protected function setUp(): void
     {
