@@ -16,7 +16,6 @@
     },
     "require": {
         "php": "^7.3|^8.0",
-        "andrey-helldar/support": "^1.26",
         "illuminate/console": "^6.0|^7.0|^8.0",
         "illuminate/database": "^6.0|^7.0|^8.0",
         "illuminate/support": "^6.0|^7.0|^8.0"
