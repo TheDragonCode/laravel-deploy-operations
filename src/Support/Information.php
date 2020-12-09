@@ -7,13 +7,13 @@ use Illuminate\Support\Str;
 final class Information
 {
     protected $available = [
-        'Migrating:'                           => 'Running:',
         'Migrated:'                            => 'Done:',
-        'Nothing to migrate'                   => 'Nothing to do',
+        'Migrating:'                           => 'Running:',
+        'Migration not found'                  => 'Action not found',
         'Migration table created successfully' => 'Action table created successfully',
         'Migration table not found'            => 'Actions table not found',
         'No migrations found'                  => 'No actions found',
-        'Migration not found'                  => 'Action not found',
+        'Nothing to migrate'                   => 'Nothing to do',
     ];
 
     public function replace(string $value): string
