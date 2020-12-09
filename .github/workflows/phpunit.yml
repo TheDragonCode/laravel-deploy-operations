@@ -34,3 +34,33 @@ jobs:
                 run: |
                     mkdir -p build/logs
                     vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+
+    scrutinizer:
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    extensions: curl, mbstring, zip, pcntl, pdo, pdo_sqlite, iconv
+                    coverage: xdebug
+
+            -   name: Composer self update
+                run: composer self-update
+
+            -   name: Install dependencies
+                run: composer update --prefer-dist --no-progress --no-interaction --no-suggest
+
+            -   name: Execute tests
+                run: |
+                    mkdir -p build/logs
+                    vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+
+            -   name: Scrutinizer CI
+                run: |
+                    wget https://scrutinizer-ci.com/ocular.phar
+                    php ocular.phar code-coverage:upload --format=php-clover coverage.clover
