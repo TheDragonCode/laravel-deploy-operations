@@ -44,6 +44,6 @@ final class MigrateTest extends TestCase
         );
 
         $this->artisan('migrate:actions:status')
-            ->expectsOutput('No migrations found');
+            ->expectsOutput('No actions found');
     }
 }

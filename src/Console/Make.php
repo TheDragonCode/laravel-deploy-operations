@@ -4,6 +4,7 @@ namespace Helldar\LaravelActions\Console;
 
 use Helldar\LaravelActions\Constants\Names;
 use Helldar\LaravelActions\Traits\Database;
+use Helldar\LaravelActions\Traits\Infoable;
 use Illuminate\Database\Console\Migrations\BaseCommand;
 use Illuminate\Database\Migrations\MigrationCreator;
 use Illuminate\Support\Composer;
@@ -12,6 +13,7 @@ use Illuminate\Support\Str;
 final class Make extends BaseCommand
 {
     use Database;
+    use Infoable;
 
     /**
      * The console command name.
@@ -86,6 +88,6 @@ final class Make extends BaseCommand
 
         $path = pathinfo($file, PATHINFO_FILENAME);
 
-        $this->line("<info>Created Migration:</info> {$path}");
+        $this->line("<info>Created Action:</info> {$path}");
     }
 }

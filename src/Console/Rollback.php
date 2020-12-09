@@ -4,6 +4,7 @@ namespace Helldar\LaravelActions\Console;
 
 use Helldar\LaravelActions\Constants\Names;
 use Helldar\LaravelActions\Traits\Database;
+use Helldar\LaravelActions\Traits\Infoable;
 use Helldar\LaravelActions\Traits\Optionable;
 use Illuminate\Database\Console\Migrations\RollbackCommand;
 use Symfony\Component\Console\Input\InputOption;
@@ -11,6 +12,7 @@ use Symfony\Component\Console\Input\InputOption;
 final class Rollback extends RollbackCommand
 {
     use Database;
+    use Infoable;
     use Optionable;
 
     /**
@@ -41,9 +43,7 @@ final class Rollback extends RollbackCommand
         $this->migrator->usingConnection($this->optionDatabase(), function () {
             $this->migrator->setOutput($this->output)->rollback(
                 $this->getMigrationPaths(),
-                [
-                    'step' => $this->optionStep(),
-                ]
+                ['step' => $this->optionStep()]
             );
         });
 
@@ -62,7 +62,7 @@ final class Rollback extends RollbackCommand
 
             ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production'],
 
-            ['step', null, InputOption::VALUE_OPTIONAL, 'The number of migrations to be reverted'],
+            ['step', null, InputOption::VALUE_OPTIONAL, 'The number of actions to be reverted'],
         ];
     }
 }

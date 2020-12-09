@@ -4,12 +4,14 @@ namespace Helldar\LaravelActions\Console;
 
 use Helldar\LaravelActions\Constants\Names;
 use Helldar\LaravelActions\Traits\Database;
+use Helldar\LaravelActions\Traits\Infoable;
 use Helldar\LaravelActions\Traits\Optionable;
 use Illuminate\Database\Console\Migrations\MigrateCommand as BaseCommand;
 
 final class Migrate extends BaseCommand
 {
     use Database;
+    use Infoable;
     use Optionable;
 
     /**
@@ -20,7 +22,7 @@ final class Migrate extends BaseCommand
     protected $signature = Names::MIGRATE
     . ' {--database= : The database connection to use}'
     . ' {--force : Force the operation to run when in production}'
-    . ' {--step : Force the migrations to be run so they can be rolled back individually}';
+    . ' {--step : Force the actions to be run so they can be rolled back individually}';
 
     /**
      * The console command description.

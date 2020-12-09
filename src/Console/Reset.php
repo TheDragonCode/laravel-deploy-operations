@@ -4,6 +4,7 @@ namespace Helldar\LaravelActions\Console;
 
 use Helldar\LaravelActions\Constants\Names;
 use Helldar\LaravelActions\Traits\Database;
+use Helldar\LaravelActions\Traits\Infoable;
 use Helldar\LaravelActions\Traits\Optionable;
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Database\Console\Migrations\BaseCommand;
@@ -14,6 +15,7 @@ final class Reset extends BaseCommand
 {
     use ConfirmableTrait;
     use Database;
+    use Infoable;
     use Optionable;
 
     /**
@@ -49,6 +51,11 @@ final class Reset extends BaseCommand
         $this->migrator = $migrator;
     }
 
+    /**
+     * Execute the console command.
+     *
+     * @return int|void
+     */
     public function handle()
     {
         if (! $this->confirmToProceed()) {
@@ -57,12 +64,16 @@ final class Reset extends BaseCommand
 
         return $this->migrator->usingConnection($this->optionDatabase(), function () {
             if (! $this->migrator->repositoryExists()) {
-                return $this->comment('Migration table not found.');
+                $this->comment('Actions table not found.');
+
+                return 1;
             }
 
             $this->migrator->setOutput($this->output)->reset(
                 $this->getMigrationPaths()
             );
+
+            return 0;
         });
     }
 

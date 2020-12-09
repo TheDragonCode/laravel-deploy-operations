@@ -4,6 +4,7 @@ namespace Helldar\LaravelActions\Console;
 
 use Helldar\LaravelActions\Constants\Names;
 use Helldar\LaravelActions\Traits\Database;
+use Helldar\LaravelActions\Traits\Infoable;
 use Helldar\LaravelActions\Traits\Optionable;
 use Illuminate\Console\Command as BaseCommand;
 use Illuminate\Console\ConfirmableTrait;
@@ -15,6 +16,7 @@ final class Refresh extends BaseCommand
 {
     use ConfirmableTrait;
     use Database;
+    use Infoable;
     use Optionable;
 
     /**

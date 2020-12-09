@@ -4,11 +4,13 @@ namespace Helldar\LaravelActions\Console;
 
 use Helldar\LaravelActions\Constants\Names;
 use Helldar\LaravelActions\Traits\Database;
+use Helldar\LaravelActions\Traits\Infoable;
 use Illuminate\Database\Console\Migrations\StatusCommand as BaseCommand;
 
 final class Status extends BaseCommand
 {
     use Database;
+    use Infoable;
 
     /**
      * The console command name.

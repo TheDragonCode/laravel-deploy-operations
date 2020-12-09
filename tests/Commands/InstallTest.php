@@ -14,7 +14,7 @@ final class InstallTest extends TestCase
         );
 
         $this->artisan('migrate:actions:status')
-            ->expectsOutput('Migration table not found.');
+            ->expectsOutput('Actions table not found.');
     }
 
     public function testRepository()
