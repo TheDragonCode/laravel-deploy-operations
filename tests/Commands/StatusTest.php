@@ -21,8 +21,6 @@ final class StatusTest extends TestCase
             $this->artisan('migrate:actions:status')->expectsTable([], [])->run();
         }
 
-        $filename = date('Y_m_d_His') . '_status';
-
         $this->artisan('make:migration:action', ['name' => 'Status'])->run();
         $this->artisan('migrate:actions')->run();
 
@@ -30,9 +28,6 @@ final class StatusTest extends TestCase
 
         $this->artisan('migrate:actions:status')->run();
 
-        $this->assertDatabaseHas($this->table, [
-            'migration' => $filename,
-            'batch'     => 1,
-        ]);
+        $this->assertDatabaseHasLike($this->table, 'migration', 'status');
     }
 }
