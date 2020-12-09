@@ -31,7 +31,8 @@ tools:
         config:
             standard: PSR12
         filter:
-            paths: [ 'src' ]
+            paths:
+                - src
     php_loc:
         enabled: true
     php_cpd:
