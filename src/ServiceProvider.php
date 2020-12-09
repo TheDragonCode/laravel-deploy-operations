@@ -69,7 +69,7 @@ final class ServiceProvider extends BaseServiceProvider
     protected function registerCreator(): void
     {
         $this->app->singleton(Action::CREATOR, static function ($app) {
-            return new MigrationCreator($app['files'], __DIR__ . '/../resources/stub');
+            return new MigrationCreator($app['files'], __DIR__ . '/../resources/stubs');
         });
     }
 
