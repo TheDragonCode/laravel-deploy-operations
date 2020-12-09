@@ -6,6 +6,7 @@
 
 [![StyleCI Status][badge_styleci]][link_styleci]
 [![Github Workflow Status][badge_build]][link_build]
+[![Coverage Status][badge_coverage]][link_scrutinizer]
 [![Scrutinizer Code Quality][badge_quality]][link_scrutinizer]
 
 [![Stable Version][badge_stable]][link_packagist]
@@ -163,6 +164,8 @@ php artisan migrate:actions:status
 [badge_lumen]:          https://img.shields.io/badge/Lumen-6.x%20%7C%207.x%20%7C%208.x-orange.svg?style=flat-square
 
 [badge_license]:        https://img.shields.io/packagist/l/andrey-helldar/laravel-actions.svg?style=flat-square
+
+[badge_coverage]:       https://img.shields.io/scrutinizer/coverage/g/andrey-helldar/laravel-actions.svg?style=flat-square
 
 [badge_quality]:        https://img.shields.io/scrutinizer/g/andrey-helldar/laravel-actions.svg?style=flat-square
 
