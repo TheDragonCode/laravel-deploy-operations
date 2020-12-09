@@ -173,7 +173,7 @@ php artisan migrate:actions:status
 
 [badge_styleci]:        https://styleci.io/repos/317845207/shield
 
-[badge_unstable]:       https://img.shields.io/badge/unstable-dev--master-orange?style=flat-square
+[badge_unstable]:       https://img.shields.io/badge/unstable-dev--main-orange?style=flat-square
 
 [link_build]:           https://github.com/andrey-helldar/laravel-actions/actions
 
@@ -181,6 +181,6 @@ php artisan migrate:actions:status
 
 [link_packagist]:       https://packagist.org/packages/andrey-helldar/laravel-actions
 
-[link_scrutinizer]:     https://scrutinizer-ci.com/g/andrey-helldar/laravel-actions/?branch=master
+[link_scrutinizer]:     https://scrutinizer-ci.com/g/andrey-helldar/laravel-actions/?branch=main
 
 [link_styleci]:         https://github.styleci.io/repos/317845207
