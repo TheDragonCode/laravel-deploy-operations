@@ -2,6 +2,7 @@
 vendor/
 build/
 
+*.bak
 *.cache
 *.clover
 *.orig
