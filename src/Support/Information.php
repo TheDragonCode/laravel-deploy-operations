@@ -2,8 +2,6 @@
 
 namespace Helldar\LaravelActions\Support;
 
-use Illuminate\Support\Str;
-
 final class Information
 {
     protected $available = [
@@ -18,12 +16,10 @@ final class Information
 
     public function replace(string $value): string
     {
-        foreach ($this->available as $search => $replace) {
-            if (Str::contains($value, $search)) {
-                return str_replace($search, $replace, $value);
-            }
-        }
-
-        return $value;
+        return str_replace(
+            array_keys($this->available),
+            array_values($this->available),
+            $value
+        );
     }
 }
