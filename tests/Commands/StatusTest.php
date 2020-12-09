@@ -2,23 +2,17 @@
 
 namespace Tests\Commands;
 
-use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 final class StatusTest extends TestCase
 {
     public function testStatusCommand()
     {
-        $this->assertFalse(
-            Schema::hasTable($this->table)
-        );
+        $this->assertDatabaseDoesntTable($this->table);
 
         $this->artisan('migrate:actions:install')->run();
 
-        $this->assertTrue(
-            Schema::hasTable($this->table)
-        );
-
+        $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 0);
 
         if ($this->is6x()) {

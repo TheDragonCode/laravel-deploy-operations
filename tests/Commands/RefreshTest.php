@@ -2,23 +2,17 @@
 
 namespace Tests\Commands;
 
-use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 final class RefreshTest extends TestCase
 {
     public function testRefreshCommand()
     {
-        $this->assertFalse(
-            Schema::hasTable($this->table)
-        );
+        $this->assertDatabaseDoesntTable($this->table);
 
         $this->artisan('migrate:actions:install')->run();
 
-        $this->assertTrue(
-            Schema::hasTable($this->table)
-        );
-
+        $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 0);
 
         $this->artisan('make:migration:action', ['name' => 'Refresh'])->run();
@@ -29,9 +23,6 @@ final class RefreshTest extends TestCase
         $this->artisan('migrate:actions:refresh')->run();
 
         $this->assertDatabaseCount($this->table, 1);
-
-        $this->assertTrue(
-            $this->table()->whereRaw('migration like \'%refresh\'')->exists()
-        );
+        $this->assertDatabaseHasLike($this->table, 'migration', 'refresh');
     }
 }

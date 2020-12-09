@@ -2,16 +2,13 @@
 
 namespace Tests\Commands;
 
-use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 final class InstallTest extends TestCase
 {
     public function testRepositoryNotFound()
     {
-        $this->assertFalse(
-            Schema::hasTable($this->table)
-        );
+        $this->assertDatabaseDoesntTable($this->table);
 
         $this->artisan('migrate:actions:status')
             ->expectsOutput('Actions table not found.');
@@ -19,14 +16,10 @@ final class InstallTest extends TestCase
 
     public function testRepository()
     {
-        $this->assertFalse(
-            Schema::hasTable($this->table)
-        );
+        $this->assertDatabaseDoesntTable($this->table);
 
         $this->artisan('migrate:actions:install')->run();
 
-        $this->assertTrue(
-            Schema::hasTable($this->table)
-        );
+        $this->assertDatabaseHasTable($this->table);
     }
 }
