@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
-         bootstrap="vendor/autoload.php"
-         cacheResultFile=".phpunit.cache/test-results"
-         executionOrder="depends,defects"
-         forceCoversAnnotation="true"
+         backupGlobals="false"
+         backupStaticAttributes="false"
          beStrictAboutCoversAnnotation="true"
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTodoAnnotatedTests="true"
+         bootstrap="vendor/autoload.php"
+         cacheResultFile=".phpunit.cache/test-results"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         executionOrder="depends,defects"
          failOnRisky="true"
          failOnWarning="true"
-         verbose="true">
+         forceCoversAnnotation="false"
+         stopOnError="false"
+         stopOnFailure="false"
+         stopOnIncomplete="false"
+         stopOnRisky="false"
+         stopOnSkipped="false"
+         verbose="false"
+>
     <php>
         <env name="APP_KEY" value="AckfSECXIvnK5r28GVIWUAxmbBSjTsmF"/>
     </php>
