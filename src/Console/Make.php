@@ -3,6 +3,7 @@
 namespace Helldar\LaravelActions\Console;
 
 use Helldar\LaravelActions\Constants\Names;
+use Helldar\LaravelActions\Traits\Argumentable;
 use Helldar\LaravelActions\Traits\Database;
 use Helldar\LaravelActions\Traits\Infoable;
 use Illuminate\Database\Console\Migrations\BaseCommand;
@@ -12,6 +13,7 @@ use Illuminate\Support\Str;
 
 final class Make extends BaseCommand
 {
+    use Argumentable;
     use Database;
     use Infoable;
 
@@ -66,7 +68,7 @@ final class Make extends BaseCommand
     public function handle()
     {
         $this->writeMigration(
-            Str::snake(trim($this->argument('name')))
+            Str::snake($this->argumentName())
         );
 
         $this->composer->dumpAutoloads();
