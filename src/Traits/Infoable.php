@@ -13,8 +13,6 @@ trait Infoable
      * @param  string  $string
      * @param  string|null  $style
      * @param  int|string|null  $verbosity
-     *
-     * @return void
      */
     public function line($string, $style = null, $verbosity = null)
     {
