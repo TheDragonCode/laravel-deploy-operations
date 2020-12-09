@@ -31,9 +31,7 @@ jobs:
                 run: composer require laravel/framework:^${{ matrix.laravel }}
 
             -   name: Execute tests
-                run: |
-                    mkdir -p build/logs
-                    vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+                run: vendor/bin/phpunit
 
     Scrutinizer:
         runs-on: ubuntu-latest
@@ -58,9 +56,9 @@ jobs:
             -   name: Execute tests
                 run: |
                     mkdir -p build/logs
-                    vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+                    vendor/bin/phpunit --coverage-clover=coverage.clover
 
             -   name: Scrutinizer CI
                 run: |
                     wget https://scrutinizer-ci.com/ocular.phar
-                    php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+                    php ocular.phar code-coverage:upload --access-token="$SCRUTINIZER_TOKEN" --format=php-clover coverage.clover
