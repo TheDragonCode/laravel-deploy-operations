@@ -34,9 +34,3 @@ jobs:
                 run: |
                     mkdir -p build/logs
                     vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
-
-            -   name: Scrutinizer CI
-                if: success() && matrix.php == '8.0' && matrix.laravel == '8.0'
-                run: |
-                    wget https://scrutinizer-ci.com/ocular.phar
-                    php ocular.phar code-coverage:upload --format=php-clover coverage.clover

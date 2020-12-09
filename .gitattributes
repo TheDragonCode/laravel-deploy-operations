@@ -6,6 +6,5 @@ tests/ export-ignore
 .codecov.yml export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
-.scrutinizer.yml
 .styleci.yml export-ignore
 phpunit.yml export-ignore
