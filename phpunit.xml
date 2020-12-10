@@ -3,40 +3,27 @@
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
          backupGlobals="false"
          backupStaticAttributes="false"
-         beStrictAboutCoversAnnotation="true"
-         beStrictAboutOutputDuringTests="true"
-         beStrictAboutTodoAnnotatedTests="true"
          bootstrap="vendor/autoload.php"
-         cacheResultFile=".phpunit.cache/test-results"
          colors="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
-         executionOrder="depends,defects"
-         failOnRisky="true"
-         failOnWarning="true"
          forceCoversAnnotation="false"
          stopOnError="false"
          stopOnFailure="false"
-         stopOnIncomplete="false"
-         stopOnRisky="false"
-         stopOnSkipped="false"
-         verbose="false"
+         verbose="true"
 >
     <php>
         <env name="APP_KEY" value="AckfSECXIvnK5r28GVIWUAxmbBSjTsmF"/>
     </php>
     <testsuites>
         <testsuite name="default">
-            <directory suffix="Test.php">tests</directory>
+            <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
-
-    <coverage
-            cacheDirectory=".phpunit.cache/code-coverage"
-            processUncoveredFiles="true">
-        <include>
-            <directory suffix=".php">src</directory>
-        </include>
-    </coverage>
+    <logging>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+        <log type="coverage-text" target="build/logs/coverage.txt"/>
+        <log type="coverage-html" target="build/logs/coverage"/>
+    </logging>
 </phpunit>
