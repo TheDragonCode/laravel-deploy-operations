@@ -109,6 +109,36 @@ database, you will be prompted for confirmation before the commands are executed
 php artisan migrate:actions --force
 ```
 
+#### Execution every time
+
+In some cases, you need to call the code every time you deploy the application. For example, to call reindexing.
+
+To do this, override the `$once` variable in the action file:
+
+```php
+use Helldar\LaravelActions\Support\Actionable;
+
+class Reindex extends Actionable
+{
+    protected $once = false;
+
+    public function up(): void
+    {
+        // your calling code
+    }
+
+    public function down(): void
+    {
+        //
+    }
+}
+```
+
+If the value is `$once = false`, the `up` method will be called every time the `migrate:actions` command called.
+
+In this case, information about it will not be written to the `migration_actions` table and, therefore, the `down` method will not be called when the rollback
+command is called.
+
 ### Rolling Back Actions
 
 To roll back the latest action operation, you may use the `rollback` command. This command rolls back the last "batch" of actions, which may include multiple
