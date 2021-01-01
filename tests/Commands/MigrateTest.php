@@ -22,6 +22,22 @@ final class MigrateTest extends TestCase
         $this->assertDatabaseHasLike($this->table, 'migration', 'test_migration');
     }
 
+    public function testEveryTimeExecution()
+    {
+        $table = 'every_time';
+
+        $this->artisan('migrate:actions:install')->run();
+        $this->artisan('migrate')->run();
+
+        $this->assertDatabaseCount($table, 0);
+        $this->artisan('migrate:actions')->run();
+
+        $this->assertDatabaseCount($table, 1);
+        $this->artisan('migrate:actions')->run();
+
+        $this->assertDatabaseCount($table, 2);
+    }
+
     public function testMigrationNotFound()
     {
         $this->assertDatabaseDoesntTable($this->table);
