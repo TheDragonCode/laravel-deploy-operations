@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
          backupGlobals="false"
          backupStaticAttributes="false"
          bootstrap="vendor/autoload.php"
@@ -13,6 +13,13 @@
          stopOnFailure="false"
          verbose="true"
 >
+    <coverage>
+        <report>
+            <clover outputFile="build/logs/clover.xml"/>
+            <html outputDirectory="build/logs/coverage"/>
+            <text outputFile="build/logs/coverage.txt"/>
+        </report>
+    </coverage>
     <php>
         <env name="APP_KEY" value="AckfSECXIvnK5r28GVIWUAxmbBSjTsmF"/>
     </php>
@@ -21,9 +28,5 @@
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
-    <logging>
-        <log type="coverage-clover" target="build/logs/clover.xml"/>
-        <log type="coverage-text" target="build/logs/coverage.txt"/>
-        <log type="coverage-html" target="build/logs/coverage"/>
-    </logging>
+    <logging/>
 </phpunit>
