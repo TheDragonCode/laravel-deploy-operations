@@ -7,4 +7,10 @@ use Illuminate\Database\Migrations\Migration;
 
 abstract class Actionable extends Migration implements Contract
 {
+    protected $once = true;
+
+    public function isOnce(): bool
+    {
+        return $this->once;
+    }
 }
