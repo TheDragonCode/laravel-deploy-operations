@@ -26,8 +26,6 @@ final class Migrator extends BaseMigrator
      * @param  string  $file
      * @param  int  $batch
      * @param  bool  $pretend
-     *
-     * @return void
      */
     protected function runUp($file, $batch, $pretend)
     {
