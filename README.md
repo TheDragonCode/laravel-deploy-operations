@@ -26,6 +26,7 @@
     * [Generating actions](#generating-actions)
     * [Running Actions](#running-actions)
         * [Forcing Actions To Run In Production](#forcing-actions-to-run-in-production)
+        * [Execution every time](#execution-every-time)
     * [Rolling Back Actions](#rolling-back-actions)
     * [Roll Back & Action Using A Single Command](#roll-back--action-using-a-single-command)
     * [Actions Status](#actions-status)
