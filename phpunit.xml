@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
-         backupGlobals="false"
+<phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="vendor/autoload.php"
+         bootstrap="phpunit.php"
          colors="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
-         forceCoversAnnotation="false"
+         processIsolation="false"
          stopOnError="false"
          stopOnFailure="false"
          verbose="true"
@@ -17,10 +15,15 @@
         <env name="APP_KEY" value="AckfSECXIvnK5r28GVIWUAxmbBSjTsmF"/>
     </php>
     <testsuites>
-        <testsuite name="default">
+        <testsuite name="Test Suite">
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
     <logging>
         <log type="coverage-clover" target="build/logs/clover.xml"/>
         <log type="coverage-text" target="build/logs/coverage.txt"/>
