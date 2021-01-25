@@ -26,16 +26,19 @@ final class MigrateTest extends TestCase
     {
         $table = 'every_time';
 
-        $this->artisan('migrate:actions:install')->run();
         $this->artisan('migrate')->run();
+        $this->artisan('migrate:actions:install')->run();
 
         $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 0);
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 1);
+        $this->assertDatabaseCount($this->table, 1);
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 2);
+        $this->assertDatabaseCount($this->table, 1);
     }
 
     public function testMigrationNotFound()
