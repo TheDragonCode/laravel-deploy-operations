@@ -29,6 +29,11 @@ trait AssertDatabase
         );
     }
 
+    protected function assertDatabaseMigrationHas(string $table, $value, $connection = null): void
+    {
+        $this->assertDatabaseHasLike($table, 'migration', $value, $connection);
+    }
+
     protected function assertDatabaseHasLike(string $table, string $column, $value, $connection = null): void
     {
         $exists = DB::connection($connection)
@@ -37,6 +42,11 @@ trait AssertDatabase
             ->exists();
 
         $this->assertTrue($exists);
+    }
+
+    protected function assertDatabaseMigrationDoesntLike(string $table, $value, $connection = null): void
+    {
+        $this->assertDatabaseDoesntLike($table, 'migration', $value, $connection);
     }
 
     protected function assertDatabaseDoesntLike(string $table, string $column, $value, $connection = null): void
