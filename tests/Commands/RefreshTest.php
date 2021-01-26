@@ -23,6 +23,6 @@ final class RefreshTest extends TestCase
         $this->artisan('migrate:actions:refresh')->run();
 
         $this->assertDatabaseCount($this->table, 1);
-        $this->assertDatabaseHasLike($this->table, 'migration', 'refresh');
+        $this->assertDatabaseMigrationHas($this->table, 'refresh');
     }
 }

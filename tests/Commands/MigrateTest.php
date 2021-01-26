@@ -19,7 +19,40 @@ final class MigrateTest extends TestCase
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($this->table, 1);
-        $this->assertDatabaseHasLike($this->table, 'migration', 'test_migration');
+        $this->assertDatabaseMigrationHas($this->table, 'test_migration');
+    }
+
+    public function testEveryTimeExecution()
+    {
+        $this->copyFiles();
+
+        $table = 'every_time';
+
+        $this->artisan('migrate:actions:install')->run();
+
+        $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'every_time');
+        $this->artisan('migrate:actions')->run();
+
+        $this->assertDatabaseCount($table, 1);
+        $this->assertDatabaseCount($this->table, 1);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'every_time');
+        $this->artisan('migrate:actions')->run();
+
+        $this->assertDatabaseCount($table, 2);
+        $this->assertDatabaseCount($this->table, 1);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'every_time');
+        $this->artisan('migrate:actions')->run();
+
+        $this->assertDatabaseCount($table, 3);
+        $this->assertDatabaseCount($this->table, 1);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'every_time');
+        $this->artisan('migrate:actions')->run();
+
+        $this->assertDatabaseCount($table, 4);
+        $this->assertDatabaseCount($this->table, 1);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'every_time');
     }
 
     public function testMigrationNotFound()

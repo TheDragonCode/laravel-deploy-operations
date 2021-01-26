@@ -9,4 +9,5 @@ tests/ export-ignore
 .gitignore export-ignore
 .scrutinizer.yml export-ignore
 .styleci.yml export-ignore
-phpunit.yml export-ignore
+
+phpunit.xml export-ignore

@@ -28,6 +28,6 @@ final class StatusTest extends TestCase
 
         $this->artisan('migrate:actions:status')->run();
 
-        $this->assertDatabaseHasLike($this->table, 'migration', 'status');
+        $this->assertDatabaseMigrationHas($this->table, 'status');
     }
 }
