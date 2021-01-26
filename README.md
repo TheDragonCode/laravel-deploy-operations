@@ -121,6 +121,14 @@ use Helldar\LaravelActions\Support\Actionable;
 
 class Reindex extends Actionable
 {
+    /**
+     * Determines the type of launch of the action.
+     *
+     * If true, then it will be executed once.
+     * If false, then the action will run every time the `migrate:actions` command is invoked.
+     *
+     * @var bool
+     */
     protected $once = false;
 
     public function up(): void
