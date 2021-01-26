@@ -43,7 +43,7 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 
 ```json
 {
-    "require-dev": {
+    "require": {
         "andrey-helldar/laravel-actions": "^1.3"
     }
 }
