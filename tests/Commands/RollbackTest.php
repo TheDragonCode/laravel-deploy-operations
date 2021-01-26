@@ -21,9 +21,9 @@ final class RollbackTest extends TestCase
 
         $this->assertDatabaseCount($this->table, 2);
 
-        $this->assertDatabaseHasLike($this->table, 'migration', 'rollback_one');
-        $this->assertDatabaseHasLike($this->table, 'migration', 'rollback_two');
-        $this->assertDatabaseDoesntLike($this->table, 'migration', 'rollback_tree');
+        $this->assertDatabaseMigrationHas($this->table, 'rollback_one');
+        $this->assertDatabaseMigrationHas($this->table, 'rollback_two');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'rollback_tree');
 
         $this->artisan('migrate:actions:rollback')->run();
 
@@ -38,8 +38,8 @@ final class RollbackTest extends TestCase
 
         $this->assertDatabaseCount($this->table, 3);
 
-        $this->assertDatabaseHasLike($this->table, 'migration', 'rollback_one');
-        $this->assertDatabaseHasLike($this->table, 'migration', 'rollback_two');
-        $this->assertDatabaseHasLike($this->table, 'migration', 'rollback_tree');
+        $this->assertDatabaseMigrationHas($this->table, 'rollback_one');
+        $this->assertDatabaseMigrationHas($this->table, 'rollback_two');
+        $this->assertDatabaseMigrationHas($this->table, 'rollback_tree');
     }
 }

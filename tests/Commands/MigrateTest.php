@@ -19,7 +19,7 @@ final class MigrateTest extends TestCase
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($this->table, 1);
-        $this->assertDatabaseHasLike($this->table, 'migration', 'test_migration');
+        $this->assertDatabaseMigrationHas($this->table, 'test_migration');
     }
 
     public function testEveryTimeExecution()
