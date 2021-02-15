@@ -15,11 +15,6 @@ final class EveryTime extends Actionable
         ]);
     }
 
-    public function down(): void
-    {
-        // nothing
-    }
-
     protected function table()
     {
         return DB::table('every_time');

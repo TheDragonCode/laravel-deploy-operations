@@ -19,11 +19,6 @@ final class TestFailedTransactions extends Actionable
         throw new Exception('Random message');
     }
 
-    public function down(): void
-    {
-        // nothing
-    }
-
     protected function table()
     {
         return DB::table('transactions');

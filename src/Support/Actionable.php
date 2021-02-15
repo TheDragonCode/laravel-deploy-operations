@@ -27,6 +27,16 @@ abstract class Actionable extends Migration implements Contract
     protected $transactions = false;
 
     /**
+     * Reverse the actions.
+     *
+     * @return void
+     */
+    public function down(): void
+    {
+        //
+    }
+
+    /**
      * Determines the type of launch of the action.
      *
      * If true, then it will be executed once.

@@ -45,7 +45,7 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```json
 {
     "require": {
-        "andrey-helldar/laravel-actions": "^1.3"
+        "andrey-helldar/laravel-actions": "^1.4"
     }
 }
 ```
@@ -126,12 +126,7 @@ class Reindex extends Actionable
 
     public function up(): void
     {
-        // your calling code
-    }
-
-    public function down(): void
-    {
-        //
+        // your code
     }
 }
 ```
@@ -165,11 +160,6 @@ class AddSomeData extends Actionable
         ]);
 
         $post->tags()->sync($ids);
-    }
-
-    public function down(): void
-    {
-        //
     }
 }
 ```
