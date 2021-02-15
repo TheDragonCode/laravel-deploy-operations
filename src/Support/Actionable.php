@@ -18,6 +18,15 @@ abstract class Actionable extends Migration implements Contract
     protected $once = true;
 
     /**
+     * Determines a call to database transactions.
+     *
+     * By default, false.
+     *
+     * @var bool
+     */
+    protected $transactions = false;
+
+    /**
      * Determines the type of launch of the action.
      *
      * If true, then it will be executed once.
@@ -28,5 +37,15 @@ abstract class Actionable extends Migration implements Contract
     public function isOnce(): bool
     {
         return $this->once;
+    }
+
+    /**
+     * Determines a call to database transactions.
+     *
+     * @return bool
+     */
+    public function enabledTransactions(): bool
+    {
+        return $this->transactions;
     }
 }

@@ -1,0 +1,36 @@
+<?php
+
+use Helldar\LaravelActions\Support\Actionable;
+use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Uuid;
+
+final class TestFailedTransactions extends Actionable
+{
+    protected $transactions = true;
+
+    public function up(): void
+    {
+        $this->table()->insert([
+            $this->value(),
+            $this->value(),
+            $this->value(),
+        ]);
+
+        throw new Exception('Random message');
+    }
+
+    public function down(): void
+    {
+        // nothing
+    }
+
+    protected function table()
+    {
+        return DB::table('transactions');
+    }
+
+    protected function value(): array
+    {
+        return ['value' => Uuid::uuid4()];
+    }
+}

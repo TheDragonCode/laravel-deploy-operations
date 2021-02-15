@@ -4,6 +4,7 @@ namespace Helldar\LaravelActions\Support;
 
 use Helldar\LaravelActions\Traits\Infoable;
 use Illuminate\Database\Migrations\Migrator as BaseMigrator;
+use Illuminate\Support\Facades\DB;
 
 final class Migrator extends BaseMigrator
 {
@@ -59,6 +60,25 @@ final class Migrator extends BaseMigrator
     }
 
     /**
+     * Starts the execution of code, starting database transactions, if necessary.
+     *
+     * @param  object  $migration
+     * @param  string  $method
+     */
+    protected function runMigration($migration, $method)
+    {
+        if ($this->enabledTransactions($migration)) {
+            DB::transaction(function () use ($migration, $method) {
+                parent::runMigration($migration, $method);
+            });
+
+            return;
+        }
+
+        parent::runMigration($migration, $method);
+    }
+
+    /**
      * Whether it is necessary to record information about the execution in the database.
      *
      * @param  object  $migration
@@ -68,5 +88,17 @@ final class Migrator extends BaseMigrator
     protected function allowLogging($migration): bool
     {
         return $migration->isOnce();
+    }
+
+    /**
+     * Whether it is necessary to call database transactions at runtime.
+     *
+     * @param  object  $migration
+     *
+     * @return bool
+     */
+    protected function enabledTransactions($migration): bool
+    {
+        return $migration->enabledTransactions();
     }
 }
