@@ -9,7 +9,7 @@ trait Files
     protected function freshFiles(): void
     {
         File::deleteDirectory(
-            database_path('actions')
+            $this->targetDirectory()
         );
     }
 
@@ -17,7 +17,32 @@ trait Files
     {
         File::copyDirectory(
             __DIR__ . '/../fixtures/actions',
-            database_path('actions')
+            $this->targetDirectory()
         );
+    }
+
+    protected function copySuccessTransaction(): void
+    {
+        File::copy(
+            __DIR__ . '/../fixtures/stubs/2021_02_15_124237_test_success_transactions.stub',
+            $this->targetDirectory('2021_02_15_124237_test_success_transactions.php')
+        );
+    }
+
+    protected function copyFailedTransaction(): void
+    {
+        File::copy(
+            __DIR__ . '/../fixtures/stubs/2021_02_15_124852_test_failed_transactions.stub',
+            $this->targetDirectory('2021_02_15_124852_test_failed_transactions.php')
+        );
+    }
+
+    protected function targetDirectory(string $path = null): string
+    {
+        $dir = database_path('actions');
+
+        File::ensureDirectoryExists($dir);
+
+        return rtrim($dir, '/\\') . '/' . ltrim($path, '/\\');
     }
 }
