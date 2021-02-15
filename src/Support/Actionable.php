@@ -28,12 +28,9 @@ abstract class Actionable extends Migration implements Contract
 
     /**
      * Reverse the actions.
-     *
-     * @return void
      */
     public function down(): void
     {
-        //
     }
 
     /**
