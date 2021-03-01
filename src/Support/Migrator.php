@@ -70,7 +70,7 @@ final class Migrator extends BaseMigrator
         if ($this->enabledTransactions($migration)) {
             DB::transaction(function () use ($migration, $method) {
                 parent::runMigration($migration, $method);
-            });
+            }, $this->transactionAttempts($migration));
 
             return;
         }
@@ -93,12 +93,26 @@ final class Migrator extends BaseMigrator
     /**
      * Whether it is necessary to call database transactions at runtime.
      *
-     * @param  object  $migration
+     * @param  \Helldar\LaravelActions\Support\Actionable|object  $migration
      *
      * @return bool
      */
     protected function enabledTransactions($migration): bool
     {
         return $migration->enabledTransactions();
+    }
+
+    /**
+     * The number of attempts to execute a request within a transaction before throwing an error.
+     *
+     * @param  \Helldar\LaravelActions\Support\Actionable|object  $migration
+     *
+     * @return int
+     */
+    protected function transactionAttempts($migration): int
+    {
+        $value = $migration->transactionAttempts();
+
+        return (int) abs($value);
     }
 }

@@ -147,6 +147,8 @@ class AddSomeData extends Actionable
 {
     protected $transactions = true;
 
+    protected $transaction_attempts = 3;
+
     public function up(): void
     {
         // ...

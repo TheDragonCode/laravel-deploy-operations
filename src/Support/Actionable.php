@@ -27,6 +27,13 @@ abstract class Actionable extends Migration implements Contract
     protected $transactions = false;
 
     /**
+     * The number of attempts to execute a request within a transaction before throwing an error.
+     *
+     * @var int
+     */
+    protected $transaction_attempts = 1;
+
+    /**
      * Reverse the actions.
      */
     public function down(): void
@@ -54,5 +61,15 @@ abstract class Actionable extends Migration implements Contract
     public function enabledTransactions(): bool
     {
         return $this->transactions;
+    }
+
+    /**
+     * The number of attempts to execute a request within a transaction before throwing an error.
+     *
+     * @return int
+     */
+    public function transactionAttempts(): int
+    {
+        return $this->transaction_attempts;
     }
 }
