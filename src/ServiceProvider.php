@@ -38,11 +38,6 @@ final class ServiceProvider extends BaseServiceProvider
         $this->registerCommands($this->commands);
     }
 
-    public function boot()
-    {
-        $this->bootConfig();
-    }
-
     public function provides()
     {
         return array_merge([
@@ -55,7 +50,7 @@ final class ServiceProvider extends BaseServiceProvider
     protected function registerRepository(): void
     {
         $this->app->singleton(Action::REPOSITORY, static function ($app) {
-            return new DatabaseMigrationRepository($app['db'], $app['config']['actions.table']);
+            return new DatabaseMigrationRepository($app['db'], $app['config']['database.actions']);
         });
     }
 
@@ -137,15 +132,8 @@ final class ServiceProvider extends BaseServiceProvider
     protected function registerConfig(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/actions.php',
-            'actions'
+            __DIR__ . '/../config/database.php',
+            'database'
         );
-    }
-
-    protected function bootConfig(): void
-    {
-        $this->publishes([
-            __DIR__ . '/../config/actions.php' => $this->app->configPath('actions.php'),
-        ], 'config');
     }
 }

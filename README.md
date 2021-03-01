@@ -45,25 +45,21 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```json
 {
     "require": {
-        "andrey-helldar/laravel-actions": "^1.4"
+        "andrey-helldar/laravel-actions": "^1.5"
     }
 }
 ```
 
 #### Laravel Framework
 
-You can also publish the config file to change implementations (ie. interface to specific class):
-
-```
-php artisan vendor:publish --provider="Helldar\LaravelActions\ServiceProvider"
-```
+Nothing else needs to be done. All is ready 😊
 
 #### Lumen Framework
 
 This package is focused on Laravel development, but it can also be used in Lumen with some workarounds. Because Lumen works a little different, as it is like a
 barebone version of Laravel and the main configuration parameters are instead located in `bootstrap/app.php`, some alterations must be made.
 
-You can install Laravel Lang Publisher in `app/Providers/AppServiceProvider.php`, and uncommenting this line that registers the App Service Providers so it can
+You can install `Laravel Actions` in `app/Providers/AppServiceProvider.php`, and uncommenting this line that registers the App Service Providers so it can
 properly load.
 
 ```

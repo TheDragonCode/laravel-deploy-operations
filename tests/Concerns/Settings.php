@@ -8,6 +8,6 @@ trait Settings
 
     protected function setTable($app): void
     {
-        $app['config']->set('actions.table', $this->table);
+        $app['config']->set('database.actions', $this->table);
     }
 }

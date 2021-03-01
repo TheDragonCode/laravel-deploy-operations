@@ -12,5 +12,5 @@ return [
     |
     */
 
-    'table' => 'migration_actions',
+    'actions' => 'migration_actions',
 ];
