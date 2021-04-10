@@ -17,21 +17,6 @@
 [![For Laravel][badge_laravel]][link_packagist]
 [![For Lumen][badge_lumen]][link_packagist]
 
-## Table of contents
-
-* [Installation](#installation)
-    * [Laravel Framework](#laravel-framework)
-    * [Lumen Framework](#lumen-framework)
-* [How to use](#how-to-use)
-    * [Generating actions](#generating-actions)
-    * [Running Actions](#running-actions)
-        * [Forcing Actions To Run In Production](#forcing-actions-to-run-in-production)
-        * [Execution Every Time](#execution-every-time)
-        * [Database Transactions](#database-transactions)
-    * [Rolling Back Actions](#rolling-back-actions)
-    * [Roll Back & Action Using A Single Command](#roll-back--action-using-a-single-command)
-    * [Actions Status](#actions-status)
-
 ## Installation
 
 To get the latest version of Laravel Actions, simply require the project using [Composer](https://getcomposer.org):
