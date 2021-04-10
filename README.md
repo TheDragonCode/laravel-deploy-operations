@@ -203,9 +203,9 @@ php artisan migrate:actions:status
 
 [badge_license]:        https://img.shields.io/packagist/l/andrey-helldar/laravel-actions.svg?style=flat-square
 
-[badge_coverage]:       https://img.shields.io/scrutinizer/coverage/g/andrey-helldar/laravel-actions.svg?style=flat-square
+[badge_coverage]:       https://img.shields.io/scrutinizer/coverage/g/andrey-helldar/laravel-actions/main?style=flat-square
 
-[badge_quality]:        https://img.shields.io/scrutinizer/g/andrey-helldar/laravel-actions.svg?style=flat-square
+[badge_quality]:        https://img.shields.io/scrutinizer/quality/g/andrey-helldar/laravel-actions/main?style=flat-square
 
 [badge_stable]:         https://img.shields.io/github/v/release/andrey-helldar/laravel-actions?label=stable&style=flat-square
 
