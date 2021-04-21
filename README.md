@@ -193,6 +193,17 @@ The `migrate:actions:status` command displays the execution status of actions. I
 php artisan migrate:actions:status
 ```
 
+## License
+
+This package is licensed under the [MIT License](LICENSE).
+
+## For Enterprise
+
+Available as part of the Tidelift Subscription.
+
+The maintainers of `andrey-helldar/laravel-actions` and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source packages you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact packages you use. [Learn more](https://tidelift.com/subscription/pkg/packagist-andrey-helldar-laravel-actions?utm_source=packagist-andrey-helldar-laravel-actions&utm_medium=referral&utm_campaign=enterprise&utm_term=repo).
+
+
 [badge_build]:          https://img.shields.io/github/workflow/status/andrey-helldar/laravel-actions/phpunit?style=flat-square
 
 [badge_downloads]:      https://img.shields.io/packagist/dt/andrey-helldar/laravel-actions.svg?style=flat-square
