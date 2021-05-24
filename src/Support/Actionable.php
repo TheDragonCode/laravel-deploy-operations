@@ -4,6 +4,7 @@ namespace Helldar\LaravelActions\Support;
 
 use Helldar\LaravelActions\Contracts\Actionable as Contract;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Arr;
 
 abstract class Actionable extends Migration implements Contract
 {
@@ -32,6 +33,13 @@ abstract class Actionable extends Migration implements Contract
      * @var int
      */
     protected $transaction_attempts = 1;
+
+    /**
+     * Determines which environment to run on.
+     *
+     * @var array|string|null
+     */
+    protected $environment = null;
 
     /**
      * Reverse the actions.
@@ -71,5 +79,15 @@ abstract class Actionable extends Migration implements Contract
     public function transactionAttempts(): int
     {
         return $this->transaction_attempts;
+    }
+
+    /**
+     * Determines which environment to run on.
+     *
+     * @return array
+     */
+    public function onEnvironment(): array
+    {
+        return Arr::wrap($this->environment);
     }
 }

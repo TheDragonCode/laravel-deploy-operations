@@ -1,6 +1,7 @@
 <?php
 
 use Helldar\LaravelActions\Support\Actionable;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
@@ -18,7 +19,7 @@ final class FooBar extends Actionable
         $this->table()->truncate();
     }
 
-    protected function table()
+    protected function table(): Builder
     {
         return DB::table('test');
     }

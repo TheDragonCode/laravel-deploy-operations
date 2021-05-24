@@ -124,7 +124,7 @@ final class ServiceProvider extends BaseServiceProvider
 
     protected function registerMigrateRefreshCommand(): void
     {
-        $this->app->singleton(Command::REFRESH, function ($app) {
+        $this->app->singleton(Command::REFRESH, function () {
             return new Refresh();
         });
     }

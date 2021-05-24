@@ -42,4 +42,37 @@ final class RollbackTest extends TestCase
         $this->assertDatabaseMigrationHas($this->table, 'rollback_two');
         $this->assertDatabaseMigrationHas($this->table, 'rollback_tree');
     }
+
+    public function testEnvironment()
+    {
+        $this->copyFiles();
+
+        $table = 'environment';
+
+        $this->artisan('migrate:actions:install')->run();
+
+        $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_all');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_production');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_testing');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_many_environments');
+        $this->artisan('migrate:actions')->run();
+
+        $this->assertDatabaseCount($table, 3);
+        $this->assertDatabaseCount($this->table, 4);
+        $this->assertDatabaseMigrationHas($this->table, 'run_on_all');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_production');
+        $this->assertDatabaseMigrationHas($this->table, 'run_on_testing');
+        $this->assertDatabaseMigrationHas($this->table, 'run_on_many_environments');
+        $this->artisan('migrate:actions')->run();
+
+        $this->artisan('migrate:actions:rollback')->run();
+        $this->assertDatabaseCount($table, 6);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_all');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_production');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_testing');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_many_environments');
+    }
 }

@@ -30,7 +30,7 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```json
 {
     "require": {
-        "andrey-helldar/laravel-actions": "^1.5"
+        "andrey-helldar/laravel-actions": "^1.6"
     }
 }
 ```
@@ -117,6 +117,46 @@ If the value is `$once = false`, the `up` method will be called every time the `
 In this case, information about it will not be written to the `migration_actions` table and, therefore, the `down` method will not be called when the rollback
 command is called.
 
+#### Execution in a specific environment
+
+In some cases, it becomes necessary to execute an action in a specific environment. For example `production`.
+
+For this you can use the `$environment` parameter:
+
+```php
+use Helldar\LaravelActions\Support\Actionable;
+
+class Reindex extends Actionable
+{
+    /** @var string|array|null */
+    protected $environment = 'production';
+
+    public function up(): void
+    {
+        // your code
+    }
+}
+```
+
+You can also specify multiple environment names:
+
+```php
+use Helldar\LaravelActions\Support\Actionable;
+
+class Reindex extends Actionable
+{
+    /** @var string|array|null */
+    protected $environment = ['testing', 'staging'];
+
+    public function up(): void
+    {
+        // your code
+    }
+}
+```
+
+By default, the action will run in all environments. The same will happen if you specify `null` or `[]` as the value.
+
 #### Database Transactions
 
 In some cases, it becomes necessary to undo previously performed actions in the database. For example, when code execution throws an error. To do this, the code
@@ -201,7 +241,11 @@ This package is licensed under the [MIT License](LICENSE).
 
 Available as part of the Tidelift Subscription.
 
-The maintainers of `andrey-helldar/laravel-actions` and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source packages you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact packages you use. [Learn more](https://tidelift.com/subscription/pkg/packagist-andrey-helldar-laravel-actions?utm_source=packagist-andrey-helldar-laravel-actions&utm_medium=referral&utm_campaign=enterprise&utm_term=repo).
+The maintainers of `andrey-helldar/laravel-actions` and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for
+the open source packages you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact packages
+you
+use. [Learn more](https://tidelift.com/subscription/pkg/packagist-andrey-helldar-laravel-actions?utm_source=packagist-andrey-helldar-laravel-actions&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
+.
 
 
 [badge_build]:          https://img.shields.io/github/workflow/status/andrey-helldar/laravel-actions/phpunit?style=flat-square

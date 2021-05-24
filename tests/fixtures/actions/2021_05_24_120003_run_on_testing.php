@@ -5,9 +5,9 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-final class EveryTime extends Actionable
+final class RunOnTesting extends Actionable
 {
-    protected $once = false;
+    protected $environment = 'testing';
 
     public function up(): void
     {
@@ -16,8 +16,15 @@ final class EveryTime extends Actionable
         ]);
     }
 
+    public function down(): void
+    {
+        $this->table()->insert([
+            'value' => Uuid::uuid4(),
+        ]);
+    }
+
     protected function table(): Builder
     {
-        return DB::table('every_time');
+        return DB::table('environment');
     }
 }

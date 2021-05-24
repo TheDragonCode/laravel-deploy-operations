@@ -37,8 +37,16 @@ final class Migrator extends BaseMigrator
             $name = $this->getMigrationName($file)
         );
 
+        if (! $this->allowEnvironment($migration)) {
+            $this->note("<info>Migrate:</info>  {$name} was skipped on this environment");
+
+            return;
+        }
+
         if ($pretend) {
-            return $this->pretendToRun($migration, 'up');
+            $this->pretendToRun($migration, 'up');
+
+            return;
         }
 
         $this->note("<comment>Migrating:</comment> {$name}");
@@ -57,6 +65,30 @@ final class Migrator extends BaseMigrator
         }
 
         $this->note("<info>Migrated:</info>  {$name} ({$runTime}ms)");
+    }
+
+    /**
+     * Run "down" a migration instance.
+     *
+     * @param  string  $file
+     * @param  object  $migration
+     * @param  bool  $pretend
+     *
+     * @return void
+     */
+    protected function runDown($file, $migration, $pretend)
+    {
+        $instance = $this->resolvePath($file);
+
+        $name = $this->getMigrationName($file);
+
+        if (! $this->allowEnvironment($instance)) {
+            $this->note("<info>Roll back:</info>  {$name} was skipped on this environment");
+
+            return;
+        }
+
+        parent::runDown($file, $migration, $pretend);
     }
 
     /**
@@ -88,6 +120,22 @@ final class Migrator extends BaseMigrator
     protected function allowLogging($migration): bool
     {
         return $migration->isOnce();
+    }
+
+    /**
+     * Whether the action needs to be executed in the current environment.
+     *
+     * @param  object  $migration
+     *
+     * @return bool
+     */
+    protected function allowEnvironment($migration): bool
+    {
+        $environment = config('app.env', 'production');
+
+        $on = $migration->onEnvironment();
+
+        return empty($on) || in_array($environment, $on);
     }
 
     /**
