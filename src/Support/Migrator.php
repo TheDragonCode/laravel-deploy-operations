@@ -78,12 +78,12 @@ final class Migrator extends BaseMigrator
      */
     protected function runDown($file, $migration, $pretend)
     {
-        $instance = $this->resolvePath($file);
-
-        $name = $this->getMigrationName($file);
+        $instance = $this->resolve(
+            $name = $this->getMigrationName($file)
+        );
 
         if (! $this->allowEnvironment($instance)) {
-            $this->note("<info>Roll back:</info>  {$name} was skipped on this environment");
+            $this->note("<info>Rolling back:</info>  {$name} was skipped on this environment");
 
             return;
         }
