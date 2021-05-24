@@ -73,8 +73,6 @@ final class Migrator extends BaseMigrator
      * @param  string  $file
      * @param  object  $migration
      * @param  bool  $pretend
-     *
-     * @return void
      */
     protected function runDown($file, $migration, $pretend)
     {
