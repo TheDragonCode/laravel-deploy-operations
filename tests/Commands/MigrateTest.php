@@ -88,8 +88,7 @@ final class MigrateTest extends TestCase
 
         try {
             $this->artisan('migrate:actions')->run();
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             $this->assertSame(Exception::class, get_class($e));
             $this->assertSame('Random message', $e->getMessage());
         }
