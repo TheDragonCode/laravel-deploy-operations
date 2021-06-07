@@ -131,9 +131,18 @@ final class Migrator extends BaseMigrator
     {
         $environment = config('app.env', 'production');
 
-        $on = $migration->onEnvironment();
+        $on     = $migration->onEnvironment();
+        $except = $migration->exceptEnvironment();
 
-        return empty($on) || in_array($environment, $on);
+        if (! empty($on) && ! in_array($environment, $on)) {
+            return false;
+        }
+
+        if (! empty($except) && in_array($environment, $except)) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

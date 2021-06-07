@@ -30,7 +30,7 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```json
 {
     "require": {
-        "andrey-helldar/laravel-actions": "^1.6"
+        "andrey-helldar/laravel-actions": "^1.7"
     }
 }
 ```
@@ -156,6 +156,46 @@ class Reindex extends Actionable
 ```
 
 By default, the action will run in all environments. The same will happen if you specify `null` or `[]` as the value.
+
+#### Execution Excluding Certain Environments
+
+In some cases, it becomes necessary to execute an action excluding certain environments. For example `production`.
+
+For this you can use the `$except_environment` parameter:
+
+```php
+use Helldar\LaravelActions\Support\Actionable;
+
+class Reindex extends Actionable
+{
+    /** @var string|array|null */
+    protected $except_environment = 'production';
+
+    public function up(): void
+    {
+        // your code
+    }
+}
+```
+
+You can also specify multiple environment names:
+
+```php
+use Helldar\LaravelActions\Support\Actionable;
+
+class Reindex extends Actionable
+{
+    /** @var string|array|null */
+    protected $except_environment = ['testing', 'staging'];
+
+    public function up(): void
+    {
+        // your code
+    }
+}
+```
+
+By default, no actions will be excluded. The same happens if you specify `null` or `[]` value.
 
 #### Database Transactions
 

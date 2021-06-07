@@ -42,6 +42,13 @@ abstract class Actionable extends Migration implements Contract
     protected $environment = null;
 
     /**
+     * Determines in which environment it should not run.
+     *
+     * @var array|string|null
+     */
+    protected $except_environment = null;
+
+    /**
      * Reverse the actions.
      */
     public function down(): void
@@ -89,5 +96,15 @@ abstract class Actionable extends Migration implements Contract
     public function onEnvironment(): array
     {
         return Arr::wrap($this->environment);
+    }
+
+    /**
+     * Determines in which environment it should not run.
+     *
+     * @return array
+     */
+    public function exceptEnvironment(): array
+    {
+        return Arr::wrap($this->except_environment);
     }
 }
