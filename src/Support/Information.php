@@ -2,7 +2,7 @@
 
 namespace Helldar\LaravelActions\Support;
 
-final class Information
+class Information
 {
     protected $available = [
         'Migrated:'                            => 'Done:',

@@ -5,7 +5,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-final class RunExceptProduction extends Actionable
+class RunExceptProduction extends Actionable
 {
     protected $except_environment = 'production';
 

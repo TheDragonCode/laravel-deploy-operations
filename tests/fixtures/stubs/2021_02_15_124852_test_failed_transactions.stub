@@ -4,7 +4,7 @@ use Helldar\LaravelActions\Support\Actionable;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-final class TestFailedTransactions extends Actionable
+class TestFailedTransactions extends Actionable
 {
     protected $transactions = true;
 

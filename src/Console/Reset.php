@@ -11,7 +11,7 @@ use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Database\Console\Migrations\BaseCommand;
 use Symfony\Component\Console\Input\InputOption;
 
-final class Reset extends BaseCommand
+class Reset extends BaseCommand
 {
     use ConfirmableTrait;
     use Database;

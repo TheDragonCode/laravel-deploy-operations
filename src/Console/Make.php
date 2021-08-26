@@ -11,7 +11,7 @@ use Illuminate\Database\Migrations\MigrationCreator;
 use Illuminate\Support\Composer;
 use Illuminate\Support\Str;
 
-final class Make extends BaseCommand
+class Make extends BaseCommand
 {
     use Argumentable;
     use Database;

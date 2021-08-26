@@ -2,7 +2,7 @@
 
 namespace Helldar\LaravelActions\Constants;
 
-final class Action
+class Action
 {
     public const REPOSITORY = 'migration.action.repository';
 

@@ -5,7 +5,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-final class RunOnManyEnvironments extends Actionable
+class RunOnManyEnvironments extends Actionable
 {
     protected $environment = ['testing', 'production'];
 

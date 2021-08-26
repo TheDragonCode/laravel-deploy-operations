@@ -7,7 +7,7 @@ use Helldar\LaravelActions\Traits\Database;
 use Helldar\LaravelActions\Traits\Infoable;
 use Illuminate\Database\Console\Migrations\StatusCommand as BaseCommand;
 
-final class Status extends BaseCommand
+class Status extends BaseCommand
 {
     use Database;
     use Infoable;

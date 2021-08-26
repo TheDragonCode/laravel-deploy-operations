@@ -5,7 +5,7 @@ namespace Tests\Commands;
 use InvalidArgumentException;
 use Tests\TestCase;
 
-final class CreatorTest extends TestCase
+class CreatorTest extends TestCase
 {
     public function testCreateAction()
     {

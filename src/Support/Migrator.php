@@ -6,7 +6,7 @@ use Helldar\LaravelActions\Traits\Infoable;
 use Illuminate\Database\Migrations\Migrator as BaseMigrator;
 use Illuminate\Support\Facades\DB;
 
-final class Migrator extends BaseMigrator
+class Migrator extends BaseMigrator
 {
     use Infoable;
 

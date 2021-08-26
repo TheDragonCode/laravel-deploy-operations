@@ -2,7 +2,7 @@
 
 namespace Helldar\LaravelActions\Constants;
 
-final class Command
+class Command
 {
     public const INSTALL = 'command.migration.actions.install';
 

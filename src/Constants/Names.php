@@ -2,7 +2,7 @@
 
 namespace Helldar\LaravelActions\Constants;
 
-final class Names
+class Names
 {
     public const INSTALL = 'migrate:actions:install';
 

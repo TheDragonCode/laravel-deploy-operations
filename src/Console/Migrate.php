@@ -8,7 +8,7 @@ use Helldar\LaravelActions\Traits\Infoable;
 use Helldar\LaravelActions\Traits\Optionable;
 use Illuminate\Database\Console\Migrations\MigrateCommand as BaseCommand;
 
-final class Migrate extends BaseCommand
+class Migrate extends BaseCommand
 {
     use Database;
     use Infoable;
