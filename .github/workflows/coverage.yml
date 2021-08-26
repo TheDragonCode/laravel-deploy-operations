@@ -22,9 +22,6 @@ jobs:
                     extensions: curl, mbstring, zip, pcntl, pdo, pdo_sqlite, iconv
                     coverage: xdebug
 
-            -   name: Composer self update
-                run: composer self-update
-
             -   name: Install dependencies
                 run: composer update --prefer-stable --prefer-dist --no-progress --no-interaction
 
