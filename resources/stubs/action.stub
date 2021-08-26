@@ -2,7 +2,7 @@
 
 use Helldar\LaravelActions\Support\Actionable;
 
-final class DummyClass extends Actionable
+class DummyClass extends Actionable
 {
     /**
      * Run the actions.
