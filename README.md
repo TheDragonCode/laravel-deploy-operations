@@ -292,9 +292,9 @@ use. [Learn more](https://tidelift.com/subscription/pkg/packagist-andrey-helldar
 
 [badge_downloads]:      https://img.shields.io/packagist/dt/andrey-helldar/laravel-actions.svg?style=flat-square
 
-[badge_laravel]:        https://img.shields.io/badge/Laravel-6.x%20%7C%207.x%20%7C%208.x-orange.svg?style=flat-square
+[badge_laravel]:        https://img.shields.io/badge/Laravel-6.x%20%7C%207.x%20%7C%208.x%20%7C%209.x-orange.svg?style=flat-square
 
-[badge_lumen]:          https://img.shields.io/badge/Lumen-6.x%20%7C%207.x%20%7C%208.x-orange.svg?style=flat-square
+[badge_lumen]:          https://img.shields.io/badge/Lumen-6.x%20%7C%207.x%20%7C%208.x%20%7C%209.x-orange.svg?style=flat-square
 
 [badge_license]:        https://img.shields.io/packagist/l/andrey-helldar/laravel-actions.svg?style=flat-square
 
