@@ -4,7 +4,7 @@ namespace Tests\Commands;
 
 use Tests\TestCase;
 
-final class InstallTest extends TestCase
+class InstallTest extends TestCase
 {
     public function testRepositoryNotFound()
     {

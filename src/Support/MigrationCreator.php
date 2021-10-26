@@ -5,7 +5,7 @@ namespace Helldar\LaravelActions\Support;
 use Illuminate\Database\Migrations\MigrationCreator as BaseMigrationCreator;
 use Illuminate\Filesystem\Filesystem;
 
-final class MigrationCreator extends BaseMigrationCreator
+class MigrationCreator extends BaseMigrationCreator
 {
     protected $customStubPath;
 

@@ -4,7 +4,7 @@ namespace Tests\Commands;
 
 use Tests\TestCase;
 
-final class ResetTest extends TestCase
+class ResetTest extends TestCase
 {
     public function testResetCommand()
     {

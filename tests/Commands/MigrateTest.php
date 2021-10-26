@@ -5,7 +5,7 @@ namespace Tests\Commands;
 use Exception;
 use Tests\TestCase;
 
-final class MigrateTest extends TestCase
+class MigrateTest extends TestCase
 {
     public function testMigrationCommand()
     {

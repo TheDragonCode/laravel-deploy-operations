@@ -4,7 +4,7 @@ namespace Tests\Commands;
 
 use Tests\TestCase;
 
-final class RefreshTest extends TestCase
+class RefreshTest extends TestCase
 {
     public function testRefreshCommand()
     {

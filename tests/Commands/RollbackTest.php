@@ -4,7 +4,7 @@ namespace Tests\Commands;
 
 use Tests\TestCase;
 
-final class RollbackTest extends TestCase
+class RollbackTest extends TestCase
 {
     public function testRollbackCommand()
     {

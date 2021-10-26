@@ -4,7 +4,7 @@ namespace Tests\Commands;
 
 use Tests\TestCase;
 
-final class MakeTest extends TestCase
+class MakeTest extends TestCase
 {
     public function testMakingFiles()
     {

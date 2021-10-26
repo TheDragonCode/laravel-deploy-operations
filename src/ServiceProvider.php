@@ -17,7 +17,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Migrations\DatabaseMigrationRepository;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
-final class ServiceProvider extends BaseServiceProvider
+class ServiceProvider extends BaseServiceProvider
 {
     protected $commands = [
         'Migrate'         => Command::MIGRATE,

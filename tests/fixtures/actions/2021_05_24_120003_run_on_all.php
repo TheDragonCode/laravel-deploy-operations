@@ -5,7 +5,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-final class RunOnAll extends Actionable
+class RunOnAll extends Actionable
 {
     public function up(): void
     {

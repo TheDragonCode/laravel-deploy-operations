@@ -5,7 +5,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-final class RunExceptManyEnvironments extends Actionable
+class RunExceptManyEnvironments extends Actionable
 {
     protected $environment = ['testing'];
 

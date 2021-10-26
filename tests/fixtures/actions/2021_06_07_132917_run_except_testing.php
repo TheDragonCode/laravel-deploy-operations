@@ -5,7 +5,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-final class RunExceptTesting extends Actionable
+class RunExceptTesting extends Actionable
 {
     protected $except_environment = 'testing';
 

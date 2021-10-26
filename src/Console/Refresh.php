@@ -12,7 +12,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Events\DatabaseRefreshed;
 use Symfony\Component\Console\Input\InputOption;
 
-final class Refresh extends BaseCommand
+class Refresh extends BaseCommand
 {
     use ConfirmableTrait;
     use Database;

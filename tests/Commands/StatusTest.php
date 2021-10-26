@@ -4,7 +4,7 @@ namespace Tests\Commands;
 
 use Tests\TestCase;
 
-final class StatusTest extends TestCase
+class StatusTest extends TestCase
 {
     public function testStatusCommand()
     {

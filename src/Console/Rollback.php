@@ -9,7 +9,7 @@ use Helldar\LaravelActions\Traits\Optionable;
 use Illuminate\Database\Console\Migrations\RollbackCommand;
 use Symfony\Component\Console\Input\InputOption;
 
-final class Rollback extends RollbackCommand
+class Rollback extends RollbackCommand
 {
     use Database;
     use Infoable;

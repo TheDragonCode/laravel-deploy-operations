@@ -5,7 +5,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-final class EveryTime extends Actionable
+class EveryTime extends Actionable
 {
     protected $once = false;
 
