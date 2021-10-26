@@ -59,8 +59,8 @@ class RollbackTest extends TestCase
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_many_environments');
         $this->artisan('migrate:actions')->run();
 
-        $this->assertDatabaseCount($table, 4);
-        $this->assertDatabaseCount($this->table, 5);
+        $this->assertDatabaseCount($table, 5);
+        $this->assertDatabaseCount($this->table, 6);
         $this->assertDatabaseMigrationHas($this->table, 'run_on_all');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_production');
         $this->assertDatabaseMigrationHas($this->table, 'run_on_testing');
@@ -68,7 +68,7 @@ class RollbackTest extends TestCase
         $this->artisan('migrate:actions')->run();
 
         $this->artisan('migrate:actions:rollback')->run();
-        $this->assertDatabaseCount($table, 8);
+        $this->assertDatabaseCount($table, 10);
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_all');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_production');

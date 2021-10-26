@@ -107,4 +107,14 @@ abstract class Actionable extends Migration implements Contract
     {
         return Arr::wrap($this->except_environment);
     }
+
+    /**
+     * Determines whether the given action can be called conditionally.
+     *
+     * @return bool
+     */
+    public function allow(): bool
+    {
+        return true;
+    }
 }

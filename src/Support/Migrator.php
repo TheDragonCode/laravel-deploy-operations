@@ -133,6 +133,11 @@ class Migrator extends BaseMigrator
 
         $on     = $migration->onEnvironment();
         $except = $migration->exceptEnvironment();
+        $allow  = $migration->allow();
+
+        if (! $allow) {
+            return false;
+        }
 
         if (! empty($on) && ! in_array($environment, $on)) {
             return false;
