@@ -2,7 +2,7 @@
 
 > Actions are like version control for your migration process, allowing your team to modify and share the application's actionable schema. If you have ever had to tell a teammate to manually perform any action on a producton server, you've come across an issue that actions solves.
 
-![laravel-actions](https://user-images.githubusercontent.com/10347617/101372725-4276fa00-38bd-11eb-818b-0e6a599edcb7.png)
+<img src="https://preview.dragon-code.pro/TheDragonCode/laravel-actions.svg?brand=laravel" width="100%" height="320" alt="Laravel Actions"/>
 
 [![StyleCI Status][badge_styleci]][link_styleci]
 [![Github Workflow Status][badge_build]][link_build]
