@@ -2,7 +2,7 @@
 
 > Actions are like version control for your migration process, allowing your team to modify and share the application's actionable schema. If you have ever had to tell a teammate to manually perform any action on a producton server, you've come across an issue that actions solves.
 
-<img src="https://preview.dragon-code.pro/TheDragonCode/laravel-actions.svg?brand=laravel" width="100%" height="320" alt="Laravel Actions"/>
+<img src="https://preview.dragon-code.pro/TheDragonCode/laravel-actions.svg?brand=laravel" alt="Laravel Actions"/>
 
 [![StyleCI Status][badge_styleci]][link_styleci]
 [![Github Workflow Status][badge_build]][link_build]
@@ -276,16 +276,6 @@ php artisan migrate:actions:status
 ## License
 
 This package is licensed under the [MIT License](LICENSE).
-
-## For Enterprise
-
-Available as part of the Tidelift Subscription.
-
-The maintainers of `andrey-helldar/laravel-actions` and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for
-the open source packages you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact packages
-you
-use. [Learn more](https://tidelift.com/subscription/pkg/packagist-andrey-helldar-laravel-actions?utm_source=packagist-andrey-helldar-laravel-actions&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
-.
 
 
 [badge_build]:          https://img.shields.io/github/workflow/status/andrey-helldar/laravel-actions/phpunit?style=flat-square
