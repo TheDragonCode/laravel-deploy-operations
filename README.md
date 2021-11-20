@@ -2,18 +2,11 @@
 
 <img src="https://preview.dragon-code.pro/TheDragonCode/laravel-actions.svg?brand=laravel" alt="Laravel Actions"/>
 
-[![StyleCI Status][badge_styleci]][link_styleci]
-[![Github Workflow Status][badge_build]][link_build]
-[![Coverage Status][badge_coverage]][link_scrutinizer]
-[![Scrutinizer Code Quality][badge_quality]][link_scrutinizer]
-
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
 [![Total Downloads][badge_downloads]][link_packagist]
+[![Github Workflow Status][badge_build]][link_build]
 [![License][badge_license]][link_license]
-
-[![For Laravel][badge_laravel]][link_packagist]
-[![For Lumen][badge_lumen]][link_packagist]
 
 > Actions are like version control for your migration process, allowing your team to modify and share the application's actionable schema. If you have ever had to tell a teammate to manually perform any action on a producton server, you've come across an issue that actions solves.
 
@@ -22,7 +15,7 @@
 To get the latest version of Laravel Actions, simply require the project using [Composer](https://getcomposer.org):
 
 ```bash
-$ composer require andrey-helldar/laravel-actions
+$ composer require dragon-code/laravel-actions
 ```
 
 Or manually update `require` block of `composer.json` and run `composer update`.
@@ -30,10 +23,17 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```json
 {
     "require": {
-        "andrey-helldar/laravel-actions": "^1.7"
+        "dragon-code/laravel-actions": "^2.0"
     }
 }
 ```
+
+### Upgrade from `andrey-helldar/laravel-actions`
+
+1. In your `composer.json` file, replace `"andrey-helldar/laravel-actions": "^1.0"` with `"dragon-code/laravel-actions": "^2.0"`.
+2. Replace the `Helldar\LaravelActions` namespace prefix with `DragonCode\LaravelActions` in your app;
+3. Run the `command composer` update.
+4. Profit!
 
 #### Laravel Framework
 
@@ -41,11 +41,10 @@ Nothing else needs to be done. All is ready 😊
 
 #### Lumen Framework
 
-This package is focused on Laravel development, but it can also be used in Lumen with some workarounds. Because Lumen works a little different, as it is like a
-barebone version of Laravel and the main configuration parameters are instead located in `bootstrap/app.php`, some alterations must be made.
+This package is focused on Laravel development, but it can also be used in Lumen with some workarounds. Because Lumen works a little different, as it is like a barebone version of
+Laravel and the main configuration parameters are instead located in `bootstrap/app.php`, some alterations must be made.
 
-You can install `Laravel Actions` in `app/Providers/AppServiceProvider.php`, and uncommenting this line that registers the App Service Providers so it can
-properly load.
+You can install `Laravel Actions` in `app/Providers/AppServiceProvider.php`, and uncommenting this line that registers the App Service Providers so it can properly load.
 
 ```
 // $app->register(App\Providers\AppServiceProvider::class);
@@ -55,7 +54,7 @@ If you are not using that line, that is usually handy to manage gracefully multi
 the `Register Service Providers` section of your `bootstrap/app.php`.
 
 ```php
-$app->register(\Helldar\LaravelActions\ServiceProvider::class);
+$app->register(\DragonCode\LaravelActions\ServiceProvider::class);
 ```
 
 ## How to use
@@ -68,8 +67,7 @@ To create a migration, use the `make:migration:action` Artisan command:
 php artisan make:migration:action my_action
 ```
 
-The new action will be placed in your `database/actions` directory. Each action file name contains a timestamp, which allows Laravel to determine the order of
-the actions.
+The new action will be placed in your `database/actions` directory. Each action file name contains a timestamp, which allows Laravel to determine the order of the actions.
 
 > At the first start, you need to create a table by running the `migrate:actions:install` command.
 >
@@ -85,8 +83,8 @@ php artisan migrate:actions
 
 #### Forcing Actions To Run In Production
 
-Some action operations are destructive, which means they may cause you to lose data. In order to protect you from running these commands against your production
-database, you will be prompted for confirmation before the commands are executed. To force the commands to run without a prompt, use the `--force` flag:
+Some action operations are destructive, which means they may cause you to lose data. In order to protect you from running these commands against your production database, you will
+be prompted for confirmation before the commands are executed. To force the commands to run without a prompt, use the `--force` flag:
 
 ```
 php artisan migrate:actions --force
@@ -99,7 +97,7 @@ In some cases, you need to call the code every time you deploy the application. 
 To do this, override the `$once` variable in the action file:
 
 ```php
-use Helldar\LaravelActions\Support\Actionable;
+use DragonCode\LaravelActions\Support\Actionable;
 
 class Reindex extends Actionable
 {
@@ -114,8 +112,7 @@ class Reindex extends Actionable
 
 If the value is `$once = false`, the `up` method will be called every time the `migrate:actions` command called.
 
-In this case, information about it will not be written to the `migration_actions` table and, therefore, the `down` method will not be called when the rollback
-command is called.
+In this case, information about it will not be written to the `migration_actions` table and, therefore, the `down` method will not be called when the rollback command is called.
 
 #### Execution In A Specific Environment
 
@@ -124,7 +121,7 @@ In some cases, it becomes necessary to execute an action in a specific environme
 For this you can use the `$environment` parameter:
 
 ```php
-use Helldar\LaravelActions\Support\Actionable;
+use DragonCode\LaravelActions\Support\Actionable;
 
 class Reindex extends Actionable
 {
@@ -141,7 +138,7 @@ class Reindex extends Actionable
 You can also specify multiple environment names:
 
 ```php
-use Helldar\LaravelActions\Support\Actionable;
+use DragonCode\LaravelActions\Support\Actionable;
 
 class Reindex extends Actionable
 {
@@ -164,7 +161,7 @@ In some cases, it becomes necessary to execute an action excluding certain envir
 For this you can use the `$except_environment` parameter:
 
 ```php
-use Helldar\LaravelActions\Support\Actionable;
+use DragonCode\LaravelActions\Support\Actionable;
 
 class Reindex extends Actionable
 {
@@ -181,7 +178,7 @@ class Reindex extends Actionable
 You can also specify multiple environment names:
 
 ```php
-use Helldar\LaravelActions\Support\Actionable;
+use DragonCode\LaravelActions\Support\Actionable;
 
 class Reindex extends Actionable
 {
@@ -199,14 +196,14 @@ By default, no actions will be excluded. The same happens if you specify `null` 
 
 #### Database Transactions
 
-In some cases, it becomes necessary to undo previously performed actions in the database. For example, when code execution throws an error. To do this, the code
-must be wrapped in a transaction.
+In some cases, it becomes necessary to undo previously performed actions in the database. For example, when code execution throws an error. To do this, the code must be wrapped in
+a transaction.
 
-By setting the `$transactions = true` parameter, you will ensure that your code is wrapped in a transaction without having to manually call
-the `DB::transaction()` method. This will reduce the time it takes to create the action.
+By setting the `$transactions = true` parameter, you will ensure that your code is wrapped in a transaction without having to manually call the `DB::transaction()` method. This
+will reduce the time it takes to create the action.
 
 ```php
-use Helldar\LaravelActions\Support\Actionable;
+use DragonCode\LaravelActions\Support\Actionable;
 
 class AddSomeData extends Actionable
 {
@@ -229,15 +226,13 @@ class AddSomeData extends Actionable
 
 ### Rolling Back Actions
 
-To roll back the latest action operation, you may use the `rollback` command. This command rolls back the last "batch" of actions, which may include multiple
-action files:
+To roll back the latest action operation, you may use the `rollback` command. This command rolls back the last "batch" of actions, which may include multiple action files:
 
 ```
 php artisan migrate:actions:rollback
 ```
 
-You may roll back a limited number of actions by providing the `step` option to the rollback command. For example, the following command will roll back the last
-five actions:
+You may roll back a limited number of actions by providing the `step` option to the rollback command. For example, the following command will roll back the last five actions:
 
 ```
 php artisan migrate:actions:rollback --step=5
@@ -251,15 +246,15 @@ php artisan migrate:actions:reset
 
 ### Roll Back & Action Using A Single Command
 
-The `migrate:actions:refresh` command will roll back all of your migrations and then execute the `migrate:actions` command. This command effectively re-creates
-your entire database:
+The `migrate:actions:refresh` command will roll back all of your migrations and then execute the `migrate:actions` command. This command effectively re-creates your entire
+database:
 
 ```
 php artisan migrate:actions:refresh
 ```
 
-You may roll back & re-migrate a limited number of migrations by providing the `step` option to the `refresh` command. For example, the following command will
-roll back & re-migrate the last five migrations:
+You may roll back & re-migrate a limited number of migrations by providing the `step` option to the `refresh` command. For example, the following command will roll back &
+re-migrate the last five migrations:
 
 ```
 php artisan migrate:actions:refresh --step=5
@@ -278,32 +273,18 @@ php artisan migrate:actions:status
 This package is licensed under the [MIT License](LICENSE).
 
 
-[badge_build]:          https://img.shields.io/github/workflow/status/andrey-helldar/laravel-actions/phpunit?style=flat-square
+[badge_build]:          https://img.shields.io/github/workflow/status/TheDragonCode/laravel-actions/phpunit?style=flat-square
 
-[badge_downloads]:      https://img.shields.io/packagist/dt/andrey-helldar/laravel-actions.svg?style=flat-square
+[badge_downloads]:      https://img.shields.io/packagist/dt/dragon-code/laravel-actions.svg?style=flat-square
 
-[badge_laravel]:        https://img.shields.io/badge/Laravel-6.x%20%7C%207.x%20%7C%208.x-orange.svg?style=flat-square
+[badge_license]:        https://img.shields.io/packagist/l/dragon-code/laravel-actions.svg?style=flat-square
 
-[badge_lumen]:          https://img.shields.io/badge/Lumen-6.x%20%7C%207.x%20%7C%208.x-orange.svg?style=flat-square
-
-[badge_license]:        https://img.shields.io/packagist/l/andrey-helldar/laravel-actions.svg?style=flat-square
-
-[badge_coverage]:       https://img.shields.io/scrutinizer/coverage/g/andrey-helldar/laravel-actions/main?style=flat-square
-
-[badge_quality]:        https://img.shields.io/scrutinizer/quality/g/andrey-helldar/laravel-actions/main?style=flat-square
-
-[badge_stable]:         https://img.shields.io/github/v/release/andrey-helldar/laravel-actions?label=stable&style=flat-square
-
-[badge_styleci]:        https://styleci.io/repos/317845207/shield
+[badge_stable]:         https://img.shields.io/github/v/release/TheDragonCode/laravel-actions?label=stable&style=flat-square
 
 [badge_unstable]:       https://img.shields.io/badge/unstable-dev--main-orange?style=flat-square
 
-[link_build]:           https://github.com/andrey-helldar/laravel-actions/actions
+[link_build]:           https://github.com/TheDragonCode/laravel-actions/actions
 
 [link_license]:         LICENSE
 
-[link_packagist]:       https://packagist.org/packages/andrey-helldar/laravel-actions
-
-[link_scrutinizer]:     https://scrutinizer-ci.com/g/andrey-helldar/laravel-actions/?branch=main
-
-[link_styleci]:         https://github.styleci.io/repos/317845207
+[link_packagist]:       https://packagist.org/packages/dragon-code/laravel-actions

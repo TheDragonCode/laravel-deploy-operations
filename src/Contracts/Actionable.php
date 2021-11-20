@@ -1,6 +1,6 @@
 <?php
 
-namespace Helldar\LaravelActions\Contracts;
+namespace DragonCode\LaravelActions\Contracts;
 
 interface Actionable
 {

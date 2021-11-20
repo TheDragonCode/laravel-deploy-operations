@@ -1,6 +1,6 @@
 <?php
 
-use Helldar\LaravelActions\Support\Actionable;
+use DragonCode\LaravelActions\Support\Actionable;
 
 class MakeExample extends Actionable
 {

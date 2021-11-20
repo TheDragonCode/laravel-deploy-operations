@@ -1,12 +1,12 @@
 <?php
 
-namespace Helldar\LaravelActions\Console;
+namespace DragonCode\LaravelActions\Console;
 
-use Helldar\LaravelActions\Constants\Names;
-use Helldar\LaravelActions\Support\Migrator;
-use Helldar\LaravelActions\Traits\Database;
-use Helldar\LaravelActions\Traits\Infoable;
-use Helldar\LaravelActions\Traits\Optionable;
+use DragonCode\LaravelActions\Constants\Names;
+use DragonCode\LaravelActions\Support\Migrator;
+use DragonCode\LaravelActions\Traits\Database;
+use DragonCode\LaravelActions\Traits\Infoable;
+use DragonCode\LaravelActions\Traits\Optionable;
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Database\Console\Migrations\BaseCommand;
 use Symfony\Component\Console\Input\InputOption;
@@ -35,14 +35,14 @@ class Reset extends BaseCommand
     /**
      * The migrator instance.
      *
-     * @var \Helldar\LaravelActions\Support\Migrator
+     * @var \DragonCode\LaravelActions\Support\Migrator
      */
     protected $migrator;
 
     /**
      * Create a new migration rollback command instance.
      *
-     * @param  \Helldar\LaravelActions\Support\Migrator  $migrator
+     * @param  \DragonCode\LaravelActions\Support\Migrator  $migrator
      */
     public function __construct(Migrator $migrator)
     {

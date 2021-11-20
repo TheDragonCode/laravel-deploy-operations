@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Helldar\LaravelActions\ServiceProvider;
+use DragonCode\LaravelActions\ServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Orchestra\Testbench\TestCase as BaseTestCase;

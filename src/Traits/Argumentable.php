@@ -1,6 +1,6 @@
 <?php
 
-namespace Helldar\LaravelActions\Traits;
+namespace DragonCode\LaravelActions\Traits;
 
 /** @mixin \Illuminate\Console\Command */
 trait Argumentable
