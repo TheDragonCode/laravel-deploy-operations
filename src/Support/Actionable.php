@@ -1,8 +1,8 @@
 <?php
 
-namespace Helldar\LaravelActions\Support;
+namespace DragonCode\LaravelActions\Support;
 
-use Helldar\LaravelActions\Contracts\Actionable as Contract;
+use DragonCode\LaravelActions\Contracts\Actionable as Contract;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Arr;
 

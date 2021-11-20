@@ -1,6 +1,6 @@
 <?php
 
-namespace Helldar\LaravelActions\Support;
+namespace DragonCode\LaravelActions\Support;
 
 class Information
 {

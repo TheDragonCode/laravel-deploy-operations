@@ -1,6 +1,6 @@
 <?php
 
-namespace Helldar\LaravelActions\Traits;
+namespace DragonCode\LaravelActions\Traits;
 
 /** @mixin \Illuminate\Database\Console\Migrations\BaseCommand */
 trait Database

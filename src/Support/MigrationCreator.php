@@ -1,6 +1,6 @@
 <?php
 
-namespace Helldar\LaravelActions\Support;
+namespace DragonCode\LaravelActions\Support;
 
 use Illuminate\Database\Migrations\MigrationCreator as BaseMigrationCreator;
 use Illuminate\Filesystem\Filesystem;

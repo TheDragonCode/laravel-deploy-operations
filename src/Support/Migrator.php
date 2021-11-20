@@ -1,8 +1,8 @@
 <?php
 
-namespace Helldar\LaravelActions\Support;
+namespace DragonCode\LaravelActions\Support;
 
-use Helldar\LaravelActions\Traits\Infoable;
+use DragonCode\LaravelActions\Traits\Infoable;
 use Illuminate\Database\Migrations\Migrator as BaseMigrator;
 use Illuminate\Support\Facades\DB;
 
@@ -153,7 +153,7 @@ class Migrator extends BaseMigrator
     /**
      * Whether it is necessary to call database transactions at runtime.
      *
-     * @param  \Helldar\LaravelActions\Support\Actionable|object  $migration
+     * @param  \DragonCode\LaravelActions\Support\Actionable|object  $migration
      *
      * @return bool
      */
@@ -165,7 +165,7 @@ class Migrator extends BaseMigrator
     /**
      * The number of attempts to execute a request within a transaction before throwing an error.
      *
-     * @param  \Helldar\LaravelActions\Support\Actionable|object  $migration
+     * @param  \DragonCode\LaravelActions\Support\Actionable|object  $migration
      *
      * @return int
      */
