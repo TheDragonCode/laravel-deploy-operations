@@ -2,7 +2,7 @@
 
 namespace DragonCode\LaravelActions\Support;
 
-use DragonCode\LaravelActions\Contracts\Actionable as Contract;
+use DragonCode\Contracts\LaravelActions\Actionable as Contract;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Arr;
 
