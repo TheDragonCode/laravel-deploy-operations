@@ -60,6 +60,7 @@
     "extra": {
         "laravel": {
             "providers": [
+                "DragonCode\\LaravelActions\\DumperServiceProvider",
                 "DragonCode\\LaravelActions\\ServiceProvider"
             ]
         }

@@ -9,4 +9,9 @@ trait Database
     {
         return $this->laravel->databasePath('actions');
     }
+
+    protected function getActionsTable(): string
+    {
+        return config('database.actions');
+    }
 }

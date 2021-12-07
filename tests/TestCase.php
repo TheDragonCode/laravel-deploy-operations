@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use DragonCode\LaravelActions\DumperServiceProvider;
 use DragonCode\LaravelActions\ServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -31,17 +32,20 @@ abstract class TestCase extends BaseTestCase
         $this->freshFiles();
     }
 
+    protected function getPackageProviders($app): array
+    {
+        return [
+            DumperServiceProvider::class,
+            ServiceProvider::class,
+        ];
+    }
+
     protected function getEnvironmentSetUp($app)
     {
         parent::getEnvironmentSetUp($app);
 
         $this->setTable($app);
         $this->setDatabase($app);
-    }
-
-    protected function getPackageProviders($app): array
-    {
-        return [ServiceProvider::class];
     }
 
     protected function table()
