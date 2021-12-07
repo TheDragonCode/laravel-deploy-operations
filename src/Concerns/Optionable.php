@@ -1,6 +1,6 @@
 <?php
 
-namespace DragonCode\LaravelActions\Traits;
+namespace DragonCode\LaravelActions\Concerns;
 
 /** @mixin \Illuminate\Console\Command */
 trait Optionable

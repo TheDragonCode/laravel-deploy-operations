@@ -1,6 +1,6 @@
 <?php
 
-namespace DragonCode\LaravelActions\Traits;
+namespace DragonCode\LaravelActions\Concerns;
 
 use DragonCode\LaravelActions\Facades\Information;
 use Symfony\Component\Console\Output\OutputInterface;

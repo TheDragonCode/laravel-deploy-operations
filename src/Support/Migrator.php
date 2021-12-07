@@ -2,7 +2,7 @@
 
 namespace DragonCode\LaravelActions\Support;
 
-use DragonCode\LaravelActions\Traits\Infoable;
+use DragonCode\LaravelActions\Concerns\Infoable;
 use Illuminate\Database\Migrations\Migrator as BaseMigrator;
 use Illuminate\Support\Facades\DB;
 
