@@ -29,7 +29,7 @@ class ServiceProvider extends BaseServiceProvider
         'MigrateStatus'   => Command::STATUS,
     ];
 
-    public function register()
+    public function register(): void
     {
         $this->registerConfig();
         $this->registerRepository();
@@ -38,7 +38,7 @@ class ServiceProvider extends BaseServiceProvider
         $this->registerCommands($this->commands);
     }
 
-    public function provides()
+    public function provides(): array
     {
         return array_merge([
             Action::MIGRATOR,
