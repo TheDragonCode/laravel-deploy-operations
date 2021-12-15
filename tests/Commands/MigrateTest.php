@@ -88,8 +88,7 @@ class MigrateTest extends TestCase
 
         try {
             $this->artisan('migrate:actions')->run();
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             $this->assertSame(Exception::class, get_class($e));
             $this->assertSame('Random message', $e->getMessage());
         }
@@ -202,6 +201,66 @@ class MigrateTest extends TestCase
         $this->assertDatabaseMigrationHas($this->table, 'run_allow');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_disallow');
         $this->artisan('migrate:actions')->run();
+    }
+
+    public function testPathAsFileWithExtension()
+    {
+        $this->copyFiles();
+
+        $table = 'test';
+
+        $path = 'sub_path/2021_12_15_205804_baz.php';
+
+        $this->artisan('migrate:actions:install')->run();
+
+        $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'baz');
+        $this->artisan('migrate:actions', ['--path' => $path])->run();
+
+        $this->assertDatabaseCount($table, 1);
+        $this->assertDatabaseCount($this->table, 1);
+        $this->assertDatabaseMigrationHas($this->table, 'baz');
+    }
+
+    public function testPathAsFileWithoutExtension()
+    {
+        $this->copyFiles();
+
+        $table = 'test';
+
+        $path = 'sub_path/2021_12_15_205804_baz';
+
+        $this->artisan('migrate:actions:install')->run();
+
+        $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'baz');
+        $this->artisan('migrate:actions', ['--path' => $path])->run();
+
+        $this->assertDatabaseCount($table, 1);
+        $this->assertDatabaseCount($this->table, 1);
+        $this->assertDatabaseMigrationHas($this->table, 'baz');
+    }
+
+    public function testPathAsDirectory()
+    {
+        $this->copyFiles();
+
+        $table = 'test';
+
+        $path = 'sub_path';
+
+        $this->artisan('migrate:actions:install')->run();
+
+        $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'baz');
+        $this->artisan('migrate:actions', ['--path' => $path])->run();
+
+        $this->assertDatabaseCount($table, 1);
+        $this->assertDatabaseCount($this->table, 1);
+        $this->assertDatabaseMigrationHas($this->table, 'baz');
     }
 
     public function testMigrationNotFound()
