@@ -1,4 +1,4 @@
-name: "Laravel 6-7"
+name: "Laravel 7"
 on: [ push ]
 
 jobs:
@@ -9,9 +9,9 @@ jobs:
             fail-fast: true
             matrix:
                 php: [ "7.3", "7.4", "8.0" ]
-                laravel: [ "6.0", "7.0" ]
+                laravel: [ "7.0" ]
 
-        name: PHP ${{ matrix.php }}, Laravel ${{ matrix.laravel }}
+        name: PHP ${{ matrix.php }}
 
         steps:
             -   name: Checkout code
