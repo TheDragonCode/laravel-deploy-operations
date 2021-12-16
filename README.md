@@ -1,4 +1,4 @@
-# Laravel Actions
+# Laravel Migration Actions
 
 <img src="https://preview.dragon-code.pro/TheDragonCode/migration-actions.svg?brand=laravel" alt="Laravel Migration Actions"/>
 
