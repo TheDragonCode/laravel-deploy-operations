@@ -30,7 +30,7 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 
 ### Upgrade from `dragon-code/laravel-actions`
 
-1. In your `composer.json` file, replace `"dragon-code/laravel-actions": "^2.0"` with `"dragon-code/laravel-migration-actions": "^2.0"`.
+1. In your `composer.json` file, replace `dragon-code/laravel-actions` with `dragon-code/laravel-migration-actions`.
 3. Run the `command composer` update.
 4. Profit!
 
