@@ -23,20 +23,20 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```json
 {
     "require": {
-        "dragon-code/laravel-migration-actions": "^3.0"
+        "dragon-code/laravel-migration-actions": "^2.0"
     }
 }
 ```
 
 ### Upgrade from `dragon-code/laravel-actions`
 
-1. In your `composer.json` file, replace `"dragon-code/laravel-actions": "^2.0"` with `"dragon-code/laravel-migration-actions": "^3.0"`.
+1. In your `composer.json` file, replace `"dragon-code/laravel-actions": "^2.0"` with `"dragon-code/laravel-migration-actions": "^2.0"`.
 3. Run the `command composer` update.
 4. Profit!
 
 ### Upgrade from `andrey-helldar/laravel-migration-actions`
 
-1. In your `composer.json` file, replace `"andrey-helldar/laravel-actions": "^1.0"` with `"dragon-code/laravel-migration-actions": "^3.0"`.
+1. In your `composer.json` file, replace `"andrey-helldar/laravel-actions": "^1.0"` with `"dragon-code/laravel-migration-actions": "^2.0"`.
 2. Replace the `Helldar\LaravelActions` namespace prefix with `DragonCode\LaravelActions` in your app;
 3. Run the `command composer` update.
 4. Profit!
