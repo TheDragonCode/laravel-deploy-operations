@@ -1,6 +1,6 @@
 # Laravel Actions
 
-<img src="https://preview.dragon-code.pro/TheDragonCode/laravel-actions.svg?brand=laravel" alt="Laravel Actions"/>
+<img src="https://preview.dragon-code.pro/TheDragonCode/migration-actions.svg?brand=laravel" alt="Laravel Migration Actions"/>
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
@@ -15,7 +15,7 @@
 To get the latest version of Laravel Actions, simply require the project using [Composer](https://getcomposer.org):
 
 ```bash
-$ composer require dragon-code/laravel-actions
+$ composer require dragon-code/laravel-migration-actions
 ```
 
 Or manually update `require` block of `composer.json` and run `composer update`.
@@ -23,14 +23,20 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```json
 {
     "require": {
-        "dragon-code/laravel-actions": "^2.0"
+        "dragon-code/laravel-migration-actions": "^3.0"
     }
 }
 ```
 
-### Upgrade from `andrey-helldar/laravel-actions`
+### Upgrade from `dragon-code/laravel-actions`
 
-1. In your `composer.json` file, replace `"andrey-helldar/laravel-actions": "^1.0"` with `"dragon-code/laravel-actions": "^2.0"`.
+1. In your `composer.json` file, replace `"dragon-code/laravel-actions": "^2.0"` with `"dragon-code/laravel-migration-actions": "^3.0"`.
+3. Run the `command composer` update.
+4. Profit!
+
+### Upgrade from `andrey-helldar/laravel-migration-actions`
+
+1. In your `composer.json` file, replace `"andrey-helldar/laravel-actions": "^1.0"` with `"dragon-code/laravel-migration-actions": "^3.0"`.
 2. Replace the `Helldar\LaravelActions` namespace prefix with `DragonCode\LaravelActions` in your app;
 3. Run the `command composer` update.
 4. Profit!
@@ -273,18 +279,18 @@ php artisan migrate:actions:status
 This package is licensed under the [MIT License](LICENSE).
 
 
-[badge_build]:          https://img.shields.io/github/workflow/status/TheDragonCode/laravel-actions/phpunit?style=flat-square
+[badge_build]:          https://img.shields.io/github/workflow/status/TheDragonCode/laravel-migration-actions/phpunit?style=flat-square
 
-[badge_downloads]:      https://img.shields.io/packagist/dt/dragon-code/laravel-actions.svg?style=flat-square
+[badge_downloads]:      https://img.shields.io/packagist/dt/dragon-code/laravel-migration-actions.svg?style=flat-square
 
-[badge_license]:        https://img.shields.io/packagist/l/dragon-code/laravel-actions.svg?style=flat-square
+[badge_license]:        https://img.shields.io/packagist/l/dragon-code/laravel-migration-actions.svg?style=flat-square
 
-[badge_stable]:         https://img.shields.io/github/v/release/TheDragonCode/laravel-actions?label=stable&style=flat-square
+[badge_stable]:         https://img.shields.io/github/v/release/TheDragonCode/laravel-migration-actions?label=stable&style=flat-square
 
 [badge_unstable]:       https://img.shields.io/badge/unstable-dev--main-orange?style=flat-square
 
-[link_build]:           https://github.com/TheDragonCode/laravel-actions/actions
+[link_build]:           https://github.com/TheDragonCode/laravel-migration-actions/actions
 
 [link_license]:         LICENSE
 
-[link_packagist]:       https://packagist.org/packages/dragon-code/laravel-actions
+[link_packagist]:       https://packagist.org/packages/dragon-code/laravel-migration-actions
