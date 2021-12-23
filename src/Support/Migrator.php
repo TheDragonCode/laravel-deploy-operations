@@ -2,9 +2,11 @@
 
 namespace DragonCode\LaravelActions\Support;
 
+use DragonCode\Contracts\LaravelActions\Actionable as ActionableContract;
 use DragonCode\LaravelActions\Concerns\Infoable;
 use Illuminate\Database\Migrations\Migrator as BaseMigrator;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class Migrator extends BaseMigrator
 {
@@ -73,6 +75,8 @@ class Migrator extends BaseMigrator
      * @param  string  $file
      * @param  object  $migration
      * @param  bool  $pretend
+     *
+     * @throws \Throwable
      */
     protected function runDown($file, $migration, $pretend)
     {
@@ -87,8 +91,6 @@ class Migrator extends BaseMigrator
         }
 
         parent::runDown($file, $migration, $pretend);
-
-        $this->runSuccess($instance);
     }
 
     /**
@@ -96,22 +98,22 @@ class Migrator extends BaseMigrator
      *
      * @param  object  $migration
      * @param  string  $method
+     *
+     * @throws \Throwable
      */
     protected function runMigration($migration, $method)
     {
-        if ($this->enabledTransactions($migration)) {
-            DB::transaction(function () use ($migration, $method) {
-                parent::runMigration($migration, $method);
+        $this->runMigrationHandle($migration, function ($migration) use ($method) {
+            if ($this->enabledTransactions($migration)) {
+                DB::transaction(function () use ($migration, $method) {
+                    parent::runMigration($migration, $method);
+                }, $this->transactionAttempts($migration));
 
-                $this->runSuccess($migration);
-            }, $this->transactionAttempts($migration));
+                return;
+            }
 
-            return;
-        }
-
-        parent::runMigration($migration, $method);
-
-        $this->runSuccess($migration);
+            parent::runMigration($migration, $method);
+        });
     }
 
     /**
@@ -182,8 +184,43 @@ class Migrator extends BaseMigrator
         return (int) abs($value);
     }
 
-    protected function runSuccess($migration): void
+    /**
+     * @param  \DragonCode\Contracts\LaravelActions\Actionable|object  $migration
+     * @param  callable  $handle
+     *
+     * @throws \Throwable
+     * @return void
+     */
+    protected function runMigrationHandle(ActionableContract $migration, callable $handle)
+    {
+        try {
+            $handle($migration);
+
+            $this->runSuccess($migration);
+        } catch (Throwable $e) {
+            $this->runFailed($migration);
+
+            throw $e;
+        }
+    }
+
+    /**
+     * @param  \DragonCode\Contracts\LaravelActions\Actionable|object  $migration
+     *
+     * @return void
+     */
+    protected function runSuccess(ActionableContract $migration): void
     {
         $migration->success();
+    }
+
+    /**
+     * @param  \DragonCode\Contracts\LaravelActions\Actionable|object  $migration
+     *
+     * @return void
+     */
+    protected function runFailed(ActionableContract $migration): void
+    {
+        //$migration->failed();
     }
 }
