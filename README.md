@@ -23,7 +23,7 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```json
 {
     "require": {
-        "dragon-code/laravel-migration-actions": "^2.0"
+        "dragon-code/laravel-migration-actions": "^2.2"
     }
 }
 ```
@@ -86,6 +86,8 @@ To run all of your outstanding actions, execute the `migrate:actions` Artisan co
 ```
 php artisan migrate:actions
 ```
+
+> You can also override the `success` and `failed` methods, which are called on success or failure processing.
 
 #### Forcing Actions To Run In Production
 
@@ -249,6 +251,8 @@ The `migrate:actions:reset` command will roll back all of your application's mig
 ```
 php artisan migrate:actions:reset
 ```
+
+> You can also override the `success` and `failed` methods, which are called on success or failure processing.
 
 ### Roll Back & Action Using A Single Command
 
