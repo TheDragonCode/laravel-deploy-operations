@@ -221,6 +221,6 @@ class Migrator extends BaseMigrator
      */
     protected function runFailed(ActionableContract $migration): void
     {
-        //$migration->failed();
+        $migration->failed();
     }
 }
