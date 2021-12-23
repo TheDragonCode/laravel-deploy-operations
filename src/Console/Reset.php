@@ -2,11 +2,11 @@
 
 namespace DragonCode\LaravelActions\Console;
 
+use DragonCode\LaravelActions\Concerns\Database;
+use DragonCode\LaravelActions\Concerns\Infoable;
+use DragonCode\LaravelActions\Concerns\Optionable;
 use DragonCode\LaravelActions\Constants\Names;
 use DragonCode\LaravelActions\Support\Migrator;
-use DragonCode\LaravelActions\Traits\Database;
-use DragonCode\LaravelActions\Traits\Infoable;
-use DragonCode\LaravelActions\Traits\Optionable;
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Database\Console\Migrations\BaseCommand;
 use Symfony\Component\Console\Input\InputOption;
