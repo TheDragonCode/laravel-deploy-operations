@@ -60,7 +60,7 @@ class RollbackTest extends TestCase
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 5);
-        $this->assertDatabaseCount($this->table, 6);
+        $this->assertDatabaseCount($this->table, 7);
         $this->assertDatabaseMigrationHas($this->table, 'run_on_all');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_production');
         $this->assertDatabaseMigrationHas($this->table, 'run_on_testing');
@@ -74,5 +74,29 @@ class RollbackTest extends TestCase
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_production');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_testing');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_many_environments');
+    }
+
+    public function testUpSuccess()
+    {
+        $this->copyFiles();
+
+        $table = 'success';
+
+        $this->artisan('migrate:actions:install')->run();
+
+        $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success');
+        $this->artisan('migrate:actions')->run();
+
+        $this->assertDatabaseCount($table, 2);
+        $this->assertDatabaseCount($this->table, 7);
+        $this->assertDatabaseMigrationHas($this->table, 'run_success');
+        $this->artisan('migrate:actions')->run();
+
+        $this->artisan('migrate:actions:rollback')->run();
+        $this->assertDatabaseCount($table, 5);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success');
     }
 }

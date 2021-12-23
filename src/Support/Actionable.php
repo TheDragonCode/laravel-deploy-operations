@@ -117,4 +117,13 @@ abstract class Actionable extends Migration implements Contract
     {
         return true;
     }
+
+    /**
+     * Method to be called when the job completes successfully
+     *
+     * @return void
+     */
+    public function success(): void
+    {
+    }
 }
