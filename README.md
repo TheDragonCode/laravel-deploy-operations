@@ -300,6 +300,11 @@ class AddSomeData extends Actionable
     {
        Log::info('success');
     }
+    
+    public function failed(): void
+    {
+       Log::info('failed');
+    }
 }
 ```
 
@@ -324,6 +329,11 @@ class AddSomeData extends Actionable
     public function down(): void
     {
        throw new Exeption();
+    }
+    
+    public function success(): void
+    {
+       Log::info('success');
     }
     
     public function failed(): void
