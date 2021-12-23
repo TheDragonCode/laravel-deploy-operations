@@ -326,7 +326,7 @@ class AddSomeData extends Actionable
        throw new Exeption();
     }
     
-    public function success(): void
+    public function failed(): void
     {
        Log::info('failed');
     }
