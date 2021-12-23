@@ -14,7 +14,7 @@ class RunSuccessOnFailed extends Actionable
 
     public function down(): void
     {
-        throw new Exception();
+        throw new Exception('Custom exception');
     }
 
     public function success(): void

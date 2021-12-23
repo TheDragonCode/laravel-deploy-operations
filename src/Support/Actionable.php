@@ -126,4 +126,13 @@ abstract class Actionable extends Migration implements Contract
     public function success(): void
     {
     }
+
+    /**
+     * The method will be called if an error occurs.
+     *
+     * @return void
+     */
+    public function failed(): void
+    {
+    }
 }

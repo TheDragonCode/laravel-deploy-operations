@@ -3,7 +3,9 @@
 namespace Tests\Commands;
 
 use Exception;
+use Illuminate\Support\Str;
 use Tests\TestCase;
+use Throwable;
 
 class MigrateTest extends TestCase
 {
@@ -131,7 +133,6 @@ class MigrateTest extends TestCase
         $this->assertDatabaseMigrationHas($this->table, 'run_on_testing');
         $this->assertDatabaseMigrationHas($this->table, 'run_except_production');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_except_testing');
-        $this->artisan('migrate:actions')->run();
     }
 
     public function testManyEnvironments()
@@ -173,7 +174,6 @@ class MigrateTest extends TestCase
         $this->assertDatabaseMigrationHas($this->table, 'run_except_production');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_except_testing');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_except_many_environments');
-        $this->artisan('migrate:actions')->run();
     }
 
     public function testAllow()
@@ -200,7 +200,6 @@ class MigrateTest extends TestCase
         $this->assertDatabaseCount($this->table, 7);
         $this->assertDatabaseMigrationHas($this->table, 'run_allow');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_disallow');
-        $this->artisan('migrate:actions')->run();
     }
 
     public function testUpSuccess()
@@ -219,15 +218,11 @@ class MigrateTest extends TestCase
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 7);
         $this->assertDatabaseMigrationHas($this->table, 'run_success');
-        $this->artisan('migrate:actions')->run();
     }
 
-    public function testUpSuccessOnFailed()
+    public function testUpFailed()
     {
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('Custom exception');
-
-        $this->copyFiles(true);
+        $this->copyFiles();
 
         $table = 'success';
 
@@ -235,8 +230,28 @@ class MigrateTest extends TestCase
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success_on_failed');
         $this->artisan('migrate:actions')->run();
+
+        $this->assertDatabaseCount($table, 2);
+        $this->assertDatabaseCount($this->table, 7);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success_on_failed');
+
+        try {
+            $this->copyFiles(true);
+
+            $this->artisan('migrate:actions')->run();
+        } catch (Throwable $e) {
+            $this->assertInstanceOf(Exception::class, $e);
+
+            $this->assertSame('Custom exception', $e->getMessage());
+
+            $this->assertTrue(Str::contains($e->getFile(), 'run_success_on_failed'));
+        }
+
+        $this->assertDatabaseCount($table, 2);
+        $this->assertDatabaseCount($this->table, 7);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success_on_failed');
     }
 
     public function testPathAsFileWithExtension()

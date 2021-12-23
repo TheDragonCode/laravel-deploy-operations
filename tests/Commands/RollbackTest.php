@@ -2,7 +2,10 @@
 
 namespace Tests\Commands;
 
+use Exception;
+use Illuminate\Support\Str;
 use Tests\TestCase;
+use Throwable;
 
 class RollbackTest extends TestCase
 {
@@ -92,11 +95,46 @@ class RollbackTest extends TestCase
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 7);
         $this->assertDatabaseMigrationHas($this->table, 'run_success');
-        $this->artisan('migrate:actions')->run();
 
         $this->artisan('migrate:actions:rollback')->run();
-        $this->assertDatabaseCount($table, 5);
+        $this->assertDatabaseCount($table, 4);
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success');
+    }
+
+    public function testUpFailed()
+    {
+        $this->copyFiles();
+
+        $table = 'success';
+
+        $this->artisan('migrate:actions:install')->run();
+
+        $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success_on_failed');
+        $this->artisan('migrate:actions')->run();
+
+        $this->assertDatabaseCount($table, 2);
+        $this->assertDatabaseCount($this->table, 7);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success_on_failed');
+
+        try {
+            $this->copyFiles(true);
+
+            $this->table()->insert(['migration' => 'run_success_on_failed', 'batch' => 999]);
+
+            $this->artisan('migrate:actions:rollback')->run();
+        } catch (Throwable $e) {
+            $this->assertInstanceOf(Exception::class, $e);
+
+            $this->assertSame('Custom exception', $e->getMessage());
+
+            $this->assertTrue(Str::contains($e->getFile(), 'run_success_on_failed'));
+        }
+
+        $this->assertDatabaseCount($table, 2);
+        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseMigrationHas($this->table, 'run_success_on_failed');
     }
 }
