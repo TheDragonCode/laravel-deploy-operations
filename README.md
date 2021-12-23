@@ -87,8 +87,6 @@ To run all of your outstanding actions, execute the `migrate:actions` Artisan co
 php artisan migrate:actions
 ```
 
-> You can also override the `success` and `failed` methods, which are called on success or failure processing.
-
 #### Forcing Actions To Run In Production
 
 Some action operations are destructive, which means they may cause you to lose data. In order to protect you from running these commands against your production database, you will
@@ -252,8 +250,6 @@ The `migrate:actions:reset` command will roll back all of your application's mig
 php artisan migrate:actions:reset
 ```
 
-> You can also override the `success` and `failed` methods, which are called on success or failure processing.
-
 ### Roll Back & Action Using A Single Command
 
 The `migrate:actions:refresh` command will roll back all of your migrations and then execute the `migrate:actions` command. This command effectively re-creates your entire
@@ -277,6 +273,71 @@ The `migrate:actions:status` command displays the execution status of actions. I
 ```
 php artisan migrate:actions:status
 ```
+
+### Execution status
+
+You can also override the `success` and `failed` methods, which are called on success or failure processing.
+
+#### If Success
+
+```php
+use DragonCode\LaravelActions\Support\Actionable;
+use Illuminate\Support\Facade\Log;
+
+class AddSomeData extends Actionable
+{
+    public function up(): void
+    {
+       //
+    }
+    
+    public function down(): void
+    {
+       //
+    }
+    
+    public function success(): void
+    {
+       Log::info('success');
+    }
+}
+```
+
+Call the `php artisan migrate:actions` command.
+
+The log file will contain two `success` entries.
+
+#### If Failed
+
+```php
+use DragonCode\LaravelActions\Support\Actionable;
+use Exeption;
+use Illuminate\Support\Facade\Log;
+
+class AddSomeData extends Actionable
+{
+    public function up(): void
+    {
+       throw new Exeption();
+    }
+    
+    public function down(): void
+    {
+       throw new Exeption();
+    }
+    
+    public function success(): void
+    {
+       Log::info('failed');
+    }
+}
+```
+
+Call the `php artisan migrate:actions` command.
+
+The log file will contain two `failed` entries.
+
+
 
 ## License
 
