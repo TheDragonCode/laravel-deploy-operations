@@ -13,12 +13,13 @@ trait Files
         );
     }
 
-    protected function copyFiles(): void
+    protected function copyFiles(bool $failed = false): void
     {
-        File::copyDirectory(
-            __DIR__ . '/../fixtures/actions',
-            $this->targetDirectory()
-        );
+        $source = $failed
+            ? __DIR__ . '/../fixtures/actions_failed'
+            : __DIR__ . '/../fixtures/actions';
+
+        File::copyDirectory($source, $this->targetDirectory());
     }
 
     protected function copySuccessTransaction(): void

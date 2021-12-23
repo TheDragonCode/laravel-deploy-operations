@@ -87,6 +87,8 @@ class Migrator extends BaseMigrator
         }
 
         parent::runDown($file, $migration, $pretend);
+
+        $this->runSuccess($instance);
     }
 
     /**
@@ -100,12 +102,16 @@ class Migrator extends BaseMigrator
         if ($this->enabledTransactions($migration)) {
             DB::transaction(function () use ($migration, $method) {
                 parent::runMigration($migration, $method);
+
+                $this->runSuccess($migration);
             }, $this->transactionAttempts($migration));
 
             return;
         }
 
         parent::runMigration($migration, $method);
+
+        $this->runSuccess($migration);
     }
 
     /**
@@ -174,5 +180,10 @@ class Migrator extends BaseMigrator
         $value = $migration->transactionAttempts();
 
         return (int) abs($value);
+    }
+
+    protected function runSuccess($migration): void
+    {
+        $migration->success();
     }
 }
