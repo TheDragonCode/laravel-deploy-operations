@@ -5,20 +5,16 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-class RunSuccess extends Actionable
+class RunSuccessOnFailed extends Actionable
 {
     public function up(): void
     {
-        $this->table()->insert([
-            'value' => Uuid::uuid4(),
-        ]);
+        throw new Exception('Custom exception');
     }
 
     public function down(): void
     {
-        $this->table()->insert([
-            'value' => Uuid::uuid4(),
-        ]);
+        throw new Exception();
     }
 
     public function success(): void

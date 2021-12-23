@@ -222,6 +222,23 @@ class MigrateTest extends TestCase
         $this->artisan('migrate:actions')->run();
     }
 
+    public function testUpSuccessOnFailed()
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Custom exception');
+
+        $this->copyFiles(true);
+
+        $table = 'success';
+
+        $this->artisan('migrate:actions:install')->run();
+
+        $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success');
+        $this->artisan('migrate:actions')->run();
+    }
+
     public function testPathAsFileWithExtension()
     {
         $this->copyFiles();
