@@ -2,10 +2,10 @@
 
 namespace DragonCode\LaravelActions\Console;
 
+use DragonCode\LaravelActions\Concerns\Database;
+use DragonCode\LaravelActions\Concerns\Infoable;
+use DragonCode\LaravelActions\Concerns\Optionable;
 use DragonCode\LaravelActions\Constants\Names;
-use DragonCode\LaravelActions\Traits\Database;
-use DragonCode\LaravelActions\Traits\Infoable;
-use DragonCode\LaravelActions\Traits\Optionable;
 use Illuminate\Console\Command as BaseCommand;
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Contracts\Events\Dispatcher;
