@@ -23,18 +23,18 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```json
 {
     "require": {
-        "dragon-code/laravel-migration-actions": "^2.2"
+        "dragon-code/laravel-migration-actions": "^2.3"
     }
 }
 ```
 
-### Upgrade from `dragon-code/laravel-actions`
+### Upgrade From `dragon-code/laravel-actions`
 
 1. In your `composer.json` file, replace `dragon-code/laravel-actions` with `dragon-code/laravel-migration-actions`.
 3. Run the `command composer` update.
 4. Profit!
 
-### Upgrade from `andrey-helldar/laravel-migration-actions`
+### Upgrade From `andrey-helldar/laravel-migration-actions`
 
 1. In your `composer.json` file, replace `"andrey-helldar/laravel-actions": "^1.0"` with `"dragon-code/laravel-migration-actions": "^2.0"`.
 2. Replace the `Helldar\LaravelActions` namespace prefix with `DragonCode\LaravelActions` in your app;
@@ -63,9 +63,9 @@ the `Register Service Providers` section of your `bootstrap/app.php`.
 $app->register(\DragonCode\LaravelActions\ServiceProvider::class);
 ```
 
-## How to use
+## How To Use
 
-### Generating actions
+### Creating Actions
 
 To create a migration, use the `make:migration:action` Artisan command:
 
@@ -274,7 +274,7 @@ The `migrate:actions:status` command displays the execution status of actions. I
 php artisan migrate:actions:status
 ```
 
-### Execution status
+### Execution Status
 
 You can also override the `success` and `failed` methods, which are called on success or failure processing.
 
@@ -347,7 +347,29 @@ Call the `php artisan migrate:actions` command.
 
 The log file will contain two `failed` entries.
 
+### Artisan Command
 
+Quite often, when working with actions, it becomes necessary to run one or another console command, and each time you have to write the following code:
+
+```php
+use Illuminate\Support\Facades\Artisan;
+
+public function up()
+{
+    Artisan::call('command-name');
+}
+```
+
+Since version [`2.3`](https://github.com/TheDragonCode/laravel-migration-actions/releases/tag/v2.3.0) we have added a method call. Now calling commands has become much easier:
+
+```php
+public function up()
+{
+    $this->artisan('command-name', [
+        // parameters
+    ]);
+}
+```
 
 ## License
 

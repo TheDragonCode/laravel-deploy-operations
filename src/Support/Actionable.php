@@ -3,11 +3,14 @@
 namespace DragonCode\LaravelActions\Support;
 
 use DragonCode\Contracts\LaravelActions\Actionable as Contract;
+use DragonCode\LaravelActions\Concerns\Artisan;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Arr;
 
 abstract class Actionable extends Migration implements Contract
 {
+    use Artisan;
+
     /**
      * Determines the type of launch of the action.
      *
