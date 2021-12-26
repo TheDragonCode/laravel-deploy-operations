@@ -356,7 +356,9 @@ use Illuminate\Support\Facades\Artisan;
 
 public function up()
 {
-    Artisan::call('command-name');
+    Artisan::call('command-name', [
+        // parameters
+    ]);
 }
 ```
 
