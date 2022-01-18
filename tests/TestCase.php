@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use DragonCode\LaravelActions\Concerns\Versionable;
 use DragonCode\LaravelActions\ServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +23,7 @@ abstract class TestCase extends BaseTestCase
     use Laraveable;
     use RefreshDatabase;
     use Settings;
+    use Versionable;
 
     protected function setUp(): void
     {
@@ -31,17 +33,17 @@ abstract class TestCase extends BaseTestCase
         $this->freshFiles();
     }
 
+    protected function getPackageProviders($app): array
+    {
+        return [ServiceProvider::class];
+    }
+
     protected function getEnvironmentSetUp($app)
     {
         parent::getEnvironmentSetUp($app);
 
         $this->setTable($app);
         $this->setDatabase($app);
-    }
-
-    protected function getPackageProviders($app): array
-    {
-        return [ServiceProvider::class];
     }
 
     protected function table()

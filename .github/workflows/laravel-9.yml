@@ -1,0 +1,32 @@
+name: "Laravel 9"
+on: [ push ]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        strategy:
+            fail-fast: true
+            matrix:
+                php: [ "8.0", "8.1" ]
+                laravel: [ "9.0" ]
+
+        name: Laravel ${{ matrix.laravel }}, PHP ${{ matrix.php }}
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    extensions: curl, mbstring, zip, pcntl, pdo, pdo_sqlite, iconv
+                    coverage: none
+
+            -   name: Install dependencies
+                run: |
+                    composer require laravel/framework:^${{ matrix.laravel }}
+                    composer update --prefer-stable --prefer-dist --no-progress --no-interaction
+            -   name: Execute tests
+                run: sudo vendor/bin/phpunit

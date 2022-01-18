@@ -2,6 +2,7 @@
 
 namespace DragonCode\LaravelActions\Support;
 
+use DragonCode\LaravelSupport\Facades\AppVersion;
 use Illuminate\Database\Migrations\MigrationCreator as BaseMigrationCreator;
 use Illuminate\Filesystem\Filesystem;
 
@@ -28,10 +29,12 @@ class MigrationCreator extends BaseMigrationCreator
         return realpath($this->customStubPath);
     }
 
-    protected function getStub($table, $create)
+    protected function getStub($table, $create): string
     {
-        $stub = $this->stubPath() . '/action.stub';
+        $stub = AppVersion::is9x() ? '/action-9.x.stub' : '/action-prev.stub';
 
-        return $this->files->get($stub);
+        return $this->files->get(
+            $this->stubPath() . $stub
+        );
     }
 }
