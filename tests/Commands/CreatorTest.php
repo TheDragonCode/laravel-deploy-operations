@@ -22,8 +22,14 @@ class CreatorTest extends TestCase
         $this->assertFileExists($path);
     }
 
-    public function testAlreadyExists()
+    public function testDuplicateOnPrev()
     {
+        if ($this->isLatestApp()) {
+            $this->assertTrue(true);
+
+            return;
+        }
+
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('A BarExample class already exists.');
 
@@ -31,5 +37,25 @@ class CreatorTest extends TestCase
 
         $this->artisan('make:migration:action', compact('name'))->run();
         $this->artisan('make:migration:action', compact('name'))->run();
+    }
+
+    public function testDuplicateOnLatest()
+    {
+        if ($this->isPrevApp()) {
+            $this->assertTrue(true);
+
+            return;
+        }
+
+        $name = 'BarExample';
+
+        $time1 = date('Y_m_d_His');
+        $this->artisan('make:migration:action', compact('name'))->run();
+
+        $time2 = date('Y_m_d_His');
+        $this->artisan('make:migration:action', compact('name'))->run();
+
+        $this->assertFileExists($this->targetDirectory($time1 . '_bar_example.php'));
+        $this->assertFileExists($this->targetDirectory($time2 . '_bar_example.php'));
     }
 }
