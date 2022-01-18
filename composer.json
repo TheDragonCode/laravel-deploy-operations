@@ -42,7 +42,7 @@
         "andrey-helldar/laravel-actions": "*",
         "dragon-code/laravel-actions": "*"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
