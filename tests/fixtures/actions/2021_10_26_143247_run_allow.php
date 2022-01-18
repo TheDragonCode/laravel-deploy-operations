@@ -5,10 +5,8 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-class RunExceptTesting extends Actionable
+class RunAllow extends Actionable
 {
-    protected $except_environment = 'testing';
-
     public function up(): void
     {
         $this->table()->insert([

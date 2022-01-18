@@ -1,6 +1,6 @@
 <?php
 
-namespace Helldar\LaravelActions\Constants;
+namespace DragonCode\LaravelActions\Constants;
 
 class Action
 {

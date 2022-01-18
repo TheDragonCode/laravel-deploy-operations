@@ -1,10 +1,10 @@
 <?php
 
-namespace Helldar\LaravelActions\Console;
+namespace DragonCode\LaravelActions\Console;
 
-use Helldar\LaravelActions\Constants\Names;
-use Helldar\LaravelActions\Traits\Database;
-use Helldar\LaravelActions\Traits\Infoable;
+use DragonCode\LaravelActions\Concerns\Database;
+use DragonCode\LaravelActions\Concerns\Infoable;
+use DragonCode\LaravelActions\Constants\Names;
 use Illuminate\Database\Console\Migrations\InstallCommand as BaseCommand;
 
 class Install extends BaseCommand

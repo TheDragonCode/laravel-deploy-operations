@@ -1,8 +1,8 @@
 <?php
 
-namespace Helldar\LaravelActions\Traits;
+namespace DragonCode\LaravelActions\Concerns;
 
-use Helldar\LaravelActions\Facades\Information;
+use DragonCode\LaravelActions\Facades\Information;
 use Symfony\Component\Console\Output\OutputInterface;
 
 trait Infoable

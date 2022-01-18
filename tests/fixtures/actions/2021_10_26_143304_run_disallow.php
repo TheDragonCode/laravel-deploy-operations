@@ -5,10 +5,8 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-class RunExceptTesting extends Actionable
+class RunDisallow extends Actionable
 {
-    protected $except_environment = 'testing';
-
     public function up(): void
     {
         $this->table()->insert([
@@ -21,6 +19,11 @@ class RunExceptTesting extends Actionable
         $this->table()->insert([
             'value' => Uuid::uuid4(),
         ]);
+    }
+
+    public function allow(): bool
+    {
+        return false;
     }
 
     protected function table(): Builder

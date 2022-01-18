@@ -2,12 +2,12 @@
 
 namespace Tests\Concerns;
 
-use Helldar\LaravelActions\Facades\Version;
+use DragonCode\LaravelSupport\Facades\AppVersion;
 
 trait Laraveable
 {
     protected function is6x(): bool
     {
-        return Version::is6x();
+        return AppVersion::is6x();
     }
 }

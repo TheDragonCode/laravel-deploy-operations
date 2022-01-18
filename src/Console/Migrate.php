@@ -1,11 +1,11 @@
 <?php
 
-namespace Helldar\LaravelActions\Console;
+namespace DragonCode\LaravelActions\Console;
 
-use Helldar\LaravelActions\Constants\Names;
-use Helldar\LaravelActions\Traits\Database;
-use Helldar\LaravelActions\Traits\Infoable;
-use Helldar\LaravelActions\Traits\Optionable;
+use DragonCode\LaravelActions\Concerns\Database;
+use DragonCode\LaravelActions\Concerns\Infoable;
+use DragonCode\LaravelActions\Concerns\Optionable;
+use DragonCode\LaravelActions\Constants\Names;
 use Illuminate\Database\Console\Migrations\MigrateCommand as BaseCommand;
 
 class Migrate extends BaseCommand
@@ -22,7 +22,9 @@ class Migrate extends BaseCommand
     protected $signature = Names::MIGRATE
     . ' {--database= : The database connection to use}'
     . ' {--force : Force the operation to run when in production}'
-    . ' {--step : Force the actions to be run so they can be rolled back individually}';
+    . ' {--step : Force the actions to be run so they can be rolled back individually}'
+    . ' {--path=* : The path(s) to the migrations files to be executed}'
+    . ' {--realpath : Indicate any provided migration file paths are pre-resolved absolute paths}';
 
     /**
      * The console command description.
@@ -47,8 +49,7 @@ class Migrate extends BaseCommand
 
             $this->migrator->setOutput($this->output)
                 ->run($this->getMigrationPaths(), [
-                    'pretend' => null,
-                    'step'    => $this->optionStep(),
+                    'step' => $this->optionStep(),
                 ]);
         });
 
@@ -58,12 +59,23 @@ class Migrate extends BaseCommand
     /**
      * Prepare the action database for running.
      */
-    protected function prepareDatabase()
+    protected function prepareDatabase(): void
     {
         if (! $this->migrator->repositoryExists()) {
             $this->call(Names::INSTALL, array_filter([
                 '--database' => $this->optionDatabase(),
             ]));
         }
+    }
+
+    protected function getMigrationPaths(): array
+    {
+        if ($paths = $this->optionPath()) {
+            return $paths;
+        }
+
+        return array_merge(
+            $this->migrator->paths(), [$this->getMigrationPath()]
+        );
     }
 }

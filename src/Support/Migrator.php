@@ -1,10 +1,12 @@
 <?php
 
-namespace Helldar\LaravelActions\Support;
+namespace DragonCode\LaravelActions\Support;
 
-use Helldar\LaravelActions\Traits\Infoable;
+use DragonCode\Contracts\LaravelActions\Actionable as ActionableContract;
+use DragonCode\LaravelActions\Concerns\Infoable;
 use Illuminate\Database\Migrations\Migrator as BaseMigrator;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class Migrator extends BaseMigrator
 {
@@ -73,6 +75,8 @@ class Migrator extends BaseMigrator
      * @param  string  $file
      * @param  object  $migration
      * @param  bool  $pretend
+     *
+     * @throws \Throwable
      */
     protected function runDown($file, $migration, $pretend)
     {
@@ -94,18 +98,22 @@ class Migrator extends BaseMigrator
      *
      * @param  object  $migration
      * @param  string  $method
+     *
+     * @throws \Throwable
      */
     protected function runMigration($migration, $method)
     {
-        if ($this->enabledTransactions($migration)) {
-            DB::transaction(function () use ($migration, $method) {
-                parent::runMigration($migration, $method);
-            }, $this->transactionAttempts($migration));
+        $this->runMigrationHandle($migration, function ($migration) use ($method) {
+            if ($this->enabledTransactions($migration)) {
+                DB::transaction(function () use ($migration, $method) {
+                    parent::runMigration($migration, $method);
+                }, $this->transactionAttempts($migration));
 
-            return;
-        }
+                return;
+            }
 
-        parent::runMigration($migration, $method);
+            parent::runMigration($migration, $method);
+        });
     }
 
     /**
@@ -133,6 +141,11 @@ class Migrator extends BaseMigrator
 
         $on     = $migration->onEnvironment();
         $except = $migration->exceptEnvironment();
+        $allow  = $migration->allow();
+
+        if (! $allow) {
+            return false;
+        }
 
         if (! empty($on) && ! in_array($environment, $on)) {
             return false;
@@ -148,7 +161,7 @@ class Migrator extends BaseMigrator
     /**
      * Whether it is necessary to call database transactions at runtime.
      *
-     * @param  \Helldar\LaravelActions\Support\Actionable|object  $migration
+     * @param  \DragonCode\LaravelActions\Support\Actionable|object  $migration
      *
      * @return bool
      */
@@ -160,7 +173,7 @@ class Migrator extends BaseMigrator
     /**
      * The number of attempts to execute a request within a transaction before throwing an error.
      *
-     * @param  \Helldar\LaravelActions\Support\Actionable|object  $migration
+     * @param  \DragonCode\LaravelActions\Support\Actionable|object  $migration
      *
      * @return int
      */
@@ -169,5 +182,45 @@ class Migrator extends BaseMigrator
         $value = $migration->transactionAttempts();
 
         return (int) abs($value);
+    }
+
+    /**
+     * @param  \DragonCode\Contracts\LaravelActions\Actionable|object  $migration
+     * @param  callable  $handle
+     *
+     * @throws \Throwable
+     * @return void
+     */
+    protected function runMigrationHandle(ActionableContract $migration, callable $handle)
+    {
+        try {
+            $handle($migration);
+
+            $this->runSuccess($migration);
+        } catch (Throwable $e) {
+            $this->runFailed($migration);
+
+            throw $e;
+        }
+    }
+
+    /**
+     * @param  \DragonCode\Contracts\LaravelActions\Actionable|object  $migration
+     *
+     * @return void
+     */
+    protected function runSuccess(ActionableContract $migration): void
+    {
+        $migration->success();
+    }
+
+    /**
+     * @param  \DragonCode\Contracts\LaravelActions\Actionable|object  $migration
+     *
+     * @return void
+     */
+    protected function runFailed(ActionableContract $migration): void
+    {
+        $migration->failed();
     }
 }

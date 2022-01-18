@@ -1,18 +1,18 @@
 <?php
 
-namespace Helldar\LaravelActions;
+namespace DragonCode\LaravelActions;
 
-use Helldar\LaravelActions\Console\Install;
-use Helldar\LaravelActions\Console\Make;
-use Helldar\LaravelActions\Console\Migrate;
-use Helldar\LaravelActions\Console\Refresh;
-use Helldar\LaravelActions\Console\Reset;
-use Helldar\LaravelActions\Console\Rollback;
-use Helldar\LaravelActions\Console\Status;
-use Helldar\LaravelActions\Constants\Action;
-use Helldar\LaravelActions\Constants\Command;
-use Helldar\LaravelActions\Support\MigrationCreator;
-use Helldar\LaravelActions\Support\Migrator;
+use DragonCode\LaravelActions\Console\Install;
+use DragonCode\LaravelActions\Console\Make;
+use DragonCode\LaravelActions\Console\Migrate;
+use DragonCode\LaravelActions\Console\Refresh;
+use DragonCode\LaravelActions\Console\Reset;
+use DragonCode\LaravelActions\Console\Rollback;
+use DragonCode\LaravelActions\Console\Status;
+use DragonCode\LaravelActions\Constants\Action;
+use DragonCode\LaravelActions\Constants\Command;
+use DragonCode\LaravelActions\Support\MigrationCreator;
+use DragonCode\LaravelActions\Support\Migrator;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Migrations\DatabaseMigrationRepository;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
@@ -29,7 +29,7 @@ class ServiceProvider extends BaseServiceProvider
         'MigrateStatus'   => Command::STATUS,
     ];
 
-    public function register()
+    public function register(): void
     {
         $this->registerConfig();
         $this->registerRepository();
@@ -38,7 +38,7 @@ class ServiceProvider extends BaseServiceProvider
         $this->registerCommands($this->commands);
     }
 
-    public function provides()
+    public function provides(): array
     {
         return array_merge([
             Action::MIGRATOR,

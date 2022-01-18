@@ -15,9 +15,22 @@ trait Files
 
     protected function copyFiles(): void
     {
-        File::copyDirectory(
-            __DIR__ . '/../fixtures/actions',
-            $this->targetDirectory()
+        File::copyDirectory(__DIR__ . '/../fixtures/actions', $this->targetDirectory());
+    }
+
+    protected function copySuccessFailureMethod()
+    {
+        File::copy(
+            __DIR__ . '/../fixtures/actions_failed/2021_12_23_165048_run_success_on_failed.php',
+            $this->targetDirectory('2021_12_23_165048_run_success_on_failed.php')
+        );
+    }
+
+    protected function copyFailedMethod()
+    {
+        File::copy(
+            __DIR__ . '/../fixtures/actions_failed/2021_12_23_184029_run_failed_failure.php',
+            $this->targetDirectory('2021_12_23_184029_run_failed_failure.php')
         );
     }
 

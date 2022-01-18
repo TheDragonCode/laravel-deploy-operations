@@ -5,18 +5,19 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-class RunExceptTesting extends Actionable
+class RunSuccessOnFailed extends Actionable
 {
-    protected $except_environment = 'testing';
-
     public function up(): void
     {
-        $this->table()->insert([
-            'value' => Uuid::uuid4(),
-        ]);
+        throw new Exception('Custom exception');
     }
 
     public function down(): void
+    {
+        throw new Exception('Custom exception');
+    }
+
+    public function success(): void
     {
         $this->table()->insert([
             'value' => Uuid::uuid4(),
@@ -25,6 +26,6 @@ class RunExceptTesting extends Actionable
 
     protected function table(): Builder
     {
-        return DB::table('environment');
+        return DB::table('success');
     }
 }

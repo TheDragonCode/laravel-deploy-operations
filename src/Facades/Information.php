@@ -1,8 +1,8 @@
 <?php
 
-namespace Helldar\LaravelActions\Facades;
+namespace DragonCode\LaravelActions\Facades;
 
-use Helldar\LaravelActions\Support\Information as Support;
+use DragonCode\LaravelActions\Support\Information as Support;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Facade;
  */
 class Information extends Facade
 {
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return Support::class;
     }

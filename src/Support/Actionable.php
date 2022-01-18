@@ -1,13 +1,16 @@
 <?php
 
-namespace Helldar\LaravelActions\Support;
+namespace DragonCode\LaravelActions\Support;
 
-use Helldar\LaravelActions\Contracts\Actionable as Contract;
+use DragonCode\Contracts\LaravelActions\Actionable as Contract;
+use DragonCode\LaravelActions\Concerns\Artisan;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Arr;
 
 abstract class Actionable extends Migration implements Contract
 {
+    use Artisan;
+
     /**
      * Determines the type of launch of the action.
      *
@@ -106,5 +109,33 @@ abstract class Actionable extends Migration implements Contract
     public function exceptEnvironment(): array
     {
         return Arr::wrap($this->except_environment);
+    }
+
+    /**
+     * Determines whether the given action can be called conditionally.
+     *
+     * @return bool
+     */
+    public function allow(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Method to be called when the job completes successfully
+     *
+     * @return void
+     */
+    public function success(): void
+    {
+    }
+
+    /**
+     * The method will be called if an error occurs.
+     *
+     * @return void
+     */
+    public function failed(): void
+    {
     }
 }

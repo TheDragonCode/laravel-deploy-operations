@@ -1,11 +1,11 @@
 <?php
 
-namespace Helldar\LaravelActions\Console;
+namespace DragonCode\LaravelActions\Console;
 
-use Helldar\LaravelActions\Constants\Names;
-use Helldar\LaravelActions\Traits\Database;
-use Helldar\LaravelActions\Traits\Infoable;
-use Helldar\LaravelActions\Traits\Optionable;
+use DragonCode\LaravelActions\Concerns\Database;
+use DragonCode\LaravelActions\Concerns\Infoable;
+use DragonCode\LaravelActions\Concerns\Optionable;
+use DragonCode\LaravelActions\Constants\Names;
 use Illuminate\Database\Console\Migrations\RollbackCommand;
 use Symfony\Component\Console\Input\InputOption;
 
