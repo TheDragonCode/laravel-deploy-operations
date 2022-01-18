@@ -14,6 +14,17 @@ class Migrator extends BaseMigrator
     use Infoable;
     use Versionable;
 
+    public function usingConnection($name, callable $callback)
+    {
+        $prev = $this->resolver->getDefaultConnection();
+
+        $this->setConnection($name);
+
+        return tap($callback(), function () use ($prev) {
+            $this->setConnection($prev);
+        });
+    }
+
     /**
      * Run "up" a migration instance.
      *
