@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
 return new class extends Actionable {
+    protected $optimize = true;
+
     public function up(): void
     {
         $this->table()->insert([

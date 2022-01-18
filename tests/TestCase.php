@@ -29,8 +29,20 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
+        $this->setCache(false);
+
         $this->freshDatabase();
         $this->freshFiles();
+    }
+
+    protected function tearDown(): void
+    {
+        $this->artisan('config:clear')->run();
+        $this->artisan('event:clear')->run();
+        $this->artisan('route:clear')->run();
+        $this->artisan('view:clear')->run();
+
+        parent::tearDown();
     }
 
     protected function getPackageProviders($app): array

@@ -7,6 +7,8 @@ use Ramsey\Uuid\Uuid;
 
 class Baz extends Actionable
 {
+    protected $optimize = true;
+
     public function up(): void
     {
         $this->table()->insert([

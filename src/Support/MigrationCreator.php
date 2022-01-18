@@ -31,7 +31,7 @@ class MigrationCreator extends BaseMigrationCreator
 
     protected function getStub($table, $create): string
     {
-        $stub = AppVersion::is9x() ? '/action-9.x.stub' : '/action-prev.stub';
+        $stub = AppVersion::is9x() ? '/action-9.x.php' : '/action-prev.php';
 
         return $this->files->get(
             $this->stubPath() . $stub

@@ -382,6 +382,60 @@ return new class extends Actionable
 };
 ```
 
+### Optimize Application
+
+Since version [`2.5.0`](https://github.com/TheDragonCode/laravel-migration-actions/releases/tag/v2.5.0) you can easily call application optimization methods on success.
+
+To do this, you just need to redefine the value of the `$optimize` variable in the action class:
+
+```php
+use DragonCode\LaravelActions\Support\Actionable;
+use Illuminate\Support\Facades\Artisan;
+
+return new class extends Actionable
+{
+    protected $optimize = true;
+
+    public function up()
+    {
+        //
+    }
+};
+```
+
+But before that, do not forget to configure what actions you need to perform. The block of settings is located in the `config/database.php` file of your application.
+
+By default, it is not available, but you can add it to your application and change the settings
+from [`this file`](https://github.com/TheDragonCode/laravel-migration-actions/blob/main/config/database.php).
+
+### Restart Daemons
+
+Starting from version [`2.5.0`](https://github.com/TheDragonCode/laravel-migration-actions/releases/tag/v2.5.0) you can easily cause queues and workers such
+as [`Horizon`](https://laravel.com/docs/horizon) and [`Octane`](https://laravel.com/docs/octane). to restart.
+
+To do this, you just need to redefine the value of the `$restart` variable in the action class:
+
+```php
+use DragonCode\LaravelActions\Support\Actionable;
+use Illuminate\Support\Facades\Artisan;
+
+return new class extends Actionable
+{
+    protected $restart = true;
+
+    public function up()
+    {
+        //
+    }
+};
+```
+
+But before that, do not forget to configure what actions you need to perform. The block of settings is located in the `config/database.php` file of your application.
+
+By default, it is not available, but you can add it to your application and change the settings
+from [`this file`](https://github.com/TheDragonCode/laravel-migration-actions/blob/main/config/database.php).
+
+
 ## License
 
 This package is licensed under the [MIT License](LICENSE).

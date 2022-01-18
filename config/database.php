@@ -13,4 +13,17 @@ return [
     */
 
     'actions' => 'migration_actions',
+
+    'actions_cache' => [
+        'config' => false,
+        'route'  => false,
+        'view'   => false,
+        'event'  => false,
+    ],
+
+    'actions_daemons' => [
+        'queue'   => false,
+        'horizon' => false,
+        'octane'  => false,
+    ],
 ];

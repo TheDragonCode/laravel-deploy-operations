@@ -200,6 +200,16 @@ class Migrator extends BaseMigrator
         return (int) abs($value);
     }
 
+    protected function hasOptimize(ActionableContract $migration): bool
+    {
+        return $migration->hasOptimize();
+    }
+
+    protected function hasQueueRestart(ActionableContract $migration): bool
+    {
+        return $migration->hasRestart();
+    }
+
     /**
      * @param  \DragonCode\Contracts\LaravelActions\Actionable|object  $migration
      * @param  callable  $handle
@@ -212,6 +222,8 @@ class Migrator extends BaseMigrator
         try {
             $handle($migration);
 
+            $this->runOptimize($migration);
+            $this->runQueueRestart($migration);
             $this->runSuccess($migration);
         } catch (Throwable $e) {
             $this->runFailed($migration);
@@ -238,5 +250,19 @@ class Migrator extends BaseMigrator
     protected function runFailed(ActionableContract $migration): void
     {
         $migration->failed();
+    }
+
+    protected function runOptimize(ActionableContract $migration): void
+    {
+        if ($this->hasOptimize($migration)) {
+            $migration->optimize();
+        }
+    }
+
+    protected function runQueueRestart(ActionableContract $migration): void
+    {
+        if ($this->hasQueueRestart($migration)) {
+            $migration->restart();
+        }
     }
 }
