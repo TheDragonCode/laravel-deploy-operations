@@ -13,7 +13,7 @@ class CreatorTest extends TestCase
 
         $filename = date('Y_m_d_His') . '_foo_example.php';
 
-        $path = database_path('actions/' . $filename);
+        $path = $this->targetDirectory($filename);
 
         $this->assertFileDoesNotExist($path);
 
