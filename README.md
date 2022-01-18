@@ -1,6 +1,6 @@
 # Laravel Migration Actions
 
-<img src="https://preview.dragon-code.pro/TheDragonCode/migration-actions.svg?brand=laravel" alt="Laravel Migration Actions"/>
+![the dragon code migration actions](https://preview.dragon-code.pro/the-dragon-code/migration-actions.svg?brand=laravel)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
@@ -23,7 +23,7 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```json
 {
     "require": {
-        "dragon-code/laravel-migration-actions": "^2.3"
+        "dragon-code/laravel-migration-actions": "^2.4"
     }
 }
 ```
@@ -105,7 +105,7 @@ To do this, override the `$once` variable in the action file:
 ```php
 use DragonCode\LaravelActions\Support\Actionable;
 
-class Reindex extends Actionable
+return new class extends Actionable
 {
     protected $once = false;
 
@@ -113,7 +113,7 @@ class Reindex extends Actionable
     {
         // your code
     }
-}
+};
 ```
 
 If the value is `$once = false`, the `up` method will be called every time the `migrate:actions` command called.
@@ -129,7 +129,7 @@ For this you can use the `$environment` parameter:
 ```php
 use DragonCode\LaravelActions\Support\Actionable;
 
-class Reindex extends Actionable
+return new class extends Actionable
 {
     /** @var string|array|null */
     protected $environment = 'production';
@@ -138,7 +138,7 @@ class Reindex extends Actionable
     {
         // your code
     }
-}
+};
 ```
 
 You can also specify multiple environment names:
@@ -146,7 +146,7 @@ You can also specify multiple environment names:
 ```php
 use DragonCode\LaravelActions\Support\Actionable;
 
-class Reindex extends Actionable
+return new class extends Actionable
 {
     /** @var string|array|null */
     protected $environment = ['testing', 'staging'];
@@ -155,7 +155,7 @@ class Reindex extends Actionable
     {
         // your code
     }
-}
+};
 ```
 
 By default, the action will run in all environments. The same will happen if you specify `null` or `[]` as the value.
@@ -169,7 +169,7 @@ For this you can use the `$except_environment` parameter:
 ```php
 use DragonCode\LaravelActions\Support\Actionable;
 
-class Reindex extends Actionable
+return new class extends Actionable
 {
     /** @var string|array|null */
     protected $except_environment = 'production';
@@ -178,7 +178,7 @@ class Reindex extends Actionable
     {
         // your code
     }
-}
+};
 ```
 
 You can also specify multiple environment names:
@@ -186,7 +186,7 @@ You can also specify multiple environment names:
 ```php
 use DragonCode\LaravelActions\Support\Actionable;
 
-class Reindex extends Actionable
+return new class extends Actionable
 {
     /** @var string|array|null */
     protected $except_environment = ['testing', 'staging'];
@@ -195,7 +195,7 @@ class Reindex extends Actionable
     {
         // your code
     }
-}
+};
 ```
 
 By default, no actions will be excluded. The same happens if you specify `null` or `[]` value.
@@ -211,7 +211,7 @@ will reduce the time it takes to create the action.
 ```php
 use DragonCode\LaravelActions\Support\Actionable;
 
-class AddSomeData extends Actionable
+return new class extends Actionable
 {
     protected $transactions = true;
 
@@ -227,7 +227,7 @@ class AddSomeData extends Actionable
 
         $post->tags()->sync($ids);
     }
-}
+};
 ```
 
 ### Rolling Back Actions
@@ -284,7 +284,7 @@ You can also override the `success` and `failed` methods, which are called on su
 use DragonCode\LaravelActions\Support\Actionable;
 use Illuminate\Support\Facade\Log;
 
-class AddSomeData extends Actionable
+return new class extends Actionable
 {
     public function up(): void
     {
@@ -305,7 +305,7 @@ class AddSomeData extends Actionable
     {
        Log::info('failed');
     }
-}
+};
 ```
 
 Call the `php artisan migrate:actions` command.
@@ -319,7 +319,7 @@ use DragonCode\LaravelActions\Support\Actionable;
 use Exeption;
 use Illuminate\Support\Facade\Log;
 
-class AddSomeData extends Actionable
+return new class extends Actionable
 {
     public function up(): void
     {
@@ -340,7 +340,7 @@ class AddSomeData extends Actionable
     {
        Log::info('failed');
     }
-}
+};
 ```
 
 Call the `php artisan migrate:actions` command.
@@ -352,25 +352,34 @@ The log file will contain two `failed` entries.
 Quite often, when working with actions, it becomes necessary to run one or another console command, and each time you have to write the following code:
 
 ```php
+use DragonCode\LaravelActions\Support\Actionable;
 use Illuminate\Support\Facades\Artisan;
 
-public function up()
+return new class extends Actionable
 {
-    Artisan::call('command-name', [
-        // parameters
-    ]);
-}
+    public function up()
+    {
+        Artisan::call('command-name', [
+            // parameters
+        ]);
+    }
+};
 ```
 
 Since version [`2.3`](https://github.com/TheDragonCode/laravel-migration-actions/releases/tag/v2.3.0) we have added a method call. Now calling commands has become much easier:
 
 ```php
-public function up()
+use DragonCode\LaravelActions\Support\Actionable;
+
+return new class extends Actionable
 {
-    $this->artisan('command-name', [
-        // parameters
-    ]);
-}
+    public function up()
+    {
+        $this->artisan('command-name', [
+            // parameters
+        ]);
+    }
+};
 ```
 
 ## License
