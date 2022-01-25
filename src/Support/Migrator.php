@@ -4,7 +4,7 @@ namespace DragonCode\LaravelActions\Support;
 
 use DragonCode\Contracts\LaravelActions\Actionable as ActionableContract;
 use DragonCode\LaravelActions\Concerns\Infoable;
-use DragonCode\LaravelActions\Concerns\Versionable;
+use DragonCode\LaravelActions\Concerns\Anonymous;
 use Illuminate\Database\Migrations\Migrator as BaseMigrator;
 use Illuminate\Support\Facades\DB;
 use Throwable;
@@ -12,7 +12,7 @@ use Throwable;
 class Migrator extends BaseMigrator
 {
     use Infoable;
-    use Versionable;
+    use Anonymous;
 
     public function usingConnection($name, callable $callback)
     {
@@ -39,7 +39,7 @@ class Migrator extends BaseMigrator
         // First we will resolve a "real" instance of the migration class from this
         // migration file name. Once we have the instances we can run the actual
         // command such as "up" or "down", or we can just simulate the action.
-        if ($this->isLatestApp()) {
+        if ($this->allowAnonymous()) {
             $migration = $this->resolvePath($file);
 
             $name = $this->getMigrationName($file);
@@ -90,7 +90,7 @@ class Migrator extends BaseMigrator
      */
     protected function runDown($file, $migration, $pretend)
     {
-        if ($this->isLatestApp()) {
+        if ($this->allowAnonymous()) {
             $instance = $this->resolvePath($file);
 
             $name = $this->getMigrationName($file);

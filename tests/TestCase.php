@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use DragonCode\LaravelActions\Concerns\Versionable;
+use DragonCode\LaravelActions\Concerns\Anonymous;
 use DragonCode\LaravelActions\ServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -17,13 +17,13 @@ use Tests\Concerns\Settings;
 abstract class TestCase extends BaseTestCase
 {
     use Actionable;
+    use Anonymous;
     use AssertDatabase;
     use Database;
     use Files;
     use Laraveable;
     use RefreshDatabase;
     use Settings;
-    use Versionable;
 
     protected function setUp(): void
     {

@@ -2,7 +2,6 @@
 
 namespace Tests\Commands;
 
-use DragonCode\LaravelSupport\Facades\AppVersion;
 use Tests\TestCase;
 
 class MakeTest extends TestCase
@@ -21,9 +20,9 @@ class MakeTest extends TestCase
 
         $this->assertFileExists($path);
 
-        $expected = AppVersion::is9x()
-            ? __DIR__ . '/../fixtures/app/9.x/stubs/make_example.stub'
-            : __DIR__ . '/../fixtures/app/prev/stubs/make_example.stub';
+        $expected = $this->allowAnonymous()
+            ? __DIR__ . '/../fixtures/app/anonymous/stubs/make_example.stub'
+            : __DIR__ . '/../fixtures/app/named/stubs/make_example.stub';
 
         $this->assertEquals(file_get_contents($expected), file_get_contents($path));
     }

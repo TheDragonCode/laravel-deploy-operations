@@ -24,7 +24,7 @@ class CreatorTest extends TestCase
 
     public function testDuplicateOnPrev()
     {
-        if ($this->isLatestApp()) {
+        if ($this->allowAnonymous()) {
             $this->assertTrue(true);
 
             return;
@@ -41,7 +41,7 @@ class CreatorTest extends TestCase
 
     public function testDuplicateOnLatest()
     {
-        if ($this->isPrevApp()) {
+        if ($this->disallowAnonymous()) {
             $this->assertTrue(true);
 
             return;
