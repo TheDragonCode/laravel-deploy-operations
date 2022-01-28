@@ -23,7 +23,7 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```json
 {
     "require": {
-        "dragon-code/laravel-migration-actions": "^2.4"
+        "dragon-code/laravel-migration-actions": "^2.6"
     }
 }
 ```
@@ -78,6 +78,46 @@ The new action will be placed in your `database/actions` directory. Each action 
 > At the first start, you need to create a table by running the `migrate:actions:install` command.
 >
 > If you execute `migrate:actions` with the first command, the `migrate:actions:install` command will be called automatically.
+
+#### Automatically Generate A File Name
+
+If you are not worried about the names of your files, then in version [2.6](https://github.com/TheDragonCode/laravel-migration-actions/releases/tag/v2.6.0) we added the ability to
+automatically generate file names.
+
+Just don't include the name attribute when creating the migration.
+
+If a git repository is found in the main folder, then the name of the current active branch will be taken as a prefix:
+
+```bash
+php artisan make:migration:action
+
+# 2022_01_28_184116_main_1643384476.php
+# 2022_01_28_184117_main_1643384477.php
+# 2022_01_28_184118_crm_2345_1643384478.php
+# 2022_01_28_184119_crm_2345_1643384479.php
+```
+
+If the git repository is not found, then the default prefix will be used:
+
+```bash
+php artisan make:migration:action
+
+# 2022_01_28_184116_auto_1643384476.php
+# 2022_01_28_184117_auto_1643384477.php
+# 2022_01_28_184118_auto_1643384478.php
+```
+
+If you are using Laravel prior to version [8.37](https://github.com/laravel/framework/releases/tag/v8.37.0), then to ensure backward compatibility, if the current git repository
+branch name starts with a number, the `branch` prefix will be automatically added to it:
+
+```bash
+php artisan make:migration:action
+```
+
+```php
+/* 2022_01_28_184116_branch_2x_1643384476.php */
+class Branch2x1643384476 extends Actionable { }
+```
 
 ### Running actions
 
