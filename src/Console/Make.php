@@ -23,7 +23,7 @@ class Make extends BaseCommand
      * @var string
      */
     protected $signature = Names::MAKE
-    . ' {name : The name of the action}';
+    . ' {name? : The name of the action}';
 
     /**
      * The console command description.

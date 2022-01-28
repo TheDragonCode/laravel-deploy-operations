@@ -26,4 +26,17 @@ class MakeTest extends TestCase
 
         $this->assertEquals(file_get_contents($expected), file_get_contents($path));
     }
+
+    public function testAutoName()
+    {
+        $filename = date('Y_m_d_His') . '_auto_' . time() . '.php';
+
+        $path = database_path('actions/' . $filename);
+
+        $this->assertFileDoesNotExist($path);
+
+        $this->artisan('make:migration:action')->run();
+
+        $this->assertFileExists($path);
+    }
 }
