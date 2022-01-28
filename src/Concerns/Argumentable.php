@@ -7,22 +7,34 @@ use DragonCode\LaravelActions\Facades\Git;
 /** @mixin \Illuminate\Console\Command */
 trait Argumentable
 {
+    protected $auto_prefix = 'auto';
+
+    protected $branch_prefix = 'branch';
+
     protected function argumentName(): string
     {
         if ($name = (string) $this->argument('name')) {
             return trim($name);
         }
 
-        return $this->getNamePrefix() . '_' . time();
+        return $this->getAutoPrefix() . '_' . time();
     }
 
-    protected function getNamePrefix(): string
+    protected function getAutoPrefix(): string
     {
-        return $this->getGitBranchName() ?: 'auto';
+        return $this->getGitBranchName() ?: $this->auto_prefix;
     }
 
     protected function getGitBranchName(): ?string
     {
-        return Git::currentBranch(base_path('.git'));
+        $name = Git::currentBranch(base_path('.git'));
+
+        preg_match('/^\d.*$/', $name, $output);
+
+        if (! empty($output)) {
+            return $this->branch_prefix . '_' . $name;
+        }
+
+        return $name;
     }
 }
