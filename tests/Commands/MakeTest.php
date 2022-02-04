@@ -29,7 +29,9 @@ class MakeTest extends TestCase
 
     public function testAutoName()
     {
-        $filename = date('Y_m_d_His') . '_auto_' . time() . '.php';
+        $filename = $this->allowAnonymous()
+            ? date('Y_m_d_His') . '_auto.php'
+            : date('Y_m_d_His') . '_auto_' . time() . '.php';
 
         $path = database_path('actions/' . $filename);
 

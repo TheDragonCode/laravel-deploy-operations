@@ -91,10 +91,17 @@ If a git repository is found in the main folder, then the name of the current ac
 ```bash
 php artisan make:migration:action
 
+### Before Laravel 8.37
 # 2022_01_28_184116_main_1643384476.php
 # 2022_01_28_184117_main_1643384477.php
 # 2022_01_28_184118_crm_2345_1643384478.php
 # 2022_01_28_184119_crm_2345_1643384479.php
+
+### Laravel 8.37 or higher
+# 2022_01_28_184116_main.php
+# 2022_01_28_184117_main.php
+# 2022_01_28_184118_crm_2345.php
+# 2022_01_28_184119_crm_2345.php
 ```
 
 If the git repository is not found, then the default prefix will be used:
@@ -102,9 +109,15 @@ If the git repository is not found, then the default prefix will be used:
 ```bash
 php artisan make:migration:action
 
+### Before Laravel 8.37
 # 2022_01_28_184116_auto_1643384476.php
 # 2022_01_28_184117_auto_1643384477.php
 # 2022_01_28_184118_auto_1643384478.php
+
+### Laravel 8.37 or higher
+# 2022_01_28_184116_auto.php
+# 2022_01_28_184117_auto.php
+# 2022_01_28_184118_auto.php
 ```
 
 If you are using Laravel prior to version [8.37](https://github.com/laravel/framework/releases/tag/v8.37.0), then to ensure backward compatibility, if the current git repository
