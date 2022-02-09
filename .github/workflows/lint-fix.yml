@@ -1,0 +1,18 @@
+name: "Code-style Fix"
+
+on:
+    push:
+        branches: [ main ]
+
+jobs:
+    fix:
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
+
+            -   name: Checking PHP Syntax
+                uses: TheDragonCode/php-codestyler@latest
+                with:
+                    fix: true
