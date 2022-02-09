@@ -12,7 +12,7 @@ trait Optionable
         return $this->input->getOption('database');
     }
 
-    protected function optionStep(int $default = null): ?int
+    protected function optionStep(?int $default = null): ?int
     {
         return $this->input->getOption('step') ?: $default;
     }

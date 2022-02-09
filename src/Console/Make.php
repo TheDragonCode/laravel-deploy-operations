@@ -6,6 +6,7 @@ use DragonCode\LaravelActions\Concerns\Argumentable;
 use DragonCode\LaravelActions\Concerns\Database;
 use DragonCode\LaravelActions\Concerns\Infoable;
 use DragonCode\LaravelActions\Constants\Names;
+use Exception;
 use Illuminate\Database\Console\Migrations\BaseCommand;
 use Illuminate\Database\Migrations\MigrationCreator;
 use Illuminate\Support\Composer;
@@ -49,8 +50,8 @@ class Make extends BaseCommand
     /**
      * Create a new action install command instance.
      *
-     * @param  \Illuminate\Database\Migrations\MigrationCreator  $creator
-     * @param  \Illuminate\Support\Composer  $composer
+     * @param \Illuminate\Database\Migrations\MigrationCreator $creator
+     * @param \Illuminate\Support\Composer $composer
      */
     public function __construct(MigrationCreator $creator, Composer $composer)
     {
@@ -63,7 +64,7 @@ class Make extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function handle()
     {
@@ -77,9 +78,9 @@ class Make extends BaseCommand
     /**
      * Write the action file to disk.
      *
-     * @param  string  $name
+     * @param string $name
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function writeMigration(string $name)
     {

@@ -63,8 +63,8 @@ class Refresh extends BaseCommand
     /**
      * Run the rollback command.
      *
-     * @param  string|null  $database
-     * @param  int|null  $step
+     * @param string|null $database
+     * @param int|null $step
      */
     protected function runRollback(?string $database, ?int $step)
     {
@@ -78,7 +78,7 @@ class Refresh extends BaseCommand
     /**
      * Run the reset command.
      *
-     * @param  string|null  $database
+     * @param string|null $database
      */
     protected function runReset(?string $database)
     {

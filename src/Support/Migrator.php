@@ -3,8 +3,8 @@
 namespace DragonCode\LaravelActions\Support;
 
 use DragonCode\Contracts\LaravelActions\Actionable as ActionableContract;
-use DragonCode\LaravelActions\Concerns\Infoable;
 use DragonCode\LaravelActions\Concerns\Anonymous;
+use DragonCode\LaravelActions\Concerns\Infoable;
 use Illuminate\Database\Migrations\Migrator as BaseMigrator;
 use Illuminate\Support\Facades\DB;
 use Throwable;
@@ -28,11 +28,11 @@ class Migrator extends BaseMigrator
     /**
      * Run "up" a migration instance.
      *
-     * @param  string  $file
-     * @param  int  $batch
-     * @param  bool  $pretend
+     * @param string $file
+     * @param int $batch
+     * @param bool $pretend
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     protected function runUp($file, $batch, $pretend)
     {
@@ -82,11 +82,11 @@ class Migrator extends BaseMigrator
     /**
      * Run "down" a migration instance.
      *
-     * @param  string  $file
-     * @param  object  $migration
-     * @param  bool  $pretend
+     * @param string $file
+     * @param object $migration
+     * @param bool $pretend
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     protected function runDown($file, $migration, $pretend)
     {
@@ -112,10 +112,10 @@ class Migrator extends BaseMigrator
     /**
      * Starts the execution of code, starting database transactions, if necessary.
      *
-     * @param  object  $migration
-     * @param  string  $method
+     * @param object $migration
+     * @param string $method
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     protected function runMigration($migration, $method)
     {
@@ -135,7 +135,7 @@ class Migrator extends BaseMigrator
     /**
      * Whether it is necessary to record information about the execution in the database.
      *
-     * @param  \DragonCode\Contracts\LaravelActions\Actionable|object  $migration
+     * @param \DragonCode\Contracts\LaravelActions\Actionable|object $migration
      *
      * @return bool
      */
@@ -147,7 +147,7 @@ class Migrator extends BaseMigrator
     /**
      * Whether the action needs to be executed in the current environment.
      *
-     * @param  \DragonCode\Contracts\LaravelActions\Actionable|object  $migration
+     * @param \DragonCode\Contracts\LaravelActions\Actionable|object $migration
      *
      * @return bool
      */
@@ -167,17 +167,13 @@ class Migrator extends BaseMigrator
             return false;
         }
 
-        if (! empty($except) && in_array($environment, $except)) {
-            return false;
-        }
-
-        return true;
+        return ! (! empty($except) && in_array($environment, $except));
     }
 
     /**
      * Whether it is necessary to call database transactions at runtime.
      *
-     * @param  \DragonCode\LaravelActions\Support\Actionable|object  $migration
+     * @param \DragonCode\LaravelActions\Support\Actionable|object $migration
      *
      * @return bool
      */
@@ -189,7 +185,7 @@ class Migrator extends BaseMigrator
     /**
      * The number of attempts to execute a request within a transaction before throwing an error.
      *
-     * @param  \DragonCode\LaravelActions\Support\Actionable|object  $migration
+     * @param \DragonCode\LaravelActions\Support\Actionable|object $migration
      *
      * @return int
      */
@@ -201,10 +197,11 @@ class Migrator extends BaseMigrator
     }
 
     /**
-     * @param  \DragonCode\Contracts\LaravelActions\Actionable|object  $migration
-     * @param  callable  $handle
+     * @param \DragonCode\Contracts\LaravelActions\Actionable|object $migration
+     * @param callable $handle
      *
-     * @throws \Throwable
+     * @throws Throwable
+     *
      * @return void
      */
     protected function runMigrationHandle(ActionableContract $migration, callable $handle)
@@ -221,7 +218,7 @@ class Migrator extends BaseMigrator
     }
 
     /**
-     * @param  \DragonCode\Contracts\LaravelActions\Actionable|object  $migration
+     * @param \DragonCode\Contracts\LaravelActions\Actionable|object $migration
      *
      * @return void
      */
@@ -231,7 +228,7 @@ class Migrator extends BaseMigrator
     }
 
     /**
-     * @param  \DragonCode\Contracts\LaravelActions\Actionable|object  $migration
+     * @param \DragonCode\Contracts\LaravelActions\Actionable|object $migration
      *
      * @return void
      */

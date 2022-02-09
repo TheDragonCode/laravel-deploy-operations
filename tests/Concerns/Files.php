@@ -58,7 +58,7 @@ trait Files
         File::copy($source, $this->targetDirectory('2021_02_15_124852_test_failed_transactions.php'));
     }
 
-    protected function targetDirectory(string $path = null): string
+    protected function targetDirectory(?string $path = null): string
     {
         $dir = database_path('actions');
 

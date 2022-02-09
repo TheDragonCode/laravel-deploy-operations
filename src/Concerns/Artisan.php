@@ -11,8 +11,8 @@ trait Artisan
     /**
      * Run an Artisan console command by name.
      *
-     * @param  string  $command
-     * @param  array  $parameters
+     * @param string $command
+     * @param array $parameters
      *
      * @return void
      */

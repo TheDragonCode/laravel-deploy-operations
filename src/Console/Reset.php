@@ -42,7 +42,7 @@ class Reset extends BaseCommand
     /**
      * Create a new migration rollback command instance.
      *
-     * @param  \DragonCode\LaravelActions\Support\Migrator  $migrator
+     * @param \DragonCode\LaravelActions\Support\Migrator $migrator
      */
     public function __construct(Migrator $migrator)
     {

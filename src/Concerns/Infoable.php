@@ -10,9 +10,9 @@ trait Infoable
     /**
      * Write a string as standard output.
      *
-     * @param  string  $string
-     * @param  string|null  $style
-     * @param  int|string|null  $verbosity
+     * @param string $string
+     * @param string|null $style
+     * @param int|string|null $verbosity
      */
     public function line($string, $style = null, $verbosity = null)
     {

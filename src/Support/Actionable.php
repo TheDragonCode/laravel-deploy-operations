@@ -42,14 +42,14 @@ abstract class Actionable extends Migration implements Contract
      *
      * @var array|string|null
      */
-    protected $environment = null;
+    protected $environment;
 
     /**
      * Determines in which environment it should not run.
      *
      * @var array|string|null
      */
-    protected $except_environment = null;
+    protected $except_environment;
 
     /**
      * Reverse the actions.
@@ -122,7 +122,7 @@ abstract class Actionable extends Migration implements Contract
     }
 
     /**
-     * Method to be called when the job completes successfully
+     * Method to be called when the job completes successfully.
      *
      * @return void
      */
