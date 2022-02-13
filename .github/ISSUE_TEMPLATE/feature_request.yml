@@ -37,7 +37,7 @@ body:
                 - PHP Version:
                 - Database Driver & Version:
         validations:
-            required: true
+            required: false
 
     -   type: markdown
         attributes:
