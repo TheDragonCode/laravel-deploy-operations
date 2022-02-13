@@ -1,0 +1,45 @@
+name: Feature Proposal
+description: Propose a new feature
+
+labels:
+    - '💪 feature request'
+
+body:
+    -   type: markdown
+        attributes:
+            value: |
+                Thanks for taking the time to fill out this bug report!
+
+                ⚠️Review existing issues to see whether someone else has already reported your issue.
+
+    -   type: textarea
+        id: description
+        attributes:
+            label: Feature description
+            description: |
+                Think through your proposal and describe it clearly.
+
+                Note that features are only added to the most recent version of Laravel Lang.
+        validations:
+            required: true
+
+    -   type: textarea
+        id: environment
+        attributes:
+            label: Envoronment
+            description: |
+                Tip: Use the `composer info dragon-code/laravel-migration-actions` command to get information for Laravel Lang.
+                Tip: Use the `php artisan --version` command to get information for your application.
+                Tip: Use the `php -v` command to get information for PHP.
+            value: |
+                - Migration Actions Version:
+                - Laravel Version:
+                - PHP Version:
+                - Database Driver & Version:
+        validations:
+            required: true
+
+    -   type: markdown
+        attributes:
+            value: |
+                ❤️ The Dragon Code? Please consider supporting our collective: https://opencollective.com/dragon-code
