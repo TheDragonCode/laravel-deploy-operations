@@ -12,6 +12,8 @@ class Command
 
     public const REFRESH = 'command.migration.actions.refresh';
 
+    public const FRESH = 'command.migration.actions.fresh';
+
     public const RESET = 'command.migration.actions.reset';
 
     public const ROLLBACK = 'command.migration.actions.rollback';

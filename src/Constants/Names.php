@@ -4,6 +4,8 @@ namespace DragonCode\LaravelActions\Constants;
 
 class Names
 {
+    public const FRESH = 'migrate:actions:fresh';
+
     public const INSTALL = 'migrate:actions:install';
 
     public const MAKE = 'make:migration:action';
