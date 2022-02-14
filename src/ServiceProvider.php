@@ -2,6 +2,7 @@
 
 namespace DragonCode\LaravelActions;
 
+use DragonCode\LaravelActions\Console\Fresh;
 use DragonCode\LaravelActions\Console\Install;
 use DragonCode\LaravelActions\Console\Make;
 use DragonCode\LaravelActions\Console\Migrate;
@@ -21,6 +22,7 @@ class ServiceProvider extends BaseServiceProvider
 {
     protected $commands = [
         'Migrate'         => Command::MIGRATE,
+        'MigrateFresh'    => Command::FRESH,
         'MigrateInstall'  => Command::INSTALL,
         'MigrateMake'     => Command::MAKE,
         'MigrateRefresh'  => Command::REFRESH,
@@ -126,6 +128,13 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->app->singleton(Command::REFRESH, function () {
             return new Refresh();
+        });
+    }
+
+    protected function registerMigrateFreshCommand(): void
+    {
+        $this->app->singleton(Command::FRESH, function () {
+            return new Fresh();
         });
     }
 

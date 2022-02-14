@@ -319,6 +319,14 @@ re-migrate the last five migrations:
 php artisan migrate:actions:refresh --step=5
 ```
 
+### Drop All Actions & Migrate Actions
+
+The `migrate:actions:fresh` command will drop all actions records from the actions table and then execute the migrate command:
+
+```
+php artisan migrate:actions:fresh
+```
+
 ### Actions Status
 
 The `migrate:actions:status` command displays the execution status of actions. In it you can see which actions were executed and which were not:
@@ -343,17 +351,17 @@ return new class extends Actionable
     {
        //
     }
-    
+
     public function down(): void
     {
        //
     }
-    
+
     public function success(): void
     {
        Log::info('success');
     }
-    
+
     public function failed(): void
     {
        Log::info('failed');
@@ -378,17 +386,17 @@ return new class extends Actionable
     {
        throw new Exeption();
     }
-    
+
     public function down(): void
     {
        throw new Exeption();
     }
-    
+
     public function success(): void
     {
        Log::info('success');
     }
-    
+
     public function failed(): void
     {
        Log::info('failed');
