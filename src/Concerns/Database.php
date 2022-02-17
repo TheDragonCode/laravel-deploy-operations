@@ -9,4 +9,13 @@ trait Database
     {
         return $this->laravel->databasePath('actions');
     }
+
+    protected function getMigrationPaths(): array
+    {
+        if ($paths = $this->optionPath()) {
+            return $paths;
+        }
+
+        return [$this->getMigrationPath()];
+    }
 }

@@ -19,6 +19,10 @@ trait Optionable
 
     protected function optionPath(): ?array
     {
+        if (! $this->hasOption('path')) {
+            return null;
+        }
+
         if ($path = $this->option('path')) {
             return collect($path)->map(function ($path) {
                 if ($this->usingRealPath()) {
