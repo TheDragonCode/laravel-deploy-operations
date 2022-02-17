@@ -40,6 +40,7 @@ class Rollback extends RollbackCommand
             return 1;
         }
 
+
         $this->migrator->usingConnection($this->optionDatabase(), function () {
             $this->migrator->setOutput($this->output)->rollback(
                 $this->getMigrationPaths(),
@@ -64,5 +65,16 @@ class Rollback extends RollbackCommand
 
             ['step', null, InputOption::VALUE_OPTIONAL, 'The number of actions to be reverted'],
         ];
+    }
+
+    protected function getMigrationPaths(): array
+    {
+        if ($this->input->hasOption('path') && $this->option('path')) {
+            return parent::getMigrationPaths();
+        }
+
+        return array_merge(array_map(static function($path) {
+            return $path.DIRECTORY_SEPARATOR.'actions';
+        }, $this->migrator->paths()), [$this->getMigrationPath()]);
     }
 }
