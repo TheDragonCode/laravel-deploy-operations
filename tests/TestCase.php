@@ -4,6 +4,7 @@ namespace Tests;
 
 use DragonCode\LaravelActions\Concerns\Anonymous;
 use DragonCode\LaravelActions\ServiceProvider;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Orchestra\Testbench\TestCase as BaseTestCase;
@@ -46,7 +47,7 @@ abstract class TestCase extends BaseTestCase
         $this->setDatabase($app);
     }
 
-    protected function table()
+    protected function table(): Builder
     {
         return DB::table($this->table);
     }
