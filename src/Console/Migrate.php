@@ -74,8 +74,8 @@ class Migrate extends BaseCommand
             return $paths;
         }
 
-        return array_merge(
-            $this->migrator->paths(), [$this->getMigrationPath()]
-        );
+        return array_merge(array_map(static function($path) {
+            return $path . DIRECTORY_SEPARATOR . 'actions';
+        }, $this->migrator->paths()), [$this->getMigrationPath()]);
     }
 }
