@@ -48,11 +48,13 @@ class Fresh extends FreshCommand
 
     protected function migrate(?string $database): void
     {
-        $this->call(Names::MIGRATE,
+        $this->call(
+            Names::MIGRATE,
             array_filter([
                 '--database' => $database,
                 '--force'    => true,
-            ]));
+            ])
+        );
     }
 
     protected function getTableName(): string

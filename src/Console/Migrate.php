@@ -62,10 +62,12 @@ class Migrate extends BaseCommand
     protected function prepareDatabase(): void
     {
         if (! $this->migrator->repositoryExists()) {
-            $this->call(Names::INSTALL,
+            $this->call(
+                Names::INSTALL,
                 array_filter([
                     '--database' => $this->optionDatabase(),
-                ]));
+                ])
+            );
         }
     }
 }
