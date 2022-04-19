@@ -45,7 +45,7 @@ class Migrator extends BaseMigrator
             $name = $this->getMigrationName($file);
         } else {
             $migration = $this->resolve(
-                $name = $this->getMigrationName($file)
+                $name  = $this->getMigrationName($file)
             );
         }
 
