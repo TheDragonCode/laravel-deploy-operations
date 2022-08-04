@@ -55,13 +55,13 @@
         }
     },
     "config": {
-        "preferred-install": "dist",
-        "sort-packages": true,
         "allow-plugins": {
             "dragon-code/codestyler": true,
             "ergebnis/composer-normalize": true,
             "friendsofphp/php-cs-fixer": true
-        }
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
     },
     "extra": {
         "laravel": {
