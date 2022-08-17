@@ -374,7 +374,8 @@ class MigrateTest extends TestCase
 
         $this->assertDatabaseHasTable($this->table);
 
-        $this->artisan('migrate:actions:status')
-            ->expectsOutput('No actions found');
+        $this->hasTermwind()
+            ? $this->artisan('migrate:actions:status')
+            : $this->artisan('migrate:actions:status')->expectsOutput('No actions found');
     }
 }
