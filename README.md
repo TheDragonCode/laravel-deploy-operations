@@ -159,7 +159,7 @@ In some cases, you need to call the code every time you deploy the application. 
 To do this, override the `$once` variable in the action file:
 
 ```php
-use DragonCode\LaravelActions\Support\Actionable;
+use DragonCode\LaravelActions\Services\Actionable;
 
 return new class extends Actionable
 {
@@ -187,7 +187,7 @@ In some cases, it becomes necessary to execute an action in a specific environme
 For this you can use the `$environment` parameter:
 
 ```php
-use DragonCode\LaravelActions\Support\Actionable;
+use DragonCode\LaravelActions\Services\Actionable;
 
 return new class extends Actionable
 {
@@ -204,7 +204,7 @@ return new class extends Actionable
 You can also specify multiple environment names:
 
 ```php
-use DragonCode\LaravelActions\Support\Actionable;
+use DragonCode\LaravelActions\Services\Actionable;
 
 return new class extends Actionable
 {
@@ -227,7 +227,7 @@ In some cases, it becomes necessary to execute an action excluding certain envir
 For this you can use the `$except_environment` parameter:
 
 ```php
-use DragonCode\LaravelActions\Support\Actionable;
+use DragonCode\LaravelActions\Services\Actionable;
 
 return new class extends Actionable
 {
@@ -244,7 +244,7 @@ return new class extends Actionable
 You can also specify multiple environment names:
 
 ```php
-use DragonCode\LaravelActions\Support\Actionable;
+use DragonCode\LaravelActions\Services\Actionable;
 
 return new class extends Actionable
 {
@@ -275,7 +275,7 @@ When calling the `migrate:actions` command with the `before` parameter, the scri
 For backwards compatibility, the `before` parameter is set to `true` by default, but actions will only be executed if the option is explicitly passed.
 
 ```php
-use DragonCode\LaravelActions\Support\Actionable;
+use DragonCode\LaravelActions\Services\Actionable;
 
 return new class extends Actionable
 {
@@ -320,7 +320,7 @@ By setting the `$transactions = true` parameter, you will ensure that your code 
 will reduce the time it takes to create the action.
 
 ```php
-use DragonCode\LaravelActions\Support\Actionable;
+use DragonCode\LaravelActions\Services\Actionable;
 
 return new class extends Actionable
 {
@@ -400,8 +400,7 @@ You can also override the `success` and `failed` methods, which are called on su
 #### If Success
 
 ```php
-use DragonCode\LaravelActions\Support\Actionable;
-use Illuminate\Support\Facade\Log;
+use DragonCode\LaravelActions\Services\Actionable;use Illuminate\Support\Facade\Log;
 
 return new class extends Actionable
 {
@@ -434,9 +433,7 @@ The log file will contain two `success` entries.
 #### If Failed
 
 ```php
-use DragonCode\LaravelActions\Support\Actionable;
-use Exeption;
-use Illuminate\Support\Facade\Log;
+use DragonCode\LaravelActions\Services\Actionable;use Exeption;use Illuminate\Support\Facade\Log;
 
 return new class extends Actionable
 {
@@ -471,8 +468,7 @@ The log file will contain two `failed` entries.
 Quite often, when working with actions, it becomes necessary to run one or another console command, and each time you have to write the following code:
 
 ```php
-use DragonCode\LaravelActions\Support\Actionable;
-use Illuminate\Support\Facades\Artisan;
+use DragonCode\LaravelActions\Services\Actionable;use Illuminate\Support\Facades\Artisan;
 
 return new class extends Actionable
 {
@@ -488,7 +484,7 @@ return new class extends Actionable
 Since version [`2.3`](https://github.com/TheDragonCode/laravel-migration-actions/releases/tag/v2.3.0) we have added a method call. Now calling commands has become much easier:
 
 ```php
-use DragonCode\LaravelActions\Support\Actionable;
+use DragonCode\LaravelActions\Services\Actionable;
 
 return new class extends Actionable
 {

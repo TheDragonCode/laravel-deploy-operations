@@ -25,15 +25,35 @@ trait Infoable
         }
     }
 
+    /**
+     * Write a string as warning output.
+     *
+     * @param string $string
+     * @param int|string|null $verbosity
+     *
+     * @return void
+     */
+    public function warn($string, $verbosity = null)
+    {
+        $this->line($string, 'warn', $verbosity);
+    }
+
+    /**
+     * Write a string as standard output.
+     *
+     * @param string $message
+     */
     protected function note($message)
     {
         $this->line($message);
     }
 
-    protected function parsedVerbosity($verbosity = null)
+    protected function parsedVerbosity($verbosity = null): int
     {
-        return method_exists($this, 'parseVerbosity')
-            ? $this->parseVerbosity($verbosity)
-            : OutputInterface::VERBOSITY_NORMAL;
+        if (method_exists($this, 'parseVerbosity')) {
+            return $this->parseVerbosity($verbosity);
+        }
+
+        return OutputInterface::VERBOSITY_NORMAL;
     }
 }

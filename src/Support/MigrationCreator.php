@@ -2,14 +2,11 @@
 
 namespace DragonCode\LaravelActions\Support;
 
-use DragonCode\LaravelActions\Concerns\Anonymous;
 use Illuminate\Database\Migrations\MigrationCreator as BaseMigrationCreator;
 use Illuminate\Filesystem\Filesystem;
 
 class MigrationCreator extends BaseMigrationCreator
 {
-    use Anonymous;
-
     protected $customStubPath;
 
     public function __construct(Filesystem $files, ?string $custom_stub_path)
@@ -33,10 +30,8 @@ class MigrationCreator extends BaseMigrationCreator
 
     protected function getStub($table, $create): string
     {
-        $stub = $this->allowAnonymous() ? '/action-anonymous.stub' : '/action-named.stub';
-
         return $this->files->get(
-            $this->stubPath() . $stub
+            $this->stubPath() . '/action.stub'
         );
     }
 }

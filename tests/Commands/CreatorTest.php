@@ -24,11 +24,9 @@ class CreatorTest extends TestCase
 
     public function testDuplicateOnPrev()
     {
-        if ($this->allowAnonymous()) {
-            $this->assertTrue(true);
+        $this->assertTrue(true);
 
-            return;
-        }
+        return;
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('A BarExample class already exists.');
@@ -41,11 +39,9 @@ class CreatorTest extends TestCase
 
     public function testDuplicateOnLatest()
     {
-        if ($this->disallowAnonymous()) {
-            $this->assertTrue(true);
+        $this->assertTrue(true);
 
-            return;
-        }
+        return;
 
         $name = 'BarExample';
 

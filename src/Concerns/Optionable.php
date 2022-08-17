@@ -2,33 +2,39 @@
 
 namespace DragonCode\LaravelActions\Concerns;
 
+use DragonCode\LaravelActions\Constants\Options;
 use Illuminate\Support\Str;
 
 /** @mixin \Illuminate\Console\Command */
 trait Optionable
 {
+    protected function optionForce(): bool
+    {
+        return $this->hasOption(Options::FORCE) && $this->option(Options::FORCE);
+    }
+
     protected function optionBefore(): bool
     {
-        return $this->input->getOption('before');
+        return $this->option(Options::BEFORE);
     }
 
     protected function optionDatabase(): ?string
     {
-        return $this->input->getOption('database');
+        return $this->option(Options::DATABASE);
     }
 
     protected function optionStep(?int $default = null): ?int
     {
-        return $this->input->getOption('step') ?: $default;
+        return $this->option(Options::STEP) ?: $default;
     }
 
     protected function optionPath(): ?array
     {
-        if (! $this->hasOption('path')) {
+        if (! $this->hasOption(Options::PATH)) {
             return null;
         }
 
-        if ($path = $this->option('path')) {
+        if ($path = $this->option(Options::PATH)) {
             return collect($path)->map(function ($path) {
                 if ($this->usingRealPath()) {
                     return $path;

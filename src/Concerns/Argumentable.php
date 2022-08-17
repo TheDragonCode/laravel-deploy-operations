@@ -7,11 +7,7 @@ use DragonCode\LaravelActions\Facades\Git;
 /** @mixin \Illuminate\Console\Command */
 trait Argumentable
 {
-    use Anonymous;
-
     protected $auto_prefix = 'auto';
-
-    protected $branch_prefix = 'branch';
 
     protected function argumentName(): string
     {
@@ -24,11 +20,7 @@ trait Argumentable
 
     protected function makeName(): string
     {
-        if ($this->allowAnonymous()) {
-            return $this->getAutoPrefix();
-        }
-
-        return $this->getAutoPrefix() . '_' . time();
+        return $this->getAutoPrefix();
     }
 
     protected function getAutoPrefix(): string
@@ -38,14 +30,6 @@ trait Argumentable
 
     protected function getGitBranchName(): ?string
     {
-        $name = Git::currentBranch(base_path('.git'));
-
-        preg_match('/^\d.*$/', $name, $output);
-
-        if (! empty($output) && $this->disallowAnonymous()) {
-            return $this->branch_prefix . '_' . $name;
-        }
-
-        return $name;
+        return Git::currentBranch(base_path('.git'));
     }
 }

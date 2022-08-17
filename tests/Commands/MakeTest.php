@@ -20,20 +20,17 @@ class MakeTest extends TestCase
 
         $this->assertFileExists($path);
 
-        $expected = $this->allowAnonymous()
-            ? __DIR__ . '/../fixtures/app/anonymous/stubs/make_example.stub'
-            : __DIR__ . '/../fixtures/app/named/stubs/make_example.stub';
+        $expected = __DIR__ . '/../fixtures/app/anonymous/stubs/make_example.stub';
 
-        $this->assertEquals(file_get_contents($expected), file_get_contents($path));
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($path)
+        );
     }
 
     public function testAutoName()
     {
-        $filename = $this->allowAnonymous()
-            ? date('Y_m_d_His') . '_auto.php'
-            : date('Y_m_d_His') . '_auto_' . time() . '.php';
-
-        $path = database_path('actions/' . $filename);
+        $path = database_path('actions/' . date('Y_m_d_His') . '_auto.php');
 
         $this->assertFileDoesNotExist($path);
 
