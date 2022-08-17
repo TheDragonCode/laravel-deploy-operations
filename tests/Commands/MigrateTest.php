@@ -430,4 +430,42 @@ class MigrateTest extends TestCase
         $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
     }
+
+    public function testMixedBefore()
+    {
+        $this->copyFiles();
+
+        $table = 'before';
+
+        $this->artisan('migrate:actions:install')->run();
+
+        $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_enabled');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
+        $this->artisan('migrate:actions', ['--before' => true])->run();
+
+        $this->assertDatabaseCount($table, 1);
+        $this->assertDatabaseCount($this->table, 9);
+        $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
+        $this->artisan('migrate:actions', ['--before' => true])->run();
+
+        $this->assertDatabaseCount($table, 1);
+        $this->assertDatabaseCount($this->table, 9);
+        $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
+        $this->artisan('migrate:actions')->run();
+
+        $this->assertDatabaseCount($table, 2);
+        $this->assertDatabaseCount($this->table, 10);
+        $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
+        $this->assertDatabaseMigrationHas($this->table, 'test_before_disabled');
+        $this->artisan('migrate:actions')->run();
+
+        $this->assertDatabaseCount($table, 2);
+        $this->assertDatabaseCount($this->table, 10);
+        $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
+        $this->assertDatabaseMigrationHas($this->table, 'test_before_disabled');
+    }
 }
