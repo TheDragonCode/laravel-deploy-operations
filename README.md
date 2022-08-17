@@ -79,6 +79,8 @@ The new action will be placed in your `database/actions` directory. Each action 
 > At the first start, you need to create a table by running the `migrate:actions:install` command.
 >
 > If you execute `migrate:actions` with the first command, the `migrate:actions:install` command will be called automatically.
+>
+> Starting from version 2.9 the `down` method will not be shown by default when creating actions files. If you need this method, just override it in the class.
 
 #### Automatically Generate A File Name
 
