@@ -25,8 +25,7 @@ jobs:
                     coverage: none
 
             -   name: Install dependencies
-                run: |
-                    composer require laravel/framework:^${{ matrix.laravel }}
-                    composer update --prefer-stable --prefer-dist --no-progress --no-interaction
+                run: composer require --dev laravel/framework:^${{ matrix.laravel }}
+
             -   name: Execute tests
                 run: sudo vendor/bin/phpunit
