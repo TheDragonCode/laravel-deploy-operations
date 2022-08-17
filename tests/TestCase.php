@@ -4,6 +4,7 @@ namespace Tests;
 
 use DragonCode\LaravelActions\Concerns\Anonymous;
 use DragonCode\LaravelActions\ServiceProvider;
+use Illuminate\Console\View\Components\Factory as Components;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -50,5 +51,10 @@ abstract class TestCase extends BaseTestCase
     protected function table(): Builder
     {
         return DB::table($this->table);
+    }
+
+    protected function hasTermwind(): bool
+    {
+        return class_exists(Components::class);
     }
 }

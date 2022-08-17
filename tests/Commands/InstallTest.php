@@ -10,8 +10,9 @@ class InstallTest extends TestCase
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan('migrate:actions:status')
-            ->expectsOutput('Actions table not found.');
+        $this->hasTermwind()
+            ? $this->artisan('migrate:actions:status')
+            : $this->artisan('migrate:actions:status')->expectsOutput('Actions table not found.');
     }
 
     public function testRepository()
