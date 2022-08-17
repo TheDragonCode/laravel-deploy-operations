@@ -176,6 +176,10 @@ If the value is `$once = false`, the `up` method will be called every time the `
 
 In this case, information about it will not be written to the `migration_actions` table and, therefore, the `down` method will not be called when the rollback command is called.
 
+> Note
+>
+> When using the `before` parameter to run command, it is recommended to override the value of the `$before` attribute to `false`, otherwise this action will be executed twice.
+
 #### Execution In A Specific Environment
 
 In some cases, it becomes necessary to execute an action in a specific environment. For example `production`.
