@@ -12,14 +12,4 @@ return new class extends Actionable {
     {
         //
     }
-
-    /**
-     * Reverse the actions.
-     *
-     * @return void
-     */
-    public function down(): void
-    {
-        //
-    }
 };
