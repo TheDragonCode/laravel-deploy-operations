@@ -13,14 +13,4 @@ class MakeExample extends Actionable
     {
         //
     }
-
-    /**
-     * Reverse the actions.
-     *
-     * @return void
-     */
-    public function down(): void
-    {
-        //
-    }
 }
