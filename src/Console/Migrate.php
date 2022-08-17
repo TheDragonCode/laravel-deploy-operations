@@ -20,11 +20,12 @@ class Migrate extends BaseCommand
      * @var string
      */
     protected $signature = Names::MIGRATE
-                           . ' {--database= : The database connection to use}'
-                           . ' {--force : Force the operation to run when in production}'
-                           . ' {--step : Force the actions to be run so they can be rolled back individually}'
-                           . ' {--path=* : The path(s) to the migrations files to be executed}'
-                           . ' {--realpath : Indicate any provided migration file paths are pre-resolved absolute paths}';
+    . ' {--database= : The database connection to use}'
+    . ' {--force : Force the operation to run when in production}'
+    . ' {--step : Force the actions to be run so they can be rolled back individually}'
+    . ' {--path=* : The path(s) to the migrations files to be executed}'
+    . ' {--realpath : Indicate any provided migration file paths are pre-resolved absolute paths}'
+    . ' {--before : Run actions marked as before}';
 
     /**
      * The console command description.
@@ -49,7 +50,8 @@ class Migrate extends BaseCommand
 
             $this->migrator->setOutput($this->output)
                 ->run($this->getMigrationPaths(), [
-                    'step' => $this->optionStep(),
+                    'step'   => $this->optionStep(),
+                    'before' => $this->optionBefore(),
                 ]);
         });
 

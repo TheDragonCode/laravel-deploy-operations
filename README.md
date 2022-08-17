@@ -8,7 +8,8 @@
 [![Github Workflow Status][badge_build]][link_build]
 [![License][badge_license]][link_license]
 
-> Actions are like version control for your migration process, allowing your team to modify and share the application's actionable schema. If you have ever had to tell a teammate to manually perform any action on a producton server, you've come across an issue that actions solves.
+> Actions are like version control for your migration process, allowing your team to modify and share the application's actionable schema. If you have ever had to tell a teammate
+> to manually perform any action on a producton server, you've come across an issue that actions solves.
 
 ## Installation
 
@@ -23,7 +24,7 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```json
 {
     "require": {
-        "dragon-code/laravel-migration-actions": "^2.6"
+        "dragon-code/laravel-migration-actions": "^2.9"
     }
 }
 ```
@@ -252,6 +253,57 @@ return new class extends Actionable
 ```
 
 By default, no actions will be excluded. The same happens if you specify `null` or `[]` value.
+
+#### Split Launch Option
+
+Sometimes it becomes necessary to launch actions separately, for example, to notify about the successful deployment of a project.
+
+There is a `before` option for this when calling actions:
+
+```bash
+php artisan migrate:actions --before
+```
+
+When calling the `migrate:actions` command with the `before` parameter, the script will execute only those actions within which the value of the `before` parameter is `true`.
+
+For backwards compatibility, the `before` parameter is set to `true` by default, but actions will only be executed if the option is explicitly passed.
+
+```php
+use DragonCode\LaravelActions\Support\Actionable;
+
+return new class extends Actionable
+{
+    protected $before = false;
+
+    public function up(): void
+    {
+        // your code
+    }
+};
+```
+
+For example, you need to call actions when deploying an application. Some actions should be run after the migrations are deployed, and others after the application is fully
+launched.
+
+To run, you need to pass the `before` parameter. For example, when using [`deployer`](https://github.com/deployphp/deployer) it would look like this:
+
+```php
+task('deploy', [
+    // ...
+    'artisan:migrate',
+    'artisan:migrate:actions --before', // here
+    'deploy:publish',
+    'php-fpm:reload',
+    'artisan:queue:restart',
+    'artisan:migrate:actions', // here
+]);
+```
+
+Thus, when `migrate:actions` is called, all actions whose `before` parameter is `true` will be executed, and after that, the remaining tasks will be executed.
+
+> Note:
+> If you call the `migrate:actions` command without the `before` parameter, then all tasks will be executed regardless of the value of the `$before` attribute inside the action
+> class.
 
 #### Database Transactions
 

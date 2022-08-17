@@ -7,6 +7,11 @@ use Illuminate\Support\Str;
 /** @mixin \Illuminate\Console\Command */
 trait Optionable
 {
+    protected function optionBefore(): bool
+    {
+        return $this->input->getOption('before');
+    }
+
     protected function optionDatabase(): ?string
     {
         return $this->input->getOption('database');

@@ -14,6 +14,8 @@ class Migrator extends BaseMigrator
     use Infoable;
     use Anonymous;
 
+    protected $is_before = false;
+
     public function usingConnection($name, callable $callback)
     {
         $prev = $this->resolver->getDefaultConnection();
@@ -23,6 +25,13 @@ class Migrator extends BaseMigrator
         return tap($callback(), function () use ($prev) {
             $this->setConnection($prev);
         });
+    }
+
+    public function runPending(array $migrations, array $options = [])
+    {
+        $this->is_before = $options['before'] ?? false;
+
+        return parent::runPending($migrations, $options);
     }
 
     /**
@@ -45,12 +54,18 @@ class Migrator extends BaseMigrator
             $name = $this->getMigrationName($file);
         } else {
             $migration = $this->resolve(
-                $name  = $this->getMigrationName($file)
+                $name = $this->getMigrationName($file)
             );
         }
 
         if (! $this->allowEnvironment($migration)) {
             $this->note("<info>Migrate:</info>  {$name} was skipped on this environment");
+
+            return;
+        }
+
+        if ($this->disallowBefore($migration)) {
+            $this->note("<info>Migrate:</info>  {$name} was omitted because the 'before' parameter is enabled.");
 
             return;
         }
@@ -194,6 +209,18 @@ class Migrator extends BaseMigrator
         $value = $migration->transactionAttempts();
 
         return (int) abs($value);
+    }
+
+    /**
+     * Defines a possible "pre-launch" of the action.
+     *
+     * @param \DragonCode\Contracts\LaravelActions\Actionable|object $migration
+     *
+     * @return bool
+     */
+    protected function disallowBefore(ActionableContract $migration): bool
+    {
+        return $this->is_before && ! $migration->hasBefore();
     }
 
     /**

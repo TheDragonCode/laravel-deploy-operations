@@ -52,6 +52,13 @@ abstract class Actionable extends Migration implements Contract
     protected $except_environment;
 
     /**
+     * Defines a possible "pre-launch" of the action.
+     *
+     * @var bool
+     */
+    protected $before = true;
+
+    /**
      * Reverse the actions.
      */
     public function down(): void
@@ -119,6 +126,16 @@ abstract class Actionable extends Migration implements Contract
     public function allow(): bool
     {
         return true;
+    }
+
+    /**
+     * Defines a possible "pre-launch" of the action.
+     *
+     * @return bool
+     */
+    public function hasBefore(): bool
+    {
+        return $this->before;
     }
 
     /**

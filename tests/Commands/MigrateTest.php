@@ -39,22 +39,22 @@ class MigrateTest extends TestCase
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 1);
-        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationDoesntLike($this->table, $table);
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 2);
-        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationDoesntLike($this->table, $table);
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 3);
-        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationDoesntLike($this->table, $table);
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 4);
-        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationDoesntLike($this->table, $table);
     }
 
@@ -118,7 +118,7 @@ class MigrateTest extends TestCase
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 5);
-        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationHas($this->table, 'run_on_all');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_production');
         $this->assertDatabaseMigrationHas($this->table, 'run_on_testing');
@@ -127,7 +127,7 @@ class MigrateTest extends TestCase
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 5);
-        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationHas($this->table, 'run_on_all');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_production');
         $this->assertDatabaseMigrationHas($this->table, 'run_on_testing');
@@ -155,7 +155,7 @@ class MigrateTest extends TestCase
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 5);
-        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationHas($this->table, 'run_on_all');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_production');
         $this->assertDatabaseMigrationHas($this->table, 'run_on_testing');
@@ -166,7 +166,7 @@ class MigrateTest extends TestCase
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 5);
-        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationHas($this->table, 'run_on_all');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_production');
         $this->assertDatabaseMigrationHas($this->table, 'run_on_testing');
@@ -191,13 +191,13 @@ class MigrateTest extends TestCase
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 5);
-        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationHas($this->table, 'run_allow');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_disallow');
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 5);
-        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationHas($this->table, 'run_allow');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_disallow');
     }
@@ -216,7 +216,7 @@ class MigrateTest extends TestCase
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 2);
-        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationHas($this->table, 'run_success');
     }
 
@@ -234,7 +234,7 @@ class MigrateTest extends TestCase
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 2);
-        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success_on_failed');
 
         try {
@@ -250,7 +250,7 @@ class MigrateTest extends TestCase
         }
 
         $this->assertDatabaseCount($table, 2);
-        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success_on_failed');
     }
 
@@ -268,7 +268,7 @@ class MigrateTest extends TestCase
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 0);
-        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationHas($this->table, 'run_failed');
     }
 
@@ -286,7 +286,7 @@ class MigrateTest extends TestCase
         $this->artisan('migrate:actions')->run();
 
         $this->assertDatabaseCount($table, 0);
-        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_failed_failure');
 
         try {
@@ -302,7 +302,7 @@ class MigrateTest extends TestCase
         }
 
         $this->assertDatabaseCount($table, 1);
-        $this->assertDatabaseCount($this->table, 8);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_failed_failure');
     }
 
@@ -377,5 +377,57 @@ class MigrateTest extends TestCase
         $this->hasTermwind()
             ? $this->artisan('migrate:actions:status')
             : $this->artisan('migrate:actions:status')->expectsOutput('No actions found');
+    }
+
+    public function testDisabledBefore()
+    {
+        $this->copyFiles();
+
+        $table = 'before';
+
+        $this->artisan('migrate:actions:install')->run();
+
+        $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_enabled');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
+        $this->artisan('migrate:actions')->run();
+
+        $this->assertDatabaseCount($table, 2);
+        $this->assertDatabaseCount($this->table, 10);
+        $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
+        $this->assertDatabaseMigrationHas($this->table, 'test_before_disabled');
+        $this->artisan('migrate:actions')->run();
+
+        $this->assertDatabaseCount($table, 2);
+        $this->assertDatabaseCount($this->table, 10);
+        $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
+        $this->assertDatabaseMigrationHas($this->table, 'test_before_disabled');
+    }
+
+    public function testEnabledBefore()
+    {
+        $this->copyFiles();
+
+        $table = 'before';
+
+        $this->artisan('migrate:actions:install')->run();
+
+        $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_enabled');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
+        $this->artisan('migrate:actions', ['--before' => true])->run();
+
+        $this->assertDatabaseCount($table, 1);
+        $this->assertDatabaseCount($this->table, 9);
+        $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
+        $this->artisan('migrate:actions', ['--before' => true])->run();
+
+        $this->assertDatabaseCount($table, 1);
+        $this->assertDatabaseCount($this->table, 9);
+        $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
     }
 }
