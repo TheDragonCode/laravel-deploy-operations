@@ -4,7 +4,7 @@ namespace DragonCode\LaravelActions\Console;
 
 use DragonCode\LaravelActions\Concerns\Argumentable;
 use DragonCode\LaravelActions\Concerns\Database;
-use DragonCode\LaravelActions\Concerns\Infoable;
+use DragonCode\LaravelActions\Concerns\Notifications;
 use DragonCode\LaravelActions\Constants\Names;
 use Exception;
 use Illuminate\Database\Console\Migrations\BaseCommand;
@@ -16,7 +16,7 @@ class Make extends BaseCommand
 {
     use Argumentable;
     use Database;
-    use Infoable;
+    use Notifications;
 
     /**
      * The console command name.

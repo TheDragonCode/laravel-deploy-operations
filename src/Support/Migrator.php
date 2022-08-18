@@ -3,16 +3,14 @@
 namespace DragonCode\LaravelActions\Support;
 
 use DragonCode\Contracts\LaravelActions\Actionable as ActionableContract;
-use DragonCode\LaravelActions\Concerns\Anonymous;
-use DragonCode\LaravelActions\Concerns\Infoable;
+use DragonCode\LaravelActions\Concerns\Notifications;
 use Illuminate\Database\Migrations\Migrator as BaseMigrator;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
 class Migrator extends BaseMigrator
 {
-    use Infoable;
-    use Anonymous;
+    use Notifications;
 
     protected $is_before = false;
 
@@ -48,16 +46,9 @@ class Migrator extends BaseMigrator
         // First we will resolve a "real" instance of the migration class from this
         // migration file name. Once we have the instances we can run the actual
         // command such as "up" or "down", or we can just simulate the action.
-        if ($this->allowAnonymous()) {
-            $migration = $this->resolvePath($file);
+        $migration = $this->resolvePath($file);
 
-            $name = $this->getMigrationName($file);
-        }
-        else {
-            $migration = $this->resolve(
-                $name  = $this->getMigrationName($file)
-            );
-        }
+        $name = $this->getMigrationName($file);
 
         if (! $this->allowEnvironment($migration)) {
             $this->note("<info>Migrate:</info>  {$name} was skipped on this environment");
@@ -106,16 +97,9 @@ class Migrator extends BaseMigrator
      */
     protected function runDown($file, $migration, $pretend)
     {
-        if ($this->allowAnonymous()) {
-            $instance = $this->resolvePath($file);
+        $instance = $this->resolvePath($file);
 
-            $name = $this->getMigrationName($file);
-        }
-        else {
-            $instance = $this->resolve(
-                $name = $this->getMigrationName($file)
-            );
-        }
+        $name = $this->getMigrationName($file);
 
         if (! $this->allowEnvironment($instance)) {
             $this->note("<info>Rolling back:</info>  {$name} was skipped on this environment");
@@ -190,7 +174,7 @@ class Migrator extends BaseMigrator
     /**
      * Whether it is necessary to call database transactions at runtime.
      *
-     * @param \DragonCode\LaravelActions\Support\Actionable|object $migration
+     * @param \DragonCode\LaravelActions\Services\Actionable|object $migration
      *
      * @return bool
      */
@@ -202,7 +186,7 @@ class Migrator extends BaseMigrator
     /**
      * The number of attempts to execute a request within a transaction before throwing an error.
      *
-     * @param \DragonCode\LaravelActions\Support\Actionable|object $migration
+     * @param \DragonCode\LaravelActions\Services\Actionable|object $migration
      *
      * @return int
      */
@@ -239,8 +223,7 @@ class Migrator extends BaseMigrator
             $handle($migration);
 
             $this->runSuccess($migration);
-        }
-        catch (Throwable $e) {
+        } catch (Throwable $e) {
             $this->runFailed($migration);
 
             throw $e;

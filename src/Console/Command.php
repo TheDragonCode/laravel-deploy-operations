@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Console;
 
-use DragonCode\LaravelActions\Concerns\Infoable;
+use DragonCode\LaravelActions\Concerns\Notifications;
 use DragonCode\LaravelActions\Concerns\Optionable;
 use DragonCode\LaravelActions\Concerns\Path;
 use DragonCode\LaravelActions\Constants\Options;
@@ -16,7 +16,7 @@ use Symfony\Component\Console\Input\InputOption;
 abstract class Command extends BaseCommand
 {
     use Optionable;
-    use Infoable;
+    use Notifications;
     use Path;
 
     protected Processor|string $processor;

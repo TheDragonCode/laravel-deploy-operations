@@ -3,7 +3,7 @@
 namespace DragonCode\LaravelActions\Console;
 
 use DragonCode\LaravelActions\Concerns\Database;
-use DragonCode\LaravelActions\Concerns\Infoable;
+use DragonCode\LaravelActions\Concerns\Notifications;
 use DragonCode\LaravelActions\Concerns\Optionable;
 use DragonCode\LaravelActions\Constants\Names;
 use Illuminate\Database\Console\Migrations\StatusCommand as BaseCommand;
@@ -11,7 +11,7 @@ use Illuminate\Database\Console\Migrations\StatusCommand as BaseCommand;
 class Status extends BaseCommand
 {
     use Database;
-    use Infoable;
+    use Notifications;
     use Optionable;
 
     /**

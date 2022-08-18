@@ -3,7 +3,7 @@
 namespace DragonCode\LaravelActions\Console;
 
 use DragonCode\LaravelActions\Concerns\Database;
-use DragonCode\LaravelActions\Concerns\Infoable;
+use DragonCode\LaravelActions\Concerns\Notifications;
 use DragonCode\LaravelActions\Concerns\Optionable;
 use DragonCode\LaravelActions\Constants\Names;
 use Illuminate\Database\Console\Migrations\RollbackCommand;
@@ -12,7 +12,7 @@ use Symfony\Component\Console\Input\InputOption;
 class Rollback extends RollbackCommand
 {
     use Database;
-    use Infoable;
+    use Notifications;
     use Optionable;
 
     /**

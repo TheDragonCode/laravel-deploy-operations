@@ -3,7 +3,7 @@
 namespace DragonCode\LaravelActions\Console;
 
 use DragonCode\LaravelActions\Concerns\Database;
-use DragonCode\LaravelActions\Concerns\Infoable;
+use DragonCode\LaravelActions\Concerns\Notifications;
 use DragonCode\LaravelActions\Concerns\Optionable;
 use DragonCode\LaravelActions\Constants\Names;
 use DragonCode\LaravelActions\Support\Migrator;
@@ -15,7 +15,7 @@ class Reset extends BaseCommand
 {
     use ConfirmableTrait;
     use Database;
-    use Infoable;
+    use Notifications;
     use Optionable;
 
     /**
