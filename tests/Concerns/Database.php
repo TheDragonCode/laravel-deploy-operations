@@ -4,9 +4,9 @@ namespace Tests\Concerns;
 
 trait Database
 {
-    protected $database = 'testing';
+    protected string $database = 'testing';
 
-    protected $table = 'foo_actions';
+    protected string $table = 'foo_actions';
 
     protected function setDatabase($app): void
     {
@@ -30,8 +30,8 @@ trait Database
 
     protected function loadMigrations(): void
     {
-        $this->loadMigrationsFrom(
-            __DIR__ . '/../fixtures/migrations'
-        );
+        $this->allowAnonymousMigrations()
+            ? $this->loadMigrationsFrom(__DIR__ . '/../fixtures/migrations/anonymous')
+            : $this->loadMigrationsFrom(__DIR__ . '/../fixtures/migrations/named');
     }
 }

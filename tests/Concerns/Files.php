@@ -16,7 +16,7 @@ trait Files
     protected function copyFiles(): void
     {
         File::copyDirectory(
-            __DIR__ . '/../fixtures/app/anonymous/actions',
+            __DIR__ . '/../fixtures/app/actions',
             $this->targetDirectory()
         );
     }
@@ -24,7 +24,7 @@ trait Files
     protected function copySuccessFailureMethod()
     {
         File::copy(
-            __DIR__ . '/../fixtures/app/anonymous/actions_failed/2021_12_23_165048_run_success_on_failed.php',
+            __DIR__ . '/../fixtures/app/actions_failed/2021_12_23_165048_run_success_on_failed.php',
             $this->targetDirectory('2021_12_23_165048_run_success_on_failed.php')
         );
     }
@@ -32,7 +32,7 @@ trait Files
     protected function copyFailedMethod()
     {
         File::copy(
-            __DIR__ . '/../fixtures/app/anonymous/actions_failed/2021_12_23_184029_run_failed_failure.php',
+            __DIR__ . '/../fixtures/app/actions_failed/2021_12_23_184029_run_failed_failure.php',
             $this->targetDirectory('2021_12_23_184029_run_failed_failure.php')
         );
     }
@@ -40,7 +40,7 @@ trait Files
     protected function copySuccessTransaction(): void
     {
         File::copy(
-            __DIR__ . '/../fixtures/app/anonymous/stubs/2021_02_15_124237_test_success_transactions.stub',
+            __DIR__ . '/../fixtures/app/stubs/2021_02_15_124237_test_success_transactions.stub',
             $this->targetDirectory('2021_02_15_124237_test_success_transactions.php')
         );
     }
@@ -48,14 +48,14 @@ trait Files
     protected function copyFailedTransaction(): void
     {
         File::copy(
-            __DIR__ . '/../fixtures/app/anonymous/stubs/2021_02_15_124852_test_failed_transactions.stub',
+            __DIR__ . '/../fixtures/app/stubs/2021_02_15_124852_test_failed_transactions.stub',
             $this->targetDirectory('2021_02_15_124852_test_failed_transactions.php')
         );
     }
 
     protected function targetDirectory(?string $path = null): string
     {
-        $dir = $this->actionsPath('actions');
+        $dir = $this->actionsPath();
 
         File::ensureDirectoryExists($dir);
 
