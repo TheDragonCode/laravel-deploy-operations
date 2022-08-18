@@ -2,17 +2,16 @@
 
 namespace DragonCode\LaravelActions\Concerns;
 
-use DragonCode\LaravelActions\Facades\Git;
+use DragonCode\LaravelActions\Support\Git;
 
-/** @mixin \Illuminate\Console\Command */
 trait Argumentable
 {
-    protected $auto_prefix = 'auto';
+    protected string $auto_prefix = 'auto';
 
     protected function argumentName(): string
     {
-        if ($name = (string) $this->argument('name')) {
-            return trim($name);
+        if ($name = $this->argument('name')) {
+            return trim((string) $name);
         }
 
         return $this->makeName();
@@ -30,6 +29,6 @@ trait Argumentable
 
     protected function getGitBranchName(): ?string
     {
-        return Git::currentBranch(base_path('.git'));
+        return Git::make()->currentBranch(base_path('.git'));
     }
 }

@@ -14,5 +14,7 @@ class Options
 
     public const PATH = 'path';
 
+    public const REALPATH = 'realpath';
+
     public const STEP = 'step';
 }

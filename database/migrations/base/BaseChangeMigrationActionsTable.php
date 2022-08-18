@@ -1,13 +1,13 @@
 <?php
 
-use DragonCode\LaravelActions\Concerns\Migrations;
+use DragonCode\LaravelActions\Concerns\Database;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 abstract class BaseChangeMigrationActionsTable extends Migration
 {
-    use Migrations;
+    use Database;
 
     public function up()
     {

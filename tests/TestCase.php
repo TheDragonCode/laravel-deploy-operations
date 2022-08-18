@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use DragonCode\LaravelActions\Concerns\Path;
 use DragonCode\LaravelActions\Concerns\Versionable;
 use DragonCode\LaravelActions\ServiceProvider;
 use Illuminate\Database\Query\Builder;
@@ -11,7 +12,6 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 use Tests\Concerns\AssertDatabase;
 use Tests\Concerns\Database;
 use Tests\Concerns\Files;
-use Tests\Concerns\Path;
 
 abstract class TestCase extends BaseTestCase
 {

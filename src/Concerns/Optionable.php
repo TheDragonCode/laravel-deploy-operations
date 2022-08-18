@@ -10,7 +10,7 @@ trait Optionable
 {
     protected function optionForce(): bool
     {
-        return $this->hasOption(Options::FORCE) && $this->option(Options::FORCE);
+        return $this->optionHas(Options::FORCE);
     }
 
     protected function optionBefore(): bool
@@ -40,7 +40,7 @@ trait Optionable
                     return $path;
                 }
 
-                $filename = $this->getMigrationPath() . DIRECTORY_SEPARATOR . $path;
+                $filename = $this->getActionsPath($path);
 
                 if (is_dir($filename) || file_exists($filename)) {
                     return $filename;
@@ -51,5 +51,20 @@ trait Optionable
         }
 
         return null;
+    }
+
+    /**
+     * Determine if the given path(s) are pre-resolved "real" paths.
+     *
+     * @return bool
+     */
+    protected function usingRealPath(): bool
+    {
+        return $this->optionHas(Options::REALPATH);
+    }
+
+    protected function optionHas(string $key): bool
+    {
+        return $this->hasOption($key) && $this->option($key);
     }
 }

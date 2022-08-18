@@ -6,6 +6,7 @@ namespace DragonCode\LaravelActions\Console;
 
 use DragonCode\LaravelActions\Concerns\Infoable;
 use DragonCode\LaravelActions\Concerns\Optionable;
+use DragonCode\LaravelActions\Concerns\Path;
 use DragonCode\LaravelActions\Constants\Options;
 use Illuminate\Console\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputOption;
@@ -14,6 +15,7 @@ abstract class Command extends BaseCommand
 {
     use Optionable;
     use Infoable;
+    use Path;
 
     abstract protected function process(): void;
 

@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Support;
 
+use DragonCode\Support\Concerns\Makeable;
 use Illuminate\Support\Str;
 
 class Git
 {
+    use Makeable;
+
     public function currentBranch(?string $path): ?string
     {
         if ($path = $this->getGitPath($path)) {

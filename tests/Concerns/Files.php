@@ -55,7 +55,7 @@ trait Files
 
     protected function targetDirectory(?string $path = null): string
     {
-        $dir = $this->actionsPath();
+        $dir = $this->getActionsPath();
 
         File::ensureDirectoryExists($dir);
 
