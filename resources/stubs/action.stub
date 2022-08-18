@@ -1,6 +1,6 @@
 <?php
 
-use DragonCode\LaravelActions\Support\Actionable;
+use DragonCode\LaravelActions\Services\Actionable;
 
 return new class extends Actionable {
     /**
