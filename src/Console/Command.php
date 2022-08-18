@@ -8,7 +8,9 @@ use DragonCode\LaravelActions\Concerns\Infoable;
 use DragonCode\LaravelActions\Concerns\Optionable;
 use DragonCode\LaravelActions\Concerns\Path;
 use DragonCode\LaravelActions\Constants\Options;
+use DragonCode\LaravelActions\Processors\Processor;
 use Illuminate\Console\Command as BaseCommand;
+use Illuminate\Container\Container;
 use Symfony\Component\Console\Input\InputOption;
 
 abstract class Command extends BaseCommand
@@ -17,7 +19,7 @@ abstract class Command extends BaseCommand
     use Infoable;
     use Path;
 
-    abstract protected function process(): void;
+    protected Processor|string $processor;
 
     public function handle(): int
     {
@@ -25,9 +27,16 @@ abstract class Command extends BaseCommand
             return 1;
         }
 
-        $this->process();
+        $this->resolveProcessor()->handle();
 
         return 0;
+    }
+
+    protected function resolveProcessor(): Processor
+    {
+        return Container::getInstance()->make($this->processor, [
+            'options' => $this->optionDto(),
+        ]);
     }
 
     protected function confirmToProceed(): bool

@@ -16,8 +16,7 @@
     "authors": [
         {
             "name": "Andrey Helldar",
-            "email": "helldar@dragon-code.pro",
-            "homepage": "https://github.com/andrey-helldar"
+            "email": "helldar@dragon-code.pro"
         }
     ],
     "support": {
@@ -25,19 +24,22 @@
         "source": "https://github.com/TheDragonCode/laravel-migration-actions"
     },
     "require": {
-        "php": "^7.3 || ^8.0",
+        "php": "^8.0",
+        "composer-runtime-api": "^2.2",
         "dragon-code/contracts": "^2.15",
         "dragon-code/laravel-support": "^3.3",
+        "dragon-code/simple-dto": "^2.3",
         "dragon-code/support": "^6.3",
-        "illuminate/console": "^6.0 || ^7.0 || ^8.0 || ^9.0",
-        "illuminate/database": "^6.0 || ^7.0 || ^8.0 || ^9.0",
-        "illuminate/support": "^6.0 || ^7.0 || ^8.0 || ^9.0",
-        "symfony/console": "^4.3 || ^5.0 || ^6.0"
+        "illuminate/container": "^7.0 || ^8.0 || ^9.0",
+        "illuminate/console": "^7.0 || ^8.0 || ^9.0",
+        "illuminate/database": "^7.0 || ^8.0 || ^9.0",
+        "illuminate/support": "^7.0 || ^8.0 || ^9.0",
+        "symfony/console": "^5.0 || ^6.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.3.1",
-        "orchestra/testbench": "^4.0 || ^5.0 || ^6.0 || ^7.0",
-        "phpunit/phpunit": "^8.0 || ^9.0",
+        "orchestra/testbench": "^5.0 || ^6.0 || ^7.0",
+        "phpunit/phpunit": "^9.0",
         "ramsey/uuid": "^3.7 || ^4.0"
     },
     "conflict": {

@@ -3,6 +3,7 @@
 namespace DragonCode\LaravelActions\Concerns;
 
 use DragonCode\LaravelActions\Constants\Options;
+use DragonCode\LaravelActions\Values\Options as OptionsDto;
 use Illuminate\Support\Str;
 
 /** @mixin \Illuminate\Console\Command */
@@ -66,5 +67,17 @@ trait Optionable
     protected function optionHas(string $key): bool
     {
         return $this->hasOption($key) && $this->option($key);
+    }
+
+    protected function optionDto(): OptionsDto
+    {
+        return OptionsDto::make([
+            'before'   => $this->optionBefore(),
+            'database' => $this->optionDatabase(),
+            'force'    => $this->optionForce(),
+            'path'     => $this->optionPath(),
+            'realpath' => $this->usingRealPath(),
+            'step'     => $this->optionStep(),
+        ]);
     }
 }
