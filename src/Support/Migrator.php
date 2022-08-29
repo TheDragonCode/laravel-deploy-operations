@@ -52,7 +52,8 @@ class Migrator extends BaseMigrator
             $migration = $this->resolvePath($file);
 
             $name = $this->getMigrationName($file);
-        } else {
+        }
+        else {
             $migration = $this->resolve(
                 $name  = $this->getMigrationName($file)
             );
@@ -109,7 +110,8 @@ class Migrator extends BaseMigrator
             $instance = $this->resolvePath($file);
 
             $name = $this->getMigrationName($file);
-        } else {
+        }
+        else {
             $instance = $this->resolve(
                 $name = $this->getMigrationName($file)
             );
@@ -237,7 +239,8 @@ class Migrator extends BaseMigrator
             $handle($migration);
 
             $this->runSuccess($migration);
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             $this->runFailed($migration);
 
             throw $e;

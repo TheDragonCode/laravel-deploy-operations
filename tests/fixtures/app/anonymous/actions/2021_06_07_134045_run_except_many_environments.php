@@ -5,7 +5,8 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-return new class () extends Actionable {
+return new class () extends Actionable
+{
     protected $environment = ['testing'];
 
     protected $except_environment = ['testing', 'production'];
