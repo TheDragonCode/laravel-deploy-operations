@@ -1,7 +1,5 @@
-name: Bug
+name: Bug Report
 description: Report a bug or other issue
-
-labels: '👓 needs review'
 
 body:
     -   type: markdown
@@ -20,10 +18,10 @@ body:
                 Tip: Use the `php artisan --version` command to get information for Laravel Framework.
                 Tip: Use the `php -v` command to get information for PHP.
             value: |
-                - Migration Actions Version:
-                - Laravel Version:
                 - PHP Version:
                 - Database Driver & Version:
+                - Migration Actions Version:
+                - Laravel Version:
         validations:
             required: true
 
@@ -50,4 +48,4 @@ body:
     -   type: markdown
         attributes:
             value: |
-                ❤️ The Dragon Code? Please consider supporting our collective: https://opencollective.com/dragon-code
+                ❤️ The Dragon Code? Please consider supporting [`our collective`](https://opencollective.com/dragon-code).
