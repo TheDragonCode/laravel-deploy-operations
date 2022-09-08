@@ -11,7 +11,7 @@ abstract class BaseChangeMigrationActionsTable extends Migration
 
     public function up()
     {
-        Schema::table($this->table(), function (Blueprint $table) {
+        Schema::table($this->getTableName(), function (Blueprint $table) {
             $table->renameColumn('migration', 'action');
 
             $table->unsignedInteger('batch')->change();
@@ -20,7 +20,7 @@ abstract class BaseChangeMigrationActionsTable extends Migration
 
     public function down()
     {
-        Schema::table($this->table(), function (Blueprint $table) {
+        Schema::table($this->getTableName(), function (Blueprint $table) {
             $table->renameColumn('action', 'migration');
 
             $table->integer('batch')->change();
