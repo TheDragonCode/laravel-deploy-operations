@@ -3,7 +3,7 @@
 namespace Tests;
 
 use DragonCode\LaravelActions\Concerns\Path;
-use DragonCode\LaravelActions\Concerns\Versionable;
+use DragonCode\LaravelActions\Concerns\Anonymouses;
 use DragonCode\LaravelActions\ServiceProvider;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -20,7 +20,7 @@ abstract class TestCase extends BaseTestCase
     use Files;
     use Path;
     use RefreshDatabase;
-    use Versionable;
+    use Anonymouses;
 
     protected function setUp(): void
     {

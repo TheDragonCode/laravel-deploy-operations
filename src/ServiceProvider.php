@@ -3,13 +3,13 @@
 namespace DragonCode\LaravelActions;
 
 use DragonCode\LaravelActions\Concerns\About;
-use DragonCode\LaravelActions\Concerns\Versionable;
+use DragonCode\LaravelActions\Concerns\Anonymouses;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
 {
     use About;
-    use Versionable;
+    use Anonymouses;
 
     public function boot(): void
     {
