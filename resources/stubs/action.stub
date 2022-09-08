@@ -2,7 +2,8 @@
 
 use DragonCode\LaravelActions\Services\Actionable;
 
-return new class extends Actionable {
+return new class () extends Actionable
+{
     /**
      * Run the actions.
      *
