@@ -51,7 +51,7 @@ abstract class Command extends BaseCommand
             return true;
         }
 
-        $this->warn('Command canceled.');
+        $this->warn('Command canceled');
 
         return false;
     }
