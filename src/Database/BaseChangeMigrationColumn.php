@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
+namespace DragonCode\LaravelActions\Database;
+
 use DragonCode\LaravelActions\Concerns\Database;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-abstract class BaseChangeMigrationActionsTable extends Migration
+abstract class BaseChangeMigrationColumn extends Migration
 {
     use Database;
 
