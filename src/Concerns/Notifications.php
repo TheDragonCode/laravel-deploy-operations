@@ -9,7 +9,7 @@ use Illuminate\Console\View\Components\Factory;
 
 trait Notifications
 {
-    protected Notification|null $notification;
+    protected ?Notification $notification = null;
 
     protected function notification(): Notification
     {
