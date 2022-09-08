@@ -3,14 +3,49 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Action Repository Table
+    | Actions Settings
     |--------------------------------------------------------------------------
     |
-    | This table keeps track of all the migrations that have already run for
-    | your application. Using this information, we can determine which of
-    | the migrations on disk haven't actually been run in the database.
+    | This block controls the connection to the database, as well as the
+    | location of the action files in the project.
     |
     */
 
-    'actions' => 'migration_actions',
+    'actions' => [
+        /*
+        |--------------------------------------------------------------------------
+        | Actions Repository Connection
+        |--------------------------------------------------------------------------
+        |
+        | This option controls the database connection used to store the table
+        | of executed actions.
+        |
+        */
+
+        'connection' => env('DB_CONNECTION'),
+
+        /*
+        |--------------------------------------------------------------------------
+        | Actions Repository Table
+        |--------------------------------------------------------------------------
+        |
+        | This table keeps track of all the actions that have already run for
+        | your application. Using this information, we can determine which of
+        | the actions on disk haven't actually been run in the database.
+        |
+        */
+
+        'table' => 'migration_actions',
+
+        /*
+        |--------------------------------------------------------------------------
+        | Actions Path
+        |--------------------------------------------------------------------------
+        |
+        | This option defines the path to the action directory.
+        |
+        */
+
+        'path' => base_path('actions'),
+    ],
 ];
