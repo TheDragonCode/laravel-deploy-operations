@@ -8,9 +8,11 @@ class Options
 {
     public const BEFORE = 'before';
 
-    public const DATABASE = 'database';
+    public const CONNECTION = 'database';
 
     public const FORCE = 'force';
+
+    public const NAME = 'name';
 
     public const PATH = 'path';
 
