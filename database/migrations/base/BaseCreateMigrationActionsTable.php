@@ -29,5 +29,3 @@ abstract class BaseCreateMigrationActionsTable extends Migration
         Schema::dropIfExists($this->table());
     }
 }
-
-;

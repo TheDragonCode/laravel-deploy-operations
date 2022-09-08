@@ -130,7 +130,8 @@ class RollbackTest extends TestCase
             $this->table()->insert(['migration' => '2021_12_23_165048_run_success_on_failed', 'batch' => 999]);
 
             $this->artisan(Names::ROLLBACK)->run();
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             $this->assertInstanceOf(Exception::class, $e);
 
             $this->assertSame('Custom exception', $e->getMessage());
@@ -189,7 +190,8 @@ class RollbackTest extends TestCase
             $this->table()->insert(['migration' => '2021_12_23_184029_run_failed_failure', 'batch' => 999]);
 
             $this->artisan(Names::ROLLBACK)->run();
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             $this->assertInstanceOf(Exception::class, $e);
 
             $this->assertSame('Custom exception', $e->getMessage());

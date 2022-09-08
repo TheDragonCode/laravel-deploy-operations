@@ -4,7 +4,6 @@ namespace DragonCode\LaravelActions;
 
 use DragonCode\LaravelActions\Concerns\About;
 use DragonCode\LaravelActions\Concerns\Versionable;
-use DragonCode\LaravelActions\Console;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider

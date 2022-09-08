@@ -1,3 +1,5 @@
 <?php
 
-class ChangeMigrationActionsTable extends BaseChangeMigrationActionsTable { }
+class ChangeMigrationActionsTable extends BaseChangeMigrationActionsTable
+{
+}

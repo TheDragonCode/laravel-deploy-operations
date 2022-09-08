@@ -223,7 +223,8 @@ class Migrator extends BaseMigrator
             $handle($migration);
 
             $this->runSuccess($migration);
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             $this->runFailed($migration);
 
             throw $e;

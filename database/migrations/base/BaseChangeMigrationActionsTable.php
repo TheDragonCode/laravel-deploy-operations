@@ -27,5 +27,3 @@ abstract class BaseChangeMigrationActionsTable extends Migration
         });
     }
 }
-
-;

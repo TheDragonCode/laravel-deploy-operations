@@ -1,3 +1,5 @@
 <?php
 
-return new class extends BaseCreateMigrationActionsTable { };
+return new class () extends BaseCreateMigrationActionsTable
+{
+};

@@ -17,12 +17,12 @@ abstract class Processor
     use Database;
     use Notifications;
 
+    abstract public function handle();
+
     public function __construct(
-        protected Options          $options,
-        protected Filesystem       $files,
+        protected Options $options,
+        protected Filesystem $files,
         protected ActionRepository $repository
     ) {
     }
-
-    abstract public function handle();
 }

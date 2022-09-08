@@ -91,7 +91,8 @@ class MigrateTest extends TestCase
 
         try {
             $this->artisan(Names::MIGRATE)->run();
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             $this->assertSame(Exception::class, get_class($e));
             $this->assertSame('Random message', $e->getMessage());
         }
@@ -242,7 +243,8 @@ class MigrateTest extends TestCase
             $this->copySuccessFailureMethod();
 
             $this->artisan(Names::MIGRATE)->run();
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             $this->assertInstanceOf(Exception::class, $e);
 
             $this->assertSame('Custom exception', $e->getMessage());
@@ -294,7 +296,8 @@ class MigrateTest extends TestCase
             $this->copyFailedMethod();
 
             $this->artisan(Names::MIGRATE)->run();
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             $this->assertInstanceOf(Exception::class, $e);
 
             $this->assertSame('Custom exception', $e->getMessage());
