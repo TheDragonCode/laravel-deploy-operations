@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DragonCode\LaravelActions;
 
 use DragonCode\LaravelActions\Concerns\About;
