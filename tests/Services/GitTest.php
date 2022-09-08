@@ -16,7 +16,7 @@ class GitTest extends TestCase
 
     public function testCurrentBranch()
     {
-        $branch = $this->git()->currentBranch(__DIR__ . '/../../.git');
+        $branch = $this->git()->currentBranch(__DIR__ . '/../../');
 
         $this->assertIsString($branch);
     }

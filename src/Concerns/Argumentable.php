@@ -29,6 +29,6 @@ trait Argumentable
 
     protected function getGitBranchName(): ?string
     {
-        return Git::make()->currentBranch(base_path('.git'));
+        return Git::make()->currentBranch(base_path());
     }
 }

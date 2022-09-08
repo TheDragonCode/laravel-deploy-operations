@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace DragonCode\LaravelActions\Support;
 
 use DragonCode\Support\Concerns\Makeable;
+use DragonCode\Support\Facades\Filesystem\Directory;
+use DragonCode\Support\Facades\Filesystem\Path;
 use Illuminate\Support\Str;
 
 class Git
@@ -25,11 +27,6 @@ class Git
         return exec(sprintf('git --git-dir %s %s', $path, $command));
     }
 
-    protected function resolvePath(string $path): ?string
-    {
-        return realpath($path) ?: null;
-    }
-
     protected function getGitPath(?string $path): ?string
     {
         if ($path = $this->resolvePath($path)) {
@@ -44,9 +41,20 @@ class Git
     protected function isGitDir(?string $path): bool
     {
         if ($path = rtrim($path, '/\\')) {
-            return Str::endsWith($path, '.git');
+            return Directory::exists($path . DIRECTORY_SEPARATOR . '.git');
         }
 
         return false;
+    }
+
+    protected function resolvePath(string $path): ?string
+    {
+        if ($path = realpath($path)) {
+            $path = rtrim($path, '\\/');
+
+            return Str::endsWith($path, '.git') ? Path::dirname($path) : $path;
+        }
+
+        return null;
     }
 }
