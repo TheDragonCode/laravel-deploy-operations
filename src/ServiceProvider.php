@@ -31,6 +31,7 @@ class ServiceProvider extends BaseServiceProvider
             Console\Reset::class,
             Console\Rollback::class,
             Console\Status::class,
+            Console\Upgrade::class,
         ]);
     }
 

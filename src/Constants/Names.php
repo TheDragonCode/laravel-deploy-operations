@@ -19,4 +19,6 @@ class Names
     public const ROLLBACK = 'migrate:actions:rollback';
 
     public const STATUS = 'migrate:actions:status';
+
+    public const UPGRADE = 'migrate:actions:upgrade';
 }
