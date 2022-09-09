@@ -22,4 +22,9 @@ class Config
 
         return rtrim($directory, '\\/') . DIRECTORY_SEPARATOR . ltrim((string) $path, '\\/');
     }
+
+    public function gitPath(): string
+    {
+        return base_path();
+    }
 }
