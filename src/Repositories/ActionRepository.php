@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Repositories;
 
-use DragonCode\LaravelActions\Concerns\Database;
+use DragonCode\LaravelActions\Helpers\Config;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\ConnectionResolverInterface as Resolver;
 use Illuminate\Database\Query\Builder as Query;
@@ -13,10 +13,9 @@ use Illuminate\Database\Schema\Builder;
 
 class ActionRepository
 {
-    use Database;
-
     public function __construct(
-        protected Resolver $resolver
+        protected Resolver $resolver,
+        protected Config   $config
     ) {
     }
 
@@ -50,7 +49,7 @@ class ActionRepository
 
     public function getLastBatchNumber(): int
     {
-        return $this->table()->max('batch') ?: 0;
+        return (int) $this->table()->max('batch');
     }
 
     public function log(string $action, int $batch): void
@@ -65,7 +64,7 @@ class ActionRepository
 
     public function createRepository(): void
     {
-        $this->schema()->create($this->getTableName(), function (Blueprint $table) {
+        $this->schema()->create($this->config->table(), function (Blueprint $table) {
             $table->id();
 
             $table->string('action');
@@ -76,12 +75,12 @@ class ActionRepository
 
     public function repositoryExists(): bool
     {
-        return $this->schema()->hasTable($this->getTableName());
+        return $this->schema()->hasTable($this->config->table());
     }
 
     public function deleteRepository(): void
     {
-        $this->schema()->dropIfExists($this->getTableName());
+        $this->schema()->dropIfExists($this->config->table());
     }
 
     protected function getOrderTable(string $order = 'asc'): Query
@@ -98,11 +97,13 @@ class ActionRepository
 
     protected function getConnection(): ConnectionInterface
     {
-        return $this->resolver->connection();
+        return $this->resolver->connection(
+            $this->config->connection()
+        );
     }
 
     protected function table(): Query
     {
-        return $this->getConnection()->table($this->getTableName())->useWritePdo();
+        return $this->getConnection()->table($this->config->table())->useWritePdo();
     }
 }
