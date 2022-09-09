@@ -6,10 +6,26 @@ namespace DragonCode\LaravelActions\Processors;
 
 class Install extends Processor
 {
-    public function handle()
+    public function handle(): void
+    {
+        if ($this->exists()) {
+            $this->notification->warning('Action repository already exists.');
+
+            return;
+        }
+
+        $this->create();
+    }
+
+    protected function exists(): bool
+    {
+        return $this->repository->repositoryExists();
+    }
+
+    protected function create(): void
     {
         $this->repository->createRepository();
 
-        $this->notification()->info('Actions table created successfully.');
+        $this->notification->info('Action repository successfully created.');
     }
 }

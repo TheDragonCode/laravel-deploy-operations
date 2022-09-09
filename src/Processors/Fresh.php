@@ -9,31 +9,26 @@ use DragonCode\LaravelActions\Constants\Options;
 
 class Fresh extends Processor
 {
-    public function handle()
+    public function handle(): void
     {
         $this->drop();
-        $this->migrate();
+        $this->create();
     }
 
     protected function drop(): void
     {
-        $this->repository->deleteRepository();
+        if ($this->repository->repositoryExists()) {
+            $this->repository->deleteRepository();
 
-        $this->notification()->info('Action table deleted successfully.');
+            $this->notification->info('Actions repository successfully deleted.');
+        }
     }
 
-    protected function migrate(): void
+    protected function create(): void
     {
-        $this->artisan(Names::MIGRATE, $this->getMigrateParams());
-
-        $this->notification()->info('Migration table created successfully.');
-    }
-
-    protected function getMigrateParams(): array
-    {
-        return array_filter([
-            '--' . Options::DATABASE => $this->options->database,
-            '--' . Options::FORCE    => true,
+        $this->artisan(Names::INSTALL, [
+            '--' . Options::CONNECTION => $this->options->connection,
+            '--' . Options::FORCE      => $this->options->force,
         ]);
     }
 }
