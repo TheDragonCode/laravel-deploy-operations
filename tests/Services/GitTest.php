@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Services;
 
-use DragonCode\LaravelActions\Support\Git;
+use DragonCode\LaravelActions\Helpers\Git;
 use Tests\TestCase;
 
 class GitTest extends TestCase

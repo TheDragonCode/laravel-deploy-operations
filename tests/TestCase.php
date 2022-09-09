@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-use DragonCode\LaravelActions\Concerns\Path;
 use DragonCode\LaravelActions\Concerns\Anonymouses;
 use DragonCode\LaravelActions\ServiceProvider;
 use Illuminate\Database\Query\Builder;
@@ -18,7 +17,6 @@ abstract class TestCase extends BaseTestCase
     use AssertDatabase;
     use Database;
     use Files;
-    use Path;
     use RefreshDatabase;
     use Anonymouses;
 
