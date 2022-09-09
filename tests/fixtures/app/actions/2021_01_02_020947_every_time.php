@@ -1,13 +1,13 @@
 <?php
 
-use DragonCode\LaravelActions\Services\Actionable;
+use DragonCode\LaravelActions\Action;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-return new class () extends Actionable
+return new class () extends Action
 {
-    protected $once = false;
+    protected bool $once = false;
 
     public function up(): void
     {

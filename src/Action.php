@@ -1,13 +1,13 @@
 <?php
 
-namespace DragonCode\LaravelActions\Services;
+namespace DragonCode\LaravelActions;
 
 use DragonCode\Contracts\LaravelActions\Actionable as Contract;
 use DragonCode\LaravelActions\Concerns\Artisan;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Arr;
 
-abstract class Actionable extends Migration implements Contract
+abstract class Action extends Migration implements Contract
 {
     use Artisan;
 
@@ -19,7 +19,7 @@ abstract class Actionable extends Migration implements Contract
      *
      * @var bool
      */
-    protected $once = true;
+    protected bool $once = true;
 
     /**
      * Determines a call to database transactions.
@@ -28,35 +28,35 @@ abstract class Actionable extends Migration implements Contract
      *
      * @var bool
      */
-    protected $transactions = false;
+    protected bool $transactions = false;
 
     /**
      * The number of attempts to execute a request within a transaction before throwing an error.
      *
      * @var int
      */
-    protected $transaction_attempts = 1;
+    protected int $transaction_attempts = 1;
 
     /**
      * Determines which environment to run on.
      *
      * @var array|string|null
      */
-    protected $environment;
+    protected string|array|null $environment = null;
 
     /**
      * Determines in which environment it should not run.
      *
      * @var array|string|null
      */
-    protected $except_environment;
+    protected string|array|null $except_environment = null;
 
     /**
      * Defines a possible "pre-launch" of the action.
      *
      * @var bool
      */
-    protected $before = true;
+    protected bool $before = true;
 
     /**
      * Reverse the actions.
