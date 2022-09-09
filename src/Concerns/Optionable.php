@@ -19,9 +19,14 @@ trait Optionable
         return $this->option(Options::BEFORE);
     }
 
-    protected function optionDatabase(): ?string
+    protected function optionConnection(): ?string
     {
-        return $this->option(Options::DATABASE);
+        return $this->option(Options::CONNECTION);
+    }
+
+    protected function optionName(): ?string
+    {
+        return $this->option(Options::NAME);
     }
 
     protected function optionStep(?int $default = null): ?int
@@ -54,11 +59,6 @@ trait Optionable
         return null;
     }
 
-    /**
-     * Determine if the given path(s) are pre-resolved "real" paths.
-     *
-     * @return bool
-     */
     protected function usingRealPath(): bool
     {
         return $this->optionHas(Options::REALPATH);
@@ -73,8 +73,9 @@ trait Optionable
     {
         return OptionsDto::make([
             'before'   => $this->optionBefore(),
-            'database' => $this->optionDatabase(),
+            'database' => $this->optionConnection(),
             'force'    => $this->optionForce(),
+            'name'     => $this->optionName(),
             'path'     => $this->optionPath(),
             'realpath' => $this->usingRealPath(),
             'step'     => $this->optionStep(),
