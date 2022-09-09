@@ -4,13 +4,16 @@ namespace DragonCode\LaravelActions\Console;
 
 use DragonCode\LaravelActions\Constants\Names;
 use DragonCode\LaravelActions\Constants\Options;
-use Illuminate\Database\Console\Migrations\StatusCommand as BaseCommand;
+use DragonCode\LaravelActions\Processors\Processor;
+use DragonCode\LaravelActions\Processors\Status as StatusProcessor;
 
-class Status extends BaseCommand
+class Status extends Command
 {
     protected $name = Names::STATUS;
 
     protected $description = 'Show the status of each action';
+
+    protected Processor|string $processor = StatusProcessor::class;
 
     protected array $options = [
         Options::CONNECTION,

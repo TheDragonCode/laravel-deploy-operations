@@ -46,7 +46,7 @@ abstract class Command extends BaseCommand
             return true;
         }
 
-        $this->warn('Application in production');
+        $this->warn('Application in production!');
 
         if ($this->confirm('Do you really wish to run this command?')) {
             return true;
