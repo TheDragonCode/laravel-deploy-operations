@@ -6,6 +6,10 @@ namespace DragonCode\LaravelActions;
 
 use DragonCode\LaravelActions\Concerns\About;
 use DragonCode\LaravelActions\Concerns\Anonymous;
+use DragonCode\LaravelActions\Notifications\Basic;
+use DragonCode\LaravelActions\Notifications\Beautiful;
+use DragonCode\LaravelActions\Notifications\Notification;
+use Illuminate\Console\View\Components\Factory;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
@@ -19,6 +23,7 @@ class ServiceProvider extends BaseServiceProvider
             $this->registerCommands();
             $this->registerAbout();
             $this->registerMigrations();
+            $this->registerNotifications();
         }
     }
 
@@ -42,5 +47,12 @@ class ServiceProvider extends BaseServiceProvider
         $this->allowAnonymousMigrations()
             ? $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/anonymous')
             : $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/named');
+    }
+
+    protected function registerNotifications(): void
+    {
+        class_exists(Factory::class)
+            ? $this->app->bind(Notification::class, Beautiful::class)
+            : $this->app->bind(Notification::class, Basic::class);
     }
 }

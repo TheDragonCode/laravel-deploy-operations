@@ -4,21 +4,33 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Helpers;
 
+use Illuminate\Config\Repository;
+
 class Config
 {
+    public function __construct(
+        protected Repository $config
+    ) {
+    }
+
+    public function environment(): ?string
+    {
+        return $this->config->get('app.env', 'production');
+    }
+
     public function connection(): ?string
     {
-        return config('database.actions.connection');
+        return $this->config->get('database.actions.connection');
     }
 
     public function table(): string
     {
-        return config('database.actions.table');
+        return $this->config->get('database.actions.table');
     }
 
     public function path(?string $path = null): string
     {
-        $directory = config('database.actions.path', base_path('actions'));
+        $directory = $this->config->get('database.actions.path', base_path('actions'));
 
         return rtrim($directory, '\\/') . DIRECTORY_SEPARATOR . ltrim((string) $path, '\\/');
     }

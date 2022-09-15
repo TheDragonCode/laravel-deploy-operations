@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Notifications;
 
+use Closure;
 use Illuminate\Console\View\Components\Factory;
 use Illuminate\Container\Container;
 
@@ -24,6 +25,11 @@ class Beautiful extends Notification
     public function warning(string $string): void
     {
         $this->components()->warn($string, $this->verbosity);
+    }
+
+    public function task(string $description, Closure $task): void
+    {
+        $this->components()->task($description, $task);
     }
 
     protected function components()
