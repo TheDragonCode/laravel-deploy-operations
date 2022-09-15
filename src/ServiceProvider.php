@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace DragonCode\LaravelActions;
 
 use DragonCode\LaravelActions\Concerns\About;
-use DragonCode\LaravelActions\Concerns\Anonymouses;
+use DragonCode\LaravelActions\Concerns\Anonymous;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
 {
     use About;
-    use Anonymouses;
+    use Anonymous;
 
     public function boot(): void
     {

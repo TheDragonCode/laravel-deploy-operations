@@ -4,7 +4,7 @@ namespace DragonCode\LaravelActions\Concerns;
 
 use DragonCode\LaravelSupport\Facades\AppVersion;
 
-trait Anonymouses
+trait Anonymous
 {
     protected function allowAnonymousMigrations(): bool
     {

@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use DragonCode\LaravelActions\Concerns\Anonymouses;
+use DragonCode\LaravelActions\Concerns\Anonymous;
 use DragonCode\LaravelActions\ServiceProvider;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,7 +18,7 @@ abstract class TestCase extends BaseTestCase
     use Database;
     use Files;
     use RefreshDatabase;
-    use Anonymouses;
+    use Anonymous;
 
     protected function setUp(): void
     {
