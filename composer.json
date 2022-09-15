@@ -27,6 +27,7 @@
     "require": {
         "php": "^8.0",
         "composer-runtime-api": "^2.2",
+        "doctrine/dbal": "^2.13 || ^3.4",
         "dragon-code/contracts": "^2.15",
         "dragon-code/laravel-support": "^3.4",
         "dragon-code/simple-dto": "^2.3",
