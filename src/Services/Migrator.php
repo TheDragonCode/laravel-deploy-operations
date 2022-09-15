@@ -12,6 +12,7 @@ use DragonCode\LaravelActions\Values\Options;
 use DragonCode\Support\Exceptions\FileNotFoundException;
 use DragonCode\Support\Filesystem\File;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class Migrator
 {
@@ -36,6 +37,15 @@ class Migrator
         }
     }
 
+    public function runDown(string $file): void
+    {
+        $action = $this->resolve($file);
+
+        $this->runAction($action, $file, 'down');
+
+        $this->deleteLog($file);
+    }
+
     protected function runAction(Action $action, string $name, string $method): void
     {
         $callback = function () use ($action, $method) {
@@ -45,7 +55,7 @@ class Migrator
                         ? DB::transaction(fn () => $this->runMethod($action, $method), $action->transactionAttempts())
                         : $this->runMethod($action, $method);
                 }
-                catch (\Throwable $e) {
+                catch (Throwable $e) {
                     $action->failed();
 
                     throw $e;
@@ -66,6 +76,11 @@ class Migrator
     protected function log(string $name, int $batch): void
     {
         $this->repository->log($name, $batch);
+    }
+
+    protected function deleteLog(string $name): void
+    {
+        $this->repository->delete($name);
     }
 
     protected function allowAction(Action $action, string $name, Options $options): bool
