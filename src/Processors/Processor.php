@@ -6,6 +6,7 @@ namespace DragonCode\LaravelActions\Processors;
 
 use DragonCode\LaravelActions\Concerns\Artisan;
 use DragonCode\LaravelActions\Helpers\Config;
+use DragonCode\LaravelActions\Helpers\Git;
 use DragonCode\LaravelActions\Notifications\Basic;
 use DragonCode\LaravelActions\Notifications\Beautiful;
 use DragonCode\LaravelActions\Notifications\Notification;
@@ -28,7 +29,8 @@ abstract class Processor
         protected InputInterface   $input,
         protected OutputInterface  $output,
         protected Config           $config,
-        protected ActionRepository $repository
+        protected ActionRepository $repository,
+        protected Git              $git
     ) {
         $this->bootNotification($this->output);
     }
