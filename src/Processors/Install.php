@@ -9,7 +9,7 @@ class Install extends Processor
     public function handle(): void
     {
         if ($this->exists()) {
-            $this->notification->warning('Action repository already exists.');
+            $this->notification->warning('Actions repository already exists.');
 
             return;
         }
@@ -26,6 +26,6 @@ class Install extends Processor
     {
         $this->repository->createRepository();
 
-        $this->notification->info('Action repository successfully created.');
+        $this->notification->info('Actions repository successfully created.');
     }
 }
