@@ -10,15 +10,15 @@ class Options extends DataTransferObject
 {
     public bool $before = false;
 
-    public ?string $database = null;
+    public ?string $connection = null;
 
     public bool $force = false;
+
+    public ?string $name = null;
 
     public ?string $path = null;
 
     public bool $realpath = false;
 
     public ?int $step = null;
-
-    public ?string $name = null;
 }
