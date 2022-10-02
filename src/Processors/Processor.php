@@ -42,4 +42,9 @@ abstract class Processor
 
         return Arr::sort($files);
     }
+
+    protected function runCommand(string $command, array $options = []): void
+    {
+        $this->artisan($command, array_filter($options));
+    }
 }

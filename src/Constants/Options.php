@@ -8,7 +8,7 @@ class Options
 {
     public const BEFORE = 'before';
 
-    public const CONNECTION = 'database';
+    public const CONNECTION = 'connection';
 
     public const FORCE = 'force';
 

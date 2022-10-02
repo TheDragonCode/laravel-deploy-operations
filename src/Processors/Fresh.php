@@ -26,7 +26,7 @@ class Fresh extends Processor
 
     protected function create(): void
     {
-        $this->artisan(Names::INSTALL, [
+        $this->runCommand(Names::INSTALL, [
             '--' . Options::CONNECTION => $this->options->connection,
             '--' . Options::FORCE      => $this->options->force,
         ]);
