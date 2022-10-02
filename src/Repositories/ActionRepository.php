@@ -26,10 +26,10 @@ class ActionRepository
             ->all();
     }
 
-    public function getByStep(?int $steps = null): array
+    public function getByStep(int $steps): array
     {
         return $this->getOrderTable('desc')
-            ->when($steps, fn (Query $builder) => $builder->take($steps))
+            ->whereIn('batch', $this->getBatchNumbers($steps))
             ->get()
             ->all();
     }
@@ -81,6 +81,15 @@ class ActionRepository
     public function deleteRepository(): void
     {
         $this->schema()->dropIfExists($this->config->table());
+    }
+
+    protected function getBatchNumbers(int $steps): array
+    {
+        return $this->getOrderTable('desc')
+            ->pluck('batch')
+            ->unique()
+            ->take($steps)
+            ->all();
     }
 
     protected function getOrderTable(string $order = 'asc'): Query
