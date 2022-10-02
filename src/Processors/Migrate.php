@@ -4,11 +4,25 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Processors;
 
+use DragonCode\LaravelActions\Events\ActionsEnded;
+use DragonCode\LaravelActions\Events\ActionsStarted;
+use DragonCode\LaravelActions\Events\NoPendingActions;
+
 class Migrate extends Processor
 {
     public function handle(): void
     {
-        $this->runEach($this->getNewFiles(), $this->getBatch());
+        if ($files = $this->getNewFiles()) {
+            $this->fireEvent(new ActionsStarted('up', $this->options->before));
+
+            $this->runEach($files, $this->getBatch());
+
+            $this->fireEvent(new ActionsEnded('up', $this->options->before));
+
+            return;
+        }
+
+        $this->fireEvent(new NoPendingActions('up'));
     }
 
     protected function runEach(array $files, int $batch): void

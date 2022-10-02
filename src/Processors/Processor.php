@@ -6,6 +6,7 @@ namespace DragonCode\LaravelActions\Processors;
 
 use Closure;
 use DragonCode\LaravelActions\Concerns\Artisan;
+use DragonCode\LaravelActions\Events\BaseEvent;
 use DragonCode\LaravelActions\Helpers\Config;
 use DragonCode\LaravelActions\Helpers\Git;
 use DragonCode\LaravelActions\Notifications\Notification;
@@ -14,6 +15,7 @@ use DragonCode\LaravelActions\Services\Migrator;
 use DragonCode\LaravelActions\Values\Options;
 use DragonCode\Support\Facades\Helpers\Arr;
 use DragonCode\Support\Filesystem\File;
+use Illuminate\Contracts\Events\Dispatcher;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -32,7 +34,8 @@ abstract class Processor
         protected Git              $git,
         protected File             $file,
         protected Migrator         $migrator,
-        protected Notification     $notification
+        protected Notification     $notification,
+        protected Dispatcher       $events
     ) {
         $this->repository->setConnection($this->options->connection);
         $this->migrator->setConnection($this->options->connection);
@@ -59,5 +62,10 @@ abstract class Processor
         }
 
         return false;
+    }
+
+    protected function fireEvent(BaseEvent $event): void
+    {
+        $this->events->dispatch($event);
     }
 }

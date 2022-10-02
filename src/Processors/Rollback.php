@@ -4,20 +4,36 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Processors;
 
+use DragonCode\LaravelActions\Events\ActionsEnded;
+use DragonCode\LaravelActions\Events\ActionsStarted;
+use DragonCode\LaravelActions\Events\NoPendingActions;
+
 class Rollback extends Processor
 {
     public function handle(): void
     {
         if ($this->tableNotFound() || $this->nothingToRollback()) {
+            $this->fireEvent(new NoPendingActions('down'));
+
             return;
         }
 
-        $this->run($this->options->step);
+        if ($actions = $this->getActions($this->options->step)) {
+            $this->fireEvent(new ActionsStarted('down', $this->options->before));
+
+            $this->run($actions);
+
+            $this->fireEvent(new ActionsEnded('down', $this->options->before));
+
+            return;
+        }
+
+        $this->fireEvent(new NoPendingActions('down'));
     }
 
-    protected function run(?int $step): void
+    protected function run(array $actions): void
     {
-        foreach ($this->getActions($step) as $row) {
+        foreach ($actions as $row) {
             $this->rollbackAction($row->action);
         }
     }
