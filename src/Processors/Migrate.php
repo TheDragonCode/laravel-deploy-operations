@@ -8,9 +8,7 @@ class Migrate extends Processor
 {
     public function handle(): void
     {
-        $batch = $this->getBatch();
-
-        $this->runEach($this->getNewFiles(), $batch);
+        $this->runEach($this->getNewFiles(), $this->getBatch());
     }
 
     protected function runEach(array $files, int $batch): void
