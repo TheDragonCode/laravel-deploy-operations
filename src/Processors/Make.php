@@ -35,12 +35,20 @@ class Make extends Processor
 
     protected function getName(): string
     {
-        $name = $this->options->name ?? $this->git->currentBranch() ?? $this->default_name;
+        $branch   = $this->getBranchName();
+        $filename = $this->getFilename($branch);
 
-        $directory = Path::dirname($name);
-        $filename  = Str::of(Path::filename($name))->prepend($this->getTime())->end('.php');
+        return Path::dirname($branch) . DIRECTORY_SEPARATOR . $filename;
+    }
 
-        return $directory . DIRECTORY_SEPARATOR . $filename;
+    protected function getFilename(string $branch): string
+    {
+        return Str::of(Path::filename($branch))->prepend($this->getTime())->end('.php')->toString();
+    }
+
+    protected function getBranchName(): string
+    {
+        return $this->options->name ?? $this->git->currentBranch() ?? $this->default_name;
     }
 
     protected function getTime(): string
