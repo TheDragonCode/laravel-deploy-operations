@@ -8,11 +8,14 @@ use DragonCode\LaravelActions\Constants\Options;
 use DragonCode\LaravelActions\Processors\Processor;
 use DragonCode\Support\Facades\Helpers\Arr;
 use Illuminate\Console\Command as BaseCommand;
+use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Container\Container;
 use Symfony\Component\Console\Input\InputOption;
 
 abstract class Command extends BaseCommand
 {
+    use ConfirmableTrait;
+
     protected Processor|string $processor;
 
     protected array $options = [
@@ -38,23 +41,6 @@ abstract class Command extends BaseCommand
             'input'   => $this->input,
             'output'  => $this->output,
         ]);
-    }
-
-    protected function confirmToProceed(): bool
-    {
-        if ($this->optionForce()) {
-            return true;
-        }
-
-        $this->warn('Application in production!');
-
-        if ($this->confirm('Do you really wish to run this command?')) {
-            return true;
-        }
-
-        $this->warn('Command canceled');
-
-        return false;
     }
 
     protected function getOptions(): array
