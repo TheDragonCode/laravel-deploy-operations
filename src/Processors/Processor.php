@@ -34,6 +34,8 @@ abstract class Processor
         protected Migrator         $migrator,
         protected Notification     $notification
     ) {
+        $this->repository->setConnection($this->options->connection);
+        $this->migrator->setConnection($this->options->connection);
     }
 
     protected function getFiles(?Closure $filter = null, ?string $path = null): array

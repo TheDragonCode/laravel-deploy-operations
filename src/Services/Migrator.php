@@ -24,6 +24,13 @@ class Migrator
     ) {
     }
 
+    public function setConnection(?string $connection): string
+    {
+        $this->repository->setConnection($connection);
+
+        return $this;
+    }
+
     public function runUp(string $file, int $batch, Options $options): void
     {
         $action = $this->resolve($file);

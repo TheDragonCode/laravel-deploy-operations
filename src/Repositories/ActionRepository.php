@@ -13,10 +13,19 @@ use Illuminate\Database\Schema\Builder;
 
 class ActionRepository
 {
+    protected ?string $connection = null;
+
     public function __construct(
         protected Resolver $resolver,
         protected Config   $config
     ) {
+    }
+
+    public function setConnection(?string $connection): self
+    {
+        $this->connection = $connection;
+
+        return $this;
     }
 
     public function getCompleted(): array
@@ -107,7 +116,7 @@ class ActionRepository
     protected function getConnection(): ConnectionInterface
     {
         return $this->resolver->connection(
-            $this->config->connection()
+            $this->connection ?: $this->config->connection()
         );
     }
 
