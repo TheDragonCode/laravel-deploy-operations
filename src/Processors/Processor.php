@@ -47,4 +47,15 @@ abstract class Processor
     {
         $this->artisan($command, array_filter($options));
     }
+
+    protected function tableNotFound(): bool
+    {
+        if (! $this->repository->repositoryExists()) {
+            $this->notification->warning('Actions table not found');
+
+            return true;
+        }
+
+        return false;
+    }
 }

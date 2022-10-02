@@ -37,4 +37,9 @@ class Basic extends Notification
 
         $this->info("Migrated: {$run_time}ms");
     }
+
+    public function twoColumn(string $first, string $second): void
+    {
+        $this->info($first . ' .......... ' . $second);
+    }
 }

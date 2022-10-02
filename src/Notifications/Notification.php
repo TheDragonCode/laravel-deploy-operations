@@ -19,6 +19,8 @@ abstract class Notification
 
     abstract public function task(string $description, Closure $task): void;
 
+    abstract public function twoColumn(string $first, string $second): void;
+
     public function __construct(
         protected OutputInterface $output
     ) {

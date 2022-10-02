@@ -22,7 +22,7 @@ class ActionRepository
     public function getCompleted(): array
     {
         return $this->getOrderTable()
-            ->pluck('action')
+            ->get()
             ->all();
     }
 

@@ -34,17 +34,6 @@ class Rollback extends Processor
         $this->migrator->runDown($action);
     }
 
-    protected function tableNotFound(): bool
-    {
-        if (! $this->repository->repositoryExists()) {
-            $this->notification->warning('Actions table not found');
-
-            return true;
-        }
-
-        return false;
-    }
-
     protected function nothingToRollback(): bool
     {
         if ($this->count() <= 0) {

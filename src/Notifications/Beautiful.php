@@ -32,6 +32,11 @@ class Beautiful extends Notification
         $this->components()->task($description, $task);
     }
 
+    public function twoColumn(string $first, string $second): void
+    {
+        $this->components()->twoColumnDetail($first, $second, $this->verbosity);
+    }
+
     protected function components()
     {
         if (! is_null($this->components)) {
