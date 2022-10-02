@@ -11,10 +11,6 @@ class Reset extends Processor
 {
     public function handle(): void
     {
-        if ($this->tableNotFound() || $this->nothingToRollback()) {
-            return;
-        }
-
         $this->reset(
             $this->options->connection,
             $this->options->path,
@@ -34,30 +30,8 @@ class Reset extends Processor
         ]);
     }
 
-    protected function tableNotFound(): bool
-    {
-        if (! $this->repository->repositoryExists()) {
-            $this->notification->warning('Actions table not found');
-
-            return true;
-        }
-
-        return false;
-    }
-
-    protected function nothingToRollback(): bool
-    {
-        if ($this->count() <= 0) {
-            $this->notification->warning('Nothing to rollback');
-
-            return true;
-        }
-
-        return false;
-    }
-
     protected function count(): int
     {
-        return $this->repository->getLastBatchNumber();
+        return count($this->repository->getCompleted());
     }
 }

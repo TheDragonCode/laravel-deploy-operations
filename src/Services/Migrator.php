@@ -48,7 +48,7 @@ class Migrator
 
     protected function runAction(Action $action, string $name, string $method): void
     {
-        $callback = function () use ($action, $method) {
+        $this->notification->task("Action: $name", function () use ($action, $method) {
             if (method_exists($action, $method)) {
                 try {
                     $action->enabledTransactions()
@@ -61,9 +61,7 @@ class Migrator
                     throw $e;
                 }
             }
-        };
-
-        $this->notification->task("Action: $name", $callback);
+        });
     }
 
     protected function runMethod(Action $action, string $method): void
