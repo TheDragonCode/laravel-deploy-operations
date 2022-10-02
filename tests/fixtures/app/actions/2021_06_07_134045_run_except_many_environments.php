@@ -9,7 +9,7 @@ return new class () extends Action
 {
     protected string|array|null $environment = ['testing'];
 
-    protected string|array|null $except_environment = ['testing', 'production'];
+    protected string|array|null $exceptEnvironment = ['testing', 'production'];
 
     public function up(): void
     {

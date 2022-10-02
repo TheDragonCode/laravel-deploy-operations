@@ -35,7 +35,7 @@ abstract class Action extends Migration implements Contract
      *
      * @var int
      */
-    protected int $transaction_attempts = 1;
+    protected int $transactionAttempts = 1;
 
     /**
      * Determines which environment to run on.
@@ -49,7 +49,7 @@ abstract class Action extends Migration implements Contract
      *
      * @var array|string|null
      */
-    protected string|array|null $except_environment = null;
+    protected string|array|null $exceptEnvironment = null;
 
     /**
      * Defines a possible "pre-launch" of the action.
@@ -95,7 +95,7 @@ abstract class Action extends Migration implements Contract
      */
     public function transactionAttempts(): int
     {
-        return $this->transaction_attempts;
+        return $this->transactionAttempts;
     }
 
     /**
@@ -115,7 +115,7 @@ abstract class Action extends Migration implements Contract
      */
     public function exceptEnvironment(): array
     {
-        return Arr::wrap($this->except_environment);
+        return Arr::wrap($this->exceptEnvironment);
     }
 
     /**

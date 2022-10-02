@@ -7,7 +7,7 @@ use Ramsey\Uuid\Uuid;
 
 return new class () extends Action
 {
-    protected string|array|null $except_environment = 'production';
+    protected string|array|null $exceptEnvironment = 'production';
 
     public function up(): void
     {

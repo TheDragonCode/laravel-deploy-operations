@@ -10,7 +10,7 @@ use Illuminate\Foundation\Console\AboutCommand;
 
 trait About
 {
-    protected string $package_name = 'dragon-code/laravel-migration-actions';
+    protected string $packageName = 'dragon-code/laravel-migration-actions';
 
     protected function registerAbout(): void
     {
@@ -23,7 +23,7 @@ trait About
 
     protected function getPackageName(): string
     {
-        return Str::of($this->package_name)
+        return Str::of($this->packageName)
             ->after('/')
             ->snake()
             ->replace('_', ' ')
@@ -33,6 +33,6 @@ trait About
 
     protected function getPackageVersion(): string
     {
-        return InstalledVersions::getPrettyVersion($this->package_name);
+        return InstalledVersions::getPrettyVersion($this->packageName);
     }
 }

@@ -10,7 +10,7 @@ use DragonCode\Support\Facades\Helpers\Str;
 
 class Make extends Processor
 {
-    protected string $default_name = 'auto';
+    protected string $defaultName = 'auto';
 
     protected string $stub = __DIR__ . '/../../resources/stubs/action.stub';
 
@@ -48,7 +48,7 @@ class Make extends Processor
 
     protected function getBranchName(): string
     {
-        return $this->options->name ?? $this->git->currentBranch() ?? $this->default_name;
+        return $this->options->name ?? $this->git->currentBranch() ?? $this->defaultName;
     }
 
     protected function getTime(): string
