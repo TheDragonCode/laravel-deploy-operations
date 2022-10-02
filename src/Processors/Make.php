@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Processors;
 
-use DragonCode\Support\Facades\Filesystem\Directory;
 use DragonCode\Support\Facades\Filesystem\File;
 use DragonCode\Support\Facades\Filesystem\Path;
 use DragonCode\Support\Facades\Helpers\Str;
@@ -19,20 +18,12 @@ class Make extends Processor
     {
         $path = $this->getPath();
 
-        $this->ensureDirectory($path);
         $this->create($path);
     }
 
     protected function create(string $path): void
     {
         File::copy($this->stub, $path);
-    }
-
-    protected function ensureDirectory(string $path): void
-    {
-        Directory::ensureDirectory(
-            Path::dirname($path)
-        );
     }
 
     protected function getPath(): string
