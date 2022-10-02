@@ -24,7 +24,7 @@ class Migrator
     ) {
     }
 
-    public function setConnection(?string $connection): string
+    public function setConnection(?string $connection): self
     {
         $this->repository->setConnection($connection);
 

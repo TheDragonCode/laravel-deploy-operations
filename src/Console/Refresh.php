@@ -18,6 +18,8 @@ class Refresh extends Command
     protected array $options = [
         Options::CONNECTION,
         Options::FORCE,
+        Options::PATH,
+        Options::REALPATH,
         Options::STEP,
     ];
 }
