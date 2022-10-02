@@ -60,6 +60,6 @@ class Status extends Processor
 
     protected function getActionFiles(): array
     {
-        return $this->getFiles(fn () => true);
+        return $this->getFiles();
     }
 }
