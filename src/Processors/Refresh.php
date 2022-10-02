@@ -11,13 +11,13 @@ class Refresh extends Processor
 {
     public function handle(): void
     {
-        $database = $this->options->connection;
+        $connection = $this->options->connection;
         $path     = $this->options->path;
         $realPath = $this->options->realpath;
         $step     = $this->options->step;
 
-        $this->rollback($database, $path, $realPath, $step);
-        $this->runMigrate($database, $path, $realPath);
+        $this->rollback($connection, $path, $realPath, $step);
+        $this->runMigrate($connection, $path, $realPath);
     }
 
     protected function rollback(?string $connection, ?string $path, bool $realPath, ?int $step): void
