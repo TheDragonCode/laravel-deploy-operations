@@ -34,19 +34,28 @@ class Status extends Processor
     protected function showData(array $actions, array $completed): void
     {
         foreach ($actions as $action) {
-            $batch = Arr::get($completed, 'batch', 'No');
+            $status = $this->getStatusFor($completed, $action);
 
-            $this->notification->twoColumn($action, $batch);
+            $this->notification->twoColumn($action, $status);
         }
     }
-    
-    protected function getStatusFor(array $ran, array $batches){
-        
+
+    protected function getStatusFor(array $completed, string $action): string
+    {
+        if ($batch = Arr::get($completed, $action)) {
+            $status = '<fg=green;options=bold>Ran</>';
+
+            return "[$batch] $status";
+        }
+
+        return '<fg=yellow;options=bold>Pending</>';
     }
 
     protected function getCompleted(): array
     {
-        return collect($this->repository->getCompleted())->pluck('batch', 'action')->toArray();
+        return collect($this->repository->getCompleted())
+            ->pluck('batch', 'action')
+            ->toArray();
     }
 
     protected function getActionFiles(): array
