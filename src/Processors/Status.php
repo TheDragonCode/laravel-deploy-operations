@@ -23,21 +23,25 @@ class Status extends Processor
         $actions   = $this->getActionFiles();
 
         $this->showCaption();
-        $this->show($actions, $completed);
+        $this->showData($actions, $completed);
     }
 
     protected function showCaption(): void
     {
-        $this->notification->twoColumn('Action name', 'Batch / Status');
+        $this->notification->twoColumn('<fg=gray>Action name</>', '<fg=gray>Batch / Status</>');
     }
 
-    protected function show(array $actions, array $completed): void
+    protected function showData(array $actions, array $completed): void
     {
         foreach ($actions as $action) {
             $batch = Arr::get($completed, 'batch', 'No');
 
             $this->notification->twoColumn($action, $batch);
         }
+    }
+    
+    protected function getStatusFor(array $ran, array $batches){
+        
     }
 
     protected function getCompleted(): array
