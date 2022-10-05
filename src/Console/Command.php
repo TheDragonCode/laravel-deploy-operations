@@ -57,8 +57,8 @@ abstract class Command extends BaseCommand
             [Options::CONNECTION, null, InputOption::VALUE_OPTIONAL, 'The database connection to use'],
             [Options::FORCE, null, InputOption::VALUE_NONE, 'Force the operation to run when in production'],
             [Options::NAME, null, InputOption::VALUE_OPTIONAL, 'The name of the action'],
-            [Options::PATH, '*', InputOption::VALUE_IS_ARRAY, 'The path(s) to the migrations files to be executed'],
-            [Options::REALPATH, null, InputOption::VALUE_NONE, 'Indicate any provided migration file paths are pre-resolved absolute paths'],
+            [Options::PATH, null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'The path(s) to the actions files to be executed'],
+            [Options::REALPATH, null, InputOption::VALUE_NONE, 'Indicate any provided action file paths are pre-resolved absolute paths'],
             [Options::STEP, null, InputOption::VALUE_OPTIONAL, 'Force the actions to be run so they can be rolled back individually'],
         ];
     }
