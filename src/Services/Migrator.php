@@ -36,7 +36,9 @@ class Migrator
         $action = $this->resolve($file);
 
         if ($this->allowAction($action, $file, $options)) {
-            $this->runAction($action, $file, 'up');
+            $this->hasAction($action, '__invoke')
+                ? $this->runAction($action, $file, '__invoke')
+                : $this->runAction($action, $file, 'up');
 
             if ($this->allowLogging($action)) {
                 $this->log($file, $batch);
@@ -48,15 +50,22 @@ class Migrator
     {
         $action = $this->resolve($file);
 
-        $this->runAction($action, $file, 'down');
+        if ($this->hasAction($action, 'down')) {
+            $this->runAction($action, $file, 'down');
+        }
 
         $this->deleteLog($file);
+    }
+
+    protected function hasAction(Action $action, string $method): bool
+    {
+        return method_exists($action, $method);
     }
 
     protected function runAction(Action $action, string $name, string $method): void
     {
         $this->notification->task("Action: $name", function () use ($action, $method) {
-            if (method_exists($action, $method)) {
+            if ($this->hasAction($action, $method)) {
                 try {
                     $action->enabledTransactions()
                         ? DB::transaction(fn () => $this->runMethod($action, $method), $action->transactionAttempts())

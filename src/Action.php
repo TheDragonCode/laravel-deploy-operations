@@ -58,6 +58,13 @@ abstract class Action extends Migration
     protected bool $before = true;
 
     /**
+     * Run the actions.
+     */
+    public function up(): void
+    {
+    }
+
+    /**
      * Reverse the actions.
      */
     public function down(): void
