@@ -2,12 +2,11 @@
 
 namespace DragonCode\LaravelActions;
 
-use DragonCode\Contracts\LaravelActions\Actionable as Contract;
 use DragonCode\LaravelActions\Concerns\Artisan;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Arr;
 
-abstract class Action extends Migration implements Contract
+abstract class Action extends Migration
 {
     use Artisan;
 
