@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Processors;
 
+use DragonCode\LaravelActions\ServiceProvider;
 use DragonCode\Support\Facades\Filesystem\Directory;
 use DragonCode\Support\Facades\Filesystem\File;
 use DragonCode\Support\Facades\Helpers\Str;
@@ -22,6 +23,12 @@ class Upgrade extends Processor
     }
 
     protected function run(): void
+    {
+        $this->moveFiles();
+        $this->moveConfig();
+    }
+
+    protected function moveFiles(): void
     {
         foreach ($this->getOldFiles() as $filename) {
             $this->notification->task($filename, fn () => $this->move($filename));
@@ -79,6 +86,22 @@ class Upgrade extends Processor
             ->replace('(declare\s*\(\s*strict_types\s*=\s*[1|0]\);)', '')
             ->replace("<?php\n", "<?php\n\ndeclare(strict_types=1);\n")
             ->toString();
+    }
+
+    protected function moveConfig(): void
+    {
+        $this->artisan('vendor:publish', [
+            '--force' => true,
+            '--provider' => ServiceProvider::class,
+        ]);
+
+        $path = config_path('actions.php');
+
+        $table = config('database.actions', 'migration_actions');
+
+        $content = Str::replace(file_get_contents($path), "'table' => 'migration_actions'", "'table' => '$table'");
+
+        file_put_contents($path, $content);
     }
 
     protected function getOldFiles(): array
