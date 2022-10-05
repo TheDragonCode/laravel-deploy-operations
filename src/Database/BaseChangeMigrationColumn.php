@@ -11,9 +11,11 @@ use Illuminate\Support\Facades\Schema;
 
 abstract class BaseChangeMigrationColumn extends Action
 {
-    public function __construct(
-        protected Config $config
-    ) {
+    protected Config $config;
+
+    public function __construct()
+    {
+        $this->config = app(Config::class);
     }
 
     public function up(): void
