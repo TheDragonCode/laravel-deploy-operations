@@ -4,6 +4,7 @@ namespace Tests\Concerns;
 
 use Illuminate\Support\Facades\File;
 
+/** @mixin \Tests\TestCase */
 trait Files
 {
     protected function freshFiles(): void
@@ -21,7 +22,7 @@ trait Files
         );
     }
 
-    protected function copySuccessFailureMethod()
+    protected function copySuccessFailureMethod(): void
     {
         File::copy(
             __DIR__ . '/../fixtures/app/actions_failed/2021_12_23_165048_run_success_on_failed.php',
@@ -29,7 +30,7 @@ trait Files
         );
     }
 
-    protected function copyFailedMethod()
+    protected function copyFailedMethod(): void
     {
         File::copy(
             __DIR__ . '/../fixtures/app/actions_failed/2021_12_23_184029_run_failed_failure.php',
@@ -60,5 +61,10 @@ trait Files
         File::ensureDirectoryExists($dir);
 
         return rtrim($dir, '/\\') . '/' . ltrim($path, '/\\');
+    }
+
+    protected function getActionsPath(): string
+    {
+        return $this->app['config']->get('actions.path');
     }
 }

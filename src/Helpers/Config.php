@@ -20,17 +20,17 @@ class Config
 
     public function connection(): ?string
     {
-        return $this->config->get('database.actions.connection');
+        return $this->config->get('actions.connection');
     }
 
     public function table(): string
     {
-        return $this->config->get('database.actions.table');
+        return $this->config->get('actions.table');
     }
 
     public function path(?string $path = null): string
     {
-        $directory = $this->config->get('database.actions.path', base_path('actions'));
+        $directory = $this->config->get('actions.path', base_path('actions'));
 
         return rtrim($directory, '\\/') . DIRECTORY_SEPARATOR . ltrim((string) $path, '\\/');
     }

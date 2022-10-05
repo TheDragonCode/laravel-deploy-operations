@@ -20,11 +20,18 @@ class ServiceProvider extends BaseServiceProvider
     public function boot(): void
     {
         if ($this->app->runningInConsole()) {
+            $this->publishConfig();
+
             $this->registerCommands();
             $this->registerAbout();
             $this->registerMigrations();
             $this->registerNotifications();
         }
+    }
+
+    public function register(): void
+    {
+        $this->registerConfig();
     }
 
     protected function registerCommands(): void
@@ -54,5 +61,20 @@ class ServiceProvider extends BaseServiceProvider
         class_exists(Factory::class)
             ? $this->app->bind(Notification::class, Beautiful::class)
             : $this->app->bind(Notification::class, Basic::class);
+    }
+
+    protected function publishConfig(): void
+    {
+        $this->publishes([
+            __DIR__ . '/../config/actions.php' => $this->app->configPath('actions.php'),
+        ]);
+    }
+
+    protected function registerConfig(): void
+    {
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/actions.php',
+            'actions'
+        );
     }
 }
