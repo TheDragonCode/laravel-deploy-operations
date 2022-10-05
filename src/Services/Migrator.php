@@ -11,6 +11,7 @@ use DragonCode\LaravelActions\Repositories\ActionRepository;
 use DragonCode\LaravelActions\Values\Options;
 use DragonCode\Support\Exceptions\FileNotFoundException;
 use DragonCode\Support\Filesystem\File;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
@@ -20,7 +21,8 @@ class Migrator
         protected File             $file,
         protected Notification     $notification,
         protected ActionRepository $repository,
-        protected Config           $config
+        protected Config           $config,
+        protected Application      $laravel
     ) {
     }
 
@@ -67,9 +69,9 @@ class Migrator
         $this->notification->task("Action: $name", function () use ($action, $method) {
             if ($this->hasAction($action, $method)) {
                 try {
-                    $action->enabledTransactions()
-                        ? DB::transaction(fn () => $this->runMethod($action, $method), $action->transactionAttempts())
-                        : $this->runMethod($action, $method);
+                    $this->runMethod($action, $method, $action->enabledTransactions(), $action->transactionAttempts());
+
+                    $action->success();
                 }
                 catch (Throwable $e) {
                     $action->failed();
@@ -80,11 +82,11 @@ class Migrator
         });
     }
 
-    protected function runMethod(Action $action, string $method): void
+    protected function runMethod(Action $action, string $method, bool $transactions, int $attempts): void
     {
-        $action->{$method}();
+        $callback = fn () => $this->laravel->call([$action, $method]);
 
-        $action->success();
+        $transactions ? DB::transaction($callback, $attempts) : $callback();
     }
 
     protected function log(string $name, int $batch): void
