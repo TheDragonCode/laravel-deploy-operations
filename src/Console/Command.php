@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Console;
 
+use DragonCode\LaravelActions\Concerns\ConfirmableTrait;
 use DragonCode\LaravelActions\Constants\Options;
 use DragonCode\LaravelActions\Processors\Processor;
 use DragonCode\Support\Facades\Helpers\Arr;
 use Illuminate\Console\Command as BaseCommand;
-use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Container\Container;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -25,13 +25,13 @@ abstract class Command extends BaseCommand
 
     public function handle(): int
     {
-        if (! $this->confirmToProceed()) {
-            return 1;
+        if ($this->allowToProceed()) {
+            $this->resolveProcessor()->handle();
+
+            return 0;
         }
 
-        $this->resolveProcessor()->handle();
-
-        return 0;
+        return 1;
     }
 
     protected function resolveProcessor(): Processor

@@ -15,10 +15,11 @@ class Migrate extends Command
 
     protected Processor|string $processor = MigrateProcessor::class;
 
+    protected bool $secure = false;
+
     protected array $options = [
         Options::BEFORE,
         Options::CONNECTION,
-        Options::FORCE,
         Options::PATH,
         Options::REALPATH,
         Options::STEP,

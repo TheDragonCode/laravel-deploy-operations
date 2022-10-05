@@ -15,6 +15,8 @@ class Status extends Command
 
     protected Processor|string $processor = StatusProcessor::class;
 
+    protected bool $secure = false;
+
     protected array $options = [
         Options::CONNECTION,
     ];
