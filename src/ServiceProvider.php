@@ -6,9 +6,9 @@ namespace DragonCode\LaravelActions;
 
 use DragonCode\LaravelActions\Concerns\About;
 use DragonCode\LaravelActions\Concerns\Anonymous;
+use DragonCode\LaravelActions\Contracts\Notification;
 use DragonCode\LaravelActions\Notifications\Basic;
 use DragonCode\LaravelActions\Notifications\Beautiful;
-use DragonCode\LaravelActions\Notifications\Notification;
 use Illuminate\Console\View\Components\Factory;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace DragonCode\LaravelActions\Services;
 
 use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelActions\Contracts\Notification;
 use DragonCode\LaravelActions\Helpers\Config;
-use DragonCode\LaravelActions\Notifications\Notification;
 use DragonCode\LaravelActions\Repositories\ActionRepository;
 use DragonCode\LaravelActions\Values\Options;
 use DragonCode\Support\Exceptions\FileNotFoundException;

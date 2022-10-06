@@ -20,14 +20,14 @@ class Refresh extends Processor
         $this->runMigrate($connection, $path, $realPath);
     }
 
-    protected function rollback(?string $connection, ?string $path, bool $realPath, ?int $step): void
+    protected function rollback(?string $connection, array $path, bool $realPath, ?int $step): void
     {
         (int) $step > 0
             ? $this->runRollback($connection, $path, $realPath, $step)
             : $this->runReset($connection, $path, $realPath);
     }
 
-    protected function runRollback(?string $connection, ?string $path, bool $realPath, ?int $step): void
+    protected function runRollback(?string $connection, array $path, bool $realPath, ?int $step): void
     {
         $this->runCommand(Names::ROLLBACK, [
             '--' . Options::CONNECTION => $connection,
@@ -38,7 +38,7 @@ class Refresh extends Processor
         ]);
     }
 
-    protected function runReset(?string $connection, ?string $path, bool $realPath): void
+    protected function runReset(?string $connection, array $path, bool $realPath): void
     {
         $this->runCommand(Names::RESET, [
             '--' . Options::CONNECTION => $connection,
@@ -48,7 +48,7 @@ class Refresh extends Processor
         ]);
     }
 
-    protected function runMigrate(?string $connection, ?string $path, bool $realPath): void
+    protected function runMigrate(?string $connection, array $path, bool $realPath): void
     {
         $this->runCommand(Names::MIGRATE, [
             '--' . Options::CONNECTION => $connection,

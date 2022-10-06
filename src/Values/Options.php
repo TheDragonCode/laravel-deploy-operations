@@ -16,7 +16,7 @@ class Options extends DataTransferObject
 
     public ?string $name = null;
 
-    public ?string $path = null;
+    public array $path = [];
 
     public bool $realpath = false;
 

@@ -7,6 +7,7 @@ namespace DragonCode\LaravelActions\Console;
 use DragonCode\LaravelActions\Concerns\ConfirmableTrait;
 use DragonCode\LaravelActions\Constants\Options;
 use DragonCode\LaravelActions\Processors\Processor;
+use DragonCode\LaravelActions\Values\Options as OptionsDto;
 use DragonCode\Support\Facades\Helpers\Arr;
 use Illuminate\Console\Command as BaseCommand;
 use Illuminate\Container\Container;
@@ -37,10 +38,15 @@ abstract class Command extends BaseCommand
     protected function resolveProcessor(): Processor
     {
         return Container::getInstance()->make($this->processor, [
-            'options' => $this->options(),
+            'options' => $this->getOptionsDto(),
             'input'   => $this->input,
             'output'  => $this->output,
         ]);
+    }
+
+    protected function getOptionsDto(): OptionsDto
+    {
+        return OptionsDto::fromArray($this->options());
     }
 
     protected function getOptions(): array

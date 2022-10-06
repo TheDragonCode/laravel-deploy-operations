@@ -6,10 +6,10 @@ namespace DragonCode\LaravelActions\Processors;
 
 use Closure;
 use DragonCode\LaravelActions\Concerns\Artisan;
+use DragonCode\LaravelActions\Contracts\Notification;
 use DragonCode\LaravelActions\Events\BaseEvent;
 use DragonCode\LaravelActions\Helpers\Config;
 use DragonCode\LaravelActions\Helpers\Git;
-use DragonCode\LaravelActions\Notifications\Notification;
 use DragonCode\LaravelActions\Repositories\ActionRepository;
 use DragonCode\LaravelActions\Services\Migrator;
 use DragonCode\LaravelActions\Values\Options;
@@ -37,6 +37,7 @@ abstract class Processor
         protected Notification     $notification,
         protected Dispatcher       $events
     ) {
+        $this->notification->setOutput($this->output);
         $this->repository->setConnection($this->options->connection);
         $this->migrator->setConnection($this->options->connection);
     }
