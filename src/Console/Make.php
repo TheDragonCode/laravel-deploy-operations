@@ -15,9 +15,12 @@ class Make extends Command
 
     protected Processor|string $processor = MakeProcessor::class;
 
+    protected array $arguments = [
+        Options::NAME,
+    ];
+
     protected array $options = [
         Options::CONNECTION,
         Options::FORCE,
-        Options::NAME,
     ];
 }
