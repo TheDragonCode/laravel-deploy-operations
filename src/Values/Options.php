@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DragonCode\LaravelActions\Values;
 
 use DragonCode\SimpleDataTransferObject\DataTransferObject;
+use DragonCode\Support\Facades\Helpers\Str;
 
 class Options extends DataTransferObject
 {
@@ -21,4 +22,13 @@ class Options extends DataTransferObject
     public bool $realpath = false;
 
     public ?int $step = null;
+
+    protected function castName(?string $value): ?string
+    {
+        if (! empty($value)) {
+            return Str::snake($value);
+        }
+
+        return null;
+    }
 }

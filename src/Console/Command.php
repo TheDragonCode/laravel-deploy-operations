@@ -56,7 +56,7 @@ abstract class Command extends BaseCommand
 
     protected function getOptionsDto(): OptionsDto
     {
-        return OptionsDto::fromArray($this->options());
+        return OptionsDto::fromArray(array_merge($this->options(), $this->arguments()));
     }
 
     protected function getOptions(): array

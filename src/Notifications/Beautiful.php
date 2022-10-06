@@ -6,7 +6,6 @@ namespace DragonCode\LaravelActions\Notifications;
 
 use Closure;
 use Illuminate\Console\View\Components\Factory;
-use Illuminate\Container\Container;
 
 class Beautiful extends Notification
 {
@@ -37,12 +36,12 @@ class Beautiful extends Notification
         $this->components()->twoColumnDetail($first, $second, $this->verbosity);
     }
 
-    protected function components()
+    protected function components(): Factory
     {
         if (! is_null($this->components)) {
             return $this->components;
         }
 
-        return $this->components = Container::getInstance()->make(Factory::class, ['output' => $this->output]);
+        return $this->component = new Factory($this->output);
     }
 }

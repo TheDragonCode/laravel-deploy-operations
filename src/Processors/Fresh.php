@@ -13,14 +13,13 @@ class Fresh extends Processor
     {
         $this->drop();
         $this->create();
+        $this->migrate();
     }
 
     protected function drop(): void
     {
         if ($this->repository->repositoryExists()) {
-            $this->repository->deleteRepository();
-
-            $this->notification->info('Actions repository successfully deleted.');
+            $this->notification->task('Dropping all actions', fn () => $this->repository->deleteRepository());
         }
     }
 
@@ -29,6 +28,13 @@ class Fresh extends Processor
         $this->runCommand(Names::INSTALL, [
             '--' . Options::CONNECTION => $this->options->connection,
             '--' . Options::FORCE      => $this->options->force,
+        ]);
+    }
+
+    protected function migrate(): void
+    {
+        $this->runCommand(Names::MIGRATE, [
+            '--' . Options::CONNECTION => $this->options->connection,
         ]);
     }
 }

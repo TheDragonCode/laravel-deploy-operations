@@ -10,7 +10,9 @@ use DragonCode\LaravelActions\Helpers\Config;
 use DragonCode\LaravelActions\Repositories\ActionRepository;
 use DragonCode\LaravelActions\Values\Options;
 use DragonCode\Support\Exceptions\FileNotFoundException;
+use DragonCode\Support\Facades\Helpers\Str;
 use DragonCode\Support\Filesystem\File;
+use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\DB;
 use Throwable;
@@ -33,30 +35,39 @@ class Migrator
         return $this;
     }
 
+    public function setOutput(OutputStyle $output): self
+    {
+        $this->notification->setOutput($output);
+
+        return $this;
+    }
+
     public function runUp(string $file, int $batch, Options $options): void
     {
-        $action = $this->resolve($file);
+        $action = $this->resolvePath($file);
+        $name   = $this->resolveActionName($file);
 
-        if ($this->allowAction($action, $file, $options)) {
+        if ($this->allowAction($action, $name, $options)) {
             $this->hasAction($action, '__invoke')
-                ? $this->runAction($action, $file, '__invoke')
-                : $this->runAction($action, $file, 'up');
+                ? $this->runAction($action, $name, '__invoke')
+                : $this->runAction($action, $name, 'up');
 
             if ($this->allowLogging($action)) {
-                $this->log($file, $batch);
+                $this->log($name, $batch);
             }
         }
     }
 
     public function runDown(string $file): void
     {
-        $action = $this->resolve($file);
+        $action = $this->resolvePath($file);
+        $name   = $this->resolveActionName($file);
 
         if ($this->hasAction($action, 'down')) {
-            $this->runAction($action, $file, 'down');
+            $this->runAction($action, $name, 'down');
         }
 
-        $this->deleteLog($file);
+        $this->deleteLog($name);
     }
 
     protected function hasAction(Action $action, string $method): bool
@@ -99,7 +110,7 @@ class Migrator
         $this->repository->delete($name);
     }
 
-    protected function allowAction(Action $action, string $name, Options $options): bool
+    protected function allowAction(Action $action, string $name, Options $options, bool $log = false): bool
     {
         if (! $this->allowEnvironment($action)) {
             $this->notification->info("Action: $name was skipped on this environment");
@@ -107,7 +118,7 @@ class Migrator
             return false;
         }
 
-        if (! $this->allowBefore($action, $options)) {
+        if ($this->disallowBefore($action, $options)) {
             $this->notification->info("Action: $name was skipped by 'before' option");
 
             return false;
@@ -135,7 +146,7 @@ class Migrator
         return ! (! empty($except) && in_array($env, $except));
     }
 
-    protected function allowBefore(Action $action, Options $options): bool
+    protected function disallowBefore(Action $action, Options $options): bool
     {
         return $options->before && ! $action->hasBefore();
     }
@@ -145,12 +156,20 @@ class Migrator
         return $action->isOnce();
     }
 
-    protected function resolve(string $path): Action
+    protected function resolvePath(string $path): Action
     {
         if ($this->file->exists($path)) {
             return require $path;
         }
 
         throw new FileNotFoundException($path);
+    }
+
+    protected function resolveActionName(string $path): string
+    {
+        return Str::of(realpath($path))
+            ->after(realpath($this->config->path()))
+            ->ltrim('\\/')
+            ->toString();
     }
 }

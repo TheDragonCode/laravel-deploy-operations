@@ -15,9 +15,9 @@ use DragonCode\LaravelActions\Services\Migrator;
 use DragonCode\LaravelActions\Values\Options;
 use DragonCode\Support\Facades\Helpers\Arr;
 use DragonCode\Support\Filesystem\File;
+use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Events\Dispatcher;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class Processor
 {
@@ -28,7 +28,7 @@ abstract class Processor
     public function __construct(
         protected Options          $options,
         protected InputInterface   $input,
-        protected OutputInterface  $output,
+        protected OutputStyle      $output,
         protected Config           $config,
         protected ActionRepository $repository,
         protected Git              $git,
@@ -39,7 +39,7 @@ abstract class Processor
     ) {
         $this->notification->setOutput($this->output);
         $this->repository->setConnection($this->options->connection);
-        $this->migrator->setConnection($this->options->connection);
+        $this->migrator->setConnection($this->options->connection)->setOutput($this->output);
     }
 
     protected function getFiles(?Closure $filter = null, ?string $path = null): array
