@@ -44,7 +44,7 @@ abstract class Processor
 
     protected function getFiles(?Closure $filter = null, ?string $path = null): array
     {
-        $files = $this->file->names($path ?: $this->config->path(), $filter, true);
+        $files = $this->file->allPaths($path ?: $this->config->path(), $filter, true);
 
         return Arr::sort($files);
     }

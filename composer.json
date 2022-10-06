@@ -48,7 +48,7 @@
         "doctrine/dbal": "^2.13 || ^3.4",
         "dragon-code/laravel-support": "^3.4",
         "dragon-code/simple-dto": "^2.3",
-        "dragon-code/support": "^6.3",
+        "dragon-code/support": "^6.6",
         "illuminate/console": "^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
         "illuminate/container": "^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
         "illuminate/database": "^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
