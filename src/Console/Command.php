@@ -32,10 +32,10 @@ abstract class Command extends BaseCommand
         if ($this->allowToProceed()) {
             $this->resolveProcessor()->handle();
 
-            return 0;
+            return self::SUCCESS;
         }
 
-        return 1;
+        return self::FAILURE;
     }
 
     protected function resolveProcessor(): Processor

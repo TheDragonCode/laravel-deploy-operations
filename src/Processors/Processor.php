@@ -57,7 +57,7 @@ abstract class Processor
     protected function tableNotFound(): bool
     {
         if (! $this->repository->repositoryExists()) {
-            $this->notification->warning('Actions table not found');
+            $this->notification->warning('Actions table not found.');
 
             return true;
         }

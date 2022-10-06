@@ -11,19 +11,19 @@ class StatusTest extends TestCase
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan(Names::INSTALL)->run();
+        $this->artisan(Names::INSTALL)->assertSuccessful();
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 0);
 
-        $this->artisan(Names::STATUS)->expectsTable([], [])->run();
+        $this->artisan(Names::STATUS)->expectsTable([], [])->assertSuccessful();
 
-        $this->artisan(Names::MAKE, ['name' => 'Status'])->run();
-        $this->artisan(Names::MIGRATE)->run();
+        $this->artisan(Names::MAKE, ['name' => 'Status'])->assertSuccessful();
+        $this->artisan(Names::MIGRATE)->assertSuccessful();
 
         $this->assertDatabaseCount($this->table, 1);
 
-        $this->artisan(Names::STATUS)->run();
+        $this->artisan(Names::STATUS)->assertSuccessful();
 
         $this->assertDatabaseMigrationHas($this->table, 'status');
     }

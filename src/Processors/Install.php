@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Processors;
 
+use DragonCode\Support\Facades\Filesystem\Directory;
+
 class Install extends Processor
 {
     public function handle(): void
@@ -15,6 +17,7 @@ class Install extends Processor
         }
 
         $this->create();
+        $this->ensureDirectory();
     }
 
     protected function exists(): bool
@@ -27,5 +30,10 @@ class Install extends Processor
         $this->repository->createRepository();
 
         $this->notification->info('Actions repository successfully created.');
+    }
+
+    protected function ensureDirectory(): void
+    {
+        Directory::ensureDirectory($this->config->path());
     }
 }

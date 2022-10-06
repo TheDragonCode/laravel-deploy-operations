@@ -11,14 +11,18 @@ class InstallTest extends TestCase
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan(Names::STATUS)->expectsOutput('Actions table not found.');
+        $this->artisan(Names::STATUS)
+            ->expectsOutputToContain('Actions table not found.')
+            ->assertSuccessful();
+
+        $this->assertDatabaseDoesntTable($this->table);
     }
 
     public function testCreate(): void
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan(Names::INSTALL)->run();
+        $this->artisan(Names::INSTALL)->assertSuccessful();
 
         $this->assertDatabaseHasTable($this->table);
     }

@@ -1,14 +1,17 @@
 <?php
 
-use DragonCode\LaravelActions\Support\Actionable;
+declare(strict_types=1);
 
-return new class extends Actionable {
+use DragonCode\LaravelActions\Action;
+
+return new class () extends Action
+{
     /**
      * Run the actions.
      *
      * @return void
      */
-    public function up(): void
+    public function __invoke(): void
     {
         //
     }

@@ -11,18 +11,18 @@ class RefreshTest extends TestCase
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan(Names::INSTALL)->run();
+        $this->artisan(Names::INSTALL)->assertSuccessful();
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 0);
 
-        $this->artisan(Names::MAKE, ['name' => 'Refresh'])->run();
-        $this->artisan(Names::MIGRATE)->run();
+        $this->artisan(Names::MAKE, ['name' => 'Refresh'])->assertSuccessful();
+        $this->artisan(Names::MIGRATE)->assertSuccessful();
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 1);
 
-        $this->artisan(Names::REFRESH)->run();
+        $this->artisan(Names::REFRESH)->assertSuccessful();
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 1);

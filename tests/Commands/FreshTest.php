@@ -13,18 +13,18 @@ class FreshTest extends TestCase
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan(Names::INSTALL)->run();
+        $this->artisan(Names::INSTALL)->assertSuccessful();
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 0);
 
-        $this->artisan(Names::MAKE, ['name' => 'Fresh'])->run();
-        $this->artisan(Names::MIGRATE)->run();
+        $this->artisan(Names::MAKE, ['name' => 'Fresh'])->assertSuccessful();
+        $this->artisan(Names::MIGRATE)->assertSuccessful();
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 1);
 
-        $this->artisan(Names::FRESH)->run();
+        $this->artisan(Names::FRESH)->assertSuccessful();
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 1);

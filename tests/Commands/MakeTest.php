@@ -11,11 +11,11 @@ class MakeTest extends TestCase
     {
         $name = 'MakeExample';
 
-        $path = $this->getActionsPath(date('Y_m_d_His') . '_make_example.php');
+        $path = $this->getActionsPath() . '/' . date('Y_m_d_His') . '_make_example.php';
 
         $this->assertFileDoesNotExist($path);
 
-        $this->artisan(Names::MAKE, compact('name'))->run();
+        $this->artisan(Names::MAKE, compact('name'))->assertSuccessful();
 
         $this->assertFileExists($path);
 
@@ -29,11 +29,11 @@ class MakeTest extends TestCase
 
     public function testAutoName()
     {
-        $path = $this->getActionsPath(date('Y_m_d_His') . '_auto.php');
+        $path = $this->getActionsPath() . '/' . date('Y_m_d_His') . '_auto.php';
 
         $this->assertFileDoesNotExist($path);
 
-        $this->artisan(Names::MAKE)->run();
+        $this->artisan(Names::MAKE)->assertSuccessful();
 
         $this->assertFileExists($path);
     }
