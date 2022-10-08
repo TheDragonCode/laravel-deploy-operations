@@ -8,27 +8,35 @@ use DragonCode\Support\Facades\Helpers\Arr;
 
 class Status extends Processor
 {
+    protected string $columnName = '<fg=gray>Action name</>';
+
+    protected string $columnStatus = '<fg=gray>Batch / Status</>';
+
+    protected string $statusRan = '<fg=green;options=bold>Ran</>';
+
+    protected string $statusPending = '<fg=yellow;options=bold>Pending</>';
+
     public function handle(): void
     {
         if ($this->tableNotFound()) {
             return;
         }
 
-        $this->run();
-    }
-
-    protected function run(): void
-    {
-        $completed = $this->getCompleted();
-        $actions   = $this->getActionFiles();
-
         $this->showCaption();
-        $this->showData($actions, $completed);
+        $this->showStatus();
     }
 
     protected function showCaption(): void
     {
-        $this->notification->twoColumn('<fg=gray>Action name</>', '<fg=gray>Batch / Status</>');
+        $this->notification->twoColumn($this->columnName, $this->columnStatus);
+    }
+
+    protected function showStatus(): void
+    {
+        $this->showData(
+            $this->getFiles(),
+            $this->getCompleted()
+        );
     }
 
     protected function showData(array $actions, array $completed): void
@@ -43,12 +51,10 @@ class Status extends Processor
     protected function getStatusFor(array $completed, string $action): string
     {
         if ($batch = Arr::get($completed, $action)) {
-            $status = '<fg=green;options=bold>Ran</>';
-
-            return "[$batch] $status";
+            return "[$batch] $this->statusRan";
         }
 
-        return '<fg=yellow;options=bold>Pending</>';
+        return $this->statusPending;
     }
 
     protected function getCompleted(): array
@@ -56,10 +62,5 @@ class Status extends Processor
         return $this->repository->getCompleted()
             ->pluck('batch', 'action')
             ->toArray();
-    }
-
-    protected function getActionFiles(): array
-    {
-        return $this->getFiles();
     }
 }

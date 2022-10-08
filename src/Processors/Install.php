@@ -11,13 +11,15 @@ class Install extends Processor
     public function handle(): void
     {
         if ($this->exists()) {
-            $this->notification->warning('Actions repository already exists.');
+            $this->notification->warning('Actions repository already exists');
 
             return;
         }
 
-        $this->create();
-        $this->ensureDirectory();
+        $this->notification->task('Installing the action repository', function () {
+            $this->create();
+            $this->ensureDirectory();
+        });
     }
 
     protected function exists(): bool
@@ -28,8 +30,6 @@ class Install extends Processor
     protected function create(): void
     {
         $this->repository->createRepository();
-
-        $this->notification->info('Actions repository successfully created.');
     }
 
     protected function ensureDirectory(): void

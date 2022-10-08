@@ -17,7 +17,7 @@ class Options extends DataTransferObject
 
     public ?string $name = null;
 
-    public array $path = [];
+    public ?string $path = null;
 
     public bool $realpath = false;
 
@@ -25,10 +25,6 @@ class Options extends DataTransferObject
 
     protected function castName(?string $value): ?string
     {
-        if (! empty($value)) {
-            return Str::snake($value);
-        }
-
-        return null;
+        return empty($value) ? null : Str::snake($value);
     }
 }

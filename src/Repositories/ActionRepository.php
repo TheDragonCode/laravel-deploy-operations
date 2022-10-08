@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Repositories;
 
+use DragonCode\LaravelActions\Constants\Order;
 use DragonCode\LaravelActions\Helpers\Config;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\ConnectionResolverInterface as Resolver;
@@ -31,12 +32,12 @@ class ActionRepository
 
     public function getCompleted(): Collection
     {
-        return $this->getOrderTable()->get();
+        return $this->sortedTable()->get();
     }
 
     public function getByStep(int $steps): array
     {
-        return $this->getOrderTable('desc')
+        return $this->sortedTable(Order::DESC)
             ->whereIn('batch', $this->getBatchNumbers($steps))
             ->get()
             ->all();
@@ -44,7 +45,7 @@ class ActionRepository
 
     public function getLast(): array
     {
-        return $this->getOrderTable('desc')
+        return $this->sortedTable(Order::DESC)
             ->where('batch', $this->getLastBatchNumber())
             ->get()
             ->all();
@@ -91,20 +92,25 @@ class ActionRepository
         $this->schema()->dropIfExists($this->config->table());
     }
 
+    /**
+     * @param int $steps
+     *
+     * @return array<int>
+     */
     protected function getBatchNumbers(int $steps): array
     {
-        return $this->getOrderTable('desc')
+        return $this->sortedTable(Order::DESC)
             ->pluck('batch')
             ->unique()
             ->take($steps)
             ->all();
     }
 
-    protected function getOrderTable(string $order = 'asc'): Query
+    protected function sortedTable(string $order = Order::ASC): Query
     {
         return $this->table()
             ->orderBy('batch', $order)
-            ->orderBy('action', $order);
+            ->orderBy('id', $order);
     }
 
     protected function schema(): Builder
@@ -112,15 +118,15 @@ class ActionRepository
         return $this->getConnection()->getSchemaBuilder();
     }
 
+    protected function table(): Query
+    {
+        return $this->getConnection()->table($this->config->table())->useWritePdo();
+    }
+
     protected function getConnection(): ConnectionInterface
     {
         return $this->resolver->connection(
             $this->connection ?: $this->config->connection()
         );
-    }
-
-    protected function table(): Query
-    {
-        return $this->getConnection()->table($this->config->table())->useWritePdo();
     }
 }

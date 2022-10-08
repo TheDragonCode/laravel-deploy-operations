@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Processors;
 
-use DragonCode\LaravelActions\Events\ActionsEnded;
-use DragonCode\LaravelActions\Events\ActionsStarted;
+use DragonCode\LaravelActions\Events\ActionEnded;
+use DragonCode\LaravelActions\Events\ActionStarted;
 use DragonCode\LaravelActions\Events\NoPendingActions;
 use DragonCode\Support\Facades\Helpers\Str;
 
@@ -14,11 +14,11 @@ class Migrate extends Processor
     public function handle(): void
     {
         if ($files = $this->getNewFiles()) {
-            $this->fireEvent(new ActionsStarted('up', $this->options->before));
+            $this->fireEvent(new ActionStarted('up', $this->options->before));
 
             $this->runEach($files, $this->getBatch());
 
-            $this->fireEvent(new ActionsEnded('up', $this->options->before));
+            $this->fireEvent(new ActionEnded('up', $this->options->before));
 
             return;
         }

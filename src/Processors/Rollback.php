@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Processors;
 
-use DragonCode\LaravelActions\Events\ActionsEnded;
-use DragonCode\LaravelActions\Events\ActionsStarted;
+use DragonCode\LaravelActions\Events\ActionEnded;
+use DragonCode\LaravelActions\Events\ActionStarted;
 use DragonCode\LaravelActions\Events\NoPendingActions;
 
 class Rollback extends Processor
@@ -19,11 +19,11 @@ class Rollback extends Processor
         }
 
         if ($actions = $this->getActions($this->options->step)) {
-            $this->fireEvent(new ActionsStarted('down', $this->options->before));
+            $this->fireEvent(new ActionStarted('down', $this->options->before));
 
             $this->run($actions);
 
-            $this->fireEvent(new ActionsEnded('down', $this->options->before));
+            $this->fireEvent(new ActionEnded('down', $this->options->before));
 
             return;
         }
@@ -55,7 +55,7 @@ class Rollback extends Processor
     protected function nothingToRollback(): bool
     {
         if ($this->count() <= 0) {
-            $this->notification->warning('Nothing to rollback');
+            $this->notification->warning('Nothing To Rollback');
 
             return true;
         }

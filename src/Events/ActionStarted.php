@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Events;
 
-class ActionsEnded extends BaseEvent
+class ActionStarted extends BaseEvent
 {
     public function __construct(
         public string $method,

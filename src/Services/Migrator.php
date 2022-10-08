@@ -110,7 +110,7 @@ class Migrator
         $this->repository->delete($name);
     }
 
-    protected function allowAction(Action $action, string $name, Options $options, bool $log = false): bool
+    protected function allowAction(Action $action, string $name, Options $options): bool
     {
         if (! $this->allowEnvironment($action)) {
             $this->notification->info("Action: $name was skipped on this environment");
@@ -131,19 +131,19 @@ class Migrator
     {
         $env = $this->config->environment();
 
-        $on     = $action->onEnvironment();
-        $except = $action->exceptEnvironment();
-        $allow  = $action->allow();
+        return $action->allow()
+            || $this->onEnvironment($env, $action->onEnvironment())
+            || $this->exceptEnvironment($env, $action->exceptEnvironment());
+    }
 
-        if (! $allow) {
-            return false;
-        }
+    protected function onEnvironment(?string $env, array $on): bool
+    {
+        return empty($on) || ! in_array($env, $on);
+    }
 
-        if (! empty($on) && ! in_array($env, $on)) {
-            return false;
-        }
-
-        return ! (! empty($except) && in_array($env, $except));
+    protected function exceptEnvironment(?string $env, array $except): bool
+    {
+        return empty($except) || ! in_array($env, $except);
     }
 
     protected function disallowBefore(Action $action, Options $options): bool

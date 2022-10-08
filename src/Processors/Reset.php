@@ -11,7 +11,7 @@ class Reset extends Processor
 {
     public function handle(): void
     {
-        $this->reset(
+        $this->rollback(
             $this->options->connection,
             $this->options->path,
             $this->options->realpath,
@@ -19,7 +19,7 @@ class Reset extends Processor
         );
     }
 
-    protected function reset(?string $connection, ?string $path, ?bool $realPath, ?int $step): void
+    protected function rollback(?string $connection, ?string $path, ?bool $realPath, int $step): void
     {
         $this->runCommand(Names::ROLLBACK, [
             '--' . Options::CONNECTION => $connection,
@@ -32,6 +32,6 @@ class Reset extends Processor
 
     protected function count(): int
     {
-        return $this->repository->getCompleted()->count();
+        return $this->repository->getCompleted()->max('batch');
     }
 }

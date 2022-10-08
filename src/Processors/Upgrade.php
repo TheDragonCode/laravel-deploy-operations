@@ -8,6 +8,7 @@ use DragonCode\LaravelActions\ServiceProvider;
 use DragonCode\Support\Facades\Filesystem\Directory;
 use DragonCode\Support\Facades\Filesystem\File;
 use DragonCode\Support\Facades\Helpers\Str;
+use DragonCode\Support\Helpers\Ables\Stringable;
 
 class Upgrade extends Processor
 {
@@ -42,6 +43,7 @@ class Upgrade extends Processor
         $content = $this->replaceNamespace($content);
         $content = $this->replaceClassName($content);
         $content = $this->replaceDeclareStrictType($content);
+        $content = $this->replaceWithInvoke($content);
 
         $this->store($filename, $content);
         $this->delete($filename);
@@ -88,11 +90,19 @@ class Upgrade extends Processor
             ->toString();
     }
 
+    protected function replaceWithInvoke(string $content): string
+    {
+        return Str::of($content)
+            ->when(! Str::matchContains($content, '/public\s+function\s+down/'), function (Stringable $string) {
+                return $string->pregReplace('/(public\s+function\s+up)/', 'public function __invoke');
+            })->toString();
+    }
+
     protected function moveConfig(): void
     {
         $this->artisan('vendor:publish', [
-            '--force' => true,
             '--provider' => ServiceProvider::class,
+            '--force'    => true,
         ]);
 
         $path = config_path('actions.php');

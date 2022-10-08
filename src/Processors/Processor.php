@@ -13,7 +13,6 @@ use DragonCode\LaravelActions\Helpers\Git;
 use DragonCode\LaravelActions\Repositories\ActionRepository;
 use DragonCode\LaravelActions\Services\Migrator;
 use DragonCode\LaravelActions\Values\Options;
-use DragonCode\Support\Facades\Helpers\Arr;
 use DragonCode\Support\Filesystem\File;
 use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -44,9 +43,7 @@ abstract class Processor
 
     protected function getFiles(?Closure $filter = null, ?string $path = null): array
     {
-        $files = $this->file->allPaths($path ?: $this->config->path(), $filter, true);
-
-        return Arr::sort($files);
+        return $this->file->allPaths($path ?: $this->config->path(), $filter, true);
     }
 
     protected function runCommand(string $command, array $options = []): void
@@ -57,7 +54,7 @@ abstract class Processor
     protected function tableNotFound(): bool
     {
         if (! $this->repository->repositoryExists()) {
-            $this->notification->warning('Actions table not found.');
+            $this->notification->warning('Actions table not found');
 
             return true;
         }

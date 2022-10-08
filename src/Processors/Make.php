@@ -10,13 +10,14 @@ use DragonCode\Support\Facades\Helpers\Str;
 
 class Make extends Processor
 {
-    protected string $defaultName = 'auto';
+    protected string $fallbackName = 'auto';
 
     protected string $stub = __DIR__ . '/../../resources/stubs/action.stub';
 
     public function handle(): void
     {
-        $path = $this->getPath();
+        $name = $this->getName();
+        $path = $this->getPath($name);
 
         $this->create($path);
     }
@@ -26,10 +27,8 @@ class Make extends Processor
         File::copy($this->stub, $path);
     }
 
-    protected function getPath(): string
+    protected function getPath(string $name): string
     {
-        $name = $this->getName();
-
         return $this->options->realpath ? $name : $this->config->path($name);
     }
 
@@ -48,7 +47,7 @@ class Make extends Processor
 
     protected function getBranchName(): string
     {
-        return $this->options->name ?? $this->git->currentBranch() ?? $this->defaultName;
+        return $this->options->name ?? $this->git->currentBranch() ?? $this->fallbackName;
     }
 
     protected function getTime(): string
