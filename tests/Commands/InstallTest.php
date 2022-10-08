@@ -12,7 +12,7 @@ class InstallTest extends TestCase
         $this->assertDatabaseDoesntTable($this->table);
 
         $this->artisan(Names::INSTALL)
-            ->expectsOutputToContain('Actions repository successfully created.')
+            ->expectsOutputToContain('Installing the action repository')
             ->assertSuccessful();
 
         $this->assertDatabaseHasTable($this->table);
@@ -23,11 +23,11 @@ class InstallTest extends TestCase
         $this->assertDatabaseDoesntTable($this->table);
 
         $this->artisan(Names::INSTALL)
-            ->expectsOutputToContain('Actions repository successfully created.')
+            ->expectsOutputToContain('Installing the action repository')
             ->assertSuccessful();
 
         $this->artisan(Names::INSTALL)
-            ->expectsOutputToContain('Actions repository already exists.')
+            ->expectsOutputToContain('Actions repository already exists')
             ->assertSuccessful();
 
         $this->assertDatabaseHasTable($this->table);
