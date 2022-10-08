@@ -83,8 +83,8 @@ abstract class Command extends BaseCommand
             [Options::BEFORE, null, InputOption::VALUE_NONE, 'Run actions marked as before'],
             [Options::CONNECTION, null, InputOption::VALUE_OPTIONAL, 'The database connection to use'],
             [Options::FORCE, null, InputOption::VALUE_NONE, 'Force the operation to run when in production'],
-            [Options::PATH, null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'The path(s) to the actions files to be executed'],
-            [Options::REALPATH, null, InputOption::VALUE_NONE, 'Indicate any provided action file paths are pre-resolved absolute paths'],
+            [Options::PATH, null, InputOption::VALUE_OPTIONAL, 'The path to the actions files to be executed'],
+            [Options::REALPATH, null, InputOption::VALUE_NONE, 'Indicate any provided action file paths are pre-resolved absolute path'],
             [Options::STEP, null, InputOption::VALUE_OPTIONAL, 'Force the actions to be run so they can be rolled back individually'],
         ];
     }
