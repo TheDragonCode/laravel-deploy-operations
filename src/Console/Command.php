@@ -31,6 +31,7 @@ abstract class Command extends BaseCommand
     {
         if ($this->allowToProceed()) {
             $this->resolveProcessor()->handle();
+            $this->forgetProcessor();
 
             return self::SUCCESS;
         }
@@ -40,11 +41,21 @@ abstract class Command extends BaseCommand
 
     protected function resolveProcessor(): Processor
     {
-        return Container::getInstance()->make($this->processor, [
+        return $this->container()->make($this->processor, [
             'options' => $this->getOptionsDto(),
             'input'   => $this->input,
             'output'  => $this->output,
         ]);
+    }
+
+    protected function forgetProcessor(): void
+    {
+        $this->container()->forgetInstance($this->processor);
+    }
+
+    protected function container(): Container
+    {
+        return Container::getInstance();
     }
 
     protected function configure(): void
