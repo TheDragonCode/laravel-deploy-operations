@@ -7,6 +7,17 @@ use Tests\TestCase;
 
 class StatusTest extends TestCase
 {
+    public function testNotFound(): void
+    {
+        $this->assertDatabaseDoesntTable($this->table);
+
+        $this->artisan(Names::STATUS)
+            ->expectsOutputToContain('Actions table not found.')
+            ->assertSuccessful();
+
+        $this->assertDatabaseDoesntTable($this->table);
+    }
+
     public function testStatusCommand()
     {
         $this->assertDatabaseDoesntTable($this->table);

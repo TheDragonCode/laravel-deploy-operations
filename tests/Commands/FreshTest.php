@@ -24,7 +24,9 @@ class FreshTest extends TestCase
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 1);
 
-        $this->artisan(Names::FRESH)->assertSuccessful();
+        $this->artisan(Names::FRESH)
+            ->expectsOutputToContain('Dropping all actions')
+            ->assertSuccessful();
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 1);

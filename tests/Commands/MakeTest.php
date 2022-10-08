@@ -19,10 +19,8 @@ class MakeTest extends TestCase
 
         $this->assertFileExists($path);
 
-        $expected = __DIR__ . '/../fixtures/app/stubs/make_example.stub';
-
         $this->assertEquals(
-            file_get_contents($expected),
+            file_get_contents(__DIR__ . '/../fixtures/app/stubs/make_example.stub'),
             file_get_contents($path)
         );
     }
