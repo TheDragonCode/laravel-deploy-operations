@@ -10,6 +10,7 @@ use Illuminate\Database\ConnectionResolverInterface as Resolver;
 use Illuminate\Database\Query\Builder as Query;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
+use Illuminate\Support\Collection;
 
 class ActionRepository
 {
@@ -28,11 +29,9 @@ class ActionRepository
         return $this;
     }
 
-    public function getCompleted(): array
+    public function getCompleted(): Collection
     {
-        return $this->getOrderTable()
-            ->get()
-            ->all();
+        return $this->getOrderTable()->get();
     }
 
     public function getByStep(int $steps): array

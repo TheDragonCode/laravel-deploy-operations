@@ -32,6 +32,6 @@ class Reset extends Processor
 
     protected function count(): int
     {
-        return count($this->repository->getCompleted());
+        return $this->repository->getCompleted()->count();
     }
 }

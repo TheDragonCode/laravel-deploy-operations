@@ -53,7 +53,7 @@ class Status extends Processor
 
     protected function getCompleted(): array
     {
-        return collect($this->repository->getCompleted())
+        return $this->repository->getCompleted()
             ->pluck('batch', 'action')
             ->toArray();
     }

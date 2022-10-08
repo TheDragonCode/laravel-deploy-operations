@@ -7,6 +7,7 @@ namespace DragonCode\LaravelActions\Processors;
 use DragonCode\LaravelActions\Events\ActionsEnded;
 use DragonCode\LaravelActions\Events\ActionsStarted;
 use DragonCode\LaravelActions\Events\NoPendingActions;
+use DragonCode\Support\Facades\Helpers\Str;
 
 class Migrate extends Processor
 {
@@ -39,9 +40,9 @@ class Migrate extends Processor
 
     protected function getNewFiles(): array
     {
-        $completed = $this->repository->getCompleted();
+        $completed = $this->repository->getCompleted()->pluck('action')->toArray();
 
-        return $this->getFiles(fn (string $file) => ! in_array($file, $completed));
+        return $this->getFiles(fn (string $file) => ! Str::of($file)->replace('\\', '/')->endsWith($completed));
     }
 
     protected function getBatch(): int
