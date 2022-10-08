@@ -170,6 +170,7 @@ class Migrator
         return Str::of(realpath($path))
             ->after(realpath($this->config->path()))
             ->ltrim('\\/')
+            ->replace('\\', '/')
             ->toString();
     }
 }
