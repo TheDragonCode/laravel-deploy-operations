@@ -43,7 +43,14 @@ abstract class Processor
 
     protected function getFiles(?Closure $filter = null, ?string $path = null): array
     {
-        return $this->file->allPaths($path ?: $this->config->path(), $filter, true);
+        return $this->file->allPaths($path ?: $this->getActionsPath(), $filter, true);
+    }
+
+    protected function getActionsPath(?string $name = null): string
+    {
+        $path = $this->options->path ?: $this->config->path();
+
+        return $this->options->realpath ? $name : $path . DIRECTORY_SEPARATOR . $name;
     }
 
     protected function runCommand(string $command, array $options = []): void

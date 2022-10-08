@@ -17,7 +17,7 @@ class Make extends Processor
     public function handle(): void
     {
         $name = $this->getName();
-        $path = $this->getPath($name);
+        $path = $this->getActionsPath($name);
 
         $this->create($path);
     }
@@ -25,11 +25,6 @@ class Make extends Processor
     protected function create(string $path): void
     {
         File::copy($this->stub, $path);
-    }
-
-    protected function getPath(string $name): string
-    {
-        return $this->options->realpath ? $name : $this->config->path($name);
     }
 
     protected function getName(): string

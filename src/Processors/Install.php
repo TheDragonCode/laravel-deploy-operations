@@ -34,6 +34,8 @@ class Install extends Processor
 
     protected function ensureDirectory(): void
     {
-        Directory::ensureDirectory($this->config->path());
+        Directory::ensureDirectory(
+            $this->getActionsPath()
+        );
     }
 }

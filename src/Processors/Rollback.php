@@ -48,7 +48,7 @@ class Rollback extends Processor
     protected function rollbackAction(string $action): void
     {
         $this->migrator->runDown(
-            $this->config->path($action)
+            $this->getActionsPath($action)
         );
     }
 
