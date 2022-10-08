@@ -13,7 +13,7 @@ class Reset extends Command
 
     protected $description = 'Rollback all actions';
 
-    protected Processor|string $processor = rollback::class;
+    protected Processor|string $processor = ResetProcessor::class;
 
     protected array $options = [
         Options::CONNECTION,
