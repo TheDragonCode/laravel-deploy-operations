@@ -11,15 +11,14 @@ class Reset extends Command
 {
     protected $name = Names::RESET;
 
-    protected $description = 'Rollback all database actions';
+    protected $description = 'Rollback all actions';
 
     protected Processor|string $processor = ResetProcessor::class;
 
     protected array $options = [
         Options::CONNECTION,
+        Options::FORCE,
         Options::PATH,
         Options::REALPATH,
-        Options::STEP,
-        Options::FORCE,
     ];
 }

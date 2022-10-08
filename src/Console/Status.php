@@ -19,5 +19,7 @@ class Status extends Command
 
     protected array $options = [
         Options::CONNECTION,
+        Options::PATH,
+        Options::REALPATH,
     ];
 }

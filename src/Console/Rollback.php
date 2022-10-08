@@ -11,13 +11,15 @@ class Rollback extends Command
 {
     protected $name = Names::ROLLBACK;
 
-    protected $description = 'Rollback the last database action';
+    protected $description = 'Rollback the last action';
 
     protected Processor|string $processor = RollbackProcessor::class;
 
     protected array $options = [
         Options::CONNECTION,
         Options::FORCE,
+        Options::PATH,
+        Options::REALPATH,
         Options::STEP,
     ];
 }

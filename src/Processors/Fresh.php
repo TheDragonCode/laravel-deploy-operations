@@ -19,7 +19,10 @@ class Fresh extends Processor
     protected function drop(): void
     {
         if ($this->repository->repositoryExists()) {
-            $this->notification->task('Dropping all actions', fn () => $this->repository->deleteRepository());
+            $this->notification->task(
+                'Dropping all actions',
+                fn () => $this->repository->deleteRepository()
+            );
         }
     }
 
@@ -28,13 +31,18 @@ class Fresh extends Processor
         $this->runCommand(Names::INSTALL, [
             '--' . Options::CONNECTION => $this->options->connection,
             '--' . Options::FORCE      => $this->options->force,
+            '--' . Options::PATH       => $this->options->path,
+            '--' . Options::REALPATH   => $this->options->realpath,
         ]);
     }
 
     protected function migrate(): void
     {
         $this->runCommand(Names::MIGRATE, [
+            '--' . Options::BEFORE => $this->options->before,
             '--' . Options::CONNECTION => $this->options->connection,
+            '--' . Options::PATH => $this->options->path,
+            '--' . Options::REALPATH => $this->options->realpath,
         ]);
     }
 }
