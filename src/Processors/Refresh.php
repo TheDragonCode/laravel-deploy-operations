@@ -12,8 +12,8 @@ class Refresh extends Processor
     public function handle(): void
     {
         $connection = $this->options->connection;
-        $path     = $this->options->path;
-        $realPath = $this->options->realpath;
+        $path       = $this->options->path;
+        $realPath   = $this->options->realpath;
 
         $this->runReset($connection, $path, $realPath);
         $this->runMigrate($connection, $path, $realPath);

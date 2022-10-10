@@ -19,7 +19,7 @@ class ActionRepository
 
     public function __construct(
         protected Resolver $resolver,
-        protected Config   $config
+        protected Config $config
     ) {
     }
 

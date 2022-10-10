@@ -2,7 +2,6 @@
 
 namespace Tests\Commands;
 
-use DragonCode\LaravelActions\Console\Command;
 use DragonCode\LaravelActions\Constants\Names;
 use Tests\TestCase;
 

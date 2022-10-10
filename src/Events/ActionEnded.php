@@ -8,7 +8,7 @@ class ActionEnded extends BaseEvent
 {
     public function __construct(
         public string $method,
-        public bool   $before
+        public bool $before
     ) {
     }
 }
