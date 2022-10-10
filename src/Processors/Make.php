@@ -16,6 +16,11 @@ class Make extends Processor
 
     public function handle(): void
     {
+        $this->notification->task('Creating an action', fn () => $this->run());
+    }
+
+    protected function run(): void
+    {
         $name = $this->getName();
         $path = $this->getActionsPath($name);
 

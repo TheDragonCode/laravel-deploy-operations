@@ -36,7 +36,9 @@ class MigrateTest extends TestCase
         $this->assertDatabaseCount($this->table, 0);
 
         $this->artisan(Names::MAKE, ['name' => 'TestMigration'])->assertSuccessful();
+
         sleep(2);
+
         $this->artisan(Names::MAKE, ['name' => 'TestMigration'])->assertSuccessful();
         $this->artisan(Names::MIGRATE)->assertSuccessful();
 

@@ -26,6 +26,7 @@ class FreshTest extends TestCase
 
         $this->artisan(Names::FRESH)
             ->expectsOutputToContain('Dropping all actions')
+            ->expectsOutputToContain('Installing the action repository')
             ->assertSuccessful();
 
         $this->assertDatabaseHasTable($this->table);

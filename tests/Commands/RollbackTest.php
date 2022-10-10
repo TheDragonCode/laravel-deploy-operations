@@ -58,9 +58,7 @@ class RollbackTest extends TestCase
 
         $table = 'environment';
 
-        $this->artisan(Names::MIGRATE)
-            ->expectsOutputToContain('Installing the action repository')
-            ->assertSuccessful();
+        $this->artisan(Names::INSTALL)->assertSuccessful();
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
@@ -71,7 +69,7 @@ class RollbackTest extends TestCase
         $this->artisan(Names::MIGRATE)->assertSuccessful();
 
         $this->assertDatabaseCount($table, 5);
-        $this->assertDatabaseCount($this->table, 10);
+        $this->assertDatabaseCount($this->table, 11);
         $this->assertDatabaseMigrationHas($this->table, 'run_on_all');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_production');
         $this->assertDatabaseMigrationHas($this->table, 'run_on_testing');
@@ -93,7 +91,7 @@ class RollbackTest extends TestCase
 
         $table = 'success';
 
-        $this->artisan(Names::MIGRATE)->assertSuccessful();
+        $this->artisan(Names::INSTALL)->assertSuccessful();
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
@@ -101,7 +99,7 @@ class RollbackTest extends TestCase
         $this->artisan(Names::MIGRATE)->assertSuccessful();
 
         $this->assertDatabaseCount($table, 2);
-        $this->assertDatabaseCount($this->table, 10);
+        $this->assertDatabaseCount($this->table, 11);
         $this->assertDatabaseMigrationHas($this->table, 'run_success');
 
         $this->artisan(Names::ROLLBACK)->assertSuccessful();
@@ -116,7 +114,7 @@ class RollbackTest extends TestCase
 
         $table = 'success';
 
-        $this->artisan(Names::MIGRATE)->assertSuccessful();
+        $this->artisan(Names::INSTALL)->assertSuccessful();
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
@@ -124,15 +122,19 @@ class RollbackTest extends TestCase
         $this->artisan(Names::MIGRATE)->assertSuccessful();
 
         $this->assertDatabaseCount($table, 2);
-        $this->assertDatabaseCount($this->table, 10);
+        $this->assertDatabaseCount($this->table, 11);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success_on_failed');
 
         try {
             $this->copySuccessFailureMethod();
 
-            $this->table()->insert(['migration' => '2021_12_23_165048_run_success_on_failed', 'batch' => 999]);
+            $this->table()->insert(['action' => '2021_12_23_165048_run_success_on_failed', 'batch' => 999]);
 
-            $this->artisan(Names::ROLLBACK)->assertSuccessful();
+            $this->assertDatabaseCount($table, 2);
+            $this->assertDatabaseCount($this->table, 12);
+            $this->assertDatabaseMigrationHas($this->table, 'run_success_on_failed');
+
+            $this->artisan(Names::ROLLBACK)->assertFailed();
         }
         catch (Throwable $e) {
             $this->assertInstanceOf(Exception::class, $e);
@@ -143,7 +145,7 @@ class RollbackTest extends TestCase
         }
 
         $this->assertDatabaseCount($table, 2);
-        $this->assertDatabaseCount($this->table, 11);
+        $this->assertDatabaseCount($this->table, 12);
         $this->assertDatabaseMigrationHas($this->table, 'run_success_on_failed');
     }
 
@@ -153,7 +155,7 @@ class RollbackTest extends TestCase
 
         $table = 'failed';
 
-        $this->artisan(Names::MIGRATE)->assertSuccessful();
+        $this->artisan(Names::INSTALL)->assertSuccessful();
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
@@ -161,7 +163,7 @@ class RollbackTest extends TestCase
         $this->artisan(Names::MIGRATE)->assertSuccessful();
 
         $this->assertDatabaseCount($table, 0);
-        $this->assertDatabaseCount($this->table, 10);
+        $this->assertDatabaseCount($this->table, 11);
         $this->assertDatabaseMigrationHas($this->table, 'run_failed');
 
         $this->artisan(Names::ROLLBACK)->assertSuccessful();
@@ -176,7 +178,7 @@ class RollbackTest extends TestCase
 
         $table = 'failed';
 
-        $this->artisan(Names::MIGRATE)->assertSuccessful();
+        $this->artisan(Names::INSTALL)->assertSuccessful();
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
@@ -184,13 +186,13 @@ class RollbackTest extends TestCase
         $this->artisan(Names::MIGRATE)->assertSuccessful();
 
         $this->assertDatabaseCount($table, 0);
-        $this->assertDatabaseCount($this->table, 10);
+        $this->assertDatabaseCount($this->table, 11);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_failed_failure');
 
         try {
             $this->copyFailedMethod();
 
-            $this->table()->insert(['migration' => '2021_12_23_184029_run_failed_failure', 'batch' => 999]);
+            $this->table()->insert(['action' => '2021_12_23_184029_run_failed_failure', 'batch' => 999]);
 
             $this->artisan(Names::ROLLBACK)->assertSuccessful();
         }
@@ -203,7 +205,7 @@ class RollbackTest extends TestCase
         }
 
         $this->assertDatabaseCount($table, 1);
-        $this->assertDatabaseCount($this->table, 11);
+        $this->assertDatabaseCount($this->table, 12);
         $this->assertDatabaseMigrationHas($this->table, 'run_failed_failure');
     }
 
@@ -213,7 +215,7 @@ class RollbackTest extends TestCase
 
         $table = 'before';
 
-        $this->artisan(Names::MIGRATE)->assertSuccessful();
+        $this->artisan(Names::INSTALL)->assertSuccessful();
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
@@ -222,7 +224,7 @@ class RollbackTest extends TestCase
         $this->artisan(Names::MIGRATE)->assertSuccessful();
 
         $this->assertDatabaseCount($table, 2);
-        $this->assertDatabaseCount($this->table, 10);
+        $this->assertDatabaseCount($this->table, 11);
         $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationHas($this->table, 'test_before_disabled');
         $this->artisan(Names::MIGRATE)->assertSuccessful();
@@ -241,7 +243,7 @@ class RollbackTest extends TestCase
 
         $table = 'before';
 
-        $this->artisan(Names::MIGRATE)->assertSuccessful();
+        $this->artisan(Names::INSTALL)->assertSuccessful();
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
@@ -250,7 +252,7 @@ class RollbackTest extends TestCase
         $this->artisan(Names::MIGRATE, ['--before' => true])->assertSuccessful();
 
         $this->assertDatabaseCount($table, 1);
-        $this->assertDatabaseCount($this->table, 9);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
         $this->artisan(Names::MIGRATE, ['--before' => true])->assertSuccessful();
