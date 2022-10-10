@@ -60,7 +60,7 @@
         "orchestra/testbench": "^4.18 || ^5.20 || ^6.25 || ^7.9 || ^8.0",
         "phpunit/phpunit": "^9.5",
         "ramsey/uuid": "^3.7 || ^4.0",
-        "nesbot/carbon": "^2.61"
+        "nesbot/carbon": "^2.62"
     },
     "conflict": {
         "andrey-helldar/laravel-actions": "*",
