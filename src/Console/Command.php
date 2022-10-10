@@ -24,10 +24,10 @@ abstract class Command extends BaseCommand
             $this->resolveProcessor()->handle();
             $this->forgetProcessor();
 
-            return self::SUCCESS;
+            return 0;
         }
 
-        return self::FAILURE;
+        return 1;
     }
 
     protected function resolveProcessor(): Processor
