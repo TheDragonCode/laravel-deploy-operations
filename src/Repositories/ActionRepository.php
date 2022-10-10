@@ -74,7 +74,7 @@ class ActionRepository
     public function createRepository(): void
     {
         $this->schema()->create($this->config->table(), function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
 
             $table->string('action');
 
