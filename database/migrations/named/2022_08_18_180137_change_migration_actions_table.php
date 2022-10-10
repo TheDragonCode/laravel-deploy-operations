@@ -2,6 +2,6 @@
 
 use DragonCode\LaravelActions\Database\BaseChangeMigrationColumn;
 
-class BaseChangeMigrationActionsTable extends BaseChangeMigrationColumn
+class ChangeMigrationActionsTable extends BaseChangeMigrationColumn
 {
 }
