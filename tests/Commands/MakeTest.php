@@ -15,9 +15,7 @@ class MakeTest extends TestCase
 
         $this->assertFileDoesNotExist($path);
 
-        $this->artisan(Names::MAKE, compact('name'))
-            ->expectsOutputToContain('Creating an action')
-            ->assertSuccessful();
+        $this->artisan(Names::MAKE, compact('name'))->assertSuccessful();
 
         $this->assertFileExists($path);
 
@@ -33,9 +31,7 @@ class MakeTest extends TestCase
 
         $this->assertFileDoesNotExist($path);
 
-        $this->artisan(Names::MAKE)
-            ->expectsOutputToContain('Creating an action')
-            ->assertSuccessful();
+        $this->artisan(Names::MAKE)->assertSuccessful();
 
         $this->assertFileExists($path);
     }

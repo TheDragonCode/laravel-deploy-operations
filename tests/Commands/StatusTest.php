@@ -11,9 +11,7 @@ class StatusTest extends TestCase
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan(Names::STATUS)
-            ->expectsOutputToContain('Actions table not found.')
-            ->assertSuccessful();
+        $this->artisan(Names::STATUS)->assertSuccessful();
 
         $this->assertDatabaseDoesntTable($this->table);
     }

@@ -398,7 +398,7 @@ class MigrateTest extends TestCase
 
         $this->assertDatabaseHasTable($this->table);
 
-        $this->artisan(Names::STATUS)->expectsOutputToContain('No actions found');
+        $this->artisan(Names::STATUS)->assertSuccessful();
     }
 
     public function testDisabledBefore()
