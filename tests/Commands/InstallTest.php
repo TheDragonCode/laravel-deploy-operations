@@ -2,6 +2,7 @@
 
 namespace Tests\Commands;
 
+use DragonCode\LaravelActions\Console\Command;
 use DragonCode\LaravelActions\Constants\Names;
 use Tests\TestCase;
 
@@ -11,7 +12,7 @@ class InstallTest extends TestCase
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan(Names::INSTALL)->assertSuccessful();
+        $this->artisan(Names::INSTALL)->assertExitCode(Command::SUCCESS);
 
         $this->assertDatabaseHasTable($this->table);
     }
@@ -20,8 +21,8 @@ class InstallTest extends TestCase
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan(Names::INSTALL)->assertSuccessful();
-        $this->artisan(Names::INSTALL)->assertSuccessful();
+        $this->artisan(Names::INSTALL)->assertExitCode(Command::SUCCESS);
+        $this->artisan(Names::INSTALL)->assertExitCode(Command::SUCCESS);
 
         $this->assertDatabaseHasTable($this->table);
     }

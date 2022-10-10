@@ -2,6 +2,7 @@
 
 namespace Tests\Commands;
 
+use DragonCode\LaravelActions\Console\Command;
 use DragonCode\LaravelActions\Constants\Names;
 use Tests\TestCase;
 
@@ -15,7 +16,7 @@ class MakeTest extends TestCase
 
         $this->assertFileDoesNotExist($path);
 
-        $this->artisan(Names::MAKE, compact('name'))->assertSuccessful();
+        $this->artisan(Names::MAKE, compact('name'))->assertExitCode(Command::SUCCESS);
 
         $this->assertFileExists($path);
 
@@ -31,7 +32,7 @@ class MakeTest extends TestCase
 
         $this->assertFileDoesNotExist($path);
 
-        $this->artisan(Names::MAKE)->assertSuccessful();
+        $this->artisan(Names::MAKE)->assertExitCode(Command::SUCCESS);
 
         $this->assertFileExists($path);
     }
