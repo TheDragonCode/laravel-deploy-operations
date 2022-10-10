@@ -13,9 +13,9 @@ class Git
     ) {
     }
 
-    public function currentBranch(): ?string
+    public function currentBranch(?string $path = null): ?string
     {
-        if ($this->hasGitDirectory()) {
+        if ($this->hasGitDirectory($path)) {
             return $this->exec('rev-parse --abbrev-ref HEAD');
         }
 
@@ -27,9 +27,9 @@ class Git
         return exec(sprintf('git --git-dir %s %s', $this->config->gitPath(), $command));
     }
 
-    protected function hasGitDirectory(): bool
+    protected function hasGitDirectory(?string $path = null): bool
     {
-        if ($path = rtrim($this->config->gitPath(), '/\\')) {
+        if ($path = rtrim($path ?: $this->config->gitPath(), '/\\')) {
             return Directory::exists($path . DIRECTORY_SEPARATOR . '.git');
         }
 

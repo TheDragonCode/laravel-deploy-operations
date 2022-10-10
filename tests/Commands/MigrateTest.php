@@ -440,13 +440,13 @@ class MigrateTest extends TestCase
         $this->artisan(Names::MIGRATE, ['--before' => true])->assertSuccessful();
 
         $this->assertDatabaseCount($table, 1);
-        $this->assertDatabaseCount($this->table, 9);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
         $this->artisan(Names::MIGRATE, ['--before' => true])->assertSuccessful();
 
         $this->assertDatabaseCount($table, 1);
-        $this->assertDatabaseCount($this->table, 9);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
     }
@@ -466,25 +466,25 @@ class MigrateTest extends TestCase
         $this->artisan(Names::MIGRATE, ['--before' => true])->assertSuccessful();
 
         $this->assertDatabaseCount($table, 1);
-        $this->assertDatabaseCount($this->table, 9);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
         $this->artisan(Names::MIGRATE, ['--before' => true])->assertSuccessful();
 
         $this->assertDatabaseCount($table, 1);
-        $this->assertDatabaseCount($this->table, 9);
+        $this->assertDatabaseCount($this->table, 10);
         $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
         $this->artisan(Names::MIGRATE)->assertSuccessful();
 
         $this->assertDatabaseCount($table, 2);
-        $this->assertDatabaseCount($this->table, 10);
+        $this->assertDatabaseCount($this->table, 11);
         $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationHas($this->table, 'test_before_disabled');
         $this->artisan(Names::MIGRATE)->assertSuccessful();
 
         $this->assertDatabaseCount($table, 2);
-        $this->assertDatabaseCount($this->table, 10);
+        $this->assertDatabaseCount($this->table, 11);
         $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationHas($this->table, 'test_before_disabled');
     }

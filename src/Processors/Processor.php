@@ -13,6 +13,7 @@ use DragonCode\LaravelActions\Helpers\Git;
 use DragonCode\LaravelActions\Repositories\ActionRepository;
 use DragonCode\LaravelActions\Services\Migrator;
 use DragonCode\LaravelActions\Values\Options;
+use DragonCode\Support\Facades\Helpers\Str;
 use DragonCode\Support\Filesystem\File;
 use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -43,14 +44,20 @@ abstract class Processor
 
     protected function getFiles(?Closure $filter = null, ?string $path = null): array
     {
-        return $this->file->allPaths($path ?: $this->getActionsPath(), $filter, true);
+        $path = $this->getActionsPath($path);
+
+        return $this->file->exists($path) ? [$path] : $this->file->allPaths($path, $filter, true);
     }
 
-    protected function getActionsPath(?string $name = null): string
+    protected function getActionsPath(?string $path = null): string
     {
-        $path = $this->options->path ?: $this->config->path();
+        $path = $this->options->realpath ? $path : $this->config->path($path);
 
-        return $this->options->realpath ? $name : $path . DIRECTORY_SEPARATOR . $name;
+        if (! is_dir($path) && ! Str::endsWith($path, '.php')) {
+            return $this->file->exists($path . '.php') ? $path . '.php' : $path;
+        }
+
+        return $path;
     }
 
     protected function runCommand(string $command, array $options = []): void

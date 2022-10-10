@@ -132,13 +132,13 @@ class Migrator
         $env = $this->config->environment();
 
         return $action->allow()
-            || $this->onEnvironment($env, $action->onEnvironment())
-            || $this->exceptEnvironment($env, $action->exceptEnvironment());
+            && $this->onEnvironment($env, $action->onEnvironment())
+            && $this->exceptEnvironment($env, $action->exceptEnvironment());
     }
 
     protected function onEnvironment(?string $env, array $on): bool
     {
-        return empty($on) || ! in_array($env, $on);
+        return empty($on) || in_array($env, $on);
     }
 
     protected function exceptEnvironment(?string $env, array $except): bool

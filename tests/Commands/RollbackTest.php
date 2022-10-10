@@ -58,7 +58,9 @@ class RollbackTest extends TestCase
 
         $table = 'environment';
 
-        $this->artisan(Names::MIGRATE)->assertSuccessful();
+        $this->artisan(Names::MIGRATE)
+            ->expectsOutputToContain('Installing the action repository')
+            ->assertSuccessful();
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);

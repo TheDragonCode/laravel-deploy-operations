@@ -32,6 +32,6 @@ class Reset extends Processor
 
     protected function count(): int
     {
-        return $this->repository->getCompleted()->max('batch');
+        return $this->repository->getLastBatchNumber();
     }
 }

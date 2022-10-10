@@ -22,8 +22,16 @@ class Status extends Processor
             return;
         }
 
-        $this->showCaption();
-        $this->showStatus();
+        [$files, $completed] = $this->getData();
+
+        if ($this->doesntEmpty($files, $completed)) {
+            $this->showCaption();
+            $this->showStatus($files, $completed);
+
+            return;
+        }
+
+        $this->notification->info('No actions found');
     }
 
     protected function showCaption(): void
@@ -31,21 +39,21 @@ class Status extends Processor
         $this->notification->twoColumn($this->columnName, $this->columnStatus);
     }
 
-    protected function showStatus(): void
-    {
-        $this->showData(
-            $this->getFiles(),
-            $this->getCompleted()
-        );
-    }
-
-    protected function showData(array $actions, array $completed): void
+    protected function showStatus(array $actions, array $completed): void
     {
         foreach ($actions as $action) {
             $status = $this->getStatusFor($completed, $action);
 
             $this->notification->twoColumn($action, $status);
         }
+    }
+
+    protected function getData(): array
+    {
+        $files     = $this->getFiles();
+        $completed = $this->getCompleted();
+
+        return [$files, $completed];
     }
 
     protected function getStatusFor(array $completed, string $action): string
@@ -62,5 +70,10 @@ class Status extends Processor
         return $this->repository->getCompleted()
             ->pluck('batch', 'action')
             ->toArray();
+    }
+
+    protected function doesntEmpty(array $actions, array $completed): bool
+    {
+        return ! empty($actions) && ! empty($completed);
     }
 }

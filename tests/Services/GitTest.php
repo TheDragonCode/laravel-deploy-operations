@@ -23,6 +23,6 @@ class GitTest extends TestCase
 
     protected function git(): Git
     {
-        return new Git();
+        return $this->app->make(Git::class);
     }
 }

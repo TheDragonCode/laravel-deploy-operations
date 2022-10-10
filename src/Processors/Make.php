@@ -37,7 +37,7 @@ class Make extends Processor
 
     protected function getFilename(string $branch): string
     {
-        return Str::of(Path::filename($branch))->prepend($this->getTime())->end('.php')->toString();
+        return Str::of(Path::filename($branch))->prepend($this->getTime())->finish('.php')->toString();
     }
 
     protected function getBranchName(): string
