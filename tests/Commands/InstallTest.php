@@ -12,7 +12,7 @@ class InstallTest extends TestCase
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan(Names::INSTALL)->assertExitCode(Command::SUCCESS);
+        $this->artisan(Names::INSTALL)->assertExitCode(0);
 
         $this->assertDatabaseHasTable($this->table);
     }
@@ -21,8 +21,8 @@ class InstallTest extends TestCase
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan(Names::INSTALL)->assertExitCode(Command::SUCCESS);
-        $this->artisan(Names::INSTALL)->assertExitCode(Command::SUCCESS);
+        $this->artisan(Names::INSTALL)->assertExitCode(0);
+        $this->artisan(Names::INSTALL)->assertExitCode(0);
 
         $this->assertDatabaseHasTable($this->table);
     }

@@ -16,7 +16,7 @@ class MakeTest extends TestCase
 
         $this->assertFileDoesNotExist($path);
 
-        $this->artisan(Names::MAKE, compact('name'))->assertExitCode(Command::SUCCESS);
+        $this->artisan(Names::MAKE, compact('name'))->assertExitCode(0);
 
         $this->assertFileExists($path);
 
@@ -32,7 +32,7 @@ class MakeTest extends TestCase
 
         $this->assertFileDoesNotExist($path);
 
-        $this->artisan(Names::MAKE)->assertExitCode(Command::SUCCESS);
+        $this->artisan(Names::MAKE)->assertExitCode(0);
 
         $this->assertFileExists($path);
     }
