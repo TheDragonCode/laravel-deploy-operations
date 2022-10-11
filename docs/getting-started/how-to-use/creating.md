@@ -54,6 +54,14 @@ For example:
 
 ```bash
 php artisan make:migration:action foo\bar\QweRty
+# actions/foo/bar/2022_10_11_225734_qwe_rty.php
 
+php artisan make:migration:action foo\bar\QweRty.php
+# actions/foo/bar/2022_10_11_225734_qwe_rty.php
+
+php artisan make:migration:action foo/bar/QweRty
+# actions/foo/bar/2022_10_11_225734_qwe_rty.php
+
+php artisan make:migration:action foo/bar/QweRty.php
 # actions/foo/bar/2022_10_11_225734_qwe_rty.php
 ```
