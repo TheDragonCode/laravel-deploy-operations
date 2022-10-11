@@ -27,6 +27,7 @@ class Upgrade extends Processor
     {
         $this->moveFiles();
         $this->moveConfig();
+        $this->clean();
     }
 
     protected function moveFiles(): void
@@ -47,6 +48,13 @@ class Upgrade extends Processor
 
         $this->store($filename, $content);
         $this->delete($filename);
+    }
+
+    protected function clean(): void
+    {
+        $this->notification->task('Delete old directory', fn () => Directory::ensureDelete(
+            database_path('actions')
+        ));
     }
 
     protected function open(string $path): string
@@ -100,23 +108,25 @@ class Upgrade extends Processor
 
     protected function moveConfig(): void
     {
-        $this->artisan('vendor:publish', [
-            '--provider' => ServiceProvider::class,
-            '--force'    => true,
-        ]);
+        $this->notification->task('Moving config file', function () {
+            $this->artisan('vendor:publish', [
+                '--provider' => ServiceProvider::class,
+                '--force'    => true,
+            ]);
 
-        $path = config_path('actions.php');
+            $path = config_path('actions.php');
 
-        $table = config('database.actions', 'migration_actions');
+            $table = config('database.actions', 'migration_actions');
 
-        $content = Str::replace(file_get_contents($path), "'table' => 'migration_actions'", "'table' => '$table'");
+            $content = Str::replace(file_get_contents($path), "'table' => 'migration_actions'", "'table' => '$table'");
 
-        file_put_contents($path, $content);
+            file_put_contents($path, $content);
+        });
     }
 
     protected function getOldFiles(): array
     {
-        return $this->getFiles(path: base_path('database/actions'));
+        return $this->getFiles(path: database_path('actions'));
     }
 
     protected function alreadyUpgraded(): bool
