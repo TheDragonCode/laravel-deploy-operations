@@ -150,7 +150,7 @@ use DragonCode\LaravelActions\Action;
 return new class () extends Action
 {
     /** @var string|array|null */
-    protected $except_environment = 'production';
+    protected $exceptEnvironment = 'production';
 
     public function __invoke(): void
     {
@@ -167,7 +167,7 @@ use DragonCode\LaravelActions\Action;
 return new class () extends Action
 {
     /** @var string|array|null */
-    protected $except_environment = ['testing', 'staging'];
+    protected $exceptEnvironment = ['testing', 'staging'];
 
     public function __invoke(): void
     {
