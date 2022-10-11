@@ -25,6 +25,16 @@ class Options extends DataTransferObject
 
     protected function castName(?string $value): ?string
     {
-        return empty($value) ? null : Str::snake($value);
+        if (empty($value)) {
+            return null;
+        }
+
+        return Str::of($value)
+            ->replace('\\', '/')
+            ->replace('.php', '')
+            ->explode('/')
+            ->map(fn (string $path) => Str::snake($path))
+            ->implode(DIRECTORY_SEPARATOR)
+            ->toString();
     }
 }

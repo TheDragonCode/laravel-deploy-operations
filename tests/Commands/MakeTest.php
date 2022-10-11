@@ -35,4 +35,76 @@ class MakeTest extends TestCase
 
         $this->assertFileExists($path);
     }
+
+    public function testNestedRightSlashWithoutExtension()
+    {
+        $name = 'Foo/bar/QweRty';
+
+        $path = $this->getActionsPath() . '/foo/bar/' . date('Y_m_d_His') . '_qwe_rty.php';
+
+        $this->assertFileDoesNotExist($path);
+
+        $this->artisan(Names::MAKE, compact('name'))->assertExitCode(0);
+
+        $this->assertFileExists($path);
+
+        $this->assertEquals(
+            file_get_contents(__DIR__ . '/../fixtures/app/stubs/make_example.stub'),
+            file_get_contents($path)
+        );
+    }
+
+    public function testNestedRightSlashWithExtension()
+    {
+        $name = 'Foo/bar/QweRty.php';
+
+        $path = $this->getActionsPath() . '/foo/bar/' . date('Y_m_d_His') . '_qwe_rty.php';
+
+        $this->assertFileDoesNotExist($path);
+
+        $this->artisan(Names::MAKE, compact('name'))->assertExitCode(0);
+
+        $this->assertFileExists($path);
+
+        $this->assertEquals(
+            file_get_contents(__DIR__ . '/../fixtures/app/stubs/make_example.stub'),
+            file_get_contents($path)
+        );
+    }
+
+    public function testNestedLeftSlashWithoutExtension()
+    {
+        $name = 'Foo\\bar\\QweRty';
+
+        $path = $this->getActionsPath() . '/foo/bar/' . date('Y_m_d_His') . '_qwe_rty.php';
+
+        $this->assertFileDoesNotExist($path);
+
+        $this->artisan(Names::MAKE, compact('name'))->assertExitCode(0);
+
+        $this->assertFileExists($path);
+
+        $this->assertEquals(
+            file_get_contents(__DIR__ . '/../fixtures/app/stubs/make_example.stub'),
+            file_get_contents($path)
+        );
+    }
+
+    public function testNestedLeftSlashWithExtension()
+    {
+        $name = 'Foo\\bar\\QweRty.php';
+
+        $path = $this->getActionsPath() . '/foo/bar/' . date('Y_m_d_His') . '_qwe_rty.php';
+
+        $this->assertFileDoesNotExist($path);
+
+        $this->artisan(Names::MAKE, compact('name'))->assertExitCode(0);
+
+        $this->assertFileExists($path);
+
+        $this->assertEquals(
+            file_get_contents(__DIR__ . '/../fixtures/app/stubs/make_example.stub'),
+            file_get_contents($path)
+        );
+    }
 }
