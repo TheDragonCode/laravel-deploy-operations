@@ -43,7 +43,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.0.2",
         "composer-runtime-api": "^2.2",
         "doctrine/dbal": "^2.13 || ^3.4",
         "dragon-code/laravel-support": "^3.4",
