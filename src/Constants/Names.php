@@ -16,7 +16,7 @@ class Names
 
     public const RESET = 'migrate:actions:reset';
 
-    public const ROLLBACK = 'migrate:actions:rollback';
+    public const ROLLBACK = 'migrate:actions:rollback.md';
 
     public const STATUS = 'migrate:actions:status';
 
