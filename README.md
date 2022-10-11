@@ -8,8 +8,8 @@
 [![Github Workflow Status][badge_build]][link_build]
 [![License][badge_license]][link_license]
 
-> Actions are like version control for your migration process, allowing your team to modify and share the application's Action schema. If you have ever had to tell a teammate
-> to manually perform any action on a producton server, you've come across an issue that actions solves.
+> Actions are like version control for your actions process, allowing your team to modify and share the application's actionable schema. If you have ever had to tell a teammate
+> to manually perform any action on a production server, you've come across an issue that actions solves.
 
 ## Documentation
 
