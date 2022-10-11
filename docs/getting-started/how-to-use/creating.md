@@ -33,7 +33,7 @@ php artisan make:migration:action
 
 ## Nested Files
 
-Since version `3.0` you can use nested paths to create actions:
+You can use nested paths to create actions:
 
 ```bash
 php artisan make:migration:action Foo/Bar/QweRty
