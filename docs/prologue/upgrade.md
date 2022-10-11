@@ -45,3 +45,49 @@ It will do the following:
 - Replace the `up` method with `__invoke` if the class does not have a `down` method
 - Replace named classes with anonymous ones
 - Create a configuration file according to the data saved in your project
+
+> Note
+> If you used inheritance of actions from other actions, then you will need to process these files manually.
+
+### Configuration
+
+Publish the config file and migrate the settings from the `config/database.php` file.
+
+```bash
+php artisan vendor:publish --provider="DragonCode\LaravelActions\ServiceProvider"
+```
+
+### Actions Location
+
+Move the action files to the `actions` folder in the project root, or update the `actions.path` option in the configuration file.
+
+
+### Parent Namespace
+
+Replace `DragonCode\LaravelActions\Support\Actionable` with `DragonCode\LaravelActions\Action`.
+
+### Anonymous Classes
+
+Replace named calls to your application's classes with anonymous ones.
+
+For example:
+
+```php
+// before
+use DragonCode\LaravelActions\Support\Actionable;
+
+class Some extends Actionable {}
+
+// after
+use DragonCode\LaravelActions\Action;
+
+return new class () extends Action {};
+```
+
+### Invokable Method
+
+If your class does not contain a `down` method, then you can replace the `up` method with `__invoke`.
+
+### Changed Migration Repository
+
+Just call the `php artisan migrate` command to make changes to the action repository table. 
