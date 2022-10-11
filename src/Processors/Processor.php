@@ -7,7 +7,6 @@ namespace DragonCode\LaravelActions\Processors;
 use Closure;
 use DragonCode\LaravelActions\Concerns\Artisan;
 use DragonCode\LaravelActions\Contracts\Notification;
-use DragonCode\LaravelActions\Events\BaseEvent;
 use DragonCode\LaravelActions\Helpers\Config;
 use DragonCode\LaravelActions\Helpers\Git;
 use DragonCode\LaravelActions\Repositories\ActionRepository;
@@ -76,8 +75,8 @@ abstract class Processor
         return false;
     }
 
-    protected function fireEvent(BaseEvent $event): void
+    protected function fireEvent(string $event, string $method): void
     {
-        $this->events->dispatch($event);
+        $this->events->dispatch(new $event($method, $this->options->before));
     }
 }

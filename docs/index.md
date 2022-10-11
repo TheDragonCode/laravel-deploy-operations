@@ -21,11 +21,9 @@
         * [Creating](getting-started/how-to-use/creating.md)
         * [Running Actions](getting-started/how-to-use/running.md)
         * [Rolling Back](getting-started/how-to-use/rollback.md)
-        * [Rolling Back & Actions Using A Single Command](getting-started/how-to-use/resetting.md)
-        * [Drop All Actions & Run Actions](getting-started/how-to-use/freshing.md)
         * [Status](getting-started/how-to-use/status.md)
     * Helpers
-        * [Execution Status](getting-started/helpers/execution-statuses.md)
+        * [Execution Status](getting-started/helpers/execution-status.md)
         * [Events](getting-started/helpers/events.md)
         * [Artisan Command](getting-started/helpers/artisan.md)
 

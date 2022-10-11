@@ -14,22 +14,22 @@ class Rollback extends Processor
     public function handle(): void
     {
         if ($this->tableNotFound() || $this->nothingToRollback()) {
-            $this->fireEvent(new NoPendingActions('down'));
+            $this->fireEvent(NoPendingActions::class, 'down');
 
             return;
         }
 
         if ($actions = $this->getActions($this->options->step)) {
-            $this->fireEvent(new ActionStarted('down', $this->options->before));
+            $this->fireEvent(ActionStarted::class, 'down');
 
             $this->run($actions);
 
-            $this->fireEvent(new ActionEnded('down', $this->options->before));
+            $this->fireEvent(ActionEnded::class, 'down');
 
             return;
         }
 
-        $this->fireEvent(new NoPendingActions('down'));
+        $this->fireEvent(NoPendingActions::class, 'down');
     }
 
     protected function run(array $actions): void

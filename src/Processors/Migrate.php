@@ -7,9 +7,11 @@ namespace DragonCode\LaravelActions\Processors;
 use DragonCode\LaravelActions\Constants\Names;
 use DragonCode\LaravelActions\Constants\Options;
 use DragonCode\LaravelActions\Events\ActionEnded;
+use DragonCode\LaravelActions\Events\ActionFailed;
 use DragonCode\LaravelActions\Events\ActionStarted;
 use DragonCode\LaravelActions\Events\NoPendingActions;
 use DragonCode\Support\Facades\Helpers\Str;
+use Throwable;
 
 class Migrate extends Processor
 {
@@ -29,17 +31,24 @@ class Migrate extends Processor
 
     protected function runActions(): void
     {
-        if ($files = $this->getNewFiles()) {
-            $this->fireEvent(new ActionStarted('up', $this->options->before));
+        try {
+            if ($files = $this->getNewFiles()) {
+                $this->fireEvent(ActionStarted::class, 'up');
 
-            $this->runEach($files, $this->getBatch());
+                $this->runEach($files, $this->getBatch());
 
-            $this->fireEvent(new ActionEnded('up', $this->options->before));
+                $this->fireEvent(ActionEnded::class, 'up');
 
-            return;
+                return;
+            }
+
+            $this->fireEvent(NoPendingActions::class, 'up');
         }
+        catch (Throwable $e) {
+            $this->fireEvent(ActionFailed::class, 'up');
 
-        $this->fireEvent(new NoPendingActions('up'));
+            throw $e;
+        }
     }
 
     protected function runEach(array $files, int $batch): void
