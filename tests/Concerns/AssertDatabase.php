@@ -22,9 +22,9 @@ trait AssertDatabase
         );
     }
 
-    protected function assertDatabaseMigrationHas(string $table, $value, $connection = null): void
+    protected function assertDatabaseMigrationHas(string $table, $value, $connection = null, string $column = 'action'): void
     {
-        $this->assertDatabaseHasLike($table, 'action', $value, $connection);
+        $this->assertDatabaseHasLike($table, $column, $value, $connection);
     }
 
     protected function assertDatabaseHasLike(string $table, string $column, $value, $connection = null): void
@@ -37,9 +37,9 @@ trait AssertDatabase
         $this->assertTrue($exists);
     }
 
-    protected function assertDatabaseMigrationDoesntLike(string $table, $value, $connection = null): void
+    protected function assertDatabaseMigrationDoesntLike(string $table, $value, $connection = null, string $column = 'action'): void
     {
-        $this->assertDatabaseDoesntLike($table, 'action', $value, $connection);
+        $this->assertDatabaseDoesntLike($table, $column, $value, $connection);
     }
 
     protected function assertDatabaseDoesntLike(string $table, string $column, $value, $connection = null): void

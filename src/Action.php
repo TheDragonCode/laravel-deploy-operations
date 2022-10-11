@@ -58,20 +58,6 @@ abstract class Action extends Migration
     protected bool $before = true;
 
     /**
-     * Run the actions.
-     */
-    public function up(): void
-    {
-    }
-
-    /**
-     * Reverse the actions.
-     */
-    public function down(): void
-    {
-    }
-
-    /**
      * Determines the type of launch of the action.
      *
      * If true, then it will be executed once.

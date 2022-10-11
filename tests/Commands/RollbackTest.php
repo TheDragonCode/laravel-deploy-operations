@@ -264,4 +264,43 @@ class RollbackTest extends TestCase
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
     }
+
+    public function testDI(): void
+    {
+        $this->copyDI();
+
+        $table = 'test';
+
+        $this->artisan(Names::INSTALL)->assertExitCode(0);
+
+        $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'invoke');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'invoke_down');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'up_down');
+        $this->assertDatabaseMigrationDoesntLike($table, 'up_down', column: 'value');
+        $this->assertDatabaseMigrationDoesntLike($table, 'invoke_down', column: 'value');
+        $this->assertDatabaseMigrationDoesntLike($table, 'invoke', column: 'value');
+        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+
+        $this->assertDatabaseCount($table, 3);
+        $this->assertDatabaseCount($this->table, 3);
+        $this->assertDatabaseMigrationHas($this->table, 'invoke');
+        $this->assertDatabaseMigrationHas($this->table, 'invoke_down');
+        $this->assertDatabaseMigrationHas($this->table, 'up_down');
+        $this->assertDatabaseMigrationHas($table, 'up_down', column: 'value');
+        $this->assertDatabaseMigrationHas($table, 'invoke_down', column: 'value');
+        $this->assertDatabaseMigrationHas($table, 'invoke', column: 'value');
+
+        $this->artisan(Names::ROLLBACK)->assertExitCode(0);
+
+        $this->assertDatabaseCount($table, 2);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'invoke');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'invoke_down');
+        $this->assertDatabaseMigrationDoesntLike($this->table, 'up_down');
+        $this->assertDatabaseMigrationDoesntLike($table, 'up_down', column: 'value');
+        $this->assertDatabaseMigrationHas($table, 'invoke_down', column: 'value');
+        $this->assertDatabaseMigrationHas($table, 'invoke', column: 'value');
+    }
 }

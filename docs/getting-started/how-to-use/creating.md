@@ -65,3 +65,71 @@ php artisan make:migration:action foo/bar/QweRty
 php artisan make:migration:action foo/bar/QweRty.php
 # actions/foo/bar/2022_10_11_225734_qwe_rty.php
 ```
+
+## Invokable Method
+
+By default, the new action class will contain the `__invoke` method, but you can easily replace it with public `up` name.
+
+```php
+use DragonCode\LaravelActions\Action;
+
+return new class () extends Action
+{
+    public function __invoke(): void
+    {
+        // some code
+    }
+};
+```
+
+> Note that the `__invoke` method has been added as a single call.
+> This means that when the action is running, it will be called, but not when it is rolled back.
+>
+> You should also pay attention to the fact that if there is an `__invoke` method in the class, the `down` method will not be called.
+
+```php
+use DragonCode\LaravelActions\Action;
+
+return new class () extends Action
+{
+    public function __invoke(): void {} // called when `php artisan migrate:actions` running
+
+    public function down(): void {} // doesn't call when `php artisan migrate:rollback` running
+                                    // and any other commands to revert the action.  
+};
+```
+
+## Dependency Injection
+
+You can also use the dependency injection with `__invoke`, `up` and `down` methods:
+
+```php
+use DragonCode\LaravelActions\Action;
+use Tests\Concerns\Some;
+
+return new class () extends Action
+{
+    public function __invoke(Some $some): void
+    {
+        $value = $some->get('qwerty');
+    }
+};
+```
+
+```php
+use DragonCode\LaravelActions\Action;
+use Tests\Concerns\Some;
+
+return new class () extends Action
+{
+    public function up(Some $some): void
+    {
+        $value = $some->get('qwerty');
+    }
+
+    public function down(Some $some): void
+    {
+        $value = $some->get('qwerty');
+    }
+};
+```

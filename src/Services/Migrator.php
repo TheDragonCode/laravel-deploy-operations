@@ -63,7 +63,7 @@ class Migrator
         $action = $this->resolvePath($file);
         $name   = $this->resolveActionName($file);
 
-        if ($this->hasAction($action, 'down')) {
+        if (! $this->hasAction($action, '__invoke') && $this->hasAction($action, 'down')) {
             $this->runAction($action, $name, 'down');
         }
 

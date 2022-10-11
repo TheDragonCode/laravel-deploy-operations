@@ -22,6 +22,14 @@ trait Files
         );
     }
 
+    protected function copyDI(): void
+    {
+        File::copyDirectory(
+            __DIR__ . '/../fixtures/app/di',
+            $this->targetDirectory()
+        );
+    }
+
     protected function copySuccessFailureMethod(): void
     {
         File::copy(
