@@ -19,7 +19,7 @@
     * [Installation](getting-started/installation.md)
     * How to use
         * [Creating](getting-started/how-to-use/creating.md)
-        * [Execution](getting-started/how-to-use/execution.md)
+        * [Running Actions](getting-started/how-to-use/running.md)
         * [Rolling Back](getting-started/how-to-use/rollback.md)
         * [Rolling Back & Actions Using A Single Command](getting-started/how-to-use/resetting.md)
         * [Drop All Actions & Run Actions](getting-started/how-to-use/freshing.md)
