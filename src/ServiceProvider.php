@@ -67,7 +67,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../config/actions.php' => $this->app->configPath('actions.php'),
-        ]);
+        ], 'config');
     }
 
     protected function registerConfig(): void
