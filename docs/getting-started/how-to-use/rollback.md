@@ -18,6 +18,34 @@ The `migrate:actions:reset` command will roll back all of your application's mig
 php artisan migrate:actions:reset
 ```
 
+For example:
+
+```bash
+php artisan migrate:actions:rollback
+# action                    batch
+# 2022_10_12_021837_some    1
+# 2022_10_12_021838_some    2
+# 2022_10_12_021839_some    2
+# 2022_10_12_021840_some    3  // will be canceled
+# 2022_10_12_021841_some    3  // will be canceled
+
+php artisan migrate:actions:rollback --step=1
+# action                    batch
+# 2022_10_12_021837_some    1
+# 2022_10_12_021838_some    2
+# 2022_10_12_021839_some    2
+# 2022_10_12_021840_some    3  // will be canceled
+# 2022_10_12_021841_some    3  // will be canceled
+
+php artisan migrate:actions:rollback --step=2
+# action                    batch
+# 2022_10_12_021837_some    1
+# 2022_10_12_021838_some    2  // will be canceled
+# 2022_10_12_021839_some    2  // will be canceled
+# 2022_10_12_021840_some    3  // will be canceled
+# 2022_10_12_021841_some    3  // will be canceled
+```
+
 ## Roll Back & Action Using A Single Command
 
 The `migrate:actions:refresh` command will roll back all of your migrations and then execute the `migrate:actions` command. This command effectively re-creates your entire
