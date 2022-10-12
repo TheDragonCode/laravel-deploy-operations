@@ -12,10 +12,8 @@ use DragonCode\LaravelActions\Helpers\Git;
 use DragonCode\LaravelActions\Repositories\ActionRepository;
 use DragonCode\LaravelActions\Services\Migrator;
 use DragonCode\LaravelActions\Values\Options;
-use DragonCode\Support\Facades\Helpers\Arr;
 use DragonCode\Support\Facades\Helpers\Str;
 use DragonCode\Support\Filesystem\File;
-use DragonCode\Support\Helpers\Ables\Arrayable;
 use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Events\Dispatcher;
 use Symfony\Component\Console\Input\InputInterface;
@@ -43,35 +41,15 @@ abstract class Processor
         $this->migrator->setConnection($this->options->connection)->setOutput($this->output);
     }
 
-    protected function getFiles(?Closure $filter = null, ?string $path = null, bool $realpath = false, bool $fullpath = false, bool $withExtension = true): array
+    protected function getFiles(string $path, ?Closure $filter = null): array
     {
-        $path = $this->getActionsPath($path, $realpath);
+        $file = Str::finish($path, '.php');
 
-        $names = $this->file->exists($path) ? [$path] : $this->file->allPaths($path, $filter, true);
-
-        return Arr::of($names)
-            ->when(
-                ! $fullpath,
-                fn (Arrayable $array) => $array
-                    ->map(fn (string $value) => Str::of(realpath($value))->after(realpath($path))->ltrim('\\/')->toString())
-            )
-            ->when(
-                ! $withExtension,
-                fn (Arrayable $array) => $array
-                    ->map(fn (string $value) => Str::before($value, '.php'))
-            )
-            ->toArray();
-    }
-
-    protected function getActionsPath(?string $path = null, bool $realpath = false): string
-    {
-        $path = $realpath ? $path : $this->config->path($path);
-
-        if (! is_dir($path) && ! Str::endsWith($path, '.php')) {
-            return $this->file->exists($path . '.php') ? $path . '.php' : $path;
+        if ($this->file->exists($file) && $this->file->isFile($file)) {
+            return [$file];
         }
 
-        return $path;
+        return $this->file->names($path, $filter, true);
     }
 
     protected function runCommand(string $command, array $options = []): void

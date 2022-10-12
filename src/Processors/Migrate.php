@@ -18,7 +18,7 @@ class Migrate extends Processor
     public function handle(): void
     {
         $this->ensureRepository();
-        $this->runActions();
+        $this->runActions($this->getCompleted());
     }
 
     protected function ensureRepository(): void
@@ -29,10 +29,10 @@ class Migrate extends Processor
         ]);
     }
 
-    protected function runActions(): void
+    protected function runActions(array $completed): void
     {
         try {
-            if ($files = $this->getNewFiles()) {
+            if ($files = $this->getNewFiles($completed)) {
                 $this->fireEvent(ActionStarted::class, 'up');
 
                 $this->runEach($files, $this->getBatch());
@@ -58,20 +58,22 @@ class Migrate extends Processor
         }
     }
 
-    protected function run(string $file, int $batch): void
+    protected function run(string $filename, int $batch): void
     {
-        $this->migrator->runUp($file, $batch, $this->options);
+        $this->migrator->runUp($filename, $batch, $this->options);
     }
 
-    protected function getNewFiles(): array
+    protected function getNewFiles(array $completed): array
     {
-        $completed = $this->repository->getCompleted()->pluck('action')->toArray();
-
         return $this->getFiles(
-            filter  : fn (string $file) => ! Str::of($file)->replace('\\', '/')->contains($completed),
-            path    : $this->options->path,
-            fullpath: true
+            path: $this->options->path,
+            filter: fn (string $file) => ! Str::of($file)->replace('\\', '/')->contains($completed)
         );
+    }
+
+    protected function getCompleted(): array
+    {
+        return $this->repository->getCompleted()->pluck('action')->toArray();
     }
 
     protected function getBatch(): int

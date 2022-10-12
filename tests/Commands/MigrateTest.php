@@ -312,6 +312,9 @@ class MigrateTest extends TestCase
         $this->assertDatabaseCount($this->table, 11);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_failed_failure');
 
+        $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 11);
+
         try {
             $this->copyFailedMethod();
 
@@ -325,7 +328,7 @@ class MigrateTest extends TestCase
             $this->assertTrue(Str::contains($e->getFile(), 'run_failed_failure'));
         }
 
-        $this->assertDatabaseCount($table, 1);
+        $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 11);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_failed_failure');
     }

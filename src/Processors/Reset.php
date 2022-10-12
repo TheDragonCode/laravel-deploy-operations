@@ -14,17 +14,16 @@ class Reset extends Processor
         $this->rollback(
             $this->options->connection,
             $this->options->path,
-            $this->options->realpath,
             $this->count()
         );
     }
 
-    protected function rollback(?string $connection, ?string $path, ?bool $realPath, int $step): void
+    protected function rollback(?string $connection, ?string $path, int $step): void
     {
         $this->runCommand(Names::ROLLBACK, [
             '--' . Options::CONNECTION => $connection,
             '--' . Options::PATH       => $path,
-            '--' . Options::REALPATH   => $realPath,
+            '--' . Options::REALPATH   => true,
             '--' . Options::STEP       => $step,
             '--' . Options::FORCE      => true,
         ]);

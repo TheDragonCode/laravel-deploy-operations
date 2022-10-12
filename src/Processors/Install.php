@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace DragonCode\LaravelActions\Processors;
 
 use DragonCode\Support\Facades\Filesystem\Directory;
+use DragonCode\Support\Facades\Filesystem\Path;
+use DragonCode\Support\Facades\Helpers\Str;
 
 class Install extends Processor
 {
@@ -34,8 +36,13 @@ class Install extends Processor
 
     protected function ensureDirectory(): void
     {
-        Directory::ensureDirectory(
-            $this->getActionsPath(realpath: $this->options->realpath)
-        );
+        $this->isFile($this->options->path)
+            ? Directory::ensureDirectory(Path::dirname($this->options->path))
+            : Directory::ensureDirectory($this->options->path);
+    }
+
+    protected function isFile(string $path): bool
+    {
+        return Str::of($path)->lower()->endsWith('.php');
     }
 }

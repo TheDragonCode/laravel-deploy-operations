@@ -56,24 +56,20 @@ class Upgrade extends Processor
 
     protected function clean(): void
     {
-        $this->notification->task('Delete old directory', fn () => Directory::ensureDelete(
-            database_path('actions')
-        ));
+        $this->notification->task(
+            'Delete old directory',
+            fn () => Directory::ensureDelete($this->oldPath())
+        );
     }
 
     protected function open(string $filename): string
     {
-        return file_get_contents(base_path('database/actions/' . $filename));
+        return file_get_contents($this->oldPath($filename));
     }
 
     protected function store(string $filename, string $content): void
     {
-        File::store($this->config->path($filename), $content);
-    }
-
-    protected function delete(string $filename): void
-    {
-        File::ensureDelete($filename);
+        File::store($this->newPath($filename), $content);
     }
 
     protected function replaceNamespace(string $content): string
@@ -149,20 +145,30 @@ class Upgrade extends Processor
                 : __DIR__ . '/../../database/migrations/named/2022_08_18_180137_change_migration_actions_table.php';
 
             $this->artisan('migrate', [
-                '--path'     => $path,
+                '--path' => $path,
                 '--realpath' => true,
-                '--force'    => true,
+                '--force' => true,
             ]);
         });
     }
 
     protected function getOldFiles(): array
     {
-        return $this->getFiles(path: database_path('actions'), realpath: true);
+        return $this->getFiles($this->oldPath());
+    }
+
+    protected function oldPath(?string $filename = null): string
+    {
+        return database_path('actions/' . $filename);
+    }
+
+    protected function newPath(?string $filename = null): string
+    {
+        return $this->options->path . '/' . $filename;
     }
 
     protected function alreadyUpgraded(): bool
     {
-        return Directory::exists($this->config->path());
+        return Directory::exists($this->newPath());
     }
 }

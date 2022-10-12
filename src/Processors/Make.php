@@ -10,7 +10,7 @@ use DragonCode\Support\Facades\Helpers\Str;
 
 class Make extends Processor
 {
-    protected string $fallbackName = 'auto';
+    protected string $fallback = 'auto';
 
     protected string $stub = __DIR__ . '/../../resources/stubs/action.stub';
 
@@ -22,9 +22,9 @@ class Make extends Processor
     protected function run(): void
     {
         $name = $this->getName();
-        $path = $this->getActionsPath($name, realpath: $this->options->realpath);
+        $path = $this->getPath();
 
-        $this->create($path);
+        $this->create($path . '/' . $name);
     }
 
     protected function create(string $path): void
@@ -34,20 +34,27 @@ class Make extends Processor
 
     protected function getName(): string
     {
-        $branch   = $this->getBranchName();
-        $filename = $this->getFilename($branch);
+        $branch = $this->getBranchName();
 
-        return Path::dirname($branch) . DIRECTORY_SEPARATOR . $filename;
+        return $this->getFilename($branch);
+    }
+
+    protected function getPath(): string
+    {
+        return $this->options->path;
     }
 
     protected function getFilename(string $branch): string
     {
-        return Str::of(Path::filename($branch))->prepend($this->getTime())->finish('.php')->toString();
+        $directory = Path::dirname($branch);
+        $filename  = Path::filename($branch);
+
+        return Str::of($filename)->prepend($this->getTime())->finish('.php')->prepend($directory . '/')->toString();
     }
 
     protected function getBranchName(): string
     {
-        return $this->options->name ?? $this->git->currentBranch() ?? $this->fallbackName;
+        return $this->options->name ?? $this->git->currentBranch() ?? $this->fallback;
     }
 
     protected function getTime(): string

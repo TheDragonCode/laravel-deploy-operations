@@ -7,7 +7,6 @@ namespace DragonCode\LaravelActions\Processors;
 use DragonCode\LaravelActions\Events\ActionEnded;
 use DragonCode\LaravelActions\Events\ActionStarted;
 use DragonCode\LaravelActions\Events\NoPendingActions;
-use DragonCode\Support\Facades\Helpers\Str;
 
 class Rollback extends Processor
 {
@@ -35,9 +34,7 @@ class Rollback extends Processor
     protected function run(array $actions): void
     {
         foreach ($actions as $row) {
-            $this->rollbackAction(
-                $this->resolveFilename($row->action)
-            );
+            $this->rollbackAction($row->action);
         }
     }
 
@@ -50,9 +47,7 @@ class Rollback extends Processor
 
     protected function rollbackAction(string $action): void
     {
-        $this->migrator->runDown(
-            $this->getActionsPath($action, realpath: $this->options->realpath)
-        );
+        $this->migrator->runDown($action, $this->options);
     }
 
     protected function nothingToRollback(): bool
@@ -69,10 +64,5 @@ class Rollback extends Processor
     protected function count(): int
     {
         return $this->repository->getLastBatchNumber();
-    }
-
-    protected function resolveFilename(string $name): string
-    {
-        return Str::finish($name, '.php');
     }
 }
