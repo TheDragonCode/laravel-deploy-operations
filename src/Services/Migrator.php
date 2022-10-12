@@ -49,13 +49,15 @@ class Migrator
         $name   = $this->resolveActionName($path);
 
         if ($this->allowAction($action, $name, $options)) {
-            $this->hasAction($action, '__invoke')
-                ? $this->runAction($action, $name, '__invoke')
-                : $this->runAction($action, $name, 'up');
+            $this->notification->task($name, function () use ($action, $name, $batch) {
+                $this->hasAction($action, '__invoke')
+                    ? $this->runAction($action, '__invoke')
+                    : $this->runAction($action, 'up');
 
-            if ($this->allowLogging($action)) {
-                $this->log($name, $batch);
-            }
+                if ($this->allowLogging($action)) {
+                    $this->log($name, $batch);
+                }
+            });
 
             return;
         }
@@ -69,11 +71,13 @@ class Migrator
         $action = $this->resolveAction($path);
         $name   = $this->resolveActionName($path);
 
-        if (! $this->hasAction($action, '__invoke') && $this->hasAction($action, 'down')) {
-            $this->runAction($action, $name, 'down');
-        }
+        $this->notification->task($name, function () use ($action, $name) {
+            if (! $this->hasAction($action, '__invoke') && $this->hasAction($action, 'down')) {
+                $this->runAction($action, 'down');
+            }
 
-        $this->deleteLog($name);
+            $this->deleteLog($name);
+        });
     }
 
     protected function hasAction(Action $action, string $method): bool
@@ -81,22 +85,20 @@ class Migrator
         return method_exists($action, $method);
     }
 
-    protected function runAction(Action $action, string $name, string $method): void
+    protected function runAction(Action $action, string $method): void
     {
-        $this->notification->task($name, function () use ($action, $method) {
-            if ($this->hasAction($action, $method)) {
-                try {
-                    $this->runMethod($action, $method, $action->enabledTransactions(), $action->transactionAttempts());
+        if ($this->hasAction($action, $method)) {
+            try {
+                $this->runMethod($action, $method, $action->enabledTransactions(), $action->transactionAttempts());
 
-                    $action->success();
-                }
-                catch (Throwable $e) {
-                    $action->failed();
-
-                    throw $e;
-                }
+                $action->success();
             }
-        });
+            catch (Throwable $e) {
+                $action->failed();
+
+                throw $e;
+            }
+        }
     }
 
     protected function runMethod(Action $action, string $method, bool $transactions, int $attempts): void
