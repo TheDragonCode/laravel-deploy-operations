@@ -20,6 +20,17 @@ class Sorter
         return Arr::ksort($items, $this->callback());
     }
 
+    public function byRan(array $actions, array $completed): array
+    {
+        foreach ($this->byValues($actions) as $value) {
+            if (! in_array($value, $completed, true)) {
+                $completed[] = $value;
+            }
+        }
+
+        return $completed;
+    }
+
     protected function callback(): Closure
     {
         return function (string $a, string $b): int {

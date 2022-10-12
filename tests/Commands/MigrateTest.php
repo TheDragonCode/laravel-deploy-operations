@@ -547,7 +547,6 @@ class MigrateTest extends TestCase
         $files[] = date('Y_m_d_His_') . 'test6';
         $this->artisan(Names::MAKE, ['name' => 'test6'])->assertExitCode(0);
 
-        $this->assertDatabaseCount($this->table, 0);
         $this->artisan(Names::MIGRATE)->assertExitCode(0);
         $this->assertDatabaseCount($this->table, 6);
 
