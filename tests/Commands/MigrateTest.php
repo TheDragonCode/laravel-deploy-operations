@@ -4,6 +4,7 @@ namespace Tests\Commands;
 
 use DragonCode\LaravelActions\Constants\Names;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 use Throwable;
@@ -520,5 +521,38 @@ class MigrateTest extends TestCase
         $this->assertDatabaseMigrationHas($table, 'up_down', column: 'value');
         $this->assertDatabaseMigrationHas($table, 'invoke_down', column: 'value');
         $this->assertDatabaseMigrationHas($table, 'invoke', column: 'value');
+    }
+
+    public function testSorting(): void
+    {
+        $files = [];
+
+        $this->artisan(Names::INSTALL)->assertExitCode(0);
+
+        $files[] = date('Y_m_d_His_') . 'test1';
+        $this->artisan(Names::MAKE, ['name' => 'test1'])->assertExitCode(0);
+        sleep(2);
+        $files[] = 'foo/' . date('Y_m_d_His_') . 'test2';
+        $this->artisan(Names::MAKE, ['name' => 'foo/test2'])->assertExitCode(0);
+        sleep(2);
+        $files[] = 'bar/' . date('Y_m_d_His_') . 'test3';
+        $this->artisan(Names::MAKE, ['name' => 'bar/test3'])->assertExitCode(0);
+        sleep(2);
+        $files[] = 'foo/' . date('Y_m_d_His_') . 'test4';
+        $this->artisan(Names::MAKE, ['name' => 'foo/test4'])->assertExitCode(0);
+        sleep(2);
+        $files[] = 'bar/' . date('Y_m_d_His_') . 'test5';
+        $this->artisan(Names::MAKE, ['name' => 'bar/test5'])->assertExitCode(0);
+        sleep(2);
+        $files[] = date('Y_m_d_His_') . 'test6';
+        $this->artisan(Names::MAKE, ['name' => 'test6'])->assertExitCode(0);
+
+        $this->assertDatabaseCount($this->table, 0);
+        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->assertDatabaseCount($this->table, 6);
+
+        $records = DB::table($this->table)->orderBy('id')->pluck('action')->toArray();
+
+        $this->assertSame($files, $records);
     }
 }

@@ -9,6 +9,7 @@ use DragonCode\LaravelActions\Concerns\Artisan;
 use DragonCode\LaravelActions\Contracts\Notification;
 use DragonCode\LaravelActions\Helpers\Config;
 use DragonCode\LaravelActions\Helpers\Git;
+use DragonCode\LaravelActions\Helpers\Sorter;
 use DragonCode\LaravelActions\Repositories\ActionRepository;
 use DragonCode\LaravelActions\Services\Migrator;
 use DragonCode\LaravelActions\Values\Options;
@@ -25,16 +26,17 @@ abstract class Processor
     abstract public function handle(): void;
 
     public function __construct(
-        protected Options $options,
-        protected InputInterface $input,
-        protected OutputStyle $output,
-        protected Config $config,
+        protected Options          $options,
+        protected InputInterface   $input,
+        protected OutputStyle      $output,
+        protected Config           $config,
         protected ActionRepository $repository,
-        protected Git $git,
-        protected File $file,
-        protected Migrator $migrator,
-        protected Notification $notification,
-        protected Dispatcher $events
+        protected Git              $git,
+        protected File             $file,
+        protected Migrator         $migrator,
+        protected Notification     $notification,
+        protected Dispatcher       $events,
+        protected Sorter           $sorter
     ) {
         $this->notification->setOutput($this->output);
         $this->repository->setConnection($this->options->connection);
@@ -49,7 +51,9 @@ abstract class Processor
             return [$file];
         }
 
-        return $this->file->names($path, $filter, true);
+        return $this->sorter->byValues(
+            $this->file->names($path, $filter, true)
+        );
     }
 
     protected function runCommand(string $command, array $options = []): void
