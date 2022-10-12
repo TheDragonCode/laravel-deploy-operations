@@ -50,8 +50,10 @@ abstract class Processor
         $names = $this->file->exists($path) ? [$path] : $this->file->allPaths($path, $filter, true);
 
         return Arr::of($names)
-            ->when(! $fullpath, fn (Arrayable $array) => $array
-                ->map(fn (string $value) => Str::of(realpath($value))->after(realpath($path))->ltrim('\\/')->toString())
+            ->when(
+                ! $fullpath,
+                fn (Arrayable $array) => $array
+                    ->map(fn (string $value) => Str::of(realpath($value))->after(realpath($path))->ltrim('\\/')->toString())
             )
             ->toArray();
     }
