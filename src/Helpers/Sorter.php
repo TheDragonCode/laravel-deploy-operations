@@ -22,7 +22,7 @@ class Sorter
 
     public function byRan(array $actions, array $completed): array
     {
-        foreach ($this->byValues($actions) as $value) {
+        foreach ($actions as $value) {
             if (! in_array($value, $completed, true)) {
                 $completed[] = $value;
             }

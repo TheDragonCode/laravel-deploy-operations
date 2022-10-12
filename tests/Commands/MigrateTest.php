@@ -352,6 +352,8 @@ class MigrateTest extends TestCase
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 1);
         $this->assertDatabaseMigrationHas($this->table, 'baz');
+
+        $this->assertSame('sub_path/2021_12_15_205804_baz', $this->table()->first()->action);
     }
 
     public function testPathAsFileWithoutExtension()
@@ -372,6 +374,8 @@ class MigrateTest extends TestCase
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 1);
         $this->assertDatabaseMigrationHas($this->table, 'baz');
+
+        $this->assertSame($path, $this->table()->first()->action);
     }
 
     public function testPathAsDirectory()
@@ -392,6 +396,8 @@ class MigrateTest extends TestCase
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 1);
         $this->assertDatabaseMigrationHas($this->table, 'baz');
+
+        $this->assertSame('sub_path/2021_12_15_205804_baz', $this->table()->first()->action);
     }
 
     public function testMigrationNotFound()
