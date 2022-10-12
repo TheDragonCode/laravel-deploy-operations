@@ -41,16 +41,16 @@ abstract class Processor
         $this->migrator->setConnection($this->options->connection)->setOutput($this->output);
     }
 
-    protected function getFiles(?Closure $filter = null, ?string $path = null): array
+    protected function getFiles(?Closure $filter = null, ?string $path = null, bool $realpath = false): array
     {
-        $path = $this->getActionsPath($path);
+        $path = $this->getActionsPath($path, $realpath);
 
-        return $this->file->exists($path) ? [$path] : $this->file->allPaths($path, $filter, true);
+        return $this->file->exists($path) ? [$path] : $this->file->names($path, $filter, true);
     }
 
-    protected function getActionsPath(?string $path = null): string
+    protected function getActionsPath(?string $path = null, bool $realpath = false): string
     {
-        $path = $this->options->realpath ? $path : $this->config->path($path);
+        $path = $realpath ? $path : $this->config->path($path);
 
         if (! is_dir($path) && ! Str::endsWith($path, '.php')) {
             return $this->file->exists($path . '.php') ? $path . '.php' : $path;

@@ -22,7 +22,7 @@ class Make extends Processor
     protected function run(): void
     {
         $name = $this->getName();
-        $path = $this->getActionsPath($name);
+        $path = $this->getActionsPath($name, realpath: $this->options->realpath);
 
         $this->create($path);
     }

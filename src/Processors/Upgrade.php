@@ -45,9 +45,9 @@ class Upgrade extends Processor
         $content = $this->replaceClassName($content);
         $content = $this->replaceDeclareStrictType($content);
         $content = $this->replaceWithInvoke($content);
+        $content = $this->replaceProperties($content);
 
         $this->store($filename, $content);
-        $this->delete($filename);
     }
 
     protected function clean(): void
@@ -57,19 +57,19 @@ class Upgrade extends Processor
         ));
     }
 
-    protected function open(string $path): string
+    protected function open(string $filename): string
     {
-        return file_get_contents(base_path('database/actions/' . $path));
+        return file_get_contents(base_path('database/actions/' . $filename));
     }
 
-    protected function store(string $path, string $content): void
+    protected function store(string $filename, string $content): void
     {
-        file_put_contents($this->config->path($path), $content);
+        File::store($this->config->path($filename), $content);
     }
 
-    protected function delete(string $path): void
+    protected function delete(string $filename): void
     {
-        File::ensureDelete($this->config->path($path));
+        File::ensureDelete($filename);
     }
 
     protected function replaceNamespace(string $content): string
@@ -83,8 +83,9 @@ class Upgrade extends Processor
     protected function replaceClassName(string $content): string
     {
         return Str::of($content)
-            ->pregReplace('/^([final\s|class]+.+extends\sAction)$/', 'return new class () extends Action')
+            ->pregReplace('/((?:return\s+new\s+class\s*\(?\s*\)?|final\s+class|class)\s*.+extends\s+Action)/', 'return new class () extends Action')
             ->trim()
+            ->trim(';')
             ->append(';')
             ->append(PHP_EOL)
             ->toString();
@@ -104,6 +105,18 @@ class Upgrade extends Processor
             ->when(! Str::matchContains($content, '/public\s+function\s+down/'), function (Stringable $string) {
                 return $string->pregReplace('/(public\s+function\s+up)/', 'public function __invoke');
             })->toString();
+    }
+
+    protected function replaceProperties(string $content): string
+    {
+        return Str::of($content)
+            ->pregReplace('/protected\s+\$once/', 'protected bool $once')
+            ->pregReplace('/protected\s+\$transactions/', 'protected bool $transactions')
+            ->pregReplace('/protected\s+\$transaction_attempts/', 'protected int $transactionAttempts')
+            ->pregReplace('/protected\s+\$environment/', 'protected string|array|null $environment')
+            ->pregReplace('/protected\s+\$except_environment/', 'protected string|array|null $exceptEnvironment')
+            ->pregReplace('/protected\s+\$before/', 'protected bool $before')
+            ->toString();
     }
 
     protected function moveConfig(): void
@@ -126,7 +139,7 @@ class Upgrade extends Processor
 
     protected function getOldFiles(): array
     {
-        return $this->getFiles(path: database_path('actions'));
+        return $this->getFiles(path: database_path('actions'), realpath: true);
     }
 
     protected function alreadyUpgraded(): bool
