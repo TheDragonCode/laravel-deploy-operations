@@ -56,7 +56,11 @@ class Migrator
             if ($this->allowLogging($action)) {
                 $this->log($name, $batch);
             }
+
+            return;
         }
+
+        $this->notification->twoColumn($name, 'SKIP');
     }
 
     public function runDown(string $filename, Options $options): void
