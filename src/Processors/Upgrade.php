@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Processors;
 
+use DragonCode\LaravelActions\Concerns\Anonymous;
 use DragonCode\LaravelActions\ServiceProvider;
 use DragonCode\Support\Facades\Filesystem\Directory;
 use DragonCode\Support\Facades\Filesystem\File;
@@ -12,6 +13,8 @@ use DragonCode\Support\Helpers\Ables\Stringable;
 
 class Upgrade extends Processor
 {
+    use Anonymous;
+
     public function handle(): void
     {
         if ($this->alreadyUpgraded()) {
@@ -27,6 +30,7 @@ class Upgrade extends Processor
     {
         $this->moveFiles();
         $this->moveConfig();
+        $this->callMigration();
         $this->clean();
     }
 
@@ -134,6 +138,21 @@ class Upgrade extends Processor
             $content = Str::replace(file_get_contents($path), "'table' => 'migration_actions'", "'table' => '$table'");
 
             file_put_contents($path, $content);
+        });
+    }
+
+    protected function callMigration(): void
+    {
+        $this->notification->task('Call migration', function () {
+            $path = $this->allowAnonymousMigrations()
+                ? __DIR__ . '/../../database/migrations/anonymous/2022_08_18_180137_change_migration_actions_table.php'
+                : __DIR__ . '/../../database/migrations/named/2022_08_18_180137_change_migration_actions_table.php';
+
+            $this->artisan('migrate', [
+                '--path'     => $path,
+                '--realpath' => true,
+                '--force'    => true,
+            ]);
         });
     }
 

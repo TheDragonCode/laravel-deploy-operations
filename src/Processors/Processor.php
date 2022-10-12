@@ -43,15 +43,22 @@ abstract class Processor
         $this->migrator->setConnection($this->options->connection)->setOutput($this->output);
     }
 
-    protected function getFiles(?Closure $filter = null, ?string $path = null, bool $realpath = false, bool $fullpath = false): array
+    protected function getFiles(?Closure $filter = null, ?string $path = null, bool $realpath = false, bool $fullpath = false, bool $withExtension = true): array
     {
         $path = $this->getActionsPath($path, $realpath);
 
         $names = $this->file->exists($path) ? [$path] : $this->file->allPaths($path, $filter, true);
 
         return Arr::of($names)
-            ->when(! $fullpath, fn (Arrayable $array) => $array
-                ->map(fn (string $value) => Str::of(realpath($value))->after(realpath($path))->ltrim('\\/')->toString())
+            ->when(
+                ! $fullpath,
+                fn (Arrayable $array) => $array
+                    ->map(fn (string $value) => Str::of(realpath($value))->after(realpath($path))->ltrim('\\/')->toString())
+            )
+            ->when(
+                ! $withExtension,
+                fn (Arrayable $array) => $array
+                    ->map(fn (string $value) => Str::before($value, '.php'))
             )
             ->toArray();
     }
