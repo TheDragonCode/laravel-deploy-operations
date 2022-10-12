@@ -13,7 +13,7 @@
 
 ## Documentation
 
-See the [documentation](docs/index.md) for detailed installation and usage instructions.
+See the [documentation](https://actions.dragon-code.pro) for detailed installation and usage instructions.
 
 ## License
 
