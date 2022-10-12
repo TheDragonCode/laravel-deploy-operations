@@ -46,7 +46,7 @@ class Migrator
     {
         $path   = $this->resolvePath($filename, $options->path);
         $action = $this->resolveAction($path);
-        $name   = $this->resolveActionName($filename);
+        $name   = $this->resolveActionName($path);
 
         if ($this->allowAction($action, $name, $options)) {
             $this->hasAction($action, '__invoke')
@@ -63,7 +63,7 @@ class Migrator
     {
         $path   = $this->resolvePath($filename, $options->path);
         $action = $this->resolveAction($path);
-        $name   = $this->resolveActionName($filename);
+        $name   = $this->resolveActionName($path);
 
         if (! $this->hasAction($action, '__invoke') && $this->hasAction($action, 'down')) {
             $this->runAction($action, $name, 'down');
@@ -176,11 +176,11 @@ class Migrator
         throw new FileNotFoundException($path);
     }
 
-    protected function resolveActionName(string $filename): string
+    protected function resolveActionName(string $path): string
     {
-        return Str::of($filename)
-            ->ltrim('\\/')
-            ->replace('\\', '/')
+        return Str::of(realpath($path))
+            ->after(realpath($this->config->path()) . DIRECTORY_SEPARATOR)
+            ->replace(['\\', '/'], '/')
             ->before('.php')
             ->toString();
     }
