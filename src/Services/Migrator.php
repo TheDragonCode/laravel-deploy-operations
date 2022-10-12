@@ -77,20 +77,23 @@ class Migrator
 
     protected function runAction(Action $action, string $name, string $method): void
     {
-        $this->notification->task("Action: $name", function () use ($action, $method) {
-            if ($this->hasAction($action, $method)) {
-                try {
-                    $this->runMethod($action, $method, $action->enabledTransactions(), $action->transactionAttempts());
+        $this->notification->task(
+            Str::of($name)->before('.php')->prepend('Action: ')->toString(),
+            function () use ($action, $method) {
+                if ($this->hasAction($action, $method)) {
+                    try {
+                        $this->runMethod($action, $method, $action->enabledTransactions(), $action->transactionAttempts());
 
-                    $action->success();
-                }
-                catch (Throwable $e) {
-                    $action->failed();
+                        $action->success();
+                    }
+                    catch (Throwable $e) {
+                        $action->failed();
 
-                    throw $e;
+                        throw $e;
+                    }
                 }
             }
-        });
+        );
     }
 
     protected function runMethod(Action $action, string $method, bool $transactions, int $attempts): void
