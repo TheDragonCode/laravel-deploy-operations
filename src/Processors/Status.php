@@ -41,7 +41,7 @@ class Status extends Processor
 
     protected function showStatus(array $actions, array $completed): void
     {
-        foreach ($this->merge($actions, $completed) as $action) {
+        foreach ($this->merge($actions, array_keys($completed)) as $action) {
             $status = $this->getStatusFor($completed, $action);
 
             $this->notification->twoColumn($action, $status);
