@@ -6,6 +6,7 @@ namespace DragonCode\LaravelActions\Values;
 
 use DragonCode\LaravelActions\Helpers\Config;
 use DragonCode\SimpleDataTransferObject\DataTransferObject;
+use DragonCode\Support\Facades\Helpers\Boolean;
 use DragonCode\Support\Facades\Helpers\Str;
 use Illuminate\Container\Container;
 
@@ -47,6 +48,26 @@ class Options extends DataTransferObject
             ->map(fn (string $path) => Str::snake($path))
             ->implode(DIRECTORY_SEPARATOR)
             ->toString();
+    }
+
+    protected function castBefore(mixed $value): bool
+    {
+        return Boolean::parse($value);
+    }
+
+    protected function castForce(mixed $value): bool
+    {
+        return Boolean::parse($value);
+    }
+
+    protected function castRealpath(mixed $value): bool
+    {
+        return Boolean::parse($value);
+    }
+
+    protected function castStep(string|int|null $value): ?int
+    {
+        return is_numeric($value) ? (int) $value : null;
     }
 
     protected function config(): Config
