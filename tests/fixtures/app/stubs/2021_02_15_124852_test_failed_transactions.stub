@@ -1,0 +1,31 @@
+<?php
+
+use DragonCode\LaravelActions\Action;
+use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Uuid;
+
+return new class extends Action
+{
+    protected bool $transactions = true;
+
+    public function up(): void
+    {
+        $this->table()->insert([
+            $this->value(),
+            $this->value(),
+            $this->value(),
+        ]);
+
+        throw new Exception('Random message');
+    }
+
+    protected function table()
+    {
+        return DB::table('transactions');
+    }
+
+    protected function value(): array
+    {
+        return ['value' => Uuid::uuid4()];
+    }
+};

@@ -1,148 +1,80 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DragonCode\LaravelActions;
 
-use DragonCode\LaravelActions\Console\Fresh;
-use DragonCode\LaravelActions\Console\Install;
-use DragonCode\LaravelActions\Console\Make;
-use DragonCode\LaravelActions\Console\Migrate;
-use DragonCode\LaravelActions\Console\Refresh;
-use DragonCode\LaravelActions\Console\Reset;
-use DragonCode\LaravelActions\Console\Rollback;
-use DragonCode\LaravelActions\Console\Status;
-use DragonCode\LaravelActions\Constants\Action;
-use DragonCode\LaravelActions\Constants\Command;
-use DragonCode\LaravelActions\Support\MigrationCreator;
-use DragonCode\LaravelActions\Support\Migrator;
-use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Database\Migrations\DatabaseMigrationRepository;
+use DragonCode\LaravelActions\Concerns\About;
+use DragonCode\LaravelActions\Concerns\Anonymous;
+use DragonCode\LaravelActions\Contracts\Notification;
+use DragonCode\LaravelActions\Notifications\Basic;
+use DragonCode\LaravelActions\Notifications\Beautiful;
+use Illuminate\Console\View\Components\Factory;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
 {
-    protected $commands = [
-        'Migrate'         => Command::MIGRATE,
-        'MigrateFresh'    => Command::FRESH,
-        'MigrateInstall'  => Command::INSTALL,
-        'MigrateMake'     => Command::MAKE,
-        'MigrateRefresh'  => Command::REFRESH,
-        'MigrateReset'    => Command::RESET,
-        'MigrateRollback' => Command::ROLLBACK,
-        'MigrateStatus'   => Command::STATUS,
-    ];
+    use About;
+    use Anonymous;
+
+    public function boot(): void
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishConfig();
+
+            $this->registerCommands();
+            $this->registerAbout();
+            $this->registerMigrations();
+            $this->registerNotifications();
+        }
+    }
 
     public function register(): void
     {
         $this->registerConfig();
-        $this->registerRepository();
-        $this->registerMigrator();
-        $this->registerCreator();
-        $this->registerCommands($this->commands);
     }
 
-    public function provides(): array
+    protected function registerCommands(): void
     {
-        return array_merge([
-            Action::MIGRATOR,
-            Action::REPOSITORY,
-            Action::CREATOR,
-        ], array_values($this->commands));
+        $this->commands([
+            Console\Fresh::class,
+            Console\Install::class,
+            Console\Make::class,
+            Console\Migrate::class,
+            Console\Refresh::class,
+            Console\Reset::class,
+            Console\Rollback::class,
+            Console\Status::class,
+            Console\Upgrade::class,
+        ]);
     }
 
-    protected function registerRepository(): void
+    protected function registerMigrations(): void
     {
-        $this->app->singleton(Action::REPOSITORY, static function ($app) {
-            return new DatabaseMigrationRepository($app['db'], $app['config']['database.actions']);
-        });
+        $this->allowAnonymousMigrations()
+            ? $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/anonymous')
+            : $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/named');
     }
 
-    protected function registerMigrator(): void
+    protected function registerNotifications(): void
     {
-        $this->app->singleton(Action::MIGRATOR, static function ($app) {
-            return new Migrator($app[Action::REPOSITORY], $app['db'], $app['files'], $app['events']);
-        });
+        class_exists(Factory::class)
+            ? $this->app->bind(Notification::class, Beautiful::class)
+            : $this->app->bind(Notification::class, Basic::class);
     }
 
-    protected function registerCreator(): void
+    protected function publishConfig(): void
     {
-        $this->app->singleton(Action::CREATOR, static function ($app) {
-            return new MigrationCreator($app['files'], __DIR__ . '/../resources/stubs');
-        });
-    }
-
-    protected function registerCommands(array $commands): void
-    {
-        foreach (array_keys($commands) as $command) {
-            $this->{"register{$command}Command"}();
-        }
-
-        $this->commands(array_values($commands));
-    }
-
-    protected function registerMigrateCommand(): void
-    {
-        $this->app->singleton(Command::MIGRATE, static function ($app) {
-            return new Migrate($app[Action::MIGRATOR], $app[Dispatcher::class]);
-        });
-    }
-
-    protected function registerMigrateStatusCommand(): void
-    {
-        $this->app->singleton(Command::STATUS, static function ($app) {
-            return new Status($app[Action::MIGRATOR]);
-        });
-    }
-
-    protected function registerMigrateInstallCommand(): void
-    {
-        $this->app->singleton(Command::INSTALL, static function ($app) {
-            return new Install($app[Action::REPOSITORY]);
-        });
-    }
-
-    protected function registerMigrateMakeCommand(): void
-    {
-        $this->app->singleton(Command::MAKE, function ($app) {
-            return new Make(
-                $app[Action::CREATOR],
-                $app['composer']
-            );
-        });
-    }
-
-    protected function registerMigrateRollbackCommand(): void
-    {
-        $this->app->singleton(Command::ROLLBACK, function ($app) {
-            return new Rollback($app[Action::MIGRATOR]);
-        });
-    }
-
-    protected function registerMigrateResetCommand(): void
-    {
-        $this->app->singleton(Command::RESET, function ($app) {
-            return new Reset($app[Action::MIGRATOR]);
-        });
-    }
-
-    protected function registerMigrateRefreshCommand(): void
-    {
-        $this->app->singleton(Command::REFRESH, function () {
-            return new Refresh();
-        });
-    }
-
-    protected function registerMigrateFreshCommand(): void
-    {
-        $this->app->singleton(Command::FRESH, function () {
-            return new Fresh();
-        });
+        $this->publishes([
+            __DIR__ . '/../config/actions.php' => $this->app->configPath('actions.php'),
+        ], 'config');
     }
 
     protected function registerConfig(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/database.php',
-            'database'
+            __DIR__ . '/../config/actions.php',
+            'actions'
         );
     }
 }

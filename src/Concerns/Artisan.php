@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Concerns;
 
-use Illuminate\Support\Facades\Artisan as ArtisanSupport;
+use Illuminate\Support\Facades\Artisan as Command;
 
 trait Artisan
 {
@@ -18,6 +18,6 @@ trait Artisan
      */
     protected function artisan(string $command, array $parameters = []): void
     {
-        ArtisanSupport::call($command, $parameters);
+        Command::call($command, $parameters);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests\Commands;
 
+use DragonCode\LaravelActions\Constants\Names;
 use Tests\TestCase;
 
 class RefreshTest extends TestCase
@@ -10,18 +11,20 @@ class RefreshTest extends TestCase
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan('migrate:actions:install')->run();
+        $this->artisan(Names::INSTALL)->assertExitCode(0);
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 0);
 
-        $this->artisan('make:migration:action', ['name' => 'Refresh'])->run();
-        $this->artisan('migrate:actions')->run();
+        $this->artisan(Names::MAKE, ['name' => 'Refresh'])->assertExitCode(0);
+        $this->artisan(Names::MIGRATE)->assertExitCode(0);
 
+        $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 1);
 
-        $this->artisan('migrate:actions:refresh')->run();
+        $this->artisan(Names::REFRESH)->assertExitCode(0);
 
+        $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 1);
         $this->assertDatabaseMigrationHas($this->table, 'refresh');
     }

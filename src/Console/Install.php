@@ -2,27 +2,21 @@
 
 namespace DragonCode\LaravelActions\Console;
 
-use DragonCode\LaravelActions\Concerns\Database;
-use DragonCode\LaravelActions\Concerns\Infoable;
 use DragonCode\LaravelActions\Constants\Names;
-use Illuminate\Database\Console\Migrations\InstallCommand as BaseCommand;
+use DragonCode\LaravelActions\Constants\Options;
+use DragonCode\LaravelActions\Processors\Install as InstallProcessor;
+use DragonCode\LaravelActions\Processors\Processor;
 
-class Install extends BaseCommand
+class Install extends Command
 {
-    use Database;
-    use Infoable;
-
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
     protected $name = Names::INSTALL;
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Create the actions repository';
+
+    protected Processor|string $processor = InstallProcessor::class;
+
+    protected array $options = [
+        Options::CONNECTION,
+        Options::FORCE,
+    ];
 }

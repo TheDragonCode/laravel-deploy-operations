@@ -2,24 +2,26 @@
 
 namespace Tests\Commands;
 
+use DragonCode\LaravelActions\Constants\Names;
 use Tests\TestCase;
 
 class InstallTest extends TestCase
 {
-    public function testRepositoryNotFound()
+    public function testCreate(): void
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->hasTermwind()
-            ? $this->artisan('migrate:actions:status')
-            : $this->artisan('migrate:actions:status')->expectsOutput('Actions table not found.');
+        $this->artisan(Names::INSTALL)->assertExitCode(0);
+
+        $this->assertDatabaseHasTable($this->table);
     }
 
-    public function testRepository()
+    public function testAlreadyCreated(): void
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan('migrate:actions:install')->run();
+        $this->artisan(Names::INSTALL)->assertExitCode(0);
+        $this->artisan(Names::INSTALL)->assertExitCode(0);
 
         $this->assertDatabaseHasTable($this->table);
     }

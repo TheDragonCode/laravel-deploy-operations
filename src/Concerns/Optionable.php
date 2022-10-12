@@ -1,49 +1,59 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DragonCode\LaravelActions\Concerns;
 
-use Illuminate\Support\Str;
+use DragonCode\LaravelActions\Constants\Options;
+use DragonCode\Support\Facades\Helpers\Arr;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
-/** @mixin \Illuminate\Console\Command */
+/** @mixin \DragonCode\LaravelActions\Console\Command */
 trait Optionable
 {
-    protected function optionBefore(): bool
+    protected array $arguments = [];
+
+    protected array $options = [
+        Options::CONNECTION,
+        Options::FORCE,
+    ];
+
+    protected function configure(): void
     {
-        return $this->input->getOption('before');
+        $this->specifyParameters();
     }
 
-    protected function optionDatabase(): ?string
+    protected function getOptions(): array
     {
-        return $this->input->getOption('database');
+        return Arr::of($this->availableOptions())
+            ->filter(fn (array $option) => in_array($option[0], $this->options))
+            ->toArray();
     }
 
-    protected function optionStep(?int $default = null): ?int
+    protected function getArguments(): array
     {
-        return $this->input->getOption('step') ?: $default;
+        return Arr::of($this->availableArguments())
+            ->filter(fn (array $argument) => in_array($argument[0], $this->arguments))
+            ->toArray();
     }
 
-    protected function optionPath(): ?array
+    protected function availableOptions(): array
     {
-        if (! $this->hasOption('path')) {
-            return null;
-        }
+        return [
+            [Options::BEFORE, null, InputOption::VALUE_NONE, 'Run actions marked as before'],
+            [Options::CONNECTION, null, InputOption::VALUE_OPTIONAL, 'The database connection to use'],
+            [Options::FORCE, null, InputOption::VALUE_NONE, 'Force the operation to run when in production'],
+            [Options::PATH, null, InputOption::VALUE_OPTIONAL, 'The path to the actions files to be executed'],
+            [Options::REALPATH, null, InputOption::VALUE_NONE, 'Indicate any provided action file paths are pre-resolved absolute path'],
+            [Options::STEP, null, InputOption::VALUE_OPTIONAL, 'Force the actions to be run so they can be rolled back individually'],
+        ];
+    }
 
-        if ($path = $this->option('path')) {
-            return collect($path)->map(function ($path) {
-                if ($this->usingRealPath()) {
-                    return $path;
-                }
-
-                $filename = $this->getMigrationPath() . DIRECTORY_SEPARATOR . $path;
-
-                if (is_dir($filename) || file_exists($filename)) {
-                    return $filename;
-                }
-
-                return Str::finish($filename, '.php');
-            })->all();
-        }
-
-        return null;
+    protected function availableArguments(): array
+    {
+        return [
+            [Options::NAME, InputArgument::OPTIONAL, 'The name of the action'],
+        ];
     }
 }

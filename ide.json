@@ -7,29 +7,11 @@
             "inputFilter": "migration",
             "files": [
                 {
-                    "directory": "/database/actions",
+                    "directory": "/actions",
                     "name": "${CURRENT_TIME|format:yyyy_MM_dd_HHmmss}_${INPUT_CLASS|className|snakeCase}.php",
                     "template": {
                         "type": "stub",
-                        "path": "resources/stubs/action-named.stub",
-                        "parameters": {
-                            "DummyClass": "${INPUT_FQN|className}"
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "id": "dragon-code.create-anonymous-action",
-            "name": "Create Anonymous Migration Action",
-            "inputFilter": "migration",
-            "files": [
-                {
-                    "directory": "/database/actions",
-                    "name": "${CURRENT_TIME|format:yyyy_MM_dd_HHmmss}_${INPUT_CLASS|className|snakeCase}.php",
-                    "template": {
-                        "type": "stub",
-                        "path": "resources/stubs/action-anonymous.stub"
+                        "path": "resources/stubs/action.stub"
                     }
                 }
             ]

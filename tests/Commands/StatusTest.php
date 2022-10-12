@@ -2,29 +2,37 @@
 
 namespace Tests\Commands;
 
+use DragonCode\LaravelActions\Constants\Names;
 use Tests\TestCase;
 
 class StatusTest extends TestCase
 {
+    public function testNotFound(): void
+    {
+        $this->assertDatabaseDoesntTable($this->table);
+
+        $this->artisan(Names::STATUS)->assertExitCode(0);
+
+        $this->assertDatabaseDoesntTable($this->table);
+    }
+
     public function testStatusCommand()
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan('migrate:actions:install')->run();
+        $this->artisan(Names::INSTALL)->assertExitCode(0);
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 0);
 
-        $this->is6x()
-            ? $this->artisan('migrate:actions:status')->run()
-            : $this->artisan('migrate:actions:status')->expectsTable([], [])->run();
+        $this->artisan(Names::STATUS)->expectsTable([], [])->assertExitCode(0);
 
-        $this->artisan('make:migration:action', ['name' => 'Status'])->run();
-        $this->artisan('migrate:actions')->run();
+        $this->artisan(Names::MAKE, ['name' => 'Status'])->assertExitCode(0);
+        $this->artisan(Names::MIGRATE)->assertExitCode(0);
 
         $this->assertDatabaseCount($this->table, 1);
 
-        $this->artisan('migrate:actions:status')->run();
+        $this->artisan(Names::STATUS)->assertExitCode(0);
 
         $this->assertDatabaseMigrationHas($this->table, 'status');
     }

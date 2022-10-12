@@ -2,29 +2,24 @@
 
 namespace DragonCode\LaravelActions\Console;
 
-use DragonCode\LaravelActions\Concerns\Database;
-use DragonCode\LaravelActions\Concerns\Infoable;
-use DragonCode\LaravelActions\Concerns\Optionable;
 use DragonCode\LaravelActions\Constants\Names;
-use Illuminate\Database\Console\Migrations\StatusCommand as BaseCommand;
+use DragonCode\LaravelActions\Constants\Options;
+use DragonCode\LaravelActions\Processors\Processor;
+use DragonCode\LaravelActions\Processors\Status as StatusProcessor;
 
-class Status extends BaseCommand
+class Status extends Command
 {
-    use Database;
-    use Infoable;
-    use Optionable;
-
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
     protected $name = Names::STATUS;
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Show the status of each action';
+
+    protected Processor|string $processor = StatusProcessor::class;
+
+    protected bool $secure = false;
+
+    protected array $options = [
+        Options::CONNECTION,
+        Options::PATH,
+        Options::REALPATH,
+    ];
 }
