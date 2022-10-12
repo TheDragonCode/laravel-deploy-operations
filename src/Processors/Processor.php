@@ -26,17 +26,17 @@ abstract class Processor
     abstract public function handle(): void;
 
     public function __construct(
-        protected Options          $options,
-        protected InputInterface   $input,
-        protected OutputStyle      $output,
-        protected Config           $config,
+        protected Options $options,
+        protected InputInterface $input,
+        protected OutputStyle $output,
+        protected Config $config,
         protected ActionRepository $repository,
-        protected Git              $git,
-        protected File             $file,
-        protected Migrator         $migrator,
-        protected Notification     $notification,
-        protected Dispatcher       $events,
-        protected Sorter           $sorter
+        protected Git $git,
+        protected File $file,
+        protected Migrator $migrator,
+        protected Notification $notification,
+        protected Dispatcher $events,
+        protected Sorter $sorter
     ) {
         $this->notification->setOutput($this->output);
         $this->repository->setConnection($this->options->connection);
