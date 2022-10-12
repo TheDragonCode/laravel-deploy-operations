@@ -42,10 +42,11 @@ class Migrator
         return $this;
     }
 
-    public function runUp(string $file, int $batch, Options $options): void
+    public function runUp(string $filename, int $batch, Options $options): void
     {
-        $action = $this->resolvePath($file);
-        $name   = $this->resolveActionName($file);
+        $path   = $this->resolvePath($filename, $options->path);
+        $action = $this->resolveAction($path);
+        $name   = $this->resolveActionName($filename);
 
         if ($this->allowAction($action, $name, $options)) {
             $this->hasAction($action, '__invoke')
@@ -58,10 +59,11 @@ class Migrator
         }
     }
 
-    public function runDown(string $file): void
+    public function runDown(string $filename, Options $options): void
     {
-        $action = $this->resolvePath($file);
-        $name   = $this->resolveActionName($file);
+        $path   = $this->resolvePath($filename, $options->path);
+        $action = $this->resolveAction($path);
+        $name   = $this->resolveActionName($filename);
 
         if (! $this->hasAction($action, '__invoke') && $this->hasAction($action, 'down')) {
             $this->runAction($action, $name, 'down');
@@ -77,23 +79,20 @@ class Migrator
 
     protected function runAction(Action $action, string $name, string $method): void
     {
-        $this->notification->task(
-            Str::of($name)->before('.php')->prepend('Action: ')->toString(),
-            function () use ($action, $method) {
-                if ($this->hasAction($action, $method)) {
-                    try {
-                        $this->runMethod($action, $method, $action->enabledTransactions(), $action->transactionAttempts());
+        $this->notification->task($name, function () use ($action, $method) {
+            if ($this->hasAction($action, $method)) {
+                try {
+                    $this->runMethod($action, $method, $action->enabledTransactions(), $action->transactionAttempts());
 
-                        $action->success();
-                    }
-                    catch (Throwable $e) {
-                        $action->failed();
+                    $action->success();
+                }
+                catch (Throwable $e) {
+                    $action->failed();
 
-                        throw $e;
-                    }
+                    throw $e;
                 }
             }
-        );
+        });
     }
 
     protected function runMethod(Action $action, string $method, bool $transactions, int $attempts): void
@@ -159,7 +158,16 @@ class Migrator
         return $action->isOnce();
     }
 
-    protected function resolvePath(string $path): Action
+    protected function resolvePath(string $filename, string $path): string
+    {
+        if ($this->file->exists($filename) && $this->file->isFile($filename)) {
+            return $filename;
+        }
+
+        return Str::finish($path . DIRECTORY_SEPARATOR . $filename, '.php');
+    }
+
+    protected function resolveAction(string $path): Action
     {
         if ($this->file->exists($path)) {
             return require $path;
@@ -168,12 +176,12 @@ class Migrator
         throw new FileNotFoundException($path);
     }
 
-    protected function resolveActionName(string $path): string
+    protected function resolveActionName(string $filename): string
     {
-        return Str::of(realpath($path))
-            ->after(realpath($this->config->path()))
+        return Str::of($filename)
             ->ltrim('\\/')
             ->replace('\\', '/')
+            ->before('.php')
             ->toString();
     }
 }

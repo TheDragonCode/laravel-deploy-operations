@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Services;
+namespace Tests\Helpers;
 
 use DragonCode\LaravelActions\Helpers\Git;
 use Tests\TestCase;

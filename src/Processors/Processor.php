@@ -9,13 +9,12 @@ use DragonCode\LaravelActions\Concerns\Artisan;
 use DragonCode\LaravelActions\Contracts\Notification;
 use DragonCode\LaravelActions\Helpers\Config;
 use DragonCode\LaravelActions\Helpers\Git;
+use DragonCode\LaravelActions\Helpers\Sorter;
 use DragonCode\LaravelActions\Repositories\ActionRepository;
 use DragonCode\LaravelActions\Services\Migrator;
 use DragonCode\LaravelActions\Values\Options;
-use DragonCode\Support\Facades\Helpers\Arr;
 use DragonCode\Support\Facades\Helpers\Str;
 use DragonCode\Support\Filesystem\File;
-use DragonCode\Support\Helpers\Ables\Arrayable;
 use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Events\Dispatcher;
 use Symfony\Component\Console\Input\InputInterface;
@@ -36,42 +35,25 @@ abstract class Processor
         protected File $file,
         protected Migrator $migrator,
         protected Notification $notification,
-        protected Dispatcher $events
+        protected Dispatcher $events,
+        protected Sorter $sorter
     ) {
         $this->notification->setOutput($this->output);
         $this->repository->setConnection($this->options->connection);
         $this->migrator->setConnection($this->options->connection)->setOutput($this->output);
     }
 
-    protected function getFiles(?Closure $filter = null, ?string $path = null, bool $realpath = false, bool $fullpath = false, bool $withExtension = true): array
+    protected function getFiles(string $path, ?Closure $filter = null): array
     {
-        $path = $this->getActionsPath($path, $realpath);
+        $file = Str::finish($path, '.php');
 
-        $names = $this->file->exists($path) ? [$path] : $this->file->allPaths($path, $filter, true);
-
-        return Arr::of($names)
-            ->when(
-                ! $fullpath,
-                fn (Arrayable $array) => $array
-                    ->map(fn (string $value) => Str::of(realpath($value))->after(realpath($path))->ltrim('\\/')->toString())
-            )
-            ->when(
-                ! $withExtension,
-                fn (Arrayable $array) => $array
-                    ->map(fn (string $value) => Str::before($value, '.php'))
-            )
-            ->toArray();
-    }
-
-    protected function getActionsPath(?string $path = null, bool $realpath = false): string
-    {
-        $path = $realpath ? $path : $this->config->path($path);
-
-        if (! is_dir($path) && ! Str::endsWith($path, '.php')) {
-            return $this->file->exists($path . '.php') ? $path . '.php' : $path;
+        if ($this->file->exists($file) && $this->file->isFile($file)) {
+            return [$file];
         }
 
-        return $path;
+        return $this->sorter->byValues(
+            $this->file->names($path, $filter, true)
+        );
     }
 
     protected function runCommand(string $command, array $options = []): void

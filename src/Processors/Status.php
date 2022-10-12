@@ -50,7 +50,7 @@ class Status extends Processor
 
     protected function getData(): array
     {
-        $files     = $this->getFiles(withExtension: false);
+        $files     = $this->getFiles($this->options->path);
         $completed = $this->getCompleted();
 
         return [$files, $completed];

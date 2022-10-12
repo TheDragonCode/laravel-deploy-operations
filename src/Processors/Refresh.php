@@ -13,13 +13,12 @@ class Refresh extends Processor
     {
         $connection = $this->options->connection;
         $path       = $this->options->path;
-        $realPath   = $this->options->realpath;
 
-        $this->runReset($connection, $path, $realPath);
-        $this->runMigrate($connection, $path, $realPath);
+        $this->runReset($connection, $path);
+        $this->runMigrate($connection, $path);
     }
 
-    protected function runReset(?string $connection, ?string $path, bool $realPath): void
+    protected function runReset(?string $connection, ?string $path, bool $realPath = true): void
     {
         $this->runCommand(Names::RESET, [
             '--' . Options::CONNECTION => $connection,
@@ -29,7 +28,7 @@ class Refresh extends Processor
         ]);
     }
 
-    protected function runMigrate(?string $connection, ?string $path, bool $realPath): void
+    protected function runMigrate(?string $connection, ?string $path, bool $realPath = true): void
     {
         $this->runCommand(Names::MIGRATE, [
             '--' . Options::CONNECTION => $connection,
