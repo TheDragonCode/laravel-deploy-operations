@@ -160,8 +160,10 @@ class Migrator
 
     protected function resolvePath(string $filename, string $path): string
     {
-        if ($this->file->exists($filename) && $this->file->isFile($filename)) {
-            return $filename;
+        $withExtension = Str::finish($filename, '.php');
+
+        if ($this->file->exists($withExtension) && $this->file->isFile($withExtension)) {
+            return $withExtension;
         }
 
         return Str::finish($path . DIRECTORY_SEPARATOR . $filename, '.php');

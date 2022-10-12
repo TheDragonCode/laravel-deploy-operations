@@ -13,6 +13,7 @@ use DragonCode\LaravelActions\Helpers\Sorter;
 use DragonCode\LaravelActions\Repositories\ActionRepository;
 use DragonCode\LaravelActions\Services\Migrator;
 use DragonCode\LaravelActions\Values\Options;
+use DragonCode\Support\Facades\Helpers\Arr;
 use DragonCode\Support\Facades\Helpers\Str;
 use DragonCode\Support\Filesystem\File;
 use Illuminate\Console\OutputStyle;
@@ -47,13 +48,11 @@ abstract class Processor
     {
         $file = Str::finish($path, '.php');
 
-        if ($this->file->exists($file) && $this->file->isFile($file)) {
-            return [$file];
-        }
+        $files = $this->isFile($file) ? [$file] : $this->file->names($path, $filter, true);
 
-        return $this->sorter->byValues(
-            $this->file->names($path, $filter, true)
-        );
+        return Arr::of($this->sorter->byValues($files))
+            ->map(fn (string $value) => Str::before($value, '.php'))
+            ->toArray();
     }
 
     protected function runCommand(string $command, array $options = []): void
@@ -75,5 +74,10 @@ abstract class Processor
     protected function fireEvent(string $event, string $method): void
     {
         $this->events->dispatch(new $event($method, $this->options->before));
+    }
+
+    protected function isFile(string $path): bool
+    {
+        return $this->file->exists($path) && $this->file->isFile($path);
     }
 }
