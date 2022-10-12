@@ -67,7 +67,11 @@ class Migrate extends Processor
     {
         $completed = $this->repository->getCompleted()->pluck('action')->toArray();
 
-        return $this->getFiles(fn (string $file) => ! Str::of($file)->replace('\\', '/')->contains($completed), $this->options->path);
+        return $this->getFiles(
+            filter  : fn (string $file) => ! Str::of($file)->replace('\\', '/')->contains($completed),
+            path    : $this->options->path,
+            fullpath: true
+        );
     }
 
     protected function getBatch(): int

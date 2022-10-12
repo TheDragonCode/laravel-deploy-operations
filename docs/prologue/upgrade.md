@@ -10,6 +10,7 @@
 - PHP 7.3 and 7.4 was dropped
 - Laravel 6.0 was dropped
 - Dragon Code: Contracts (`dragon-code/contracts`) was dropped
+- Added property typing
 
 ## Medium Impact Changes
 
@@ -91,3 +92,16 @@ If your class does not contain a `down` method, then you can replace the `up` me
 ### Changed Migration Repository
 
 Just call the `php artisan migrate` command to make changes to the action repository table. 
+
+### Added property typing
+
+Make sure all overridden properties are typed:
+
+```
+protected $once                 >>  protected bool $once
+protected $transactions         >>  protected bool $transactions
+protected $transactionAttempts  >>  protected int $transactionAttempts
+protected $environment          >>  protected string|array|null $environment
+protected $exceptEnvironment    >>  protected string|array|null $exceptEnvironment
+protected $before               >>  protected bool $before
+```
