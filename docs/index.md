@@ -16,20 +16,20 @@
 * Prologue
     * [Upgrade Guide](prologue/upgrade.md)
 * Getting Started
-    * [Installation](getting-started/installation.md)
+    * [Installation](getting-started/installation/index.md)
     * How to use
-        * [Creating](getting-started/how-to-use/creating.md)
-        * [Running Actions](getting-started/how-to-use/running.md)
-        * [Rolling Back](getting-started/how-to-use/rollback.md)
-        * [Status](getting-started/how-to-use/status.md)
+        * [Creating](how-to-use/creating.md)
+        * [Running Actions](how-to-use/running.md)
+        * [Rolling Back](how-to-use/rollback.md)
+        * [Status](how-to-use/status.md)
     * Helpers
-        * [Execution Status](getting-started/helpers/execution-status.md)
-        * [Events](getting-started/helpers/events.md)
-        * [Artisan Command](getting-started/helpers/artisan.md)
+        * [Execution Status](helpers/execution-status.md)
+        * [Events](helpers/events.md)
+        * [Artisan Command](helpers/artisan.md)
 
 ## License
 
-This package is licensed under the [MIT License](../LICENSE).
+This package is licensed under the [MIT License](prologue/license.md).
 
 
 [badge_build]:          https://img.shields.io/github/workflow/status/TheDragonCode/laravel-migration-actions/phpunit?style=flat-square
@@ -44,6 +44,6 @@ This package is licensed under the [MIT License](../LICENSE).
 
 [link_build]:           https://github.com/TheDragonCode/laravel-migration-actions/actions
 
-[link_license]:         ../LICENSE
+[link_license]:         prologue/license.md
 
 [link_packagist]:       https://packagist.org/packages/dragon-code/laravel-migration-actions

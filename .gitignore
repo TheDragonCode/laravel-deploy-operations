@@ -1,6 +1,16 @@
 .idea/
-vendor/
+_site/
 build/
+node_modules/
+tmp/
+vendor/
+
+.cache
+.DS_Store
+.env
+.php_cs.cache
+.phpintel
+.temp
 
 *.bak
 *.cache
@@ -8,3 +18,4 @@ build/
 *.orig
 
 composer.lock
+package-lock.json
