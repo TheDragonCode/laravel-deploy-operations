@@ -6,6 +6,22 @@ To run all of your outstanding actions, execute the `migrate:actions` artisan co
 php artisan migrate:actions
 ```
 
+Action call order is checked by filename without path:
+
+```bash
+2022_10_14_000001_test1      # 1
+2022_10_14_000004_test4      # 4
+bar/2022_10_14_000003_test3  # 3
+foo/2022_10_14_000002_test2  # 2
+```
+
+```bash
+2022_10_14_000001_test1      # 1
+foo/2022_10_14_000002_test2  # 2
+bar/2022_10_14_000003_test3  # 3
+2022_10_14_000004_test4      # 4
+```
+
 ## Split Launch Option
 
 Sometimes it becomes necessary to launch actions separately, for example, to notify about the successful deployment of a project.
