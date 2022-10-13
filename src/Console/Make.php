@@ -24,5 +24,6 @@ class Make extends Command
         Options::FORCE,
         Options::PATH,
         Options::REALPATH,
+        Options::SILENT,
     ];
 }

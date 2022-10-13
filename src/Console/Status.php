@@ -21,5 +21,6 @@ class Status extends Command
         Options::CONNECTION,
         Options::PATH,
         Options::REALPATH,
+        Options::SILENT,
     ];
 }
