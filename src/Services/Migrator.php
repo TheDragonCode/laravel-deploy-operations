@@ -12,19 +12,19 @@ use DragonCode\LaravelActions\Values\Options;
 use DragonCode\Support\Exceptions\FileNotFoundException;
 use DragonCode\Support\Facades\Helpers\Str;
 use DragonCode\Support\Filesystem\File;
-use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 
 class Migrator
 {
     public function __construct(
-        protected File $file,
-        protected Notification $notification,
+        protected File             $file,
+        protected Notification     $notification,
         protected ActionRepository $repository,
-        protected Config $config,
-        protected Application $laravel
+        protected Config           $config,
+        protected Application      $laravel
     ) {
     }
 
@@ -35,7 +35,7 @@ class Migrator
         return $this;
     }
 
-    public function setOutput(OutputStyle $output): self
+    public function setOutput(OutputInterface $output): self
     {
         $this->notification->setOutput($output);
 

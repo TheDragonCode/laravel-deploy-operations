@@ -16,33 +16,33 @@ use DragonCode\LaravelActions\Values\Options;
 use DragonCode\Support\Facades\Helpers\Arr;
 use DragonCode\Support\Facades\Helpers\Str;
 use DragonCode\Support\Filesystem\File;
-use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Events\Dispatcher;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class Processor
 {
     use Artisan;
 
-    abstract public function handle(): void;
-
     public function __construct(
-        protected Options $options,
-        protected InputInterface $input,
-        protected OutputStyle $output,
-        protected Config $config,
+        protected Options          $options,
+        protected InputInterface   $input,
+        protected OutputInterface  $output,
+        protected Config           $config,
         protected ActionRepository $repository,
-        protected Git $git,
-        protected File $file,
-        protected Migrator $migrator,
-        protected Notification $notification,
-        protected Dispatcher $events,
-        protected Sorter $sorter
+        protected Git              $git,
+        protected File             $file,
+        protected Migrator         $migrator,
+        protected Notification     $notification,
+        protected Dispatcher       $events,
+        protected Sorter           $sorter
     ) {
         $this->notification->setOutput($this->output);
         $this->repository->setConnection($this->options->connection);
         $this->migrator->setConnection($this->options->connection)->setOutput($this->output);
     }
+
+    abstract public function handle(): void;
 
     protected function getFiles(string $path, ?Closure $filter = null): array
     {
@@ -57,7 +57,7 @@ abstract class Processor
 
     protected function runCommand(string $command, array $options = []): void
     {
-        $this->artisan($command, array_filter($options));
+        $this->artisan($command, array_filter($options), $this->output);
     }
 
     protected function tableNotFound(): bool

@@ -23,7 +23,7 @@ class Migrate extends Processor
 
     protected function ensureRepository(): void
     {
-        $this->artisan(Names::INSTALL, [
+        $this->runCommand(Names::INSTALL, [
             '--' . Options::CONNECTION => $this->options->connection,
             '--' . Options::FORCE      => true,
         ]);
