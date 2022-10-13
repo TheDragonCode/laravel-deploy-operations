@@ -12,7 +12,6 @@ class Fresh extends Processor
     public function handle(): void
     {
         $this->drop();
-        $this->create();
         $this->migrate();
     }
 
@@ -21,14 +20,6 @@ class Fresh extends Processor
         if ($this->repository->repositoryExists()) {
             $this->notification->task('Dropping all actions', fn () => $this->repository->deleteRepository());
         }
-    }
-
-    protected function create(): void
-    {
-        $this->runCommand(Names::INSTALL, [
-            '--' . Options::CONNECTION => $this->options->connection,
-            '--' . Options::FORCE      => $this->options->force,
-        ]);
     }
 
     protected function migrate(): void
