@@ -24,7 +24,7 @@ class Git
 
     protected function exec(string $command, ?string $path = null): ?string
     {
-        return exec(sprintf('git --git-dir "%s" %s', $path, $command));
+        return exec(sprintf('git -C "%s" %s', $path, $command));
     }
 
     protected function hasGitDirectory(?string $path = null): bool
