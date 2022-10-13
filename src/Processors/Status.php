@@ -24,14 +24,14 @@ class Status extends Processor
 
         [$files, $completed] = $this->getData();
 
-        if ($this->doesntEmpty($files, $completed)) {
-            $this->showCaption();
-            $this->showStatus($files, $completed);
+        if ($this->isEmpty($files, $completed)) {
+            $this->notification->info('No actions found');
 
             return;
         }
 
-        $this->notification->info('No actions found');
+        $this->showCaption();
+        $this->showStatus($files, $completed);
     }
 
     protected function showCaption(): void
@@ -77,8 +77,8 @@ class Status extends Processor
             ->toArray();
     }
 
-    protected function doesntEmpty(array $actions, array $completed): bool
+    protected function isEmpty(array $actions, array $completed): bool
     {
-        return ! empty($actions) && ! empty($completed);
+        return empty($actions) && empty($completed);
     }
 }
