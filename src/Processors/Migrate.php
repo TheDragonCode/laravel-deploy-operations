@@ -18,7 +18,13 @@ class Migrate extends Processor
     public function handle(): void
     {
         $this->ensureRepository();
+        $this->showCaption();
         $this->runActions($this->getCompleted());
+    }
+
+    protected function showCaption(): void
+    {
+        $this->notification->info('Launching Actions');
     }
 
     protected function ensureRepository(): void

@@ -21,6 +21,7 @@ class Rollback extends Processor
         if ($actions = $this->getActions($this->options->step)) {
             $this->fireEvent(ActionStarted::class, 'down');
 
+            $this->showCaption();
             $this->run($actions);
 
             $this->fireEvent(ActionEnded::class, 'down');
@@ -29,6 +30,11 @@ class Rollback extends Processor
         }
 
         $this->fireEvent(NoPendingActions::class, 'down');
+    }
+
+    protected function showCaption(): void
+    {
+        $this->notification->info('Rollback Actions');
     }
 
     protected function run(array $actions): void
