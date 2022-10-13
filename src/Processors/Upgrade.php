@@ -64,12 +64,12 @@ class Upgrade extends Processor
 
     protected function open(string $filename): string
     {
-        return file_get_contents($this->oldPath($filename));
+        return file_get_contents($this->oldPath($filename . '.php'));
     }
 
     protected function store(string $filename, string $content): void
     {
-        File::store($this->newPath($filename), $content);
+        File::store($this->newPath($filename . '.php'), $content);
     }
 
     protected function replaceNamespace(string $content): string
@@ -145,9 +145,9 @@ class Upgrade extends Processor
                 : __DIR__ . '/../../database/migrations/named/2022_08_18_180137_change_migration_actions_table.php';
 
             $this->artisan('migrate', [
-                '--path'     => $path,
+                '--path' => $path,
                 '--realpath' => true,
-                '--force'    => true,
+                '--force' => true,
             ]);
         });
     }
