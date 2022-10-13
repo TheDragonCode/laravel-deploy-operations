@@ -20,11 +20,11 @@ use Throwable;
 class Migrator
 {
     public function __construct(
-        protected File             $file,
-        protected Notification     $notification,
+        protected File $file,
+        protected Notification $notification,
         protected ActionRepository $repository,
-        protected Config           $config,
-        protected Application      $laravel
+        protected Config $config,
+        protected Application $laravel
     ) {
     }
 
@@ -124,11 +124,7 @@ class Migrator
             return false;
         }
 
-        if ($this->disallowBefore($action, $options)) {
-            return false;
-        }
-
-        return true;
+        return ! ($this->disallowBefore($action, $options));
     }
 
     protected function allowEnvironment(Action $action): bool
