@@ -20,11 +20,11 @@ use Throwable;
 class Migrator
 {
     public function __construct(
-        protected File $file,
-        protected Notification $notification,
+        protected File             $file,
+        protected Notification     $notification,
         protected ActionRepository $repository,
-        protected Config $config,
-        protected Application $laravel
+        protected Config           $config,
+        protected Application      $laravel
     ) {
     }
 
@@ -48,7 +48,7 @@ class Migrator
         $action = $this->resolveAction($path);
         $name   = $this->resolveActionName($path);
 
-        if ($this->allowAction($action, $name, $options)) {
+        if ($this->allowAction($action, $options)) {
             $this->notification->task($name, function () use ($action, $name, $batch) {
                 $this->hasAction($action, '__invoke')
                     ? $this->runAction($action, '__invoke')
@@ -118,17 +118,13 @@ class Migrator
         $this->repository->delete($name);
     }
 
-    protected function allowAction(Action $action, string $name, Options $options): bool
+    protected function allowAction(Action $action, Options $options): bool
     {
         if (! $this->allowEnvironment($action)) {
-            $this->notification->info("Action: $name was skipped on this environment");
-
             return false;
         }
 
         if ($this->disallowBefore($action, $options)) {
-            $this->notification->info("Action: $name was skipped by 'before' option");
-
             return false;
         }
 
