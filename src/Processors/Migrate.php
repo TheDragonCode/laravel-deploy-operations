@@ -25,6 +25,7 @@ class Migrate extends Processor
     {
         $this->runCommand(Names::INSTALL, [
             '--' . Options::CONNECTION => $this->options->connection,
+            '--' . Options::FORCE      => true,
         ]);
     }
 
