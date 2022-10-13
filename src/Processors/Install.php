@@ -24,6 +24,11 @@ class Install extends Processor
         });
     }
 
+    protected function isFile(string $path): bool
+    {
+        return Str::of($path)->lower()->endsWith('.php');
+    }
+
     protected function exists(): bool
     {
         return $this->repository->repositoryExists();
@@ -39,10 +44,5 @@ class Install extends Processor
         $this->isFile($this->options->path)
             ? Directory::ensureDirectory(Path::dirname($this->options->path))
             : Directory::ensureDirectory($this->options->path);
-    }
-
-    protected function isFile(string $path): bool
-    {
-        return Str::of($path)->lower()->endsWith('.php');
     }
 }

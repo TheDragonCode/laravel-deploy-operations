@@ -17,8 +17,8 @@ class Migrate extends Processor
 {
     public function handle(): void
     {
-        $this->ensureRepository();
         $this->showCaption();
+        $this->ensureRepository();
         $this->runActions($this->getCompleted());
     }
 
@@ -32,7 +32,7 @@ class Migrate extends Processor
         $this->runCommand(Names::INSTALL, [
             '--' . Options::CONNECTION => $this->options->connection,
             '--' . Options::FORCE      => true,
-            '--' . Options::SILENT     => true,
+            '--' . Options::MUTE       => true,
         ]);
     }
 
