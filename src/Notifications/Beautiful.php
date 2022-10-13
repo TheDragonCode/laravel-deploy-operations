@@ -6,43 +6,52 @@ namespace DragonCode\LaravelActions\Notifications;
 
 use Closure;
 use Illuminate\Console\View\Components\Factory;
-use Illuminate\Support\Optional;
 
 class Beautiful extends Notification
 {
-    protected Factory|Optional|null $components = null;
+    protected ?Factory $components = null;
 
     public function line(string $string, ?string $style = null): void
     {
-        $this->components()->line($style, $string, $this->verbosity);
+        if ($this->canSpeak()) {
+            $this->components()->line($style, $string, $this->verbosity);
+        }
     }
 
     public function info(string $string): void
     {
-        $this->components()->info($string, $this->verbosity);
+        if ($this->canSpeak()) {
+            $this->components()->info($string, $this->verbosity);
+        }
     }
 
     public function warning(string $string): void
     {
-        $this->components()->warn($string, $this->verbosity);
+        if ($this->canSpeak()) {
+            $this->components()->warn($string, $this->verbosity);
+        }
     }
 
     public function task(string $description, Closure $task): void
     {
-        $this->components()->task($description, $task);
+        if ($this->canSpeak()) {
+            $this->components()->task($description, $task);
+        }
     }
 
     public function twoColumn(string $first, string $second): void
     {
-        $this->components()->twoColumnDetail($first, $second, $this->verbosity);
+        if ($this->canSpeak()) {
+            $this->components()->twoColumnDetail($first, $second, $this->verbosity);
+        }
     }
 
-    protected function components(): Factory|Optional
+    protected function components(): Factory
     {
         if (! is_null($this->components)) {
             return $this->components;
         }
 
-        return $this->component = $this->canSpeak() ? new Factory($this->output) : optional();
+        return $this->components = new Factory($this->output);
     }
 }

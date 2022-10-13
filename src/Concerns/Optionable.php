@@ -17,7 +17,7 @@ trait Optionable
     protected array $options = [
         Options::CONNECTION,
         Options::FORCE,
-        Options::SILENT,
+        Options::MUTE,
     ];
 
     protected function configure(): void
@@ -48,7 +48,7 @@ trait Optionable
             [Options::PATH, null, InputOption::VALUE_OPTIONAL, 'The path to the actions files to be executed'],
             [Options::REALPATH, null, InputOption::VALUE_NONE, 'Indicate any provided action file paths are pre-resolved absolute path'],
             [Options::STEP, null, InputOption::VALUE_OPTIONAL, 'Force the actions to be run so they can be rolled back individually'],
-            [Options::SILENT, null, InputOption::VALUE_NONE, 'Turns off the output of informational messages'],
+            [Options::MUTE, null, InputOption::VALUE_NONE, 'Turns off the output of informational messages'],
         ];
     }
 

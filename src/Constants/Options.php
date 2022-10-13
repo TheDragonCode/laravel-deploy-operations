@@ -12,13 +12,13 @@ class Options
 
     public const FORCE = 'force';
 
+    public const MUTE = 'mute';
+
     public const NAME = 'name';
 
     public const PATH = 'path';
 
     public const REALPATH = 'realpath';
-
-    public const SILENT = 'silent';
 
     public const STEP = 'step';
 }
