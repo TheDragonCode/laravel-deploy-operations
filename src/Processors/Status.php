@@ -31,10 +31,16 @@ class Status extends Processor
         }
 
         $this->showCaption();
+        $this->showHeaders();
         $this->showStatus($files, $completed);
     }
 
     protected function showCaption(): void
+    {
+        $this->notification->info('Show Status');
+    }
+
+    protected function showHeaders(): void
     {
         $this->notification->twoColumn($this->columnName, $this->columnStatus);
     }
