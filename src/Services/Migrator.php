@@ -20,11 +20,11 @@ use Throwable;
 class Migrator
 {
     public function __construct(
-        protected File             $file,
-        protected Notification     $notification,
+        protected File $file,
+        protected Notification $notification,
         protected ActionRepository $repository,
-        protected Config           $config,
-        protected Application      $laravel
+        protected Config $config,
+        protected Application $laravel
     ) {
     }
 

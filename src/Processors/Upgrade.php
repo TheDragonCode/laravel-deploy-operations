@@ -145,9 +145,9 @@ class Upgrade extends Processor
                 : __DIR__ . '/../../database/migrations/named/2022_08_18_180137_change_migration_actions_table.php';
 
             $this->runCommand('migrate', [
-                '--path' => $path,
+                '--path'     => $path,
                 '--realpath' => true,
-                '--force' => true,
+                '--force'    => true,
             ]);
         });
     }
