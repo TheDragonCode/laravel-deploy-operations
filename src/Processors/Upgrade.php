@@ -122,7 +122,7 @@ class Upgrade extends Processor
     protected function moveConfig(): void
     {
         $this->notification->task('Moving config file', function () {
-            $this->artisan('vendor:publish', [
+            $this->runCommand('vendor:publish', [
                 '--provider' => ServiceProvider::class,
                 '--force'    => true,
             ]);
@@ -144,7 +144,7 @@ class Upgrade extends Processor
                 ? __DIR__ . '/../../database/migrations/anonymous/2022_08_18_180137_change_migration_actions_table.php'
                 : __DIR__ . '/../../database/migrations/named/2022_08_18_180137_change_migration_actions_table.php';
 
-            $this->artisan('migrate', [
+            $this->runCommand('migrate', [
                 '--path'     => $path,
                 '--realpath' => true,
                 '--force'    => true,

@@ -16,9 +16,9 @@ use DragonCode\LaravelActions\Values\Options;
 use DragonCode\Support\Facades\Helpers\Arr;
 use DragonCode\Support\Facades\Helpers\Str;
 use DragonCode\Support\Filesystem\File;
-use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Events\Dispatcher;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class Processor
 {
@@ -29,7 +29,7 @@ abstract class Processor
     public function __construct(
         protected Options $options,
         protected InputInterface $input,
-        protected OutputStyle $output,
+        protected OutputInterface $output,
         protected Config $config,
         protected ActionRepository $repository,
         protected Git $git,
@@ -57,7 +57,7 @@ abstract class Processor
 
     protected function runCommand(string $command, array $options = []): void
     {
-        $this->artisan($command, array_filter($options));
+        $this->artisan($command, array_filter($options), $this->output);
     }
 
     protected function tableNotFound(): bool
