@@ -2,36 +2,26 @@
 
 ## High Impact Changes
 
-- Replacing named classes with anonymous ones
-- Change the location of the configuration file
-- Changing the namespace of the parent class
-- Changing variable names from `snake_case` to `camelCase`
-- Added recursive search for actions in a folder
-- PHP 7.3 and 7.4 was dropped
+- [Change the location of the configuration file](#configuration)
+- [Replacing named classes with anonymous ones](#anonymous-classes)
+- [Changing the namespace of the parent class](#parent-namespace)
+- [Changing variable names from `snake_case` to `camelCase` and added typing](#changed-properties)
+- [Added recursive search for actions in a folder](#added-recursive-search-for-actions-in-a-folder)
+- [PHP 7.3 and 7.4 was dropped](#php-802-required)
 - Laravel 6.0 was dropped
 - Dragon Code: Contracts (`dragon-code/contracts`) was dropped
-- Added property typing
 
 ## Medium Impact Changes
 
-- Changing the name of an action column in the database
-- Action storage directory changed
+- [Changing the name of an action column in the database](#changed-migration-repository)
+- [Action storage directory changed](#actions-location)
 
 ## Upgrading To 3.x from 2.x
 
-### Updating Dependencies
-
-#### PHP 8.0.2 Required
-
-Laravel Actions now requires PHP 8.0.2 or greater.
-
-#### Composer Dependencies
-
-You should update the following dependency in your application's `composer.json` file:
-
-- `dragon-code/laravel-migration-actions` to `^3.0`
-
 ### Call Upgrade Command
+
+> Note
+> If you used inheritance of actions from other actions, then you will need to process these files manually.
 
 For your convenience, we have created an upgrade console command:
 
@@ -47,12 +37,21 @@ It will do the following:
 - Replace named classes with anonymous ones
 - Create a configuration file according to the data saved in your project
 
-> Note
-> If you used inheritance of actions from other actions, then you will need to process these files manually.
+### Updating Dependencies
+
+#### PHP 8.0.2 Required
+
+Laravel Actions now requires PHP 8.0.2 or greater.
+
+#### Composer Dependencies
+
+You should update the following dependency in your application's `composer.json` file:
+
+- `dragon-code/laravel-migration-actions` to `^3.0`
 
 ### Configuration
 
-Publish the config file and migrate the settings from the `config/database.php` file.
+Publish the config file and migrate the settings from the `config/database.php` file to `config/actions.php`.
 
 ```bash
 php artisan vendor:publish --provider="DragonCode\LaravelActions\ServiceProvider"
@@ -61,7 +60,6 @@ php artisan vendor:publish --provider="DragonCode\LaravelActions\ServiceProvider
 ### Actions Location
 
 Move the action files to the `actions` folder in the project root, or update the `actions.path` option in the configuration file.
-
 
 ### Parent Namespace
 
@@ -91,17 +89,35 @@ If your class does not contain a `down` method, then you can replace the `up` me
 
 ### Changed Migration Repository
 
-Just call the `php artisan migrate` command to make changes to the action repository table. 
+Just call the `php artisan migrate` command to make changes to the action repository table.
 
-### Added property typing
+### Changed Properties
 
 Make sure all overridden properties are typed:
 
 ```
-protected $once                 >>  protected bool $once
-protected $transactions         >>  protected bool $transactions
-protected $transactionAttempts  >>  protected int $transactionAttempts
-protected $environment          >>  protected string|array|null $environment
-protected $exceptEnvironment    >>  protected string|array|null $exceptEnvironment
-protected $before               >>  protected bool $before
+protected $once                  >>  protected bool $once
+protected $transactions          >>  protected bool $transactions
+protected $transaction_attempts  >>  protected int $transactionAttempts
+protected $environment           >>  protected string|array|null $environment
+protected $except_environment    >>  protected string|array|null $exceptEnvironment
+protected $before                >>  protected bool $before
+```
+
+### Added recursive search for actions in a folder
+
+#### Before:
+
+```bash
+2022_10_13_013321_test1
+2022_10_13_013326_test2
+bar/2022_10_13_013323_test3 # will not be called
+```
+
+#### After:
+
+```bash
+2022_10_13_013321_test1
+2022_10_13_013326_test2
+bar/2022_10_13_013323_test3 # will be called
 ```
