@@ -10,7 +10,7 @@ use Illuminate\Support\Optional;
 
 class Beautiful extends Notification
 {
-    protected Factory|null $components = null;
+    protected Factory|Optional|null $components = null;
 
     public function line(string $string, ?string $style = null): void
     {
