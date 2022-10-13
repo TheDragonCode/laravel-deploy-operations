@@ -42,6 +42,6 @@ class Beautiful extends Notification
             return $this->components;
         }
 
-        return $this->component = new Factory($this->output);
+        return $this->component = $this->canSpeak() ? new Factory($this->output) : optional();
     }
 }

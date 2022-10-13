@@ -18,5 +18,7 @@ class Options
 
     public const REALPATH = 'realpath';
 
+    public const SILENT = 'silent';
+
     public const STEP = 'step';
 }

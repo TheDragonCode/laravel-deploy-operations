@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Concerns;
 
+use Illuminate\Console\OutputStyle;
 use Illuminate\Support\Facades\Artisan as Command;
-use Symfony\Component\Console\Output\OutputInterface;
 
 trait Artisan
 {
@@ -14,11 +14,11 @@ trait Artisan
      *
      * @param string $command
      * @param array $parameters
-     * @param \Symfony\Component\Console\Output\OutputInterface|null $outputBuffer
+     * @param \Illuminate\Console\OutputStyle|null $outputBuffer
      *
      * @return void
      */
-    protected function artisan(string $command, array $parameters = [], ?OutputInterface $outputBuffer = null): void
+    protected function artisan(string $command, array $parameters = [], ?OutputStyle $outputBuffer = null): void
     {
         Command::call($command, $parameters, $outputBuffer);
     }

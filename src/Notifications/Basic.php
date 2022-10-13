@@ -10,9 +10,11 @@ class Basic extends Notification
 {
     public function line(string $string, ?string $style = null): void
     {
-        $styled = $style ? "<$style>$string</$style>" : $string;
+        if ($this->canSpeak()) {
+            $styled = $style ? "<$style>$string</$style>" : $string;
 
-        $this->output->writeln($styled, $this->verbosity);
+            $this->output->writeln($styled, $this->verbosity);
+        }
     }
 
     public function info(string $string): void
@@ -35,7 +37,7 @@ class Basic extends Notification
 
         $run_time = number_format((microtime(true) - $start) * 1000, 2);
 
-        $this->info("Migrated: {$run_time}ms");
+        $this->info("Done in {$run_time}ms");
     }
 
     public function twoColumn(string $first, string $second): void

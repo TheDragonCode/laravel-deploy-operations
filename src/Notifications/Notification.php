@@ -6,11 +6,14 @@ namespace DragonCode\LaravelActions\Notifications;
 
 use Closure;
 use DragonCode\LaravelActions\Contracts\Notification as NotificationContract;
+use Illuminate\Console\OutputStyle;
 use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class Notification implements NotificationContract
 {
-    protected ?OutputInterface $output = null;
+    protected ?OutputStyle $output = null;
+
+    protected bool $silent = false;
 
     protected int $verbosity = OutputInterface::VERBOSITY_NORMAL;
 
@@ -24,10 +27,16 @@ abstract class Notification implements NotificationContract
 
     abstract public function twoColumn(string $first, string $second): void;
 
-    public function setOutput(OutputInterface $output): NotificationContract
+    public function setOutput(OutputStyle $output, bool $silent = false): NotificationContract
     {
         $this->output = $output;
+        $this->silent = $silent;
 
         return $this;
+    }
+
+    protected function canSpeak(): bool
+    {
+        return ! $this->silent;
     }
 }

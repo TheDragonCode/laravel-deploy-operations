@@ -25,6 +25,8 @@ class Options extends DataTransferObject
     public bool $realpath = false;
 
     public ?int $step = null;
+    
+    public bool $silent = false;
 
     public function resolvePath(): self
     {
