@@ -42,6 +42,8 @@ class Basic extends Notification
 
     public function twoColumn(string $first, string $second): void
     {
-        $this->info($first . ' .......... ' . $second);
+        $divider = str_pad('', 20, '.');
+
+        $this->info($first . ' ' . $divider . ' ' . $second);
     }
 }

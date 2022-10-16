@@ -20,11 +20,11 @@ use Throwable;
 class Migrator
 {
     public function __construct(
-        protected File $file,
-        protected Notification $notification,
+        protected File             $file,
+        protected Notification     $notification,
         protected ActionRepository $repository,
-        protected Config $config,
-        protected Application $laravel
+        protected Config           $config,
+        protected Application      $laravel
     ) {
     }
 
@@ -62,7 +62,7 @@ class Migrator
             return;
         }
 
-        $this->notification->twoColumn($name, 'SKIP');
+        $this->notification->twoColumn($name, '<fg=yellow;options=bold>SKIPPED</>');
     }
 
     public function runDown(string $filename, Options $options): void
