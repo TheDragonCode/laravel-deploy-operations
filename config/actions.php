@@ -36,4 +36,25 @@ return [
     */
 
     'path' => base_path('actions'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Path Exclusion
+    |--------------------------------------------------------------------------
+    |
+    | This option determines which directory and/or file paths should be
+    | excluded when processing files.
+    |
+    | Valid values: array, string or null
+    |
+    | Specify `null` to disable.
+    |
+    | For example,
+    |    ['foo', 'bar']
+    |    'foo'
+    |    null
+    |
+    */
+
+    'exclude' => null,
 ];

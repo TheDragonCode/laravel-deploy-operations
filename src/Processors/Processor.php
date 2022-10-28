@@ -50,6 +50,8 @@ abstract class Processor
 
         $files = $this->isFile($file) ? [$file] : $this->file->names($path, $filter, true);
 
+        $files = Arr::filter($files, fn (string $path) => ! Str::contains($path, $this->config->exclude()));
+
         return Arr::of($this->sorter->byValues($files))
             ->map(fn (string $value) => Str::before($value, '.php'))
             ->toArray();
