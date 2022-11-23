@@ -652,4 +652,21 @@ class MigrateTest extends TestCase
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path/2021_12_15_205804_baz');
         $this->assertDatabaseMigrationHas($this->table, 'sub_path/2022_10_27_230732_foo');
     }
+
+    public function testEmptyDirectory()
+    {
+        $this->copyEmptyDirectory();
+
+        $table = 'every_time';
+
+        $this->artisan(Names::INSTALL)->assertExitCode(0);
+
+        $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseMigrationDoesntLike($this->table, $table);
+        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+
+        $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 0);
+    }
 }
