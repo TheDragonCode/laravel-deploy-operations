@@ -24,25 +24,25 @@ abstract class Processor
 {
     use Artisan;
 
-    abstract public function handle(): void;
-
     public function __construct(
-        protected Options $options,
-        protected InputInterface $input,
-        protected OutputStyle $output,
-        protected Config $config,
+        protected Options          $options,
+        protected InputInterface   $input,
+        protected OutputStyle      $output,
+        protected Config           $config,
         protected ActionRepository $repository,
-        protected Git $git,
-        protected File $file,
-        protected Migrator $migrator,
-        protected Notification $notification,
-        protected Dispatcher $events,
-        protected Sorter $sorter
+        protected Git              $git,
+        protected File             $file,
+        protected Migrator         $migrator,
+        protected Notification     $notification,
+        protected Dispatcher       $events,
+        protected Sorter           $sorter
     ) {
         $this->notification->setOutput($this->output, $this->options->silent);
         $this->repository->setConnection($this->options->connection);
         $this->migrator->setConnection($this->options->connection)->setOutput($this->output);
     }
+
+    abstract public function handle(): void;
 
     protected function getFiles(string $path, ?Closure $filter = null): array
     {
@@ -50,7 +50,7 @@ abstract class Processor
 
         $files = $this->isFile($file) ? [$file] : $this->file->names($path, $filter, true);
 
-        $files = Arr::filter($files, fn (string $path) => ! Str::contains($path, $this->config->exclude()));
+        $files = Arr::filter($files, fn (string $path) => Str::endsWith($path, '.php') && ! Str::contains($path, $this->config->exclude()));
 
         return Arr::of($this->sorter->byValues($files))
             ->map(fn (string $value) => Str::before($value, '.php'))

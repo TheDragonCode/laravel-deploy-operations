@@ -22,6 +22,14 @@ trait Files
         );
     }
 
+    protected function copyEmptyDirectory(): void
+    {
+        File::copyDirectory(
+            __DIR__ . '/../fixtures/app/empty',
+            $this->targetDirectory()
+        );
+    }
+
     protected function copyDI(): void
     {
         File::copyDirectory(
