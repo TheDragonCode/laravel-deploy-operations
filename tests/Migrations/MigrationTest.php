@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Migrations;
 
+use Doctrine\DBAL\Driver\PDOSqlite\Driver;
 use DragonCode\LaravelActions\Constants\Names;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +14,12 @@ class MigrationTest extends TestCase
 {
     public function testRunMigrationAfterInstall(): void
     {
+        if (! class_exists(Driver::class)) {
+            $this->assertTrue(true);
+
+            return;
+        }
+
         DB::table('migrations')->truncate();
 
         Schema::connection($this->database)->dropIfExists($this->table);
