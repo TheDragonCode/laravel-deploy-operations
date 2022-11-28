@@ -22,7 +22,9 @@ abstract class BaseChangeMigrationColumn extends Action
     {
         if ($this->hasTable()) {
             Schema::table($this->table(), function (Blueprint $table) {
-                $table->renameColumn('migration', 'action');
+                if ($this->hasColumn('migration') && $this->doesntHaveColumn('action')) {
+                    $table->renameColumn('migration', 'action');
+                }
 
                 $table->unsignedInteger('batch')->change();
             });
@@ -43,6 +45,16 @@ abstract class BaseChangeMigrationColumn extends Action
     protected function hasTable(): bool
     {
         return Schema::hasTable($this->table());
+    }
+
+    protected function hasColumn(string $column): bool
+    {
+        return Schema::hasColumn($this->table(), $column);
+    }
+
+    protected function doesntHaveColumn(string $column): bool
+    {
+        return ! $this->hasColumn($column);
     }
 
     protected function table(): string
