@@ -22,6 +22,18 @@ bar/2022_10_14_000003_test3  # 3
 2022_10_14_000004_test4      # 4
 ```
 
+## Isolating Action Execution
+
+If you are deploying your application across multiple servers and running migrations as part of your deployment process, you likely do not want two servers attempting to migrate
+the database at the same time. To avoid this, you may use the `isolated` option when invoking the `migrate:actions` command.
+
+When the `isolated` option is provided, Laravel will acquire an atomic lock using your application's cache driver before attempting to run your migrations. All other attempts to
+run the `migrate:actions` command while that lock is held will not execute; however, the command will still exit with a successful exit status code:
+
+```bash
+php artisan migrate:actions --isolated
+```
+
 ## Split Launch Option
 
 Sometimes it becomes necessary to launch actions separately, for example, to notify about the successful deployment of a project.
@@ -39,7 +51,7 @@ For backwards compatibility, the `before` parameter is set to `true` by default,
 ```php
 use DragonCode\LaravelActions\Action;
 
-return new class () extends Action
+return new class extends Action
 {
     protected $before = false;
 
@@ -95,7 +107,7 @@ To do this, override the `$once` variable in the action file:
 ```php
 use DragonCode\LaravelActions\Action;
 
-return new class () extends Action
+return new class extends Action
 {
     protected $once = false;
 
@@ -123,7 +135,7 @@ For this you can use the `$environment` parameter:
 ```php
 use DragonCode\LaravelActions\Action;
 
-return new class () extends Action
+return new class extends Action
 {
     /** @var string|array|null */
     protected $environment = 'production';
@@ -140,7 +152,7 @@ You can also specify multiple environment names:
 ```php
 use DragonCode\LaravelActions\Action;
 
-return new class () extends Action
+return new class extends Action
 {
     /** @var string|array|null */
     protected $environment = ['testing', 'staging'];
@@ -163,7 +175,7 @@ For this you can use the `$except_environment` parameter:
 ```php
 use DragonCode\LaravelActions\Action;
 
-return new class () extends Action
+return new class extends Action
 {
     /** @var string|array|null */
     protected $exceptEnvironment = 'production';
@@ -180,7 +192,7 @@ You can also specify multiple environment names:
 ```php
 use DragonCode\LaravelActions\Action;
 
-return new class () extends Action
+return new class extends Action
 {
     /** @var string|array|null */
     protected $exceptEnvironment = ['testing', 'staging'];
@@ -205,7 +217,7 @@ will reduce the time it takes to create the action.
 ```php
 use DragonCode\LaravelActions\Action;
 
-return new class () extends Action
+return new class extends Action
 {
     protected $transactions = true;
 
