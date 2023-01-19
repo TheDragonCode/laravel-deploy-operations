@@ -18,6 +18,7 @@ trait Optionable
         Options::CONNECTION,
         Options::FORCE,
         Options::MUTE,
+        Options::ISOLATED,
     ];
 
     protected function configure(): void
@@ -49,6 +50,7 @@ trait Optionable
             [Options::REALPATH, null, InputOption::VALUE_NONE, 'Indicate any provided action file paths are pre-resolved absolute path'],
             [Options::STEP, null, InputOption::VALUE_OPTIONAL, 'Force the actions to be run so they can be rolled back individually'],
             [Options::MUTE, null, InputOption::VALUE_NONE, 'Turns off the output of informational messages'],
+            [Options::ISOLATED, null, InputOption::VALUE_OPTIONAL, 'Do not run the actions command if another instance of the actions command is already running'],
         ];
     }
 

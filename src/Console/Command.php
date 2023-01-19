@@ -5,15 +5,20 @@ declare(strict_types=1);
 namespace DragonCode\LaravelActions\Console;
 
 use DragonCode\LaravelActions\Concerns\ConfirmableTrait;
+use DragonCode\LaravelActions\Concerns\Isolatable;
 use DragonCode\LaravelActions\Concerns\Optionable;
+use DragonCode\LaravelActions\Constants\Options;
 use DragonCode\LaravelActions\Processors\Processor;
 use DragonCode\LaravelActions\Values\Options as OptionsDto;
 use Illuminate\Console\Command as BaseCommand;
 use Illuminate\Container\Container;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class Command extends BaseCommand
 {
     use ConfirmableTrait;
+    use Isolatable;
     use Optionable;
 
     protected Processor|string $processor;
@@ -24,10 +29,28 @@ abstract class Command extends BaseCommand
             $this->resolveProcessor()->handle();
             $this->forgetProcessor();
 
-            return 0;
+            return self::SUCCESS;
         }
 
-        return 1;
+        return self::FAILURE;
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        if ($this->option(Options::ISOLATED) !== false && ! $this->isolationCreate()) {
+            $this->comment(sprintf('The [%s] command is already running.', $this->getName()));
+
+            return $this->isolatedStatusCode();
+        }
+
+        try {
+            return parent::execute($input, $output);
+        }
+        finally {
+            if ($this->option(Options::ISOLATED) !== false) {
+                $this->isolationForget();
+            }
+        }
     }
 
     protected function resolveProcessor(): Processor
