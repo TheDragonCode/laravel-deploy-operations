@@ -26,6 +26,16 @@ trait Isolatable
 
     protected function isolatedStatusCode(): int
     {
-        return (int) (is_numeric($this->option(Options::ISOLATED)) ? $this->option(Options::ISOLATED) : self::SUCCESS);
+        return (int) (is_numeric($this->getIsolateOption()) ? $this->getIsolateOption() : self::SUCCESS);
+    }
+
+    protected function getIsolateOption(): int|bool
+    {
+        return $this->hasIsolateOption() ? $this->option(Options::ISOLATED) : false;
+    }
+
+    protected function hasIsolateOption(): bool
+    {
+        return $this->hasOption(Options::ISOLATED) && $this->option(Options::ISOLATED);
     }
 }

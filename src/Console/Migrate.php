@@ -23,5 +23,6 @@ class Migrate extends Command
         Options::PATH,
         Options::REALPATH,
         Options::MUTE,
+        Options::ISOLATED,
     ];
 }

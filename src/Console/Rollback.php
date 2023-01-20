@@ -22,5 +22,6 @@ class Rollback extends Command
         Options::REALPATH,
         Options::STEP,
         Options::MUTE,
+        Options::ISOLATED,
     ];
 }
