@@ -35,7 +35,7 @@ jobs:
                     release-notes: ${{ github.event.release.body }}
                     latest-version: ${{ github.event.release.tag_name }}
                     compare-url-target-revision: ${{ github.event.release.target_commitish }}
-                    path-to-changelog: docs/prologue/changelog/3.x.md
+                    path-to-changelog: docs/prologue/changelog/4.x.md
 
             -   name: Storing
                 id: changelog
