@@ -36,13 +36,13 @@ abstract class Command extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        if ($this->getIsolateOption() !== false && ! $this->isolationMutex()->create($this)) {
+            $this->comment(sprintf('The [%s] command is already running.', $this->getName()));
+
+            return $this->isolatedStatusCode();
+        }
+
         try {
-            if ($this->getIsolateOption() !== false && ! $this->isolationMutex()->create($this)) {
-                $this->comment(sprintf('The [%s] command is already running.', $this->getName()));
-
-                return $this->isolatedStatusCode();
-            }
-
             return parent::execute($input, $output);
         }
         finally {

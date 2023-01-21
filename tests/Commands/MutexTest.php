@@ -47,7 +47,6 @@ class MutexTest extends TestCase
             ->once();
 
         $this->mutex->shouldReceive('forget')
-            ->never()
             ->once();
 
         $this->runCommand();
@@ -62,8 +61,7 @@ class MutexTest extends TestCase
             ->once();
 
         $this->mutex->shouldReceive('forget')
-            ->never()
-            ->once();
+            ->never();
 
         $this->runCommand();
 
@@ -77,7 +75,6 @@ class MutexTest extends TestCase
             ->twice();
 
         $this->mutex->shouldReceive('forget')
-            ->never()
             ->twice();
 
         $this->runCommand();
