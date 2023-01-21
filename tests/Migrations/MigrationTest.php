@@ -34,7 +34,8 @@ class MigrationTest extends TestCase
 
         $this->artisan('migrate')->run();
 
-        $this->assertDatabaseCount('migrations', 1);
+        $this->assertDatabaseCount('migrations', 2);
         $this->assertDatabaseHas('migrations', ['migration' => '2022_08_18_180137_change_migration_actions_table']);
+        $this->assertDatabaseHas('migrations', ['migration' => '2023_01_21_172923_rename_migrations_actions_table_to_actions']);
     }
 }
