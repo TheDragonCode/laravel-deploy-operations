@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelActions\Database;
 
+use DragonCode\LaravelActions\Action;
 use DragonCode\LaravelActions\Helpers\Config;
 use Illuminate\Support\Facades\Schema;
 use RuntimeException;
 
-class BaseRenameMigrationsActionsTableToActions
+class BaseRenameMigrationsActionsTableToActions extends Action
 {
     protected Config $config;
 
