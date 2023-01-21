@@ -22,8 +22,8 @@ class ServiceProvider extends BaseServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishConfig();
 
-            $this->registerCommands();
             $this->registerAbout();
+            $this->registerCommands();
             $this->registerMigrations();
             $this->registerNotifications();
         }
