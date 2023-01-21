@@ -21,7 +21,7 @@ class EventsTest extends TestCase
 
         Event::fake();
 
-        $this->artisan(Names::ACTIONS)->assertSuccessful();
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         Event::assertDispatchedTimes(ActionStarted::class, 1);
         Event::assertDispatchedTimes(ActionEnded::class, 1);
