@@ -36,7 +36,7 @@ module.exports = {
         editLink: true,
 
         navbar: [
-            { text: '3.x', link: '/prologue/changelog/index.md' }
+            { text: '4.x', link: '/prologue/changelog/4.x.md' }
         ],
 
         sidebarDepth: 1,
