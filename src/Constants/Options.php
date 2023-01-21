@@ -12,6 +12,8 @@ class Options
 
     public const FORCE = 'force';
 
+    public const ISOLATED = 'isolated';
+
     public const MUTE = 'mute';
 
     public const NAME = 'name';
