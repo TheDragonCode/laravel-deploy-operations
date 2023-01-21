@@ -14,7 +14,9 @@
 ## Table of contents
 
 * Prologue
-    * [Upgrade Guide](prologue/upgrade.md)
+    * [Upgrade Guide](prologue/upgrade-guide/index.md)
+      * [To 4.x from 3.x](prologue/upgrade-guide/4.x.md)
+      * [To 3.x from 2.x](prologue/upgrade-guide/3.x.md)
 * Getting Started
     * [Installation](getting-started/installation/index.md)
     * How to use
