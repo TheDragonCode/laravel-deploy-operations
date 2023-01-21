@@ -1,7 +1,9 @@
 <?php
 
-use DragonCode\LaravelActions\Database\BaseChangeMigrationColumn;
+declare(strict_types=1);
 
-return new class () extends BaseChangeMigrationColumn
+use DragonCode\LaravelActions\Database\BaseChangeColumn;
+
+return new class () extends BaseChangeColumn
 {
 };

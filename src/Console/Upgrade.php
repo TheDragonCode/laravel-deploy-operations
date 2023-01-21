@@ -12,7 +12,7 @@ class Upgrade extends Command
 {
     protected $name = Names::UPGRADE;
 
-    protected $description = 'Action structure upgrade from version 2 to 3';
+    protected $description = 'Action project upgrade from version 3 to 4';
 
     protected Processor|string $processor = UpgradeProcessor::class;
 }

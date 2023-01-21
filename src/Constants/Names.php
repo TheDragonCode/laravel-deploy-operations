@@ -4,21 +4,21 @@ namespace DragonCode\LaravelActions\Constants;
 
 class Names
 {
-    public const FRESH = 'migrate:actions:fresh';
+    public const FRESH = 'actions:fresh';
 
-    public const INSTALL = 'migrate:actions:install';
+    public const INSTALL = 'actions:install';
 
-    public const MAKE = 'make:migration:action';
+    public const MAKE = 'make:action';
 
-    public const MIGRATE = 'migrate:actions';
+    public const ACTIONS = 'actions';
 
-    public const REFRESH = 'migrate:actions:refresh';
+    public const REFRESH = 'actions:refresh';
 
-    public const RESET = 'migrate:actions:reset';
+    public const RESET = 'actions:reset';
 
-    public const ROLLBACK = 'migrate:actions:rollback.md';
+    public const ROLLBACK = 'actions:rollback';
 
-    public const STATUS = 'migrate:actions:status';
+    public const STATUS = 'actions:status';
 
-    public const UPGRADE = 'migrate:actions:upgrade';
+    public const UPGRADE = 'actions:upgrade';
 }

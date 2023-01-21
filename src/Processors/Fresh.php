@@ -12,7 +12,7 @@ class Fresh extends Processor
     public function handle(): void
     {
         $this->drop();
-        $this->migrate();
+        $this->actions();
     }
 
     protected function drop(): void
@@ -22,9 +22,9 @@ class Fresh extends Processor
         }
     }
 
-    protected function migrate(): void
+    protected function actions(): void
     {
-        $this->runCommand(Names::MIGRATE, [
+        $this->runCommand(Names::ACTIONS, [
             '--' . Options::CONNECTION => $this->options->connection,
             '--' . Options::PATH       => $this->options->path,
             '--' . Options::REALPATH   => true,

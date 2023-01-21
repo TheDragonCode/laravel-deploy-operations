@@ -13,7 +13,7 @@
 
 ## Medium Impact Changes
 
-- [Changing the name of an action column in the database](#changed-migration-repository)
+- [Changing the name of an action column in the database](#changed-action-repository)
 - [Action storage directory changed](#actions-location)
 
 ## Upgrading To 3.x from 2.x
@@ -26,7 +26,7 @@
 For your convenience, we have created an upgrade console command:
 
 ```bash
-php artisan migrate:actions:upgrade
+php artisan actions:upgrade
 ```
 
 It will do the following:
@@ -47,7 +47,7 @@ Laravel Actions now requires PHP 8.0.2 or greater.
 
 You should update the following dependency in your application's `composer.json` file:
 
-- `dragon-code/laravel-migration-actions` to `^3.0`
+- `dragon-code/laravel-actions` to `^3.0`
 
 ### Configuration
 
@@ -87,7 +87,7 @@ return new class () extends Action {};
 
 If your class does not contain a `down` method, then you can replace the `up` method with `__invoke`.
 
-### Changed Migration Repository
+### Changed Action Repository
 
 Just call the `php artisan migrate` command to make changes to the action repository table.
 

@@ -9,7 +9,7 @@ use DragonCode\LaravelActions\Helpers\Config;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-abstract class BaseChangeMigrationColumn extends Action
+abstract class BaseChangeColumn extends Action
 {
     protected Config $config;
 

@@ -4,9 +4,9 @@
     "description": "Performing actions with saving the list of called files",
     "author": "Andrey Helldar <helldar@dragon-code.pro>",
     "license": "MIT",
-    "homepage": "https://github.com/TheDragonCode/laravel-migration-actions",
+    "homepage": "https://github.com/TheDragonCode/laravel-actions",
     "bugs": {
-        "url": "https://github.com/TheDragonCode/laravel-migration-actions/issues"
+        "url": "https://github.com/TheDragonCode/laravel-actions/issues"
     },
     "scripts": {
         "dev": "vuepress dev docs --debug",
@@ -14,7 +14,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+ssh://git@github.com/TheDragonCode/laravel-migration-actions.git"
+        "url": "git+ssh://git@github.com/TheDragonCode/laravel-actions.git"
     },
     "devDependencies": {
         "@vuepress/plugin-theme-data": "2.0.0-beta.54",

@@ -1,9 +1,9 @@
 # Creating Actions
 
-To create an action use the `make:migration:action` artisan command:
+To create an action use the `make:action` artisan command:
 
 ```bash
-php artisan make:migration:action some_name
+php artisan make:action some_name
 ```
 
 The new action's file will be placed in your `actions` directory in the base path of your app.
@@ -18,7 +18,7 @@ If you do not specify the "name" attribute, then the file name will be generated
 > git branch name ?: 'auto'
 
 ```bash
-php artisan make:migration:action
+php artisan make:action
 
 ### When the git repository is found (`base_path('.git')` directory is exists) and HEAD branch name is 'qwerty'
 # 2022_10_11_225116_qwerty.php
@@ -36,14 +36,14 @@ php artisan make:migration:action
 You can use nested paths to create actions:
 
 ```bash
-php artisan make:migration:action Foo/Bar/QweRty
-php artisan make:migration:action Foo/Bar/QweRty.php
+php artisan make:action Foo/Bar/QweRty
+php artisan make:action Foo/Bar/QweRty.php
 
-php artisan make:migration:action Foo\Bar\QweRty
-php artisan make:migration:action Foo\Bar\QweRty.php
+php artisan make:action Foo\Bar\QweRty
+php artisan make:action Foo\Bar\QweRty.php
 
-php artisan make:migration:action foo\bar\QweRty
-php artisan make:migration:action foo\bar\QweRty.php
+php artisan make:action foo\bar\QweRty
+php artisan make:action foo\bar\QweRty.php
 ```
 
 All of these commands will create a file called `actions/foo/bar/Y_m_d_His_qwe_rty.php`.
@@ -51,16 +51,16 @@ All of these commands will create a file called `actions/foo/bar/Y_m_d_His_qwe_r
 For example:
 
 ```bash
-php artisan make:migration:action foo\bar\QweRty
+php artisan make:action foo\bar\QweRty
 # actions/foo/bar/2022_10_11_225734_qwe_rty.php
 
-php artisan make:migration:action foo\bar\QweRty.php
+php artisan make:action foo\bar\QweRty.php
 # actions/foo/bar/2022_10_11_225734_qwe_rty.php
 
-php artisan make:migration:action foo/bar/QweRty
+php artisan make:action foo/bar/QweRty
 # actions/foo/bar/2022_10_11_225734_qwe_rty.php
 
-php artisan make:migration:action foo/bar/QweRty.php
+php artisan make:action foo/bar/QweRty.php
 # actions/foo/bar/2022_10_11_225734_qwe_rty.php
 ```
 
@@ -90,7 +90,7 @@ use DragonCode\LaravelActions\Action;
 
 return new class () extends Action
 {
-    public function __invoke(): void {} // called when `php artisan migrate:actions` running
+    public function __invoke(): void {} // called when `php artisan actions` running
 
     public function down(): void {} // doesn't call when `php artisan migrate:rollback` running
                                     // and any other commands to revert the action.  

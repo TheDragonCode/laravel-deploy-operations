@@ -26,9 +26,9 @@ module.exports = {
 
         logo: `https://${ hostname }/images/logo.svg`,
 
-        repo: 'https://github.com/TheDragonCode/laravel-migration-actions',
+        repo: 'https://github.com/TheDragonCode/laravel-actions',
         repoLabel: 'GitHub',
-        docsRepo: 'https://github.com/TheDragonCode/laravel-migration-actions',
+        docsRepo: 'https://github.com/TheDragonCode/laravel-actions',
         docsBranch: 'main',
         docsDir: 'docs',
 
