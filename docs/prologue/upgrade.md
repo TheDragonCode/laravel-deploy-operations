@@ -26,7 +26,7 @@
 For your convenience, we have created an upgrade console command:
 
 ```bash
-php artisan migrate:actions:upgrade
+php artisan actions:upgrade
 ```
 
 It will do the following:
