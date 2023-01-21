@@ -1,5 +1,5 @@
 {
-    "name": "dragon-code/laravel-migration-actions",
+    "name": "dragon-code/laravel-actions",
     "description": "Performing actions with saving the list of called files",
     "license": "MIT",
     "type": "library",
@@ -21,8 +21,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/TheDragonCode/laravel-migration-actions/issues",
-        "source": "https://github.com/TheDragonCode/laravel-migration-actions"
+        "issues": "https://github.com/TheDragonCode/laravel-actions/issues",
+        "source": "https://github.com/TheDragonCode/laravel-actions"
     },
     "funding": [
         {

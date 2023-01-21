@@ -1,7 +1,7 @@
 <?php
 
-use DragonCode\LaravelActions\Database\BaseChangeMigrationColumn;
+use DragonCode\LaravelActions\Database\BaseChangeColumn;
 
-class ChangeMigrationActionsTable extends BaseChangeMigrationColumn
+class ChangeActionsTable extends BaseChangeColumn
 {
 }

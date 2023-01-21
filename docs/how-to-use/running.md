@@ -24,10 +24,10 @@ bar/2022_10_14_000003_test3  # 3
 
 ## Isolating Action Execution
 
-If you are deploying your application across multiple servers and running migrations as part of your deployment process, you likely do not want two servers attempting to migrate
+If you are deploying your application across multiple servers and running actions as part of your deployment process, you likely do not want two servers attempting to migrate
 the database at the same time. To avoid this, you may use the `isolated` option when invoking the `migrate:actions` command.
 
-When the `isolated` option is provided, Laravel will acquire an atomic lock using your application's cache driver before attempting to run your migrations. All other attempts to
+When the `isolated` option is provided, Laravel will acquire an atomic lock using your application's cache driver before attempting to run your actions. All other attempts to
 run the `migrate:actions` command while that lock is held will not execute; however, the command will still exit with a successful exit status code:
 
 ```bash
@@ -62,7 +62,7 @@ return new class extends Action
 };
 ```
 
-For example, you need to call actions when deploying an application. Some actions should be run after the migrations are deployed, and others after the application is fully
+For example, you need to call actions when deploying an application. Some actions should be run after the actions are deployed, and others after the application is fully
 launched.
 
 To run, you need to pass the `before` parameter. For example, when using [`deployer`](https://github.com/deployphp/deployer) it would look like this:
