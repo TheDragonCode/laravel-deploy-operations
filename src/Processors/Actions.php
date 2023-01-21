@@ -13,7 +13,7 @@ use DragonCode\LaravelActions\Events\NoPendingActions;
 use DragonCode\Support\Facades\Helpers\Str;
 use Throwable;
 
-class Migrate extends Processor
+class Actions extends Processor
 {
     public function handle(): void
     {
