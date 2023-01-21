@@ -40,7 +40,7 @@ class ServiceProvider extends BaseServiceProvider
             Console\Fresh::class,
             Console\Install::class,
             Console\Make::class,
-            Console\Migrate::class,
+            Console\Actions::class,
             Console\Refresh::class,
             Console\Reset::class,
             Console\Rollback::class,
