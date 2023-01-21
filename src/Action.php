@@ -14,7 +14,7 @@ abstract class Action extends Migration
      * Determines the type of launch of the action.
      *
      * If true, then it will be executed once.
-     * If false, then the action will run every time the `migrate:actions` command is invoked.
+     * If false, then the action will run every time the `actions` command is invoked.
      *
      * @var bool
      */
@@ -61,7 +61,7 @@ abstract class Action extends Migration
      * Determines the type of launch of the action.
      *
      * If true, then it will be executed once.
-     * If false, then the action will run every time the `migrate:actions` command is invoked.
+     * If false, then the action will run every time the `actions` command is invoked.
      *
      * @return bool
      */

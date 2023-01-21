@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Tests\TestCase;
 use Throwable;
 
-class MigrateTest extends TestCase
+class ActionsTest extends TestCase
 {
     public function testMigrationCommand()
     {

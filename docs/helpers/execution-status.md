@@ -31,7 +31,7 @@ return new class () extends Action
 };
 ```
 
-Call the `php artisan migrate:actions` command.
+Call the `php artisan actions` command.
 
 The log file will contain two `success` entries.
 
@@ -66,6 +66,6 @@ return new class extends Action
 };
 ```
 
-Call the `php artisan migrate:actions` command.
+Call the `php artisan actions` command.
 
 The log file will contain two `failed` entries.

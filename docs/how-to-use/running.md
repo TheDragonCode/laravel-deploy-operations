@@ -1,9 +1,9 @@
 # Running Actions
 
-To run all of your outstanding actions, execute the `migrate:actions` artisan command:
+To run all of your outstanding actions, execute the `actions` artisan command:
 
 ```bash
-php artisan migrate:actions
+php artisan actions
 ```
 
 Action call order is checked by filename without path:
@@ -25,13 +25,13 @@ bar/2022_10_14_000003_test3  # 3
 ## Isolating Action Execution
 
 If you are deploying your application across multiple servers and running actions as part of your deployment process, you likely do not want two servers attempting to migrate
-the database at the same time. To avoid this, you may use the `isolated` option when invoking the `migrate:actions` command.
+the database at the same time. To avoid this, you may use the `isolated` option when invoking the `actions` command.
 
 When the `isolated` option is provided, Laravel will acquire an atomic lock using your application's cache driver before attempting to run your actions. All other attempts to
-run the `migrate:actions` command while that lock is held will not execute; however, the command will still exit with a successful exit status code:
+run the `actions` command while that lock is held will not execute; however, the command will still exit with a successful exit status code:
 
 ```bash
-php artisan migrate:actions --isolated
+php artisan actions --isolated
 ```
 
 ## Split Launch Option
@@ -41,10 +41,10 @@ Sometimes it becomes necessary to launch actions separately, for example, to not
 There is a `before` option for this when calling actions:
 
 ```bash
-php artisan migrate:actions --before
+php artisan actions --before
 ```
 
-When calling the `migrate:actions` command with the `before` parameter, the script will execute only those actions within which the value of the `before` parameter is `true`.
+When calling the `actions` command with the `before` parameter, the script will execute only those actions within which the value of the `before` parameter is `true`.
 
 For backwards compatibility, the `before` parameter is set to `true` by default, but actions will only be executed if the option is explicitly passed.
 
@@ -71,31 +71,31 @@ To run, you need to pass the `before` parameter. For example, when using [`deplo
 task('deploy', [
     // ...
     'artisan:migrate',
-    'artisan:migrate:actions --before', // here
+    'artisan:actions --before', // here
     'deploy:publish',
     'php-fpm:reload',
     'artisan:queue:restart',
-    'artisan:migrate:actions', // here
+    'artisan:actions', // here
 ]);
 ```
 
-Thus, when `migrate:actions` is called, all actions whose `before` parameter is `true` will be executed, and after that, the remaining tasks will be executed.
+Thus, when `actions` is called, all actions whose `before` parameter is `true` will be executed, and after that, the remaining tasks will be executed.
 
 > Note:
-> If you call the `migrate:actions` command without the `before` parameter,
+> If you call the `actions` command without the `before` parameter,
 > then all tasks will be executed regardless of the value of the `$before`
 > attribute inside the action class.
 
 ## Forcing Actions To Run In Production
 
 > Some commands cannot be executed in production without confirmation.
-> These include all commands except `migrate:actions:status` and `migrate:actions`.
+> These include all commands except `actions:status` and `actions`.
 
 Some action operations are destructive, which means they may cause you to lose data. In order to protect you from running these commands against your production database,
 you will be prompted for confirmation before the commands are executed. To force the commands to run without a prompt, use the `--force` flag:
 
 ```bash
-php artisan migrate:actions:install --force
+php artisan actions:install --force
 ```
 
 ## Execution Every Time
@@ -118,7 +118,7 @@ return new class extends Action
 };
 ```
 
-If the value is `$once = false`, the `up` method will be called every time the `migrate:actions` command called.
+If the value is `$once = false`, the `up` method will be called every time the `actions` command called.
 
 In this case, information about it will not be written to the `migration_actions` table and, therefore, the `down` method will not be called when the rollback command is called.
 
