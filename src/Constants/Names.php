@@ -10,7 +10,7 @@ class Names
 
     public const MAKE = 'make:action';
 
-    public const MIGRATE = 'actions';
+    public const ACTIONS = 'actions';
 
     public const REFRESH = 'actions:refresh';
 

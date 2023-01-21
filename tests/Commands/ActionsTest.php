@@ -21,7 +21,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseCount($this->table, 0);
 
         $this->artisan(Names::MAKE, ['name' => 'TestMigration'])->assertExitCode(0);
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($this->table, 1);
         $this->assertDatabaseMigrationHas($this->table, 'test_migration');
@@ -41,7 +41,7 @@ class ActionsTest extends TestCase
         sleep(2);
 
         $this->artisan(Names::MAKE, ['name' => 'TestMigration'])->assertExitCode(0);
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($this->table, 2);
         $this->assertDatabaseMigrationHas($this->table, 'test_migration');
@@ -58,22 +58,22 @@ class ActionsTest extends TestCase
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseMigrationDoesntLike($this->table, $table);
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 12);
         $this->assertDatabaseMigrationDoesntLike($this->table, $table);
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 12);
         $this->assertDatabaseMigrationDoesntLike($this->table, $table);
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 3);
         $this->assertDatabaseCount($this->table, 12);
         $this->assertDatabaseMigrationDoesntLike($this->table, $table);
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 4);
         $this->assertDatabaseCount($this->table, 12);
@@ -91,7 +91,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseMigrationDoesntLike($this->table, $table);
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 3);
         $this->assertDatabaseCount($this->table, 1);
@@ -111,7 +111,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseMigrationDoesntLike($this->table, $table);
 
         try {
-            $this->artisan(Names::MIGRATE)->assertExitCode(0);
+            $this->artisan(Names::ACTIONS)->assertExitCode(0);
         }
         catch (Exception $e) {
             $this->assertSame(Exception::class, get_class($e));
@@ -138,7 +138,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_testing');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_except_production');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_except_testing');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 5);
         $this->assertDatabaseCount($this->table, 12);
@@ -147,7 +147,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseMigrationHas($this->table, 'run_on_testing');
         $this->assertDatabaseMigrationHas($this->table, 'run_except_production');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_except_testing');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 5);
         $this->assertDatabaseCount($this->table, 12);
@@ -175,7 +175,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_except_production');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_except_testing');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_except_many_environments');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 5);
         $this->assertDatabaseCount($this->table, 12);
@@ -186,7 +186,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseMigrationHas($this->table, 'run_except_production');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_except_testing');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_except_many_environments');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 5);
         $this->assertDatabaseCount($this->table, 12);
@@ -211,13 +211,13 @@ class ActionsTest extends TestCase
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_allow');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_disallow');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 5);
         $this->assertDatabaseCount($this->table, 12);
         $this->assertDatabaseMigrationHas($this->table, 'run_allow');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_disallow');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 5);
         $this->assertDatabaseCount($this->table, 12);
@@ -236,7 +236,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 12);
@@ -254,7 +254,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success_on_failed');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 12);
@@ -263,7 +263,7 @@ class ActionsTest extends TestCase
         try {
             $this->copySuccessFailureMethod();
 
-            $this->artisan(Names::MIGRATE)->assertExitCode(0);
+            $this->artisan(Names::ACTIONS)->assertExitCode(0);
         }
         catch (Throwable $e) {
             $this->assertInstanceOf(Exception::class, $e);
@@ -289,7 +289,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_failed');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 12);
@@ -307,7 +307,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'run_failed_failure');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 12);
@@ -316,7 +316,7 @@ class ActionsTest extends TestCase
         try {
             $this->copyFailedMethod();
 
-            $this->artisan(Names::MIGRATE)->assertExitCode(0);
+            $this->artisan(Names::ACTIONS)->assertExitCode(0);
         }
         catch (Throwable $e) {
             $this->assertInstanceOf(Exception::class, $e);
@@ -344,7 +344,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'baz');
-        $this->artisan(Names::MIGRATE, ['--path' => $path])->assertExitCode(0);
+        $this->artisan(Names::ACTIONS, ['--path' => $path])->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 1);
@@ -366,7 +366,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'baz');
-        $this->artisan(Names::MIGRATE, ['--path' => $path])->assertExitCode(0);
+        $this->artisan(Names::ACTIONS, ['--path' => $path])->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 1);
@@ -388,7 +388,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'baz');
-        $this->artisan(Names::MIGRATE, ['--path' => $path])->assertExitCode(0);
+        $this->artisan(Names::ACTIONS, ['--path' => $path])->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 2);
@@ -420,13 +420,13 @@ class ActionsTest extends TestCase
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 12);
         $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationHas($this->table, 'test_before_disabled');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 12);
@@ -446,13 +446,13 @@ class ActionsTest extends TestCase
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
-        $this->artisan(Names::MIGRATE, ['--before' => true])->assertExitCode(0);
+        $this->artisan(Names::ACTIONS, ['--before' => true])->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 11);
         $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
-        $this->artisan(Names::MIGRATE, ['--before' => true])->assertExitCode(0);
+        $this->artisan(Names::ACTIONS, ['--before' => true])->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 11);
@@ -472,25 +472,25 @@ class ActionsTest extends TestCase
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
-        $this->artisan(Names::MIGRATE, ['--before' => true])->assertExitCode(0);
+        $this->artisan(Names::ACTIONS, ['--before' => true])->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 11);
         $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
-        $this->artisan(Names::MIGRATE, ['--before' => true])->assertExitCode(0);
+        $this->artisan(Names::ACTIONS, ['--before' => true])->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 11);
         $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 12);
         $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
         $this->assertDatabaseMigrationHas($this->table, 'test_before_disabled');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 12);
@@ -514,7 +514,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseMigrationDoesntLike($table, 'up_down', column: 'value');
         $this->assertDatabaseMigrationDoesntLike($table, 'invoke_down', column: 'value');
         $this->assertDatabaseMigrationDoesntLike($table, 'invoke', column: 'value');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 3);
         $this->assertDatabaseCount($this->table, 3);
@@ -550,7 +550,7 @@ class ActionsTest extends TestCase
         $files[] = date('Y_m_d_His_') . 'test6';
         $this->artisan(Names::MAKE, ['name' => 'test6'])->assertExitCode(0);
 
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
         $this->assertDatabaseCount($this->table, 6);
 
         $records = DB::table($this->table)->orderBy('id')->pluck('action')->toArray();
@@ -574,7 +574,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path/2021_12_15_205804_baz');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path/2022_10_27_230732_foo');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 10);
@@ -582,7 +582,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path/2021_12_15_205804_baz');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path/2022_10_27_230732_foo');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 10);
@@ -590,7 +590,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path/2021_12_15_205804_baz');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path/2022_10_27_230732_foo');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 3);
         $this->assertDatabaseCount($this->table, 10);
@@ -598,7 +598,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path/2021_12_15_205804_baz');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path/2022_10_27_230732_foo');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 4);
         $this->assertDatabaseCount($this->table, 10);
@@ -623,28 +623,28 @@ class ActionsTest extends TestCase
         $this->assertDatabaseMigrationDoesntLike($this->table, $table);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path/2021_12_15_205804_baz');
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path/2022_10_27_230732_foo');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 11);
         $this->assertDatabaseMigrationDoesntLike($this->table, $table);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path/2021_12_15_205804_baz');
         $this->assertDatabaseMigrationHas($this->table, 'sub_path/2022_10_27_230732_foo');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 11);
         $this->assertDatabaseMigrationDoesntLike($this->table, $table);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path/2021_12_15_205804_baz');
         $this->assertDatabaseMigrationHas($this->table, 'sub_path/2022_10_27_230732_foo');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 3);
         $this->assertDatabaseCount($this->table, 11);
         $this->assertDatabaseMigrationDoesntLike($this->table, $table);
         $this->assertDatabaseMigrationDoesntLike($this->table, 'sub_path/2021_12_15_205804_baz');
         $this->assertDatabaseMigrationHas($this->table, 'sub_path/2022_10_27_230732_foo');
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 4);
         $this->assertDatabaseCount($this->table, 11);
@@ -664,7 +664,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseMigrationDoesntLike($this->table, $table);
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);

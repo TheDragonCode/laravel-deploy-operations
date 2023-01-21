@@ -9,7 +9,7 @@ use DragonCode\LaravelActions\Processors\Processor;
 
 class Migrate extends Command
 {
-    protected $signature = Names::MIGRATE;
+    protected $signature = Names::ACTIONS;
 
     protected $description = 'Run the actions';
 
