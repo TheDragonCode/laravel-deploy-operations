@@ -32,7 +32,7 @@
 This package is licensed under the [MIT License](prologue/license.md).
 
 
-[badge_build]:          https://img.shields.io/github/workflow/status/TheDragonCode/laravel-migration-actions/phpunit?style=flat-square
+[badge_build]:          https://img.shields.io/github/actions/workflow/status/TheDragonCode/laravel-migration-actions/laravel.yml?style=flat-square
 
 [badge_downloads]:      https://img.shields.io/packagist/dt/dragon-code/laravel-migration-actions.svg?style=flat-square
 
