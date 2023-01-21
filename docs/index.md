@@ -1,6 +1,6 @@
-# Laravel Migration Actions
+# Laravel Actions
 
-![the dragon code migration actions](https://preview.dragon-code.pro/the-dragon-code/migration-actions.svg?brand=laravel)
+![the dragon code actions](https://preview.dragon-code.pro/the-dragon-code/actions.svg?brand=laravel)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
@@ -32,18 +32,18 @@
 This package is licensed under the [MIT License](prologue/license.md).
 
 
-[badge_build]:          https://img.shields.io/github/actions/workflow/status/TheDragonCode/laravel-migration-actions/laravel.yml?style=flat-square
+[badge_build]:          https://img.shields.io/github/actions/workflow/status/TheDragonCode/laravel-actions/laravel.yml?style=flat-square
 
-[badge_downloads]:      https://img.shields.io/packagist/dt/dragon-code/laravel-migration-actions.svg?style=flat-square
+[badge_downloads]:      https://img.shields.io/packagist/dt/dragon-code/laravel-actions.svg?style=flat-square
 
-[badge_license]:        https://img.shields.io/packagist/l/dragon-code/laravel-migration-actions.svg?style=flat-square
+[badge_license]:        https://img.shields.io/packagist/l/dragon-code/laravel-actions.svg?style=flat-square
 
-[badge_stable]:         https://img.shields.io/github/v/release/TheDragonCode/laravel-migration-actions?label=stable&style=flat-square
+[badge_stable]:         https://img.shields.io/github/v/release/TheDragonCode/laravel-actions?label=stable&style=flat-square
 
 [badge_unstable]:       https://img.shields.io/badge/unstable-dev--main-orange?style=flat-square
 
-[link_build]:           https://github.com/TheDragonCode/laravel-migration-actions/actions
+[link_build]:           https://github.com/TheDragonCode/laravel-actions/actions
 
 [link_license]:         prologue/license.md
 
-[link_packagist]:       https://packagist.org/packages/dragon-code/laravel-migration-actions
+[link_packagist]:       https://packagist.org/packages/dragon-code/laravel-actions

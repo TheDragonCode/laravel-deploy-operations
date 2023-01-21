@@ -3,7 +3,7 @@
 To get the latest version of Laravel Actions, simply require the project using [Composer](https://getcomposer.org):
 
 ```bash
-composer require dragon-code/laravel-migration-actions
+composer require dragon-code/laravel-actions
 ```
 
 Or manually update `require` block of `composer.json` and run `composer update` console command.
@@ -11,7 +11,7 @@ Or manually update `require` block of `composer.json` and run `composer update` 
 ```json
 {
     "require": {
-        "dragon-code/laravel-migration-actions": "^3.0"
+        "dragon-code/laravel-actions": "^3.0"
     }
 }
 ```
@@ -41,5 +41,5 @@ $app->register(\DragonCode\LaravelActions\ServiceProvider::class);
 Next, you can copy the config file:
 
 ```bash
-cp vendor/dragon-code/laravel-migration-actions/config/actions.php config/actions.php
+cp vendor/dragon-code/laravel-actions/config/actions.php config/actions.php
 ```
