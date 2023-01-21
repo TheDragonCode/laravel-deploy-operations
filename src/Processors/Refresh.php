@@ -30,7 +30,7 @@ class Refresh extends Processor
 
     protected function runMigrate(?string $connection, ?string $path, bool $realPath = true): void
     {
-        $this->runCommand(Names::MIGRATE, [
+        $this->runCommand(Names::ACTIONS, [
             '--' . Options::CONNECTION => $connection,
             '--' . Options::PATH       => $path,
             '--' . Options::REALPATH   => $realPath,

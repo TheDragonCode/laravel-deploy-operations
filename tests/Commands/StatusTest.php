@@ -28,7 +28,7 @@ class StatusTest extends TestCase
         $this->artisan(Names::STATUS)->expectsTable([], [])->assertExitCode(0);
 
         $this->artisan(Names::MAKE, ['name' => 'Status'])->assertExitCode(0);
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($this->table, 1);
 

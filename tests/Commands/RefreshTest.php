@@ -17,7 +17,7 @@ class RefreshTest extends TestCase
         $this->assertDatabaseCount($this->table, 0);
 
         $this->artisan(Names::MAKE, ['name' => 'Refresh'])->assertExitCode(0);
-        $this->artisan(Names::MIGRATE)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 1);
