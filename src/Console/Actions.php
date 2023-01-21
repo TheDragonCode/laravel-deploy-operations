@@ -7,7 +7,7 @@ use DragonCode\LaravelActions\Constants\Options;
 use DragonCode\LaravelActions\Processors\Migrate as MigrateProcessor;
 use DragonCode\LaravelActions\Processors\Processor;
 
-class Migrate extends Command
+class Actions extends Command
 {
     protected $signature = Names::ACTIONS;
 
