@@ -64,7 +64,7 @@
     },
     "conflict": {
         "andrey-helldar/laravel-actions": "*",
-        "dragon-code/laravel-actions": "*"
+        "dragon-code/laravel-migration-actions": "*"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
