@@ -48,7 +48,7 @@ module.exports = {
                 children: [
                     {
                         text: 'Upgrade Guide',
-                        link: '/prologue/upgrade.md'
+                        link: '/prologue/upgrade-guide/index.md'
                     },
                     {
                         text: 'License',
