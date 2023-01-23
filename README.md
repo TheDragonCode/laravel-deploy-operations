@@ -1,6 +1,6 @@
 # Laravel Actions
 
-![the dragon code actions](https://preview.dragon-code.pro/the-dragon-code/actions.svg?brand=laravel)
+![the dragon code actions](https://preview.dragon-code.pro/the-dragon-code/laravel-actions.svg?brand=laravel)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
