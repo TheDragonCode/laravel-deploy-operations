@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
-class MigrationTest extends TestCase
+class ActionsTest extends TestCase
 {
-    public function testRunMigrationAfterInstall(): void
+    public function testRunActionsAfterInstall(): void
     {
         if (! class_exists(Driver::class)) {
             $this->assertTrue(true);

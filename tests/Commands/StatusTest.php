@@ -34,6 +34,6 @@ class StatusTest extends TestCase
 
         $this->artisan(Names::STATUS)->assertExitCode(0);
 
-        $this->assertDatabaseMigrationHas($this->table, 'status');
+        $this->assertDatabaseActionHas($this->table, 'status');
     }
 }

@@ -21,12 +21,12 @@ class ResetTest extends TestCase
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 1);
-        $this->assertDatabaseMigrationHas($this->table, 'reset');
+        $this->assertDatabaseActionHas($this->table, 'reset');
 
         $this->artisan(Names::RESET)->assertExitCode(0);
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'reset');
+        $this->assertDatabaseActionDoesntLike($this->table, 'reset');
     }
 }

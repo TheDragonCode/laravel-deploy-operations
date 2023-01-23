@@ -27,9 +27,9 @@ class RollbackTest extends TestCase
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 2);
 
-        $this->assertDatabaseMigrationHas($this->table, 'rollback_one');
-        $this->assertDatabaseMigrationHas($this->table, 'rollback_two');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'rollback_tree');
+        $this->assertDatabaseActionHas($this->table, 'rollback_one');
+        $this->assertDatabaseActionHas($this->table, 'rollback_two');
+        $this->assertDatabaseActionDoesntLike($this->table, 'rollback_tree');
 
         $this->artisan(Names::ROLLBACK)->assertExitCode(0);
 
@@ -47,9 +47,9 @@ class RollbackTest extends TestCase
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 3);
 
-        $this->assertDatabaseMigrationHas($this->table, 'rollback_one');
-        $this->assertDatabaseMigrationHas($this->table, 'rollback_two');
-        $this->assertDatabaseMigrationHas($this->table, 'rollback_tree');
+        $this->assertDatabaseActionHas($this->table, 'rollback_one');
+        $this->assertDatabaseActionHas($this->table, 'rollback_two');
+        $this->assertDatabaseActionHas($this->table, 'rollback_tree');
     }
 
     public function testEnvironment()
@@ -62,27 +62,27 @@ class RollbackTest extends TestCase
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_all');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_production');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_testing');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_many_environments');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_all');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_production');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_testing');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_many_environments');
         $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 5);
         $this->assertDatabaseCount($this->table, 12);
-        $this->assertDatabaseMigrationHas($this->table, 'run_on_all');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_production');
-        $this->assertDatabaseMigrationHas($this->table, 'run_on_testing');
-        $this->assertDatabaseMigrationHas($this->table, 'run_on_many_environments');
+        $this->assertDatabaseActionHas($this->table, 'run_on_all');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_production');
+        $this->assertDatabaseActionHas($this->table, 'run_on_testing');
+        $this->assertDatabaseActionHas($this->table, 'run_on_many_environments');
         $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->artisan(Names::ROLLBACK)->assertExitCode(0);
         $this->assertDatabaseCount($table, 10);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_all');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_production');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_testing');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_on_many_environments');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_all');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_production');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_testing');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_many_environments');
     }
 
     public function testDownSuccess()
@@ -95,17 +95,17 @@ class RollbackTest extends TestCase
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_success');
         $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 12);
-        $this->assertDatabaseMigrationHas($this->table, 'run_success');
+        $this->assertDatabaseActionHas($this->table, 'run_success');
 
         $this->artisan(Names::ROLLBACK)->assertExitCode(0);
         $this->assertDatabaseCount($table, 4);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_success');
     }
 
     public function testDownSuccessOnFailed()
@@ -118,12 +118,12 @@ class RollbackTest extends TestCase
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success_on_failed');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_success_on_failed');
         $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 12);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_success_on_failed');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_success_on_failed');
 
         try {
             $this->copySuccessFailureMethod();
@@ -132,7 +132,7 @@ class RollbackTest extends TestCase
 
             $this->assertDatabaseCount($table, 2);
             $this->assertDatabaseCount($this->table, 13);
-            $this->assertDatabaseMigrationHas($this->table, 'run_success_on_failed');
+            $this->assertDatabaseActionHas($this->table, 'run_success_on_failed');
 
             $this->artisan(Names::ROLLBACK)->assertExitCode(1);
         }
@@ -146,7 +146,7 @@ class RollbackTest extends TestCase
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 13);
-        $this->assertDatabaseMigrationHas($this->table, 'run_success_on_failed');
+        $this->assertDatabaseActionHas($this->table, 'run_success_on_failed');
     }
 
     public function testDownFailed()
@@ -159,17 +159,17 @@ class RollbackTest extends TestCase
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_failed');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_failed');
         $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 12);
-        $this->assertDatabaseMigrationHas($this->table, 'run_failed');
+        $this->assertDatabaseActionHas($this->table, 'run_failed');
 
         $this->artisan(Names::ROLLBACK)->assertExitCode(0);
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_failed');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_failed');
     }
 
     public function testUpFailedOnException()
@@ -182,12 +182,12 @@ class RollbackTest extends TestCase
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_failed_failure');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_failed_failure');
         $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 12);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'run_failed_failure');
+        $this->assertDatabaseActionDoesntLike($this->table, 'run_failed_failure');
 
         try {
             $this->copyFailedMethod();
@@ -206,7 +206,7 @@ class RollbackTest extends TestCase
 
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 13);
-        $this->assertDatabaseMigrationHas($this->table, 'run_failed_failure');
+        $this->assertDatabaseActionHas($this->table, 'run_failed_failure');
     }
 
     public function testDisabledBefore()
@@ -219,22 +219,22 @@ class RollbackTest extends TestCase
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_enabled');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
+        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_enabled');
+        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_disabled');
         $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 12);
-        $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
-        $this->assertDatabaseMigrationHas($this->table, 'test_before_disabled');
+        $this->assertDatabaseActionHas($this->table, 'test_before_enabled');
+        $this->assertDatabaseActionHas($this->table, 'test_before_disabled');
         $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->artisan(Names::ROLLBACK)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 4);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_enabled');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
+        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_enabled');
+        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_disabled');
     }
 
     public function testEnabledBefore()
@@ -247,22 +247,22 @@ class RollbackTest extends TestCase
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_enabled');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
+        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_enabled');
+        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_disabled');
         $this->artisan(Names::ACTIONS, ['--before' => true])->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 11);
-        $this->assertDatabaseMigrationHas($this->table, 'test_before_enabled');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
+        $this->assertDatabaseActionHas($this->table, 'test_before_enabled');
+        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_disabled');
         $this->artisan(Names::ACTIONS, ['--before' => true])->assertExitCode(0);
 
         $this->artisan(Names::ROLLBACK)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_enabled');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'test_before_disabled');
+        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_enabled');
+        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_disabled');
     }
 
     public function testDI(): void
@@ -275,32 +275,32 @@ class RollbackTest extends TestCase
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'invoke');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'invoke_down');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'up_down');
-        $this->assertDatabaseMigrationDoesntLike($table, 'up_down', column: 'value');
-        $this->assertDatabaseMigrationDoesntLike($table, 'invoke_down', column: 'value');
-        $this->assertDatabaseMigrationDoesntLike($table, 'invoke', column: 'value');
+        $this->assertDatabaseActionDoesntLike($this->table, 'invoke');
+        $this->assertDatabaseActionDoesntLike($this->table, 'invoke_down');
+        $this->assertDatabaseActionDoesntLike($this->table, 'up_down');
+        $this->assertDatabaseActionDoesntLike($table, 'up_down', column: 'value');
+        $this->assertDatabaseActionDoesntLike($table, 'invoke_down', column: 'value');
+        $this->assertDatabaseActionDoesntLike($table, 'invoke', column: 'value');
         $this->artisan(Names::ACTIONS)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 3);
         $this->assertDatabaseCount($this->table, 3);
-        $this->assertDatabaseMigrationHas($this->table, 'invoke');
-        $this->assertDatabaseMigrationHas($this->table, 'invoke_down');
-        $this->assertDatabaseMigrationHas($this->table, 'up_down');
-        $this->assertDatabaseMigrationHas($table, 'up_down', column: 'value');
-        $this->assertDatabaseMigrationHas($table, 'invoke_down', column: 'value');
-        $this->assertDatabaseMigrationHas($table, 'invoke', column: 'value');
+        $this->assertDatabaseActionHas($this->table, 'invoke');
+        $this->assertDatabaseActionHas($this->table, 'invoke_down');
+        $this->assertDatabaseActionHas($this->table, 'up_down');
+        $this->assertDatabaseActionHas($table, 'up_down', column: 'value');
+        $this->assertDatabaseActionHas($table, 'invoke_down', column: 'value');
+        $this->assertDatabaseActionHas($table, 'invoke', column: 'value');
 
         $this->artisan(Names::ROLLBACK)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'invoke');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'invoke_down');
-        $this->assertDatabaseMigrationDoesntLike($this->table, 'up_down');
-        $this->assertDatabaseMigrationDoesntLike($table, 'up_down', column: 'value');
-        $this->assertDatabaseMigrationHas($table, 'invoke_down', column: 'value');
-        $this->assertDatabaseMigrationHas($table, 'invoke', column: 'value');
+        $this->assertDatabaseActionDoesntLike($this->table, 'invoke');
+        $this->assertDatabaseActionDoesntLike($this->table, 'invoke_down');
+        $this->assertDatabaseActionDoesntLike($this->table, 'up_down');
+        $this->assertDatabaseActionDoesntLike($table, 'up_down', column: 'value');
+        $this->assertDatabaseActionHas($table, 'invoke_down', column: 'value');
+        $this->assertDatabaseActionHas($table, 'invoke', column: 'value');
     }
 }

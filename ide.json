@@ -3,8 +3,8 @@
     "codeGenerations": [
         {
             "id": "dragon-code.create-action",
-            "name": "Create Migration Action",
-            "inputFilter": "migration",
+            "name": "Create Action",
+            "inputFilter": "actions",
             "files": [
                 {
                     "directory": "/actions",
