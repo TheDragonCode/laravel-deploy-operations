@@ -55,8 +55,8 @@ database:
 php artisan actions:refresh
 ```
 
-You may roll back & re-migrate a limited number of actions by providing the `step` option to the `refresh` command. For example, the following command will roll back &
-re-migrate the last five actions:
+You may roll back & re-run a limited number of actions by providing the `step` option to the `refresh` command. For example, the following command will roll back &
+re-run the last five actions:
 
 ```
 php artisan actions:refresh --step=5
@@ -64,7 +64,7 @@ php artisan actions:refresh --step=5
 
 ## Drop All Actions & Rerun Actions
 
-The `actions:fresh` command will drop all actions records from the actions table and then execute the migrate command:
+The `actions:fresh` command will drop all actions records from the actions table and then execute the actions command:
 
 ```
 php artisan actions:fresh

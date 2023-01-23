@@ -28,6 +28,6 @@ class FreshTest extends TestCase
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 1);
-        $this->assertDatabaseMigrationHas($this->table, 'fresh');
+        $this->assertDatabaseActionHas($this->table, 'fresh');
     }
 }

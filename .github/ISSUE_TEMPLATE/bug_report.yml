@@ -20,7 +20,7 @@ body:
             value: |
                 - PHP Version:
                 - Database Driver & Version:
-                - Migration Actions Version:
+                - Actions Version:
                 - Laravel Version:
         validations:
             required: true

@@ -26,6 +26,6 @@ class RefreshTest extends TestCase
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 1);
-        $this->assertDatabaseMigrationHas($this->table, 'refresh');
+        $this->assertDatabaseActionHas($this->table, 'refresh');
     }
 }

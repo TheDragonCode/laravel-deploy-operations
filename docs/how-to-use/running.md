@@ -24,7 +24,7 @@ bar/2022_10_14_000003_test3  # 3
 
 ## Isolating Action Execution
 
-If you are deploying your application across multiple servers and running actions as part of your deployment process, you likely do not want two servers attempting to migrate
+If you are deploying your application across multiple servers and running actions as part of your deployment process, you likely do not want two servers attempting to run
 the database at the same time. To avoid this, you may use the `isolated` option when invoking the `actions` command.
 
 When the `isolated` option is provided, Laravel will acquire an atomic lock using your application's cache driver before attempting to run your actions. All other attempts to
@@ -120,7 +120,7 @@ return new class extends Action
 
 If the value is `$once = false`, the `up` method will be called every time the `actions` command called.
 
-In this case, information about it will not be written to the `migration_actions` table and, therefore, the `down` method will not be called when the rollback command is called.
+In this case, information about it will not be written to the `actions` table and, therefore, the `down` method will not be called when the rollback command is called.
 
 > Note
 >
