@@ -12,7 +12,7 @@ class Make extends Processor
 {
     protected string $fallback = 'auto';
 
-    protected string $stub = __DIR__ . '/../../resources/stubs/action.stub';
+    protected string $defaultStub = __DIR__ . '/../../resources/stubs/action.stub';
 
     public function handle(): void
     {
@@ -29,7 +29,7 @@ class Make extends Processor
 
     protected function create(string $path): void
     {
-        File::copy($this->stub, $path);
+        File::copy($this->stubPath(), $path);
     }
 
     protected function getName(): string
@@ -60,5 +60,14 @@ class Make extends Processor
     protected function getTime(): string
     {
         return date('Y_m_d_His_');
+    }
+
+    protected function stubPath(): string
+    {
+        if ($path = realpath(base_path('stubs/action.stub'))) {
+            return $path;
+        }
+
+        return $this->defaultStub;
     }
 }

@@ -5,7 +5,8 @@ You can also override the `success` and `failed` methods, which are called on su
 ## If Success
 
 ```php
-use DragonCode\LaravelActions\Action;use Illuminate\Support\Facade\Log;
+use DragonCode\LaravelActions\Action;
+use Illuminate\Support\Facade\Log;
 
 return new class () extends Action
 {

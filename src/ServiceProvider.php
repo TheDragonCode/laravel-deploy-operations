@@ -37,14 +37,15 @@ class ServiceProvider extends BaseServiceProvider
     protected function registerCommands(): void
     {
         $this->commands([
+            Console\Actions::class,
             Console\Fresh::class,
             Console\Install::class,
             Console\Make::class,
-            Console\Actions::class,
             Console\Refresh::class,
             Console\Reset::class,
             Console\Rollback::class,
             Console\Status::class,
+            Console\StubPublish::class,
             Console\Upgrade::class,
         ]);
     }
