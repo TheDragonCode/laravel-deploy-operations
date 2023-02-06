@@ -1,6 +1,6 @@
 # Installation
 
-To get the latest version of Laravel Actions, simply require the project using [Composer](https://getcomposer.org):
+To get the latest version of `Laravel Actions`, simply require the project using [Composer](https://getcomposer.org):
 
 ```bash
 composer require dragon-code/laravel-actions
@@ -11,7 +11,7 @@ Or manually update `require` block of `composer.json` and run `composer update` 
 ```json
 {
     "require": {
-        "dragon-code/laravel-actions": "^3.0"
+        "dragon-code/laravel-actions": "^4.0"
     }
 }
 ```

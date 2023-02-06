@@ -2,6 +2,7 @@
 
 namespace Tests\Concerns;
 
+use DragonCode\Support\Facades\Filesystem\Directory;
 use Illuminate\Support\Facades\File;
 
 /** @mixin \Tests\TestCase */
@@ -9,9 +10,10 @@ trait Files
 {
     protected function freshFiles(): void
     {
-        File::deleteDirectory(
-            $this->targetDirectory()
-        );
+        Directory::ensureDelete([
+            $this->targetDirectory(),
+            $this->stubsDirectory(),
+        ]);
     }
 
     protected function copyFiles(): void
@@ -77,6 +79,11 @@ trait Files
         File::ensureDirectoryExists($dir);
 
         return rtrim($dir, '/\\') . '/' . ltrim($path, '/\\');
+    }
+
+    protected function stubsDirectory(): string
+    {
+        return base_path('stubs');
     }
 
     protected function getActionsPath(): string
