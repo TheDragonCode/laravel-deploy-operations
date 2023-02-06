@@ -1,4 +1,5 @@
-name: laravel
+name: phpunit
+
 on: [ push ]
 
 jobs:
