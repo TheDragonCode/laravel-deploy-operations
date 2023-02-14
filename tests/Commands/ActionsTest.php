@@ -11,7 +11,7 @@ use Throwable;
 
 class ActionsTest extends TestCase
 {
-    public function testMigrationCommand()
+    public function testActionsCommand()
     {
         $this->assertDatabaseDoesntTable($this->table);
 
