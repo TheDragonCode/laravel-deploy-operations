@@ -1,6 +1,6 @@
-# Laravel Actions
+# Laravel Deploy Actions
 
-![the dragon code actions](https://preview.dragon-code.pro/the-dragon-code/deploy-actions.svg?brand=laravel)
+![the dragon code actions](https://preview.dragon-code.pro/the-dragon-code/deploy-actions.svg?brand=laravel&mode=dark)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
