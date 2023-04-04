@@ -53,7 +53,7 @@ use DragonCode\LaravelActions\Action;
 
 return new class extends Action
 {
-    protected $before = false;
+    protected bool $before = false;
 
     public function __invoke(): void
     {
@@ -109,7 +109,7 @@ use DragonCode\LaravelActions\Action;
 
 return new class extends Action
 {
-    protected $once = false;
+    protected bool $once = false;
 
     public function __invoke(): void
     {
@@ -137,8 +137,7 @@ use DragonCode\LaravelActions\Action;
 
 return new class extends Action
 {
-    /** @var string|array|null */
-    protected $environment = 'production';
+    protected string|array|null $environment = 'production';
 
     public function __invoke(): void
     {
@@ -154,8 +153,7 @@ use DragonCode\LaravelActions\Action;
 
 return new class extends Action
 {
-    /** @var string|array|null */
-    protected $environment = ['testing', 'staging'];
+    protected string|array|null $environment = ['testing', 'staging'];
 
     public function __invoke(): void
     {
@@ -177,8 +175,7 @@ use DragonCode\LaravelActions\Action;
 
 return new class extends Action
 {
-    /** @var string|array|null */
-    protected $exceptEnvironment = 'production';
+    protected string|array|null $exceptEnvironment = 'production';
 
     public function __invoke(): void
     {
@@ -194,8 +191,7 @@ use DragonCode\LaravelActions\Action;
 
 return new class extends Action
 {
-    /** @var string|array|null */
-    protected $exceptEnvironment = ['testing', 'staging'];
+    protected string|array|null $exceptEnvironment = ['testing', 'staging'];
 
     public function __invoke(): void
     {
@@ -219,7 +215,7 @@ use DragonCode\LaravelActions\Action;
 
 return new class extends Action
 {
-    protected $transactions = true;
+    protected bool $transactions = true;
 
     protected $transactionAttempts = 3;
 
