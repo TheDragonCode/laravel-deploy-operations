@@ -1,6 +1,6 @@
 {
     "name": "dragon-code/laravel-actions",
-    "description": "Performing actions with saving the list of called files",
+    "description": "Performing any actions during the deployment process",
     "license": "MIT",
     "type": "library",
     "keywords": [
