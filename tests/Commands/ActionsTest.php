@@ -4,6 +4,7 @@ namespace Tests\Commands;
 
 use DragonCode\LaravelActions\Constants\Names;
 use DragonCode\LaravelActions\Jobs\ActionJob;
+use DragonCode\LaravelSupport\Facades\AppVersion;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
@@ -700,7 +701,7 @@ class ActionsTest extends TestCase
         $this->assertDatabaseActionDoesntLike($this->table, 'foo_bar');
         $this->assertDatabaseActionDoesntLike($this->table, 'every_time');
 
-        Queue::assertPushed(ActionJob::class, 2);
+        Queue::assertPushed(ActionJob::class, $this->is7x() ? 6 : 2);
 
         Queue::assertPushedOn($queue, ActionJob::class, fn (ActionJob $job) => Str::contains($job->filename, [
             'foo_bar',
@@ -743,5 +744,10 @@ class ActionsTest extends TestCase
         $this->assertDatabaseCount($this->table, 1);
         $this->assertDatabaseActionHas($this->table, 'foo_bar');
         $this->assertDatabaseActionDoesntLike($this->table, 'every_time');
+    }
+
+    protected function is7x(): bool
+    {
+        return AppVersion::is7x();
     }
 }
