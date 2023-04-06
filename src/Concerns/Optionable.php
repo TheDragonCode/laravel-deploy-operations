@@ -51,6 +51,7 @@ trait Optionable
             [Options::STEP, null, InputOption::VALUE_OPTIONAL, 'Force the actions to be run so they can be rolled back individually'],
             [Options::MUTE, null, InputOption::VALUE_NONE, 'Turns off the output of informational messages'],
             [Options::ISOLATED, null, InputOption::VALUE_OPTIONAL, 'Do not run the actions command if another instance of the actions command is already running', false],
+            [Options::SYNC, null, InputOption::VALUE_OPTIONAL, 'Makes all actions run synchronously', false],
         ];
     }
 

@@ -24,5 +24,6 @@ class Actions extends Command
         Options::REALPATH,
         Options::MUTE,
         Options::ISOLATED,
+        Options::SYNC,
     ];
 }

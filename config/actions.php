@@ -24,7 +24,7 @@ return [
     |
     */
 
-    'table'      => 'actions',
+    'table' => 'actions',
 
     /*
     |--------------------------------------------------------------------------
@@ -35,7 +35,7 @@ return [
     |
     */
 
-    'path'       => base_path('actions'),
+    'path' => base_path('actions'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,5 +56,25 @@ return [
     |
     */
 
-    'exclude'    => null,
+    'exclude' => null,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Queue
+    |--------------------------------------------------------------------------
+    |
+    | This option specifies the queue settings that will process
+    | asynchronous actions.
+    |
+    */
+
+    'queue' => [
+        // Connection name
+
+        'connection' => env('ACTIONS_QUEUE_CONNECTION', env('QUEUE_CONNECTION', 'sync')),
+
+        // Queue name
+
+        'name' => env('ACTIONS_QUEUE_NAME'),
+    ],
 ];

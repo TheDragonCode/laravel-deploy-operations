@@ -28,6 +28,8 @@ class Options extends DataTransferObject
 
     public bool $mute = false;
 
+    public bool $sync = false;
+
     public function resolvePath(): self
     {
         $this->path = $this->realpath

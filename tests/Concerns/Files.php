@@ -24,6 +24,14 @@ trait Files
         );
     }
 
+    protected function copyAsync(): void
+    {
+        File::copyDirectory(
+            __DIR__ . '/../fixtures/app/async',
+            $this->targetDirectory()
+        );
+    }
+
     protected function copyEmptyDirectory(): void
     {
         File::copyDirectory(
