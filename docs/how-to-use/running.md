@@ -217,7 +217,7 @@ return new class extends Action
 {
     protected bool $transactions = true;
 
-    protected $transactionAttempts = 3;
+    protected int $transactionAttempts = 3;
 
     public function __invoke(): void
     {
