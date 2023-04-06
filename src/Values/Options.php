@@ -26,7 +26,7 @@ class Options extends DataTransferObject
 
     public ?int $step = null;
 
-    public bool $silent = false;
+    public bool $mute = false;
 
     public function resolvePath(): self
     {

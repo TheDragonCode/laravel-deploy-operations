@@ -39,7 +39,7 @@ abstract class Processor
         protected Dispatcher $events,
         protected Sorter $sorter
     ) {
-        $this->notification->setOutput($this->output, $this->options->silent);
+        $this->notification->setOutput($this->output, $this->options->mute);
         $this->repository->setConnection($this->options->connection);
         $this->migrator->setConnection($this->options->connection)->setOutput($this->output);
     }

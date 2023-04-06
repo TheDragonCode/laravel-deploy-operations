@@ -36,7 +36,11 @@ class Beautiful extends Notification
     {
         if ($this->canSpeak()) {
             $this->components()->task($description, $task);
+            
+            return;
         }
+        
+        $task();
     }
 
     public function twoColumn(string $first, string $second): void
