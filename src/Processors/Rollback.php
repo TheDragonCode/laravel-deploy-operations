@@ -59,7 +59,7 @@ class Rollback extends Processor
     protected function nothingToRollback(): bool
     {
         if ($this->count() <= 0) {
-            $this->notification->warning('Nothing To Rollback');
+            $this->notification->info('Nothing To Rollback');
 
             return true;
         }

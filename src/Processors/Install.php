@@ -13,7 +13,7 @@ class Install extends Processor
     public function handle(): void
     {
         if ($this->exists()) {
-            $this->notification->warning('Actions repository already exists');
+            $this->notification->info('Actions repository already exists');
 
             return;
         }
