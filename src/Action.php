@@ -58,6 +58,13 @@ abstract class Action extends Migration
     protected bool $before = true;
 
     /**
+     * Defines whether the action will run synchronously or asynchronously.
+     *
+     * @var bool
+     */
+    protected bool $async = false;
+
+    /**
      * Determines the type of launch of the action.
      *
      * If true, then it will be executed once.
@@ -128,6 +135,16 @@ abstract class Action extends Migration
     public function hasBefore(): bool
     {
         return $this->before;
+    }
+
+    /**
+     * Defines whether the action will run synchronously or asynchronously.
+     *
+     * @return bool
+     */
+    public function isAsync(): bool
+    {
+        return $this->async;
     }
 
     /**

@@ -3,8 +3,11 @@
 namespace Tests\Commands;
 
 use DragonCode\LaravelActions\Constants\Names;
+use DragonCode\LaravelActions\Jobs\ActionJob;
+use DragonCode\LaravelSupport\Facades\AppVersion;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 use Throwable;
@@ -668,5 +671,83 @@ class ActionsTest extends TestCase
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
+    }
+
+    public function testAsync()
+    {
+        $this->copyAsync();
+
+        $table1 = 'test';
+        $table2 = 'every_time';
+
+        $queue = config('actions.queue.name');
+
+        Queue::fake();
+
+        $this->artisan(Names::INSTALL)->assertExitCode(0);
+
+        Queue::assertNothingPushed();
+
+        $this->assertDatabaseCount($table1, 0);
+        $this->assertDatabaseCount($table2, 0);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseActionDoesntLike($this->table, 'foo_bar');
+        $this->assertDatabaseActionDoesntLike($this->table, 'every_time');
+
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+
+        $this->assertDatabaseActionDoesntLike($this->table, 'foo_bar');
+        $this->assertDatabaseActionDoesntLike($this->table, 'every_time');
+
+        Queue::assertPushed(ActionJob::class, $this->is7x() ? 6 : 2);
+
+        Queue::assertPushedOn($queue, ActionJob::class, fn (ActionJob $job) => Str::contains($job->filename, [
+            'foo_bar',
+            'every_time',
+        ]));
+    }
+
+    public function testSync()
+    {
+        $this->copyAsync();
+
+        $table1 = 'test';
+        $table2 = 'every_time';
+
+        $this->artisan(Names::INSTALL)->assertExitCode(0);
+
+        $this->assertDatabaseCount($table1, 0);
+        $this->assertDatabaseCount($table2, 0);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseActionDoesntLike($this->table, 'foo_bar');
+        $this->assertDatabaseActionDoesntLike($this->table, 'every_time');
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+
+        $this->assertDatabaseCount($table1, 1);
+        $this->assertDatabaseCount($table2, 1);
+        $this->assertDatabaseCount($this->table, 1);
+        $this->assertDatabaseActionHas($this->table, 'foo_bar');
+        $this->assertDatabaseActionDoesntLike($this->table, 'every_time');
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+
+        $this->assertDatabaseCount($table1, 1);
+        $this->assertDatabaseCount($table2, 2);
+        $this->assertDatabaseCount($this->table, 1);
+        $this->assertDatabaseActionHas($this->table, 'foo_bar');
+        $this->assertDatabaseActionDoesntLike($this->table, 'every_time');
+        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+
+        $this->assertDatabaseCount($table1, 1);
+        $this->assertDatabaseCount($table2, 3);
+        $this->assertDatabaseCount($this->table, 1);
+        $this->assertDatabaseActionHas($this->table, 'foo_bar');
+        $this->assertDatabaseActionDoesntLike($this->table, 'every_time');
+    }
+
+    protected function is7x(): bool
+    {
+        return AppVersion::is7x();
     }
 }

@@ -71,7 +71,10 @@
     "autoload": {
         "psr-4": {
             "DragonCode\\LaravelActions\\": "src"
-        }
+        },
+        "classmap": [
+            "polyfill"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

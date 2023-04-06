@@ -294,13 +294,13 @@ class RollbackTest extends TestCase
 
         $this->artisan(Names::ROLLBACK)->assertExitCode(0);
 
-        $this->assertDatabaseCount($table, 2);
+        $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 0);
         $this->assertDatabaseActionDoesntLike($this->table, 'invoke');
         $this->assertDatabaseActionDoesntLike($this->table, 'invoke_down');
         $this->assertDatabaseActionDoesntLike($this->table, 'up_down');
         $this->assertDatabaseActionDoesntLike($table, 'up_down', column: 'value');
-        $this->assertDatabaseActionHas($table, 'invoke_down', column: 'value');
+        $this->assertDatabaseActionDoesntLike($table, 'invoke_down', column: 'value');
         $this->assertDatabaseActionHas($table, 'invoke', column: 'value');
     }
 }

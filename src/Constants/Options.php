@@ -23,4 +23,6 @@ class Options
     public const REALPATH = 'realpath';
 
     public const STEP = 'step';
+
+    public const SYNC = 'sync';
 }

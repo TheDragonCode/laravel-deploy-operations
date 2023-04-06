@@ -225,3 +225,33 @@ return new class extends Action
     }
 };
 ```
+
+## Asynchronous Call
+
+In some cases, it becomes necessary to execute actions in an asynchronous manner without delaying the deployment process.
+
+To do this, you need to override the `$async` property in the action class:
+
+```php
+use DragonCode\LaravelActions\Action;
+
+return new class extends Action
+{
+    protected bool $async = true;
+
+    public function __invoke(): void
+    {
+        // some code
+    }
+};
+```
+
+In this case, the action file that defines this parameter will run asynchronously using the `DragonCode\LaravelActions\Jobs\ActionJob` class.
+
+The name of the connection and queue can be changed through the [settings](https://github.com/TheDragonCode/laravel-actions/tree/main/config).
+
+::: Info
+We remind you that in this case the [queuing system](https://laravel.com/docs/queues) must work in your application.
+
+Using Laravel version 8.37 and above, checking for the [uniqueness](https://laravel.com/docs/10.x/queues#unique-jobs) of the execution is supported.
+:::

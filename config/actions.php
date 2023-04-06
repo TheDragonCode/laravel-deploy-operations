@@ -24,7 +24,7 @@ return [
     |
     */
 
-    'table'      => 'actions',
+    'table' => 'actions',
 
     /*
     |--------------------------------------------------------------------------
@@ -35,7 +35,7 @@ return [
     |
     */
 
-    'path'       => base_path('actions'),
+    'path' => base_path('actions'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,5 +56,40 @@ return [
     |
     */
 
-    'exclude'    => null,
+    'exclude' => null,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Queue
+    |--------------------------------------------------------------------------
+    |
+    | This option specifies the queue settings that will process
+    | asynchronous actions.
+    |
+    */
+
+    'queue' => [
+        /*
+        |--------------------------------------------------------------------------
+        | Queue Connection
+        |--------------------------------------------------------------------------
+        |
+        | This parameter defines the default connection.
+        |
+        */
+
+        'connection' => env('ACTIONS_QUEUE_CONNECTION', env('QUEUE_CONNECTION', 'sync')),
+
+        /*
+        |--------------------------------------------------------------------------
+        | Queue Name
+        |--------------------------------------------------------------------------
+        |
+        | This parameter specifies the name of the queue to which asynchronous
+        | jobs will be sent.
+        |
+        */
+
+        'name' => env('ACTIONS_QUEUE_NAME'),
+    ],
 ];

@@ -7,6 +7,7 @@ namespace DragonCode\LaravelActions\Services;
 use DragonCode\LaravelActions\Action;
 use DragonCode\LaravelActions\Contracts\Notification;
 use DragonCode\LaravelActions\Helpers\Config;
+use DragonCode\LaravelActions\Jobs\ActionJob;
 use DragonCode\LaravelActions\Repositories\ActionRepository;
 use DragonCode\LaravelActions\Values\Options;
 use DragonCode\Support\Exceptions\FileNotFoundException;
@@ -49,6 +50,12 @@ class Migrator
         $name   = $this->resolveActionName($path);
 
         if ($this->allowAction($action, $options)) {
+            if ($this->hasAsync($action, $options)) {
+                dispatch(new ActionJob($name));
+
+                return;
+            }
+
             $this->notification->task($name, function () use ($action, $name, $batch) {
                 $this->hasAction($action, '__invoke')
                     ? $this->runAction($action, '__invoke')
@@ -72,17 +79,9 @@ class Migrator
         $name   = $this->resolveActionName($path);
 
         $this->notification->task($name, function () use ($action, $name) {
-            if (! $this->hasAction($action, '__invoke') && $this->hasAction($action, 'down')) {
-                $this->runAction($action, 'down');
-            }
-
+            $this->runAction($action, 'down');
             $this->deleteLog($name);
         });
-    }
-
-    protected function hasAction(Action $action, string $method): bool
-    {
-        return method_exists($action, $method);
     }
 
     protected function runAction(Action $action, string $method): void
@@ -99,6 +98,16 @@ class Migrator
                 throw $e;
             }
         }
+    }
+
+    protected function hasAction(Action $action, string $method): bool
+    {
+        return method_exists($action, $method);
+    }
+
+    protected function hasAsync(Action $action, Options $options): bool
+    {
+        return ! $options->sync && $action->isAsync();
     }
 
     protected function runMethod(Action $action, string $method, bool $transactions, int $attempts): void
