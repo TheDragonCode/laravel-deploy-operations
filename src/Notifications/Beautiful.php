@@ -36,10 +36,10 @@ class Beautiful extends Notification
     {
         if ($this->canSpeak()) {
             $this->components()->task($description, $task);
-            
+
             return;
         }
-        
+
         $task();
     }
 
