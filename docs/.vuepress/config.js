@@ -44,7 +44,6 @@ module.exports = {
         sidebar: [
             {
                 text: 'Prologue',
-                collapsible: true,
                 children: [
                     {
                         text: 'Upgrade Guide',
@@ -65,7 +64,6 @@ module.exports = {
 
             {
                 text: 'Getting Started',
-                collapsible: true,
                 children: [
                     {
                         text: 'Installation',
@@ -76,13 +74,11 @@ module.exports = {
 
             {
                 text: 'How To Use',
-                collapsible: true,
                 children: getChildren('how-to-use')
             },
 
             {
                 text: 'Helpers',
-                collapsible: true,
                 children: getChildren('helpers')
             }
         ]
