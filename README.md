@@ -1,4 +1,4 @@
-# Laravel Deploy Actions
+# Deploy Actions for Laravel
 
 ![the dragon code actions](https://preview.dragon-code.pro/the-dragon-code/deploy-actions.svg?brand=laravel&mode=dark)
 
