@@ -24,7 +24,7 @@ class Actions extends Processor
 
     protected function showCaption(): void
     {
-        $this->notification->info('Launching Actions');
+        $this->notification->info('Running actions');
     }
 
     protected function ensureRepository(): void
