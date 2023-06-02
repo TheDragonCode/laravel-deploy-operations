@@ -15,6 +15,7 @@ use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 class ServiceProvider extends BaseServiceProvider
 {
     use About;
+
     use Anonymous;
 
     public function boot(): void

@@ -17,8 +17,11 @@ use Illuminate\Support\Facades\Artisan;
 class ActionJob implements ShouldQueue, ShouldBeUnique
 {
     use Dispatchable;
+
     use InteractsWithQueue;
+
     use Queueable;
+
     use SerializesModels;
 
     public function __construct(

@@ -17,9 +17,13 @@ use Tests\Concerns\Files;
 abstract class TestCase extends BaseTestCase
 {
     use AssertDatabase;
+
     use Database;
+
     use Files;
+
     use RefreshDatabase;
+
     use Anonymous;
 
     protected function setUp(): void

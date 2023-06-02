@@ -17,7 +17,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 abstract class Command extends BaseCommand
 {
     use ConfirmableTrait;
+
     use Isolatable;
+
     use Optionable;
 
     protected Processor|string $processor;
