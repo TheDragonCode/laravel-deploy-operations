@@ -15,8 +15,7 @@ class Mutex
 
     public function __construct(
         protected Cache $cache
-    ) {
-    }
+    ) {}
 
     public function create(Command $command): bool
     {

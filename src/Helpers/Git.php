@@ -10,8 +10,7 @@ class Git
 {
     public function __construct(
         protected Config $config
-    ) {
-    }
+    ) {}
 
     public function currentBranch(?string $path = null): ?string
     {

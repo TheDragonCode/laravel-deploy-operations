@@ -20,8 +20,7 @@ class ActionRepository
     public function __construct(
         protected Resolver $resolver,
         protected Config $config
-    ) {
-    }
+    ) {}
 
     public function setConnection(?string $connection): self
     {
@@ -93,8 +92,6 @@ class ActionRepository
     }
 
     /**
-     * @param int $steps
-     *
      * @return array<int>
      */
     protected function getBatchNumbers(int $steps): array

@@ -23,7 +23,7 @@ trait Isolatable
         return self::SUCCESS;
     }
 
-    protected function getIsolateOption(): int|bool
+    protected function getIsolateOption(): bool|int
     {
         return $this->hasIsolateOption() ? $this->option(Options::ISOLATED) : false;
     }

@@ -15,8 +15,6 @@ abstract class Action extends Migration
      *
      * If true, then it will be executed once.
      * If false, then the action will run every time the `actions` command is invoked.
-     *
-     * @var bool
      */
     protected bool $once = true;
 
@@ -24,43 +22,31 @@ abstract class Action extends Migration
      * Determines a call to database transactions.
      *
      * By default, false.
-     *
-     * @var bool
      */
     protected bool $transactions = false;
 
     /**
      * The number of attempts to execute a request within a transaction before throwing an error.
-     *
-     * @var int
      */
     protected int $transactionAttempts = 1;
 
     /**
      * Determines which environment to run on.
-     *
-     * @var array|string|null
      */
-    protected string|array|null $environment = null;
+    protected array|string|null $environment = null;
 
     /**
      * Determines in which environment it should not run.
-     *
-     * @var array|string|null
      */
-    protected string|array|null $exceptEnvironment = null;
+    protected array|string|null $exceptEnvironment = null;
 
     /**
      * Defines a possible "pre-launch" of the action.
-     *
-     * @var bool
      */
     protected bool $before = true;
 
     /**
      * Defines whether the action will run synchronously or asynchronously.
-     *
-     * @var bool
      */
     protected bool $async = false;
 
@@ -69,8 +55,6 @@ abstract class Action extends Migration
      *
      * If true, then it will be executed once.
      * If false, then the action will run every time the `actions` command is invoked.
-     *
-     * @return bool
      */
     public function isOnce(): bool
     {
@@ -79,8 +63,6 @@ abstract class Action extends Migration
 
     /**
      * Determines a call to database transactions.
-     *
-     * @return bool
      */
     public function enabledTransactions(): bool
     {
@@ -89,8 +71,6 @@ abstract class Action extends Migration
 
     /**
      * The number of attempts to execute a request within a transaction before throwing an error.
-     *
-     * @return int
      */
     public function transactionAttempts(): int
     {
@@ -99,8 +79,6 @@ abstract class Action extends Migration
 
     /**
      * Determines which environment to run on.
-     *
-     * @return array
      */
     public function onEnvironment(): array
     {
@@ -109,8 +87,6 @@ abstract class Action extends Migration
 
     /**
      * Determines in which environment it should not run.
-     *
-     * @return array
      */
     public function exceptEnvironment(): array
     {
@@ -119,8 +95,6 @@ abstract class Action extends Migration
 
     /**
      * Determines whether the given action can be called conditionally.
-     *
-     * @return bool
      */
     public function allow(): bool
     {
@@ -129,8 +103,6 @@ abstract class Action extends Migration
 
     /**
      * Defines a possible "pre-launch" of the action.
-     *
-     * @return bool
      */
     public function hasBefore(): bool
     {
@@ -139,8 +111,6 @@ abstract class Action extends Migration
 
     /**
      * Defines whether the action will run synchronously or asynchronously.
-     *
-     * @return bool
      */
     public function isAsync(): bool
     {
@@ -149,19 +119,11 @@ abstract class Action extends Migration
 
     /**
      * Method to be called when the job completes successfully.
-     *
-     * @return void
      */
-    public function success(): void
-    {
-    }
+    public function success(): void {}
 
     /**
      * The method will be called if an error occurs.
-     *
-     * @return void
      */
-    public function failed(): void
-    {
-    }
+    public function failed(): void {}
 }

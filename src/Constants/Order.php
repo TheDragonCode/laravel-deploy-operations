@@ -6,7 +6,6 @@ namespace DragonCode\LaravelActions\Constants;
 
 class Order
 {
-    public const ASC = 'asc';
-
+    public const ASC  = 'asc';
     public const DESC = 'desc';
 }

@@ -69,7 +69,7 @@ class Options extends DataTransferObject
         return Boolean::parse($value);
     }
 
-    protected function castStep(string|int|null $value): ?int
+    protected function castStep(int|string|null $value): ?int
     {
         return is_numeric($value) ? (int) $value : null;
     }

@@ -26,8 +26,7 @@ class Migrator
         protected ActionRepository $repository,
         protected Config $config,
         protected Application $laravel
-    ) {
-    }
+    ) {}
 
     public function setConnection(?string $connection): self
     {
@@ -133,7 +132,7 @@ class Migrator
             return false;
         }
 
-        return ! ($this->disallowBefore($action, $options));
+        return ! $this->disallowBefore($action, $options);
     }
 
     protected function allowEnvironment(Action $action): bool

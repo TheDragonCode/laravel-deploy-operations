@@ -14,14 +14,11 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Artisan;
 
-class ActionJob implements ShouldQueue, ShouldBeUnique
+class ActionJob implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable;
-
     use InteractsWithQueue;
-
     use Queueable;
-
     use SerializesModels;
 
     public function __construct(

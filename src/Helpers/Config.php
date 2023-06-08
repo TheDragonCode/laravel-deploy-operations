@@ -11,8 +11,7 @@ class Config
 {
     public function __construct(
         protected Repository $config
-    ) {
-    }
+    ) {}
 
     public function environment(): ?string
     {
