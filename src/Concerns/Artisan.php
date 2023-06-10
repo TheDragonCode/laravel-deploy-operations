@@ -11,6 +11,8 @@ trait Artisan
 {
     /**
      * Run an Artisan console command by name.
+     *
+     * @param  ?OutputStyle  $outputBuffer
      */
     protected function artisan(string $command, array $parameters = [], ?OutputStyle $outputBuffer = null): void
     {

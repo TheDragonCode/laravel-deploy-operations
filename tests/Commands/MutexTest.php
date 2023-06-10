@@ -21,7 +21,7 @@ class MutexTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->command = new class () extends Command {
+        $this->command = new class extends Command {
             public int $ran = 0;
 
             public function handle(): int

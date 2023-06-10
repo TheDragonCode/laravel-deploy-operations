@@ -25,9 +25,7 @@ abstract class Action extends Migration
      */
     protected bool $transactions = false;
 
-    /**
-     * The number of attempts to execute a request within a transaction before throwing an error.
-     */
+    /** The number of attempts to execute a request within a transaction before throwing an error. */
     protected int $transactionAttempts = 1;
 
     /**
@@ -40,14 +38,10 @@ abstract class Action extends Migration
      */
     protected array|string|null $exceptEnvironment = null;
 
-    /**
-     * Defines a possible "pre-launch" of the action.
-     */
+    /** Defines a possible "pre-launch" of the action. */
     protected bool $before = true;
 
-    /**
-     * Defines whether the action will run synchronously or asynchronously.
-     */
+    /** Defines whether the action will run synchronously or asynchronously. */
     protected bool $async = false;
 
     /**

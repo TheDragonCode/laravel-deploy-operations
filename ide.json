@@ -2,8 +2,8 @@
     "$schema": "https://laravel-ide.com/schema/laravel-ide-v2.json",
     "codeGenerations": [
         {
-        "id": "dragon-code.create-action",
-        "name": "Create Action",
+            "id": "dragon-code.create-action",
+            "name": "Create Action",
             "inputFilter": "actions",
             "files": [
                 {
