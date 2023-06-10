@@ -4,8 +4,7 @@ use DragonCode\LaravelActions\Action;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-return new class extends Action
-{
+return new class extends Action {
     protected bool $transactions = true;
 
     public function up(): void

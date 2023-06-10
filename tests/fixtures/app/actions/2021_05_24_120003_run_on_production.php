@@ -5,9 +5,8 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-return new class () extends Action
-{
-    protected string|array|null $environment = 'production';
+return new class extends Action {
+    protected array|string|null $environment = 'production';
 
     public function up(): void
     {

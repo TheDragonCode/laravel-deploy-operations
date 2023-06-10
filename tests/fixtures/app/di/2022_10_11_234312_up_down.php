@@ -5,8 +5,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Tests\Concerns\Some;
 
-return new class () extends Action
-{
+return new class extends Action {
     public function up(Some $some): void
     {
         $this->table()->insert([
