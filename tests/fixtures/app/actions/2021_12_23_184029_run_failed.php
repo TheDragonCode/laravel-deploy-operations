@@ -5,15 +5,10 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-return new class () extends Action
-{
-    public function up(): void
-    {
-    }
+return new class extends Action {
+    public function up(): void {}
 
-    public function down(): void
-    {
-    }
+    public function down(): void {}
 
     public function failed(): void
     {

@@ -5,8 +5,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-return new class () extends Action
-{
+return new class extends Action {
     public function up(): void
     {
         throw new Exception('Custom exception');

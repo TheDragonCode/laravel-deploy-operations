@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 use Foo\Bar\Some;
 
-return new class () extends Some
-{
+return new class extends Some {
     public function __invoke(): void
     {
         // some code

@@ -5,8 +5,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-return new class () extends Action
-{
+return new class extends Action {
     protected bool $once = false;
 
     protected bool $async = true;
