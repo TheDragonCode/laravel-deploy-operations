@@ -89,7 +89,8 @@
         "allow-plugins": {
             "dragon-code/codestyler": true,
             "ergebnis/composer-normalize": true,
-            "friendsofphp/php-cs-fixer": true
+            "friendsofphp/php-cs-fixer": true,
+            "symfony/thanks": true
         },
         "preferred-install": "dist",
         "sort-packages": true
