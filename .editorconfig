@@ -40,7 +40,6 @@ ij_css_use_double_quotes = true
 ij_css_value_alignment = do_not_align
 
 [*.less]
-indent_size = 2
 ij_less_align_closing_brace_with_properties = false
 ij_less_blank_lines_around_nested_selector = 1
 ij_less_blank_lines_between_blocks = 1
@@ -63,7 +62,6 @@ ij_less_use_double_quotes = true
 ij_less_value_alignment = 0
 
 [*.sass]
-indent_size = 2
 ij_sass_align_closing_brace_with_properties = false
 ij_sass_blank_lines_around_nested_selector = 1
 ij_sass_blank_lines_between_blocks = 1
@@ -502,15 +500,15 @@ ij_php_align_assignments = true
 ij_php_align_class_constants = true
 ij_php_align_enum_cases = true
 ij_php_align_group_field_declarations = false
-ij_php_align_inline_comments = true
+ij_php_align_inline_comments = false
 ij_php_align_key_value_pairs = true
-ij_php_align_match_arm_bodies = false
+ij_php_align_match_arm_bodies = true
 ij_php_align_multiline_array_initializer_expression = true
 ij_php_align_multiline_binary_operation = false
 ij_php_align_multiline_chained_methods = false
 ij_php_align_multiline_extends_list = true
 ij_php_align_multiline_for = false
-ij_php_align_multiline_parameters = true
+ij_php_align_multiline_parameters = false
 ij_php_align_multiline_parameters_in_calls = false
 ij_php_align_multiline_ternary_operation = false
 ij_php_align_named_arguments = true
@@ -562,7 +560,7 @@ ij_php_else_if_style = combine
 ij_php_else_on_new_line = true
 ij_php_example_weight = 28
 ij_php_extends_keyword_wrap = normal
-ij_php_extends_list_wrap = off
+ij_php_extends_list_wrap = on_every_item
 ij_php_fields_default_visibility = protected
 ij_php_filesource_weight = 28
 ij_php_finally_on_new_line = true
@@ -625,7 +623,7 @@ ij_php_phpdoc_blank_lines_around_parameters = true
 ij_php_phpdoc_keep_blank_lines = true
 ij_php_phpdoc_param_spaces_between_name_and_description = 2
 ij_php_phpdoc_param_spaces_between_tag_and_type = 2
-ij_php_phpdoc_param_spaces_between_type_and_name = 1
+ij_php_phpdoc_param_spaces_between_type_and_name = 2
 ij_php_phpdoc_use_fqcn = true
 ij_php_phpdoc_wrap_long_lines = true
 ij_php_place_assignment_sign_on_next_line = false
@@ -773,7 +771,7 @@ ij_html_text_wrap = off
 [{*.http,*.rest}]
 indent_size = 0
 ij_continuation_indent_size = 4
-ij_http request_call_parameters_wrap = normal
+ij_http request_call_parameters_wrap = on_every_item
 
 [{*.markdown,*.md}]
 ij_markdown_force_one_space_after_blockquote_symbol = true
