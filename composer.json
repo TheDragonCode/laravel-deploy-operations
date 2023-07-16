@@ -40,6 +40,10 @@
         {
             "type": "yoomoney",
             "url": "https://yoomoney.ru/to/410012608840929"
+        },
+        {
+            "type": "donationalerts",
+            "url": "https://www.donationalerts.com/r/dragon_code"
         }
     ],
     "require": {
