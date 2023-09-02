@@ -43,7 +43,7 @@ jobs:
                 run: npm run build
 
             -   name: Deploy to GitHub Pages
-                uses: crazy-max/ghaction-github-pages@v3.1.0
+                uses: crazy-max/ghaction-github-pages@v3.2.0
                 with:
                     target_branch: gh-pages
                     build_dir: docs/.vuepress/dist
