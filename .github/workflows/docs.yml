@@ -24,7 +24,7 @@ jobs:
                     token: ${{ secrets.GITHUB_TOKEN }}
 
             -   name: Setup Node.js
-                uses: actions/setup-node@v3
+                uses: actions/setup-node@v4
 
             -   name: Cache dependencies
                 uses: actions/cache@v3
