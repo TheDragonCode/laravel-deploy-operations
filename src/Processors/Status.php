@@ -70,7 +70,7 @@ class Status extends Processor
     protected function getStatusFor(array $completed, string $action): string
     {
         if ($batch = Arr::get($completed, $action)) {
-            return "[$batch] $this->statusRan";
+            return sprintf('[%s] %s', $batch, $this->statusRan);
         }
 
         return $this->statusPending;
