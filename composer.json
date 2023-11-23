@@ -26,14 +26,6 @@
     },
     "funding": [
         {
-            "type": "github",
-            "url": "https://github.com/sponsors/TheDragonCode"
-        },
-        {
-            "type": "open_collective",
-            "url": "https://opencollective.com/dragon-code"
-        },
-        {
             "type": "boosty",
             "url": "https://boosty.to/dragon-code"
         },
