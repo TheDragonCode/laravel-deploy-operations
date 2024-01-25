@@ -14,7 +14,7 @@ use DragonCode\Support\Exceptions\FileNotFoundException;
 use DragonCode\Support\Facades\Helpers\Str;
 use DragonCode\Support\Filesystem\File;
 use Illuminate\Console\OutputStyle;
-use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
@@ -25,7 +25,7 @@ class Migrator
         protected Notification $notification,
         protected ActionRepository $repository,
         protected Config $config,
-        protected Application $laravel
+        protected Container $container
     ) {}
 
     public function setConnection(?string $connection): self
@@ -111,7 +111,7 @@ class Migrator
 
     protected function runMethod(Action $action, string $method, bool $transactions, int $attempts): void
     {
-        $callback = fn () => $this->laravel->call([$action, $method]);
+        $callback = fn () => $this->container->call([$action, $method]);
 
         $transactions ? DB::transaction($callback, $attempts) : $callback();
     }
