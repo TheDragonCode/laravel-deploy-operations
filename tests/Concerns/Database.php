@@ -24,7 +24,6 @@ trait Database
 
     protected function freshDatabase(): void
     {
-        $this->refreshDatabase();
         $this->loadMigrations();
 
         $this->artisan('migrate')->run();
