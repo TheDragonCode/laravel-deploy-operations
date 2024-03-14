@@ -17,12 +17,13 @@
         "url": "git+ssh://git@github.com/TheDragonCode/laravel-actions.git"
     },
     "devDependencies": {
-        "@vuepress/plugin-theme-data": "2.0.0-rc.8",
+        "@vuepress/bundler-vite": "^2.0.0-rc.8",
+        "@vuepress/theme-default": "^2.0.0-rc.20",
         "@vueuse/core": "^7.5.5",
         "dotenv": "^15.0.0",
-        "vuepress": "2.0.0-rc.8"
+        "vuepress": "^2.0.0-rc.8"
     },
     "engines": {
-        "node": ">=16.16"
+        "node": ">=20.11"
     }
 }
