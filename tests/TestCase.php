@@ -35,7 +35,7 @@ abstract class TestCase extends BaseTestCase
         return [ServiceProvider::class];
     }
 
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
         parent::getEnvironmentSetUp($app);
 
