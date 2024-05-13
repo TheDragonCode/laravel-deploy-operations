@@ -4,6 +4,7 @@ namespace DragonCode\LaravelActions;
 
 use DragonCode\LaravelActions\Concerns\Artisan;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Arr;
 
 abstract class Action extends Migration
 {
@@ -75,7 +76,7 @@ abstract class Action extends Migration
      */
     public function onEnvironment(): array
     {
-        return (array) $this->environment;
+        return Arr::wrap($this->environment);
     }
 
     /**
@@ -83,7 +84,7 @@ abstract class Action extends Migration
      */
     public function exceptEnvironment(): array
     {
-        return (array) $this->exceptEnvironment;
+        return Arr::wrap($this->exceptEnvironment);
     }
 
     /**

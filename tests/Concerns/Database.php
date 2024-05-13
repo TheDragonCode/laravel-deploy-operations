@@ -24,13 +24,8 @@ trait Database
 
     protected function freshDatabase(): void
     {
-        $this->loadMigrations();
+        $this->loadMigrationsFrom(__DIR__ . '/../fixtures/migrations');
 
         $this->artisan('migrate')->run();
-    }
-
-    protected function loadMigrations(): void
-    {
-        $this->loadMigrationsFrom(__DIR__ . '/../fixtures/migrations');
     }
 }

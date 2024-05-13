@@ -30,7 +30,7 @@ jobs:
 
             -   name: Install Doctrine
                 if: matrix.laravel == '10.0'
-                run: composer require doctrine/dbal 
+                run: composer require doctrine/dbal
 
             -   name: Execute tests
                 run: sudo vendor/bin/phpunit

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Migrations;
 
 use DragonCode\LaravelActions\Constants\Names;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
@@ -13,9 +12,9 @@ class ActionsTest extends TestCase
 {
     public function testRunActionsAfterInstall(): void
     {
-        DB::table('migrations')->truncate();
+        Schema::dropAllTables();
 
-        Schema::connection($this->database)->dropIfExists($this->table);
+        $this->artisan('migrate:install')->run();
 
         $this->assertDatabaseCount('migrations', 0);
         $this->assertDatabaseDoesntTable($this->table);
@@ -27,7 +26,7 @@ class ActionsTest extends TestCase
 
         $this->artisan('migrate')->run();
 
-        $this->assertDatabaseCount('migrations', 2);
+        $this->assertDatabaseCount('migrations', 9);
 
         $this->assertDatabaseHas('migrations', [
             'migration' => '2022_08_18_180137_change_migration_actions_table',
