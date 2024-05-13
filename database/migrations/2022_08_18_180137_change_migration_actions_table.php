@@ -2,22 +2,12 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Database;
-
 use DragonCode\LaravelActions\Action;
 use DragonCode\LaravelActions\Helpers\Config;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-abstract class BaseChangeColumn extends Action
-{
-    protected Config $config;
-
-    public function __construct()
-    {
-        $this->config = app(Config::class);
-    }
-
+return new class extends Action {
     public function up(): void
     {
         if ($this->hasTable()) {
@@ -59,6 +49,6 @@ abstract class BaseChangeColumn extends Action
 
     protected function table(): string
     {
-        return $this->config->table();
+        return app(Config::class)->table();
     }
-}
+};

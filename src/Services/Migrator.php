@@ -18,6 +18,10 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
+use function in_array;
+use function method_exists;
+use function realpath;
+
 class Migrator
 {
     public function __construct(
@@ -48,27 +52,27 @@ class Migrator
         $action = $this->resolveAction($path);
         $name   = $this->resolveActionName($path);
 
-        if ($this->allowAction($action, $options)) {
-            if ($this->hasAsync($action, $options)) {
-                dispatch(new ActionJob($name));
-
-                return;
-            }
-
-            $this->notification->task($name, function () use ($action, $name, $batch) {
-                $this->hasAction($action, '__invoke')
-                    ? $this->runAction($action, '__invoke')
-                    : $this->runAction($action, 'up');
-
-                if ($this->allowLogging($action)) {
-                    $this->log($name, $batch);
-                }
-            });
+        if (! $this->allowAction($action, $options)) {
+            $this->notification->twoColumn($name, '<fg=yellow;options=bold>SKIPPED</>');
 
             return;
         }
 
-        $this->notification->twoColumn($name, '<fg=yellow;options=bold>SKIPPED</>');
+        if ($this->hasAsync($action, $options)) {
+            ActionJob::dispatch($name);
+
+            return;
+        }
+
+        $this->notification->task($name, function () use ($action, $name, $batch) {
+            $this->hasAction($action, '__invoke')
+                ? $this->runAction($action, '__invoke')
+                : $this->runAction($action, 'up');
+
+            if ($this->allowLogging($action)) {
+                $this->log($name, $batch);
+            }
+        });
     }
 
     public function runDown(string $filename, Options $options): void

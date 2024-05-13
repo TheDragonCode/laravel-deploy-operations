@@ -14,6 +14,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Artisan;
 
+use function config;
+
 class ActionJob implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable;

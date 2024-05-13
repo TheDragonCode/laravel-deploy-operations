@@ -6,6 +6,11 @@ namespace DragonCode\LaravelActions\Helpers;
 
 use DragonCode\Support\Facades\Filesystem\Directory;
 
+use function exec;
+use function realpath;
+use function rtrim;
+use function sprintf;
+
 class Git
 {
     public function __construct(

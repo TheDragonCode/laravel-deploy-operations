@@ -39,42 +39,40 @@
         }
     ],
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.2",
         "composer-runtime-api": "^2.2",
-        "doctrine/dbal": "^2.13 || ^3.4",
-        "dragon-code/laravel-support": "^3.5",
         "dragon-code/simple-dto": "^2.5.1",
         "dragon-code/support": "^6.6",
-        "illuminate/console": "^7.30.6 || ^8.75 || ^9.0 || ^10.0 || ^11.0",
-        "illuminate/container": "^7.30.6 || ^8.75 || ^9.0 || ^10.0 || ^11.0",
-        "illuminate/database": "^7.30.6 || ^8.75 || ^9.0 || ^10.0 || ^11.0",
-        "illuminate/support": "^7.30.6 || ^8.75 || ^9.0 || ^10.0 || ^11.0",
-        "symfony/console": "^5.3 || ^6.0 || ^7.0"
+        "illuminate/console": "^10.0 || ^11.0",
+        "illuminate/container": "^10.0 || ^11.0",
+        "illuminate/database": "^10.0 || ^11.0",
+        "illuminate/support": "^10.0 || ^11.0",
+        "symfony/console": " ^6.0 || ^7.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.3.1",
         "nesbot/carbon": "^2.62.1 || ^3.0",
-        "orchestra/testbench": "^5.20 || ^6.25 || ^7.9 || ^8.0 || ^9.0",
-        "phpunit/phpunit": "^9.6 || ^10.0",
-        "ramsey/uuid": "^3.7 || ^4.0"
+        "orchestra/testbench": "^8.0 || ^9.0",
+        "phpunit/phpunit": "^10.0",
+        "ramsey/uuid": "^4.0"
     },
     "conflict": {
         "andrey-helldar/laravel-actions": "*",
         "dragon-code/laravel-migration-actions": "*"
     },
+    "suggest": {
+        "doctrine/dbal": "This package must be installed if you are using Laravel 10."
+    },
     "minimum-stability": "stable",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "DragonCode\\LaravelActions\\": "src"
-        },
-        "classmap": [
-            "polyfill"
-        ]
+            "DragonCode\\LaravelActions\\": "src/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests"
+            "Tests\\": "tests/"
         }
     },
     "config": {

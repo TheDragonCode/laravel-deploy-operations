@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        backupGlobals="false"
-        backupStaticAttributes="false"
+        xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
         bootstrap="vendor/autoload.php"
         colors="true"
-        convertErrorsToExceptions="true"
-        convertNoticesToExceptions="false"
-        convertWarningsToExceptions="false"
-        processIsolation="false"
-        stopOnError="false"
-        stopOnFailure="false"
-        verbose="true"
+        cacheDirectory=".phpunit.cache"
 >
-    <coverage processUncoveredFiles="true">
-        <include>
-            <directory suffix=".php">./src</directory>
-        </include>
+    <coverage>
         <report>
             <clover outputFile="build/logs/clover.xml"/>
             <html outputDirectory="build/logs/coverage"/>
@@ -29,7 +18,12 @@
     </php>
     <testsuites>
         <testsuite name="Test Suite">
-            <directory suffix="Test.php">./tests</directory>
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
+    <source>
+        <include>
+            <directory>./src</directory>
+        </include>
+    </source>
 </phpunit>

@@ -8,7 +8,8 @@ use DragonCode\LaravelActions\Helpers\Config;
 use DragonCode\SimpleDataTransferObject\DataTransferObject;
 use DragonCode\Support\Facades\Helpers\Boolean;
 use DragonCode\Support\Facades\Helpers\Str;
-use Illuminate\Container\Container;
+
+use function is_numeric;
 
 class Options extends DataTransferObject
 {
@@ -33,7 +34,7 @@ class Options extends DataTransferObject
     public function resolvePath(): self
     {
         $this->path = $this->realpath
-            ? $this->path ?: $this->config()->path()
+            ? $this->path ?? $this->config()->path()
             : $this->config()->path($this->path);
 
         return $this;
@@ -76,6 +77,6 @@ class Options extends DataTransferObject
 
     protected function config(): Config
     {
-        return Container::getInstance()->make(Config::class);
+        return app(Config::class);
     }
 }

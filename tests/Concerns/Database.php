@@ -31,8 +31,6 @@ trait Database
 
     protected function loadMigrations(): void
     {
-        $this->allowAnonymousMigrations()
-            ? $this->loadMigrationsFrom(__DIR__ . '/../fixtures/migrations/anonymous')
-            : $this->loadMigrationsFrom(__DIR__ . '/../fixtures/migrations/named');
+        $this->loadMigrationsFrom(__DIR__ . '/../fixtures/migrations');
     }
 }

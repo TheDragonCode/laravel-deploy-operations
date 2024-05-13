@@ -2,22 +2,11 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Database;
-
 use DragonCode\LaravelActions\Action;
 use DragonCode\LaravelActions\Helpers\Config;
 use Illuminate\Support\Facades\Schema;
-use RuntimeException;
 
-class BaseRenameMigrationsActionsTableToActions extends Action
-{
-    protected Config $config;
-
-    public function __construct()
-    {
-        $this->config = app(Config::class);
-    }
-
+return new class extends Action {
     public function up(): void
     {
         if (Schema::hasTable('migration_actions') && $this->doesntSame('migration_actions', $this->table())) {
@@ -50,6 +39,6 @@ class BaseRenameMigrationsActionsTableToActions extends Action
 
     protected function table(): string
     {
-        return $this->config->table();
+        return app(Config::class)->table();
     }
-}
+};

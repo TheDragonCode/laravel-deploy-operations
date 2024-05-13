@@ -6,6 +6,8 @@ namespace DragonCode\LaravelActions\Processors;
 
 use DragonCode\Support\Facades\Filesystem\File;
 
+use function base_path;
+
 class StubPublish extends Processor
 {
     protected string $stub = __DIR__ . '/../../resources/stubs/action.stub';

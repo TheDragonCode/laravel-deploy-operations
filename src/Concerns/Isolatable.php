@@ -7,11 +7,13 @@ namespace DragonCode\LaravelActions\Concerns;
 use DragonCode\LaravelActions\Constants\Options;
 use DragonCode\LaravelActions\Services\Mutex;
 
+use function is_numeric;
+
 trait Isolatable
 {
     protected function isolationMutex(): Mutex
     {
-        return $this->getLaravel()->make(Mutex::class);
+        return app(Mutex::class);
     }
 
     protected function isolatedStatusCode(): int
