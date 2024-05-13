@@ -28,5 +28,9 @@ jobs:
             -   name: Install dependencies
                 run: composer require --dev laravel/framework:^${{ matrix.laravel }}
 
+            -   name: Install Doctrine
+                if: matrix.laravel == '10.0'
+                run: composer require doctrine/dbal 
+
             -   name: Execute tests
                 run: sudo vendor/bin/phpunit
