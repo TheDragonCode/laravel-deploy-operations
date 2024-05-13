@@ -5,17 +5,13 @@ declare(strict_types=1);
 namespace DragonCode\LaravelActions;
 
 use DragonCode\LaravelActions\Concerns\About;
-use DragonCode\LaravelActions\Concerns\Anonymous;
 use DragonCode\LaravelActions\Contracts\Notification;
-use DragonCode\LaravelActions\Notifications\Basic;
 use DragonCode\LaravelActions\Notifications\Beautiful;
-use Illuminate\Console\View\Components\Factory;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
 {
     use About;
-    use Anonymous;
 
     public function boot(): void
     {
@@ -52,16 +48,12 @@ class ServiceProvider extends BaseServiceProvider
 
     protected function registerMigrations(): void
     {
-        $this->allowAnonymousMigrations()
-            ? $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/anonymous')
-            : $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/named');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 
     protected function registerNotifications(): void
     {
-        class_exists(Factory::class)
-            ? $this->app->bind(Notification::class, Beautiful::class)
-            : $this->app->bind(Notification::class, Basic::class);
+        $this->app->bind(Notification::class, Beautiful::class);
     }
 
     protected function publishConfig(): void
@@ -73,9 +65,6 @@ class ServiceProvider extends BaseServiceProvider
 
     protected function registerConfig(): void
     {
-        $this->mergeConfigFrom(
-            __DIR__ . '/../config/actions.php',
-            'actions'
-        );
+        $this->mergeConfigFrom(__DIR__ . '/../config/actions.php', 'actions');
     }
 }

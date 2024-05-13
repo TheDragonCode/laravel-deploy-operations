@@ -6,6 +6,8 @@ namespace DragonCode\LaravelActions\Processors;
 
 use DragonCode\Support\Facades\Helpers\Arr;
 
+use function sprintf;
+
 class Status extends Processor
 {
     protected string $columnName = '<fg=gray>Action name</>';

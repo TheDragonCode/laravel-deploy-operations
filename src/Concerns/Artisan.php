@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Artisan as Command;
 
 trait Artisan
 {
-    /**
-     * Run an Artisan console command by name.
-     *
-     * @param  ?OutputStyle  $outputBuffer
-     */
     protected function artisan(string $command, array $parameters = [], ?OutputStyle $outputBuffer = null): void
     {
         Command::call($command, $parameters, $outputBuffer);

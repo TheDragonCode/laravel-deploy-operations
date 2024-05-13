@@ -8,11 +8,13 @@ use DragonCode\LaravelActions\Concerns\ConfirmableTrait;
 use DragonCode\LaravelActions\Concerns\Isolatable;
 use DragonCode\LaravelActions\Concerns\Optionable;
 use DragonCode\LaravelActions\Processors\Processor;
-use DragonCode\LaravelActions\Values\Options as OptionsDto;
+use DragonCode\LaravelActions\Values\Options as OptionsData;
 use Illuminate\Console\Command as BaseCommand;
-use Illuminate\Container\Container;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+
+use function app;
+use function array_merge;
 
 abstract class Command extends BaseCommand
 {
@@ -26,7 +28,6 @@ abstract class Command extends BaseCommand
     {
         if ($this->allowToProceed()) {
             $this->resolveProcessor()->handle();
-            $this->forgetProcessor();
 
             return self::SUCCESS;
         }
@@ -54,25 +55,15 @@ abstract class Command extends BaseCommand
 
     protected function resolveProcessor(): Processor
     {
-        return $this->container()->make($this->processor, [
+        return app($this->processor, [
             'options' => $this->getOptionsDto(),
             'input'   => $this->input,
             'output'  => $this->output,
         ]);
     }
 
-    protected function forgetProcessor(): void
+    protected function getOptionsDto(): OptionsData
     {
-        $this->container()->forgetInstance($this->processor);
-    }
-
-    protected function container(): Container
-    {
-        return Container::getInstance();
-    }
-
-    protected function getOptionsDto(): OptionsDto
-    {
-        return OptionsDto::fromArray(array_merge($this->options(), $this->arguments()))->resolvePath();
+        return OptionsData::fromArray(array_merge($this->options(), $this->arguments()))->resolvePath();
     }
 }

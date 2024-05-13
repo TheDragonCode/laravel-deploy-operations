@@ -13,6 +13,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\Collection;
 
+use function compact;
+
 class ActionRepository
 {
     protected ?string $connection = null;

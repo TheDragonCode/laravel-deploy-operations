@@ -8,6 +8,8 @@ use Closure;
 use DragonCode\Support\Facades\Filesystem\Path;
 use DragonCode\Support\Facades\Helpers\Arr;
 
+use function in_array;
+
 class Sorter
 {
     public function byValues(array $items): array

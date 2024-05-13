@@ -1,4 +1,4 @@
-# Laravel Deploy Actions
+# Deploy Actions for Laravel
 
 ![the dragon code actions](https://preview.dragon-code.pro/the-dragon-code/deploy-actions.svg?brand=laravel&mode=dark)
 
@@ -15,6 +15,7 @@
 
 * Prologue
     * [Upgrade Guide](prologue/upgrade-guide/index.md)
+        * [To 5.x from 4.x](prologue/upgrade-guide/5.x.md)
         * [To 4.x from 3.x](prologue/upgrade-guide/4.x.md)
         * [To 3.x from 2.x](prologue/upgrade-guide/3.x.md)
 * Getting Started

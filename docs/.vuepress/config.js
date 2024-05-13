@@ -70,7 +70,7 @@ export default defineUserConfig({
         editLink: true,
 
         navbar: [
-            {text: '4.x', link: '/prologue/changelog/4.x.md'}
+            {text: '5.x', link: '/prologue/changelog/5.x.md'}
         ],
 
         sidebarDepth: 1,

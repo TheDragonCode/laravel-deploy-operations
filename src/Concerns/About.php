@@ -17,11 +17,9 @@ trait About
 
     protected function registerAbout(): void
     {
-        if (class_exists(AboutCommand::class)) {
-            AboutCommand::add($this->getPackageName(), fn () => [
-                'Version' => $this->getPackageVersion(),
-            ]);
-        }
+        AboutCommand::add($this->getPackageName(), fn () => [
+            'Version' => $this->getPackageVersion(),
+        ]);
     }
 
     protected function getPackageName(): string
@@ -41,10 +39,6 @@ trait About
 
     protected function loadPackageName(): string
     {
-        if (! is_null($this->packageName)) {
-            return $this->packageName;
-        }
-
-        return $this->packageName = Arr::ofFile($this->composer)->get('name');
+        return $this->packageName ??= Arr::ofFile($this->composer)->get('name');
     }
 }

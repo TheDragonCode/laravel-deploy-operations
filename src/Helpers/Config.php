@@ -7,6 +7,11 @@ namespace DragonCode\LaravelActions\Helpers;
 use DragonCode\Support\Facades\Helpers\Arr;
 use Illuminate\Config\Repository;
 
+use function base_path;
+use function ltrim;
+use function rtrim;
+use function str_replace;
+
 class Config
 {
     public function __construct(
@@ -38,13 +43,16 @@ class Config
 
     public function path(?string $path = null): string
     {
-        $directory = $this->config->get('actions.path', base_path('actions'));
-
-        return rtrim($directory, '\\/') . DIRECTORY_SEPARATOR . ltrim((string) $path, '\\/');
+        return rtrim($this->directory(), '\\/') . DIRECTORY_SEPARATOR . ltrim((string) $path, '\\/');
     }
 
     public function gitPath(): string
     {
         return base_path();
+    }
+
+    protected function directory(): string
+    {
+        return $this->config->get('actions.path', base_path('actions'));
     }
 }

@@ -9,6 +9,8 @@ use DragonCode\Support\Facades\Helpers\Arr;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
+use function in_array;
+
 /** @mixin \DragonCode\LaravelActions\Console\Command */
 trait Optionable
 {

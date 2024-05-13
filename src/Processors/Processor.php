@@ -20,6 +20,8 @@ use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Events\Dispatcher;
 use Symfony\Component\Console\Input\InputInterface;
 
+use function array_filter;
+
 abstract class Processor
 {
     use Artisan;

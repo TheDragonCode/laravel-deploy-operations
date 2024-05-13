@@ -52,10 +52,6 @@ class Beautiful extends Notification
 
     protected function components(): Factory
     {
-        if (! is_null($this->components)) {
-            return $this->components;
-        }
-
-        return $this->components = new Factory($this->output);
+        return $this->components ??= new Factory($this->output);
     }
 }
