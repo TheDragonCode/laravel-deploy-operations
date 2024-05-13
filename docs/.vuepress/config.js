@@ -70,7 +70,14 @@ export default defineUserConfig({
         editLink: true,
 
         navbar: [
-            {text: '5.x', link: '/prologue/changelog/5.x.md'}
+            {
+                text: '5.x',
+                children: [
+                    {text: '5.x', link: '/getting-started/installation/index.md'},
+                    {text: '4.x', link: 'https://github.com/TheDragonCode/laravel-actions/blob/4.x/docs/index.md'},
+                    {text: '3.x', link: 'https://github.com/TheDragonCode/laravel-actions/blob/3.x/docs/index.md'},
+                ]
+            }
         ],
 
         sidebarDepth: 1,
@@ -86,12 +93,6 @@ export default defineUserConfig({
                     {
                         text: 'License',
                         link: '/prologue/license.md'
-                    },
-                    {
-                        text: 'Changelog',
-                        link: '/prologue/changelog/index.md',
-                        collapsible: true,
-                        children: getChildren('prologue/changelog', 'desc')
                     }
                 ]
             },
