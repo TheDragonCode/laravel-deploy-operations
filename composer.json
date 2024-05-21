@@ -65,7 +65,8 @@
         "dragon-code/laravel-migration-actions": "*"
     },
     "suggest": {
-        "doctrine/dbal": "This package must be installed if you are using Laravel 10."
+        "doctrine/dbal": "This package must be installed if you are using Laravel 10.",
+        "dragon-code/laravel-data-dumper": "Required if you want to save the execution state using the `schema:dump` console command"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
