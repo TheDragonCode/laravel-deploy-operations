@@ -17,6 +17,13 @@
 
 See the [documentation](https://deploy-operations.dragon-code.pro) for detailed installation and usage instructions.
 
+## Upgrade Guide
+
+To upgrade from `Laravel Deploy Actions` versions 4 and 5 to `Deploy Operations`, read these guides:
+
+- [To 6.x from 5.x](https://deploy-operations.dragon-code.pro/prologue/upgrade-guide/6.x.html)
+- [To 5.x from 4.x](https://deploy-operations.dragon-code.pro/prologue/upgrade-guide/5.x.html)
+
 ## License
 
 This package is licensed under the [MIT License](LICENSE).
