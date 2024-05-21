@@ -3,10 +3,9 @@
 namespace DragonCode\LaravelDeployOperations;
 
 use DragonCode\LaravelDeployOperations\Concerns\Artisan;
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Arr;
 
-abstract class Operation extends Migration
+abstract class Operation
 {
     use Artisan;
 
@@ -43,6 +42,11 @@ abstract class Operation extends Migration
 
     /** Defines whether the operation will run synchronously or asynchronously. */
     protected bool $async = false;
+
+    public function getConnection(): ?string
+    {
+        return config('deploy-operations.connection');
+    }
 
     /**
      * Determines the type of launch of the deploy operation.
