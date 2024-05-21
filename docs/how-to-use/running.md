@@ -215,13 +215,19 @@ use DragonCode\LaravelDeployOperations\Operation;
 
 return new class extends Operation
 {
-    protected bool $transactions = true;
-
-    protected int $transactionAttempts = 3;
-
     public function __invoke(): void
     {
         // some code
+    }
+
+    public function enabledTransactions(): bool
+    {
+        return true;
+    }
+
+    public function transactionAttempts(): int
+    {
+        return 4;
     }
 };
 ```
