@@ -114,7 +114,13 @@ export default defineUserConfig({
 
             {
                 text: 'How To Use',
-                children: getChildren('how-to-use')
+                children: [
+                    '/how-to-use/running.md',
+                    '/how-to-use/creating.md',
+                    '/how-to-use/status.md',
+                    '/how-to-use/rollback.md',
+                    '/how-to-use/customize-stub.md',
+                ]
             },
 
             {
