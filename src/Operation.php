@@ -18,16 +18,6 @@ abstract class Operation
     protected bool $once = true;
 
     /**
-     * Determines a call to database transactions.
-     *
-     * By default, false.
-     */
-    protected bool $transactions = false;
-
-    /** The number of attempts to execute a request within a transaction before throwing an error. */
-    protected int $transactionAttempts = 1;
-
-    /**
      * Determines which environment to run on.
      */
     protected array|string|null $environment = null;
@@ -64,7 +54,7 @@ abstract class Operation
      */
     public function enabledTransactions(): bool
     {
-        return $this->transactions;
+        return (bool) config('deploy-operations.transactions.enabled');
     }
 
     /**
@@ -72,7 +62,7 @@ abstract class Operation
      */
     public function transactionAttempts(): int
     {
-        return $this->transactionAttempts;
+        return config('deploy-operations.transactions.attempts', 1);
     }
 
     /**

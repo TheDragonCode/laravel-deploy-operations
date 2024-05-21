@@ -28,6 +28,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Database Transations
+    |--------------------------------------------------------------------------
+    |
+    | This setting defines the rules for working with database transactions.
+    | This specifies a common value for all operations, but you can override this
+    | value directly in the class of the operation itself.
+    */
+
+    'transactions' => [
+        // | Determines whether the use of database transactions is enabled.
+
+        'enabled' => false,
+
+        // | The number of attempts to execute a request within a transaction before throwing an error.
+        'attempts' => 1,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Operations Path
     |--------------------------------------------------------------------------
     |
