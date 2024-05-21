@@ -7,9 +7,6 @@ To get started, execute the `schema:dump` command:
 
 ```bash
 php artisan schema:dump
- 
-# Dump the current database schema and prune all existing migrations...
-php artisan schema:dump --prune
 ```
 
 You can read more about the operation of this console command in
