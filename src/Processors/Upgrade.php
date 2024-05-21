@@ -105,7 +105,7 @@ class Upgrade extends Processor
     protected function replaceDeclareStrictType(string $content): string
     {
         return Str::of($content)
-            ->replace('(declare\s*\(\s*strict_types\s*=\s*[1|0]\);)', '')
+            ->pregReplace('(declare\s*\(\s*strict_types\s*=\s*[1|0]\);)', '')
             ->replace("<?php\n", "<?php\n\ndeclare(strict_types=1);\n")
             ->toString();
     }
