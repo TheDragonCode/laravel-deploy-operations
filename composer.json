@@ -5,10 +5,13 @@
     "type": "library",
     "keywords": [
         "laravel",
-        "migration",
-        "migrations",
+        "deploy",
+        "deployment",
+        "operations",
         "action",
         "actions",
+        "migration",
+        "migrations",
         "dragon-code",
         "dragon",
         "andrey-helldar"
