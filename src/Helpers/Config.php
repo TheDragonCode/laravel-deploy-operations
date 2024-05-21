@@ -16,8 +16,7 @@ class Config
 {
     public function __construct(
         protected Repository $config
-    ) {
-    }
+    ) {}
 
     public function environment(): ?string
     {
@@ -36,7 +35,7 @@ class Config
 
     public function exclude(): array
     {
-        return Arr::of((array)$this->config->get('deploy-operations.exclude'))
+        return Arr::of((array) $this->config->get('deploy-operations.exclude'))
             ->map(fn (string $path) => str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $path))
             ->filter()
             ->toArray();
@@ -44,7 +43,7 @@ class Config
 
     public function path(?string $path = null): string
     {
-        return rtrim($this->directory(), '\\/') . DIRECTORY_SEPARATOR . ltrim((string)$path, '\\/');
+        return rtrim($this->directory(), '\\/') . DIRECTORY_SEPARATOR . ltrim((string) $path, '\\/');
     }
 
     public function gitPath(): string

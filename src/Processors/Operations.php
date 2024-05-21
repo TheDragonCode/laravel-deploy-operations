@@ -31,8 +31,8 @@ class Operations extends Processor
     {
         $this->runCommand(Names::Install, [
             '--' . Options::Connection => $this->options->connection,
-            '--' . Options::Force => true,
-            '--' . Options::Mute => true,
+            '--' . Options::Force      => true,
+            '--' . Options::Mute       => true,
         ]);
     }
 
@@ -50,7 +50,8 @@ class Operations extends Processor
             }
 
             $this->fireEvent(NoPendingDeployOperations::class, 'up');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             $this->fireEvent(DeployOperationFailed::class, 'up');
 
             throw $e;
@@ -73,7 +74,7 @@ class Operations extends Processor
     {
         return $this->getFiles(
             path: $this->options->path,
-            filter: fn (string $file) => !Str::of($file)->replace('\\', '/')->contains($completed)
+            filter: fn (string $file) => ! Str::of($file)->replace('\\', '/')->contains($completed)
         );
     }
 

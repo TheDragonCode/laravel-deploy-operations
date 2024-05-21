@@ -13,7 +13,7 @@ class Rollback extends Command
 
     protected $description = 'Rollback the last deploy operation';
 
-    protected Processor | string $processor = RollbackProcessor::class;
+    protected Processor|string $processor = RollbackProcessor::class;
 
     protected array $options = [
         Options::Connection,

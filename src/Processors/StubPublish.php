@@ -31,7 +31,7 @@ class StubPublish extends Processor
 
     protected function doesntExist(): bool
     {
-        return !File::exists($this->path());
+        return ! File::exists($this->path());
     }
 
     protected function path(): string

@@ -73,6 +73,6 @@ class Notification
 
     protected function canSpeak(): bool
     {
-        return !$this->silent;
+        return ! $this->silent;
     }
 }

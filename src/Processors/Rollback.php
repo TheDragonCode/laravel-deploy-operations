@@ -46,7 +46,7 @@ class Rollback extends Processor
 
     protected function getOperations(?int $step): array
     {
-        return (int)$step > 0
+        return (int) $step > 0
             ? $this->repository->getByStep($step)
             : $this->repository->getLast();
     }

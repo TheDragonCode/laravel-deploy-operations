@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use DragonCode\LaravelDeployOperations\Operation;
 use DragonCode\LaravelDeployOperations\Helpers\Config;
+use DragonCode\LaravelDeployOperations\Operation;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 

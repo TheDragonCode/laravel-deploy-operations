@@ -13,7 +13,7 @@ class Status extends Command
 
     protected $description = 'Show the status of each deploy operation';
 
-    protected Processor | string $processor = StatusProcessor::class;
+    protected Processor|string $processor = StatusProcessor::class;
 
     protected bool $secure = false;
 

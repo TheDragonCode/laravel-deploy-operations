@@ -22,8 +22,7 @@ class OperationsRepository
     public function __construct(
         protected Resolver $resolver,
         protected Config $config
-    ) {
-    }
+    ) {}
 
     public function getCompleted(): Collection
     {
@@ -53,7 +52,7 @@ class OperationsRepository
 
     public function getLastBatchNumber(): int
     {
-        return (int)$this->table()->max('batch');
+        return (int) $this->table()->max('batch');
     }
 
     public function log(string $operation, int $batch): void

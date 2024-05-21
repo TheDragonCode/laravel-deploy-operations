@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use DragonCode\LaravelDeployOperations\Operation;
 use DragonCode\LaravelDeployOperations\Helpers\Config;
+use DragonCode\LaravelDeployOperations\Operation;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Operation {
@@ -28,13 +28,7 @@ return new class extends Operation {
     protected function validateTable(string $name): void
     {
         if (Schema::hasTable($name)) {
-            throw new RuntimeException(
-                sprintf(
-                    'A table named [%s] already exists. Change the table name settings in the [%s] configuration file.',
-                    $name,
-                    'config/deploy-operations.php'
-                )
-            );
+            throw new RuntimeException(sprintf('A table named [%s] already exists. Change the table name settings in the [%s] configuration file.', $name, 'config/deploy-operations.php'));
         }
     }
 

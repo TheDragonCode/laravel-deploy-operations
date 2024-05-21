@@ -13,7 +13,7 @@ class Make extends Command
 
     protected $description = 'Create a new deploy operation file';
 
-    protected Processor | string $processor = MakeProcessor::class;
+    protected Processor|string $processor = MakeProcessor::class;
 
     protected array $arguments = [
         Options::Name,

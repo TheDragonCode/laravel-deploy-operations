@@ -49,57 +49,57 @@ trait Optionable
                 Options::Before,
                 null,
                 InputOption::VALUE_NONE,
-                'Run operations marked as before'
+                'Run operations marked as before',
             ],
             [
                 Options::Connection,
                 null,
                 InputOption::VALUE_OPTIONAL,
-                'The database connection to use'
+                'The database connection to use',
             ],
             [
                 Options::Force,
                 null,
                 InputOption::VALUE_NONE,
-                'Force the operation to run when in production'
+                'Force the operation to run when in production',
             ],
             [
                 Options::Path,
                 null,
                 InputOption::VALUE_OPTIONAL,
-                'The path to the operations files to be executed'
+                'The path to the operations files to be executed',
             ],
             [
                 Options::Realpath,
                 null,
                 InputOption::VALUE_NONE,
-                'Indicate any provided operation file paths are pre-resolved absolute path'
+                'Indicate any provided operation file paths are pre-resolved absolute path',
             ],
             [
                 Options::Step,
                 null,
                 InputOption::VALUE_OPTIONAL,
-                'Force the operations to be run so they can be rolled back individually'
+                'Force the operations to be run so they can be rolled back individually',
             ],
             [
                 Options::Mute,
                 null,
                 InputOption::VALUE_NONE,
-                'Turns off the output of informational messages'
+                'Turns off the output of informational messages',
             ],
             [
                 Options::Isolated,
                 null,
                 InputOption::VALUE_OPTIONAL,
                 'Do not run the operations command if another instance of the operations command is already running',
-                false
+                false,
             ],
             [
                 Options::Sync,
                 null,
                 InputOption::VALUE_OPTIONAL,
                 'Makes all operations run synchronously',
-                false
+                false,
             ],
         ];
     }

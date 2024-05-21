@@ -135,7 +135,8 @@ class RollbackTest extends TestCase
             $this->assertDatabaseOperationHas($this->table, 'run_success_on_failed');
 
             $this->artisan(Names::Rollback)->assertExitCode(1);
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             $this->assertInstanceOf(Exception::class, $e);
 
             $this->assertSame('Custom exception', $e->getMessage());
@@ -194,7 +195,8 @@ class RollbackTest extends TestCase
             $this->table()->insert(['operation' => '2021_12_23_184029_run_failed_failure', 'batch' => 999]);
 
             $this->artisan(Names::Rollback)->assertExitCode(0);
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             $this->assertInstanceOf(Exception::class, $e);
 
             $this->assertSame('Custom exception', $e->getMessage());

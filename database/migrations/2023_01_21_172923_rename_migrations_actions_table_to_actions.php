@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use DragonCode\LaravelDeployOperations\Operation;
 use DragonCode\LaravelDeployOperations\Helpers\Config;
+use DragonCode\LaravelDeployOperations\Operation;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Operation {

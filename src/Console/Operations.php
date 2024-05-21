@@ -13,7 +13,7 @@ class Operations extends Command
 
     protected $description = 'Run the deploy operations';
 
-    protected Processor | string $processor = OperationsProcessor::class;
+    protected Processor|string $processor = OperationsProcessor::class;
 
     protected bool $secure = false;
 

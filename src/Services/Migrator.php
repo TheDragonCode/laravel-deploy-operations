@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelDeployOperations\Services;
 
-use DragonCode\LaravelDeployOperations\Operation;
 use DragonCode\LaravelDeployOperations\Helpers\Config;
 use DragonCode\LaravelDeployOperations\Jobs\OperationJob;
 use DragonCode\LaravelDeployOperations\Notifications\Notification;
+use DragonCode\LaravelDeployOperations\Operation;
 use DragonCode\LaravelDeployOperations\Repositories\OperationsRepository;
 use DragonCode\LaravelDeployOperations\Values\Options;
 use DragonCode\Support\Exceptions\FileNotFoundException;
@@ -30,8 +30,7 @@ class Migrator
         protected OperationsRepository $repository,
         protected Config $config,
         protected Container $container
-    ) {
-    }
+    ) {}
 
     public function setConnection(?string $connection): self
     {
@@ -49,11 +48,11 @@ class Migrator
 
     public function runUp(string $filename, int $batch, Options $options): void
     {
-        $path = $this->resolvePath($filename, $options->path);
+        $path      = $this->resolvePath($filename, $options->path);
         $operation = $this->resolveOperation($path);
-        $name = $this->resolveOperationName($path);
+        $name      = $this->resolveOperationName($path);
 
-        if (!$this->allowOperation($operation, $options)) {
+        if (! $this->allowOperation($operation, $options)) {
             $this->notification->twoColumn($name, '<fg=yellow;options=bold>SKIPPED</>');
 
             return;
@@ -78,9 +77,9 @@ class Migrator
 
     public function runDown(string $filename, Options $options): void
     {
-        $path = $this->resolvePath($filename, $options->path);
+        $path      = $this->resolvePath($filename, $options->path);
         $operation = $this->resolveOperation($path);
-        $name = $this->resolveOperationName($path);
+        $name      = $this->resolveOperationName($path);
 
         $this->notification->task($name, function () use ($operation, $name) {
             $this->runOperation($operation, 'down');
@@ -100,7 +99,8 @@ class Migrator
                 );
 
                 $operation->success();
-            } catch (Throwable $e) {
+            }
+            catch (Throwable $e) {
                 $operation->failed();
 
                 throw $e;
@@ -115,7 +115,7 @@ class Migrator
 
     protected function hasAsync(Operation $operation, Options $options): bool
     {
-        return !$options->sync && $operation->isAsync();
+        return ! $options->sync && $operation->isAsync();
     }
 
     protected function runMethod(Operation $operation, string $method, bool $transactions, int $attempts): void
@@ -137,11 +137,11 @@ class Migrator
 
     protected function allowOperation(Operation $operation, Options $options): bool
     {
-        if (!$this->allowEnvironment($operation)) {
+        if (! $this->allowEnvironment($operation)) {
             return false;
         }
 
-        return !$this->disallowBefore($operation, $options);
+        return ! $this->disallowBefore($operation, $options);
     }
 
     protected function allowEnvironment(Operation $operation): bool
@@ -160,12 +160,12 @@ class Migrator
 
     protected function exceptEnvironment(?string $env, array $except): bool
     {
-        return empty($except) || !in_array($env, $except);
+        return empty($except) || ! in_array($env, $except);
     }
 
     protected function disallowBefore(Operation $operation, Options $options): bool
     {
-        return $options->before && !$operation->hasBefore();
+        return $options->before && ! $operation->hasBefore();
     }
 
     protected function allowLogging(Operation $operation): bool

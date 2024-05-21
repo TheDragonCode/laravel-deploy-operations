@@ -26,6 +26,8 @@ abstract class Processor
 {
     use Artisan;
 
+    abstract public function handle(): void;
+
     public function __construct(
         protected Options $options,
         protected InputInterface $input,
@@ -44,8 +46,6 @@ abstract class Processor
         $this->migrator->setConnection($this->options->connection)->setOutput($this->output);
     }
 
-    abstract public function handle(): void;
-
     protected function getFiles(string $path, ?Closure $filter = null): array
     {
         $file = Str::finish($path, '.php');
@@ -54,7 +54,7 @@ abstract class Processor
 
         $files = Arr::filter(
             $files,
-            fn (string $path) => Str::endsWith($path, '.php') && !Str::contains($path, $this->config->exclude())
+            fn (string $path) => Str::endsWith($path, '.php') && ! Str::contains($path, $this->config->exclude())
         );
 
         return Arr::of($this->sorter->byValues($files))
@@ -69,7 +69,7 @@ abstract class Processor
 
     protected function tableNotFound(): bool
     {
-        if (!$this->repository->repositoryExists()) {
+        if (! $this->repository->repositoryExists()) {
             $this->notification->warning('Deploy operations table not found');
 
             return true;

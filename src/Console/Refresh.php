@@ -13,7 +13,7 @@ class Refresh extends Command
 
     protected $description = 'Reset and re-run all deploy operations';
 
-    protected Processor | string $processor = RefreshProcessor::class;
+    protected Processor|string $processor = RefreshProcessor::class;
 
     protected array $options = [
         Options::Connection,

@@ -51,7 +51,7 @@ class Make extends Processor
     protected function getFilename(string $branch): string
     {
         $directory = Path::dirname($branch);
-        $filename = Path::filename($branch);
+        $filename  = Path::filename($branch);
 
         return Str::of($filename)->prepend($this->getTime())->finish('.php')->prepend($directory . '/')->toString();
     }

@@ -12,5 +12,5 @@ class Install extends Command
 
     protected $description = 'Create the deploy operations repository';
 
-    protected Processor | string $processor = InstallProcessor::class;
+    protected Processor|string $processor = InstallProcessor::class;
 }

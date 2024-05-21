@@ -26,8 +26,8 @@ class Fresh extends Processor
     {
         $this->runCommand(Names::Operations, [
             '--' . Options::Connection => $this->options->connection,
-            '--' . Options::Path => $this->options->path,
-            '--' . Options::Realpath => true,
+            '--' . Options::Path       => $this->options->path,
+            '--' . Options::Realpath   => true,
         ]);
     }
 }

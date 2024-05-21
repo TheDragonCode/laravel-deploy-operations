@@ -14,5 +14,5 @@ class Upgrade extends Command
 
     protected $description = 'Upgrading project files from version 5 to 6';
 
-    protected Processor | string $processor = UpgradeProcessor::class;
+    protected Processor|string $processor = UpgradeProcessor::class;
 }

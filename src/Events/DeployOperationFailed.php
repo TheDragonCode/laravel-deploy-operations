@@ -4,6 +4,4 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelDeployOperations\Events;
 
-class DeployOperationFailed extends BaseEvent
-{
-}
+class DeployOperationFailed extends BaseEvent {}
