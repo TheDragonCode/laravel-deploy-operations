@@ -71,7 +71,7 @@ By default, the new operation class will contain the `__invoke` method, but you 
 ```php
 use DragonCode\LaravelDeployOperations\Operation;
 
-return new class () extends Operation
+return new class extends Operation
 {
     public function __invoke(): void
     {
@@ -88,7 +88,7 @@ return new class () extends Operation
 ```php
 use DragonCode\LaravelDeployOperations\Operation;
 
-return new class () extends Operation
+return new class extends Operation
 {
     public function __invoke(): void {} // called when `php artisan operations` running
 
@@ -105,7 +105,7 @@ You can also use the dependency injection with `__invoke`, `up` and `down` metho
 use DragonCode\LaravelDeployOperations\Operation;
 use Tests\Concerns\Some;
 
-return new class () extends Operation
+return new class extends Operation
 {
     public function __invoke(Some $some): void
     {
@@ -118,7 +118,7 @@ return new class () extends Operation
 use DragonCode\LaravelDeployOperations\Operation;
 use Tests\Concerns\Some;
 
-return new class () extends Operation
+return new class extends Operation
 {
     public function up(Some $some): void
     {

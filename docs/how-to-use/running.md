@@ -120,15 +120,15 @@ return new class extends Operation
 
 If the value is `$once = false`, the `up` method will be called every time the `operations` command called.
 
-In this case, information about it will not be written to the `actions` table and, therefore, the `down` method will not be called when the rollback command is called.
+In this case, information about it will not be written to the `operations` table and, therefore, the `down` method will not be called when the rollback command is called.
 
 > Note
 >
-> When using the `before` parameter to run command, it is recommended to override the value of the `$before` attribute to `false`, otherwise this action will be executed twice.
+> When using the `before` parameter to run command, it is recommended to override the value of the `$before` attribute to `false`, otherwise this operation will be executed twice.
 
 ## Execution In A Specific Environment
 
-In some cases, it becomes necessary to execute an action in a specific environment. For example `production`.
+In some cases, it becomes necessary to execute an operation in a specific environment. For example `production`.
 
 For this you can use the `$environment` parameter:
 
@@ -162,11 +162,11 @@ return new class extends Operation
 };
 ```
 
-By default, the action will run in all environments. The same will happen if you specify `null` or `[]` as the value.
+By default, the operation will run in all environments. The same will happen if you specify `null` or `[]` as the value.
 
 ## Execution Excluding Certain Environments
 
-In some cases, it becomes necessary to execute an action excluding certain environments. For example `production`.
+In some cases, it becomes necessary to execute an operation excluding certain environments. For example `production`.
 
 For this you can use the `$except_environment` parameter:
 
@@ -200,15 +200,15 @@ return new class extends Operation
 };
 ```
 
-By default, no actions will be excluded. The same happens if you specify `null` or `[]` value.
+By default, no operations will be excluded. The same happens if you specify `null` or `[]` value.
 
 ## Database Transactions
 
-In some cases, it becomes necessary to undo previously performed actions in the database. For example, when code execution throws an error. To do this, the code must be wrapped in
+In some cases, it becomes necessary to undo previously performed operations in the database. For example, when code execution throws an error. To do this, the code must be wrapped in
 a transaction.
 
 By setting the `$transactions = true` parameter, you will ensure that your code is wrapped in a transaction without having to manually call the `DB::transaction()` method. This
-will reduce the time it takes to create the action.
+will reduce the time it takes to create the operation.
 
 ```php
 use DragonCode\LaravelDeployOperations\Operation;
@@ -228,9 +228,9 @@ return new class extends Operation
 
 ## Asynchronous Call
 
-In some cases, it becomes necessary to execute actions in an asynchronous manner without delaying the deployment process.
+In some cases, it becomes necessary to execute operations in an asynchronous manner without delaying the deployment process.
 
-To do this, you need to override the `$async` property in the action class:
+To do this, you need to override the `$async` property in the operation class:
 
 ```php
 use DragonCode\LaravelDeployOperations\Operation;
@@ -246,9 +246,9 @@ return new class extends Operation
 };
 ```
 
-In this case, the action file that defines this parameter will run asynchronously using the `DragonCode\LaravelDeployOperations\Jobs\ActionJob` class.
+In this case, the operation file that defines this parameter will run asynchronously using the `DragonCode\LaravelDeployOperations\Jobs\OperationJob` class.
 
-The name of the connection and queue can be changed through the [settings](https://github.com/TheDragonCode/laravel-actions/tree/main/config).
+The name of the connection and queue can be changed through the [settings](https://github.com/TheDragonCode/laravel-deploy-operations/tree/main/config).
 
 ::: Info
 We remind you that in this case the [queuing system](https://laravel.com/docs/queues) must work in your application.

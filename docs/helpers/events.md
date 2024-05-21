@@ -11,7 +11,8 @@ DragonCode\LaravelDeployOperations\Events\NoPendingDeployOperations::class
 
 If there are no operation files to execute, the `NoPendingDeployOperations` event will be sent.
 
-In other cases, the `DeployOperationStarted` event will be sent before processing starts, and the `DeployOperationEnded` event will be sent after processing.
+In other cases, the `DeployOperationStarted` event will be sent before processing starts,
+and the `DeployOperationEnded` event will be sent after processing.
 
 For example:
 

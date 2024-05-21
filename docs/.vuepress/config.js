@@ -71,9 +71,10 @@ export default defineUserConfig({
 
         navbar: [
             {
-                text: '5.x',
+                text: '6.x',
                 children: [
-                    {text: '5.x', link: '/getting-started/installation/index.md'},
+                    {text: '6.x', link: '/getting-started/installation/index.md'},
+                    {text: '5.x', link: 'https://github.com/TheDragonCode/laravel-deploy-operations/blob/5.x/docs/index.md'},
                     {text: '4.x', link: 'https://github.com/TheDragonCode/laravel-deploy-operations/blob/4.x/docs/index.md'},
                     {text: '3.x', link: 'https://github.com/TheDragonCode/laravel-deploy-operations/blob/3.x/docs/index.md'},
                 ]

@@ -8,7 +8,7 @@ You can also override the `success` and `failed` methods, which are called on su
 use DragonCode\LaravelDeployOperations\Operation;
 use Illuminate\Support\Facade\Log;
 
-return new class () extends Operation
+return new class extends Operation
 {
     public function up(): void
     {

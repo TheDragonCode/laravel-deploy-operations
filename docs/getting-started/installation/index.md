@@ -1,6 +1,6 @@
 # Installation
 
-To get the latest version of `Deploy Operations for Laravel`, simply require the project using [Composer](https://getcomposer.org):
+To get the latest version of `Deploy Operations for Laravel`, require the project using [Composer](https://getcomposer.org):
 
 ```bash
 composer require dragon-code/laravel-deploy-operations

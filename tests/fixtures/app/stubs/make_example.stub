@@ -6,7 +6,7 @@ use DragonCode\LaravelDeployOperations\Operation;
 
 return new class extends Operation {
     /**
-     * Run the actions.
+     * Run the operation.
      *
      * @return void
      */
