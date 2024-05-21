@@ -30,9 +30,6 @@ abstract class Operation
     /** Defines a possible "pre-launch" of the operation. */
     protected bool $before = true;
 
-    /** Defines whether the operation will run synchronously or asynchronously. */
-    protected bool $async = false;
-
     public function getConnection(): ?string
     {
         return config('deploy-operations.connection');
@@ -102,7 +99,7 @@ abstract class Operation
      */
     public function isAsync(): bool
     {
-        return $this->async;
+        return (bool) config('deploy-operations.async');
     }
 
     /**

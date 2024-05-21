@@ -79,6 +79,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Asynchronous settings
+    |--------------------------------------------------------------------------
+    |
+    | Defines whether the operation will run synchronously or asynchronously.
+    |
+    | When this option is activated, each operation will be performed through jobs.
+    */
+
+    'async' => false,
+
+    /*
+    |--------------------------------------------------------------------------
     | Queue
     |--------------------------------------------------------------------------
     |

@@ -236,18 +236,21 @@ return new class extends Operation
 
 In some cases, it becomes necessary to execute operations in an asynchronous manner without delaying the deployment process.
 
-To do this, you need to override the `$async` property in the operation class:
+To do this, you need to override the `async` method in the operation class:
 
 ```php
 use DragonCode\LaravelDeployOperations\Operation;
 
 return new class extends Operation
 {
-    protected bool $async = true;
-
     public function __invoke(): void
     {
         // some code
+    }
+
+    public function isAsync(): bool
+    {
+        return true;
     }
 };
 ```

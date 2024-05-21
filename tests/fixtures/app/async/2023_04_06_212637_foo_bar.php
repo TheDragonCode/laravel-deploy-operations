@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
 return new class extends Operation {
-    protected bool $async = true;
-
     public function __invoke(): void
     {
         $this->table()->insert([
@@ -18,5 +16,10 @@ return new class extends Operation {
     protected function table(): Builder
     {
         return DB::table('test');
+    }
+
+    public function isAsync(): bool
+    {
+        return true;
     }
 };
