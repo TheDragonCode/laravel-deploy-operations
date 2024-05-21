@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use DragonCode\LaravelActions\Action;
-use DragonCode\LaravelActions\Helpers\Config;
+use DragonCode\LaravelDeployOperations\Operation;
+use DragonCode\LaravelDeployOperations\Helpers\Config;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Action {
+return new class extends Operation {
     public function up(): void
     {
         if (Schema::hasTable('migration_actions') && $this->doesntSame('migration_actions', $this->table())) {

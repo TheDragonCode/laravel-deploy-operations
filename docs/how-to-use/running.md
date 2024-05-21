@@ -1,12 +1,12 @@
-# Running Actions
+# Running Operations
 
-To run all of your outstanding actions, execute the `actions` artisan command:
+To run all of your outstanding operations, execute the `operations` artisan command:
 
 ```bash
-php artisan actions
+php artisan operations
 ```
 
-Action call order is checked by filename without path:
+Operation call order is checked by filename without path:
 
 ```bash
 2022_10_14_000001_test1      # 1
@@ -22,36 +22,36 @@ bar/2022_10_14_000003_test3  # 3
 2022_10_14_000004_test4      # 4
 ```
 
-## Isolating Action Execution
+## Isolating Operations Execution
 
-If you are deploying your application across multiple servers and running actions as part of your deployment process, you likely do not want two servers attempting to run
-the database at the same time. To avoid this, you may use the `isolated` option when invoking the `actions` command.
+If you are deploying your application across multiple servers and running operations as part of your deployment process, you likely do not want two servers attempting to run
+the database at the same time. To avoid this, you may use the `isolated` option when invoking the `operations` command.
 
-When the `isolated` option is provided, Laravel will acquire an atomic lock using your application's cache driver before attempting to run your actions. All other attempts to
-run the `actions` command while that lock is held will not execute; however, the command will still exit with a successful exit status code:
+When the `isolated` option is provided, Laravel will acquire an atomic lock using your application's cache driver before attempting to run your operations. All other attempts to
+run the `operations` command while that lock is held will not execute; however, the command will still exit with a successful exit status code:
 
 ```bash
-php artisan actions --isolated
+php artisan operations --isolated
 ```
 
 ## Split Launch Option
 
-Sometimes it becomes necessary to launch actions separately, for example, to notify about the successful deployment of a project.
+Sometimes it becomes necessary to launch operations separately, for example, to notify about the successful deployment of a project.
 
-There is a `before` option for this when calling actions:
+There is a `before` option for this when calling operations:
 
 ```bash
-php artisan actions --before
+php artisan operations --before
 ```
 
-When calling the `actions` command with the `before` parameter, the script will execute only those actions within which the value of the `before` parameter is `true`.
+When calling the `operations` command with the `before` parameter, the script will execute only those operations within which the value of the `before` parameter is `true`.
 
-For backwards compatibility, the `before` parameter is set to `true` by default, but actions will only be executed if the option is explicitly passed.
+For backwards compatibility, the `before` parameter is set to `true` by default, but operations will only be executed if the option is explicitly passed.
 
 ```php
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 
-return new class extends Action
+return new class extends Operation
 {
     protected bool $before = false;
 
@@ -62,7 +62,7 @@ return new class extends Action
 };
 ```
 
-For example, you need to call actions when deploying an application. Some actions should be run after the actions are deployed, and others after the application is fully
+For example, you need to call operations when deploying an application. Some operations should be run after the operations are deployed, and others after the application is fully
 launched.
 
 To run, you need to pass the `before` parameter. For example, when using [`deployer`](https://github.com/deployphp/deployer) it would look like this:
@@ -71,43 +71,43 @@ To run, you need to pass the `before` parameter. For example, when using [`deplo
 task('deploy', [
     // ...
     'artisan:migrate',
-    'artisan:actions --before', // here
+    'artisan:operation --before', // here
     'deploy:publish',
     'php-fpm:reload',
     'artisan:queue:restart',
-    'artisan:actions', // here
+    'artisan:operations', // here
 ]);
 ```
 
-Thus, when `actions` is called, all actions whose `before` parameter is `true` will be executed, and after that, the remaining tasks will be executed.
+Thus, when `operations` is called, all operations whose `before` parameter is `true` will be executed, and after that, the remaining tasks will be executed.
 
 > Note:
-> If you call the `actions` command without the `before` parameter,
+> If you call the `operations` command without the `before` parameter,
 > then all tasks will be executed regardless of the value of the `$before`
-> attribute inside the action class.
+> attribute inside the operation class.
 
-## Forcing Actions To Run In Production
+## Forcing Operations To Run In Production
 
 > Some commands cannot be executed in production without confirmation.
-> These include all commands except `actions:status` and `actions`.
+> These include all commands except `operations:status` and `operations`.
 
-Some action operations are destructive, which means they may cause you to lose data. In order to protect you from running these commands against your production database,
+Some operations are destructive, which means they may cause you to lose data. In order to protect you from running these commands against your production database,
 you will be prompted for confirmation before the commands are executed. To force the commands to run without a prompt, use the `--force` flag:
 
 ```bash
-php artisan actions:install --force
+php artisan operations:install --force
 ```
 
 ## Execution Every Time
 
 In some cases, you need to call the code every time you deploy the application. For example, to call reindexing.
 
-To do this, override the `$once` variable in the action file:
+To do this, override the `$once` variable in the operation file:
 
 ```php
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 
-return new class extends Action
+return new class extends Operation
 {
     protected bool $once = false;
 
@@ -118,7 +118,7 @@ return new class extends Action
 };
 ```
 
-If the value is `$once = false`, the `up` method will be called every time the `actions` command called.
+If the value is `$once = false`, the `up` method will be called every time the `operations` command called.
 
 In this case, information about it will not be written to the `actions` table and, therefore, the `down` method will not be called when the rollback command is called.
 
@@ -133,9 +133,9 @@ In some cases, it becomes necessary to execute an action in a specific environme
 For this you can use the `$environment` parameter:
 
 ```php
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 
-return new class extends Action
+return new class extends Operation
 {
     protected string|array|null $environment = 'production';
 
@@ -149,9 +149,9 @@ return new class extends Action
 You can also specify multiple environment names:
 
 ```php
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 
-return new class extends Action
+return new class extends Operation
 {
     protected string|array|null $environment = ['testing', 'staging'];
 
@@ -171,9 +171,9 @@ In some cases, it becomes necessary to execute an action excluding certain envir
 For this you can use the `$except_environment` parameter:
 
 ```php
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 
-return new class extends Action
+return new class extends Operation
 {
     protected string|array|null $exceptEnvironment = 'production';
 
@@ -187,9 +187,9 @@ return new class extends Action
 You can also specify multiple environment names:
 
 ```php
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 
-return new class extends Action
+return new class extends Operation
 {
     protected string|array|null $exceptEnvironment = ['testing', 'staging'];
 
@@ -211,9 +211,9 @@ By setting the `$transactions = true` parameter, you will ensure that your code 
 will reduce the time it takes to create the action.
 
 ```php
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 
-return new class extends Action
+return new class extends Operation
 {
     protected bool $transactions = true;
 
@@ -233,9 +233,9 @@ In some cases, it becomes necessary to execute actions in an asynchronous manner
 To do this, you need to override the `$async` property in the action class:
 
 ```php
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 
-return new class extends Action
+return new class extends Operation
 {
     protected bool $async = true;
 
@@ -246,7 +246,7 @@ return new class extends Action
 };
 ```
 
-In this case, the action file that defines this parameter will run asynchronously using the `DragonCode\LaravelActions\Jobs\ActionJob` class.
+In this case, the action file that defines this parameter will run asynchronously using the `DragonCode\LaravelDeployOperations\Jobs\ActionJob` class.
 
 The name of the connection and queue can be changed through the [settings](https://github.com/TheDragonCode/laravel-actions/tree/main/config).
 

@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Console;
+namespace DragonCode\LaravelDeployOperations\Console;
 
-use DragonCode\LaravelActions\Constants\Names;
-use DragonCode\LaravelActions\Constants\Options;
-use DragonCode\LaravelActions\Processors\Fresh as FreshProcessor;
-use DragonCode\LaravelActions\Processors\Processor;
+use DragonCode\LaravelDeployOperations\Constants\Names;
+use DragonCode\LaravelDeployOperations\Constants\Options;
+use DragonCode\LaravelDeployOperations\Processors\Fresh as FreshProcessor;
+use DragonCode\LaravelDeployOperations\Processors\Processor;
 
 class Fresh extends Command
 {
-    protected $name = Names::FRESH;
+    protected $name = Names::Fresh;
 
-    protected $description = 'Drop and re-run all actions';
+    protected $description = 'Drop and re-run all deploy operations';
 
     protected Processor|string $processor = FreshProcessor::class;
 
     protected array $options = [
-        Options::CONNECTION,
-        Options::FORCE,
-        Options::PATH,
-        Options::REALPATH,
-        Options::MUTE,
-        Options::ISOLATED,
+        Options::Connection,
+        Options::Force,
+        Options::Path,
+        Options::Realpath,
+        Options::Mute,
+        Options::Isolated,
     ];
 }

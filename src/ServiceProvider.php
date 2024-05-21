@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions;
+namespace DragonCode\LaravelDeployOperations;
 
-use DragonCode\LaravelActions\Concerns\About;
-use DragonCode\LaravelActions\Contracts\Notification;
-use DragonCode\LaravelActions\Notifications\Beautiful;
+use DragonCode\LaravelDeployOperations\Concerns\About;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
@@ -21,7 +19,6 @@ class ServiceProvider extends BaseServiceProvider
             $this->registerAbout();
             $this->registerCommands();
             $this->registerMigrations();
-            $this->registerNotifications();
         }
     }
 
@@ -33,7 +30,7 @@ class ServiceProvider extends BaseServiceProvider
     protected function registerCommands(): void
     {
         $this->commands([
-            Console\Actions::class,
+            Console\Operations::class,
             Console\Fresh::class,
             Console\Install::class,
             Console\Make::class,
@@ -51,20 +48,15 @@ class ServiceProvider extends BaseServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 
-    protected function registerNotifications(): void
-    {
-        $this->app->bind(Notification::class, Beautiful::class);
-    }
-
     protected function publishConfig(): void
     {
         $this->publishes([
-            __DIR__ . '/../config/actions.php' => $this->app->configPath('actions.php'),
+            __DIR__ . '/../config/deploy-operations.php' => $this->app->configPath('deploy-operations.php'),
         ], 'config');
     }
 
     protected function registerConfig(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/actions.php', 'actions');
+        $this->mergeConfigFrom(__DIR__ . '/../config/deploy-operations.php', 'deploy-operations');
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Helpers;
+namespace DragonCode\LaravelDeployOperations\Helpers;
 
 use DragonCode\Support\Facades\Helpers\Arr;
 use Illuminate\Config\Repository;
@@ -16,7 +16,8 @@ class Config
 {
     public function __construct(
         protected Repository $config
-    ) {}
+    ) {
+    }
 
     public function environment(): ?string
     {
@@ -25,17 +26,17 @@ class Config
 
     public function connection(): ?string
     {
-        return $this->config->get('actions.connection');
+        return $this->config->get('deploy-operations.connection');
     }
 
     public function table(): string
     {
-        return $this->config->get('actions.table');
+        return $this->config->get('deploy-operations.table');
     }
 
     public function exclude(): array
     {
-        return Arr::of((array) $this->config->get('actions.exclude'))
+        return Arr::of((array)$this->config->get('deploy-operations.exclude'))
             ->map(fn (string $path) => str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $path))
             ->filter()
             ->toArray();
@@ -43,7 +44,7 @@ class Config
 
     public function path(?string $path = null): string
     {
-        return rtrim($this->directory(), '\\/') . DIRECTORY_SEPARATOR . ltrim((string) $path, '\\/');
+        return rtrim($this->directory(), '\\/') . DIRECTORY_SEPARATOR . ltrim((string)$path, '\\/');
     }
 
     public function gitPath(): string
@@ -53,6 +54,6 @@ class Config
 
     protected function directory(): string
     {
-        return $this->config->get('actions.path', base_path('actions'));
+        return $this->config->get('deploy-operations.path', base_path('operations'));
     }
 }

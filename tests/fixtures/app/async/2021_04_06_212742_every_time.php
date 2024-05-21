@@ -1,11 +1,11 @@
 <?php
 
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-return new class extends Action {
+return new class extends Operation {
     protected bool $once = false;
 
     protected bool $async = true;

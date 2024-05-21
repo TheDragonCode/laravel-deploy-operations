@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 
-return new class extends Action {
+return new class extends Operation {
     /**
      * Run the actions.
      *

@@ -1,14 +1,14 @@
-# Creating Actions
+# Creating Operations
 
-To create an action use the `make:action` artisan command:
+To create an operation use the `make:operation` artisan command:
 
 ```bash
-php artisan make:action some_name
+php artisan make:operation some_name
 ```
 
-The new action's file will be placed in your `actions` directory in the base path of your app.
+The new operation's file will be placed in your `operations` directory in the base path of your app.
 
-Each action file name contains a timestamp, which allows Laravel to determine the order of the actions.
+Each operation file name contains a timestamp, which allows Laravel to determine the order of the operations.
 
 
 ## Automatically Generate A File Name
@@ -18,7 +18,7 @@ If you do not specify the "name" attribute, then the file name will be generated
 > git branch name ?: 'auto'
 
 ```bash
-php artisan make:action
+php artisan make:operation
 
 ### When the git repository is found (`base_path('.git')` directory is exists) and HEAD branch name is 'qwerty'
 # 2022_10_11_225116_qwerty.php
@@ -33,45 +33,45 @@ php artisan make:action
 
 ## Nested Files
 
-You can use nested paths to create actions:
+You can use nested paths to create operations:
 
 ```bash
-php artisan make:action Foo/Bar/QweRty
-php artisan make:action Foo/Bar/QweRty.php
+php artisan make:operation Foo/Bar/QweRty
+php artisan make:operation Foo/Bar/QweRty.php
 
-php artisan make:action Foo\Bar\QweRty
-php artisan make:action Foo\Bar\QweRty.php
+php artisan make:operation Foo\Bar\QweRty
+php artisan make:operation Foo\Bar\QweRty.php
 
-php artisan make:action foo\bar\QweRty
-php artisan make:action foo\bar\QweRty.php
+php artisan make:operation foo\bar\QweRty
+php artisan make:operation foo\bar\QweRty.php
 ```
 
-All of these commands will create a file called `actions/foo/bar/Y_m_d_His_qwe_rty.php`.
+All of these commands will create a file called `operations/foo/bar/Y_m_d_His_qwe_rty.php`.
 
 For example:
 
 ```bash
-php artisan make:action foo\bar\QweRty
-# actions/foo/bar/2022_10_11_225734_qwe_rty.php
+php artisan make:operation foo\bar\QweRty
+# operations/foo/bar/2022_10_11_225734_qwe_rty.php
 
-php artisan make:action foo\bar\QweRty.php
-# actions/foo/bar/2022_10_11_225734_qwe_rty.php
+php artisan make:operation foo\bar\QweRty.php
+# operations/foo/bar/2022_10_11_225734_qwe_rty.php
 
-php artisan make:action foo/bar/QweRty
-# actions/foo/bar/2022_10_11_225734_qwe_rty.php
+php artisan make:operation foo/bar/QweRty
+# operations/foo/bar/2022_10_11_225734_qwe_rty.php
 
-php artisan make:action foo/bar/QweRty.php
-# actions/foo/bar/2022_10_11_225734_qwe_rty.php
+php artisan make:operation foo/bar/QweRty.php
+# operations/foo/bar/2022_10_11_225734_qwe_rty.php
 ```
 
 ## Invokable Method
 
-By default, the new action class will contain the `__invoke` method, but you can easily replace it with public `up` name.
+By default, the new operation class will contain the `__invoke` method, but you can easily replace it with public `up` name.
 
 ```php
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 
-return new class () extends Action
+return new class () extends Operation
 {
     public function __invoke(): void
     {
@@ -81,19 +81,19 @@ return new class () extends Action
 ```
 
 > Note that the `__invoke` method has been added as a single call.
-> This means that when the action is running, it will be called, but not when it is rolled back.
+> This means that when the operation is running, it will be called, but not when it is rolled back.
 >
 > You should also pay attention to the fact that if there is an `__invoke` method in the class, the `down` method will not be called.
 
 ```php
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 
-return new class () extends Action
+return new class () extends Operation
 {
-    public function __invoke(): void {} // called when `php artisan actions` running
+    public function __invoke(): void {} // called when `php artisan operations` running
 
     public function down(): void {} // doesn't call when `php artisan migrate:rollback` running
-                                    // and any other commands to revert the action.  
+                                    // and any other commands to revert the operation.  
 };
 ```
 
@@ -102,10 +102,10 @@ return new class () extends Action
 You can also use the dependency injection with `__invoke`, `up` and `down` methods:
 
 ```php
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 use Tests\Concerns\Some;
 
-return new class () extends Action
+return new class () extends Operation
 {
     public function __invoke(Some $some): void
     {
@@ -115,10 +115,10 @@ return new class () extends Action
 ```
 
 ```php
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 use Tests\Concerns\Some;
 
-return new class () extends Action
+return new class () extends Operation
 {
     public function up(Some $some): void
     {

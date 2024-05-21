@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Console;
+namespace DragonCode\LaravelDeployOperations\Console;
 
-use DragonCode\LaravelActions\Concerns\ConfirmableTrait;
-use DragonCode\LaravelActions\Concerns\Isolatable;
-use DragonCode\LaravelActions\Concerns\Optionable;
-use DragonCode\LaravelActions\Processors\Processor;
-use DragonCode\LaravelActions\Values\Options as OptionsData;
+use DragonCode\LaravelDeployOperations\Concerns\ConfirmableTrait;
+use DragonCode\LaravelDeployOperations\Concerns\Isolatable;
+use DragonCode\LaravelDeployOperations\Concerns\Optionable;
+use DragonCode\LaravelDeployOperations\Processors\Processor;
+use DragonCode\LaravelDeployOperations\Values\Options as OptionsData;
 use Illuminate\Console\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

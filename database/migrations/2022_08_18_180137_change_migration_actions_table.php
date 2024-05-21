@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use DragonCode\LaravelActions\Action;
-use DragonCode\LaravelActions\Helpers\Config;
+use DragonCode\LaravelDeployOperations\Operation;
+use DragonCode\LaravelDeployOperations\Helpers\Config;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Action {
+return new class extends Operation {
     public function up(): void
     {
         if ($this->hasTable()) {

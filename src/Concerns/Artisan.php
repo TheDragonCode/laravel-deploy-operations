@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Concerns;
+namespace DragonCode\LaravelDeployOperations\Concerns;
 
 use Illuminate\Console\OutputStyle;
 use Illuminate\Support\Facades\Artisan as Command;

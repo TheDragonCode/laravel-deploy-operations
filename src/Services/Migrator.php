@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Services;
+namespace DragonCode\LaravelDeployOperations\Services;
 
-use DragonCode\LaravelActions\Action;
-use DragonCode\LaravelActions\Contracts\Notification;
-use DragonCode\LaravelActions\Helpers\Config;
-use DragonCode\LaravelActions\Jobs\ActionJob;
-use DragonCode\LaravelActions\Repositories\ActionRepository;
-use DragonCode\LaravelActions\Values\Options;
+use DragonCode\LaravelDeployOperations\Operation;
+use DragonCode\LaravelDeployOperations\Helpers\Config;
+use DragonCode\LaravelDeployOperations\Jobs\OperationJob;
+use DragonCode\LaravelDeployOperations\Notifications\Notification;
+use DragonCode\LaravelDeployOperations\Repositories\OperationsRepository;
+use DragonCode\LaravelDeployOperations\Values\Options;
 use DragonCode\Support\Exceptions\FileNotFoundException;
 use DragonCode\Support\Facades\Helpers\Str;
 use DragonCode\Support\Filesystem\File;
@@ -27,10 +27,11 @@ class Migrator
     public function __construct(
         protected File $file,
         protected Notification $notification,
-        protected ActionRepository $repository,
+        protected OperationsRepository $repository,
         protected Config $config,
         protected Container $container
-    ) {}
+    ) {
+    }
 
     public function setConnection(?string $connection): self
     {
@@ -48,28 +49,28 @@ class Migrator
 
     public function runUp(string $filename, int $batch, Options $options): void
     {
-        $path   = $this->resolvePath($filename, $options->path);
-        $action = $this->resolveAction($path);
-        $name   = $this->resolveActionName($path);
+        $path = $this->resolvePath($filename, $options->path);
+        $operation = $this->resolveOperation($path);
+        $name = $this->resolveOperationName($path);
 
-        if (! $this->allowAction($action, $options)) {
+        if (!$this->allowOperation($operation, $options)) {
             $this->notification->twoColumn($name, '<fg=yellow;options=bold>SKIPPED</>');
 
             return;
         }
 
-        if ($this->hasAsync($action, $options)) {
-            ActionJob::dispatch($name);
+        if ($this->hasAsync($operation, $options)) {
+            OperationJob::dispatch($name);
 
             return;
         }
 
-        $this->notification->task($name, function () use ($action, $name, $batch) {
-            $this->hasAction($action, '__invoke')
-                ? $this->runAction($action, '__invoke')
-                : $this->runAction($action, 'up');
+        $this->notification->task($name, function () use ($operation, $name, $batch) {
+            $this->hasOperation($operation, '__invoke')
+                ? $this->runOperation($operation, '__invoke')
+                : $this->runOperation($operation, 'up');
 
-            if ($this->allowLogging($action)) {
+            if ($this->allowLogging($operation)) {
                 $this->log($name, $batch);
             }
         });
@@ -77,45 +78,49 @@ class Migrator
 
     public function runDown(string $filename, Options $options): void
     {
-        $path   = $this->resolvePath($filename, $options->path);
-        $action = $this->resolveAction($path);
-        $name   = $this->resolveActionName($path);
+        $path = $this->resolvePath($filename, $options->path);
+        $operation = $this->resolveOperation($path);
+        $name = $this->resolveOperationName($path);
 
-        $this->notification->task($name, function () use ($action, $name) {
-            $this->runAction($action, 'down');
+        $this->notification->task($name, function () use ($operation, $name) {
+            $this->runOperation($operation, 'down');
             $this->deleteLog($name);
         });
     }
 
-    protected function runAction(Action $action, string $method): void
+    protected function runOperation(Operation $operation, string $method): void
     {
-        if ($this->hasAction($action, $method)) {
+        if ($this->hasOperation($operation, $method)) {
             try {
-                $this->runMethod($action, $method, $action->enabledTransactions(), $action->transactionAttempts());
+                $this->runMethod(
+                    $operation,
+                    $method,
+                    $operation->enabledTransactions(),
+                    $operation->transactionAttempts()
+                );
 
-                $action->success();
-            }
-            catch (Throwable $e) {
-                $action->failed();
+                $operation->success();
+            } catch (Throwable $e) {
+                $operation->failed();
 
                 throw $e;
             }
         }
     }
 
-    protected function hasAction(Action $action, string $method): bool
+    protected function hasOperation(Operation $operation, string $method): bool
     {
-        return method_exists($action, $method);
+        return method_exists($operation, $method);
     }
 
-    protected function hasAsync(Action $action, Options $options): bool
+    protected function hasAsync(Operation $operation, Options $options): bool
     {
-        return ! $options->sync && $action->isAsync();
+        return !$options->sync && $operation->isAsync();
     }
 
-    protected function runMethod(Action $action, string $method, bool $transactions, int $attempts): void
+    protected function runMethod(Operation $operation, string $method, bool $transactions, int $attempts): void
     {
-        $callback = fn () => $this->container->call([$action, $method]);
+        $callback = fn () => $this->container->call([$operation, $method]);
 
         $transactions ? DB::transaction($callback, $attempts) : $callback();
     }
@@ -130,22 +135,22 @@ class Migrator
         $this->repository->delete($name);
     }
 
-    protected function allowAction(Action $action, Options $options): bool
+    protected function allowOperation(Operation $operation, Options $options): bool
     {
-        if (! $this->allowEnvironment($action)) {
+        if (!$this->allowEnvironment($operation)) {
             return false;
         }
 
-        return ! $this->disallowBefore($action, $options);
+        return !$this->disallowBefore($operation, $options);
     }
 
-    protected function allowEnvironment(Action $action): bool
+    protected function allowEnvironment(Operation $operation): bool
     {
         $env = $this->config->environment();
 
-        return $action->allow()
-            && $this->onEnvironment($env, $action->onEnvironment())
-            && $this->exceptEnvironment($env, $action->exceptEnvironment());
+        return $operation->allow()
+            && $this->onEnvironment($env, $operation->onEnvironment())
+            && $this->exceptEnvironment($env, $operation->exceptEnvironment());
     }
 
     protected function onEnvironment(?string $env, array $on): bool
@@ -155,17 +160,17 @@ class Migrator
 
     protected function exceptEnvironment(?string $env, array $except): bool
     {
-        return empty($except) || ! in_array($env, $except);
+        return empty($except) || !in_array($env, $except);
     }
 
-    protected function disallowBefore(Action $action, Options $options): bool
+    protected function disallowBefore(Operation $operation, Options $options): bool
     {
-        return $options->before && ! $action->hasBefore();
+        return $options->before && !$operation->hasBefore();
     }
 
-    protected function allowLogging(Action $action): bool
+    protected function allowLogging(Operation $operation): bool
     {
-        return $action->isOnce();
+        return $operation->isOnce();
     }
 
     protected function resolvePath(string $filename, string $path): string
@@ -179,7 +184,7 @@ class Migrator
         return Str::finish($path . DIRECTORY_SEPARATOR . $filename, '.php');
     }
 
-    protected function resolveAction(string $path): Action
+    protected function resolveOperation(string $path): Operation
     {
         if ($this->file->exists($path)) {
             return require $path;
@@ -188,7 +193,7 @@ class Migrator
         throw new FileNotFoundException($path);
     }
 
-    protected function resolveActionName(string $path): string
+    protected function resolveOperationName(string $path): string
     {
         return Str::of(realpath($path))
             ->after(realpath($this->config->path()) . DIRECTORY_SEPARATOR)

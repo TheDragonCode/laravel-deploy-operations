@@ -1,26 +1,26 @@
 <?php
 
-namespace DragonCode\LaravelActions\Console;
+namespace DragonCode\LaravelDeployOperations\Console;
 
-use DragonCode\LaravelActions\Constants\Names;
-use DragonCode\LaravelActions\Constants\Options;
-use DragonCode\LaravelActions\Processors\Processor;
-use DragonCode\LaravelActions\Processors\Reset as ResetProcessor;
+use DragonCode\LaravelDeployOperations\Constants\Names;
+use DragonCode\LaravelDeployOperations\Constants\Options;
+use DragonCode\LaravelDeployOperations\Processors\Processor;
+use DragonCode\LaravelDeployOperations\Processors\Reset as ResetProcessor;
 
 class Reset extends Command
 {
-    protected $name = Names::RESET;
+    protected $name = Names::Reset;
 
-    protected $description = 'Rollback all actions';
+    protected $description = 'Rollback all deploy operations';
 
-    protected Processor|string $processor = ResetProcessor::class;
+    protected Processor | string $processor = ResetProcessor::class;
 
     protected array $options = [
-        Options::CONNECTION,
-        Options::FORCE,
-        Options::PATH,
-        Options::REALPATH,
-        Options::MUTE,
-        Options::ISOLATED,
+        Options::Connection,
+        Options::Force,
+        Options::Path,
+        Options::Realpath,
+        Options::Mute,
+        Options::Isolated,
     ];
 }

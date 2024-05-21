@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Processors;
+namespace DragonCode\LaravelDeployOperations\Processors;
 
-use DragonCode\LaravelActions\Constants\Names;
-use DragonCode\LaravelActions\Constants\Options;
+use DragonCode\LaravelDeployOperations\Constants\Names;
+use DragonCode\LaravelDeployOperations\Constants\Options;
 
 class Reset extends Processor
 {
@@ -20,12 +20,12 @@ class Reset extends Processor
 
     protected function rollback(?string $connection, ?string $path, int $step): void
     {
-        $this->runCommand(Names::ROLLBACK, [
-            '--' . Options::CONNECTION => $connection,
-            '--' . Options::PATH       => $path,
-            '--' . Options::REALPATH   => true,
-            '--' . Options::STEP       => $step,
-            '--' . Options::FORCE      => true,
+        $this->runCommand(Names::Rollback, [
+            '--' . Options::Connection => $connection,
+            '--' . Options::Path       => $path,
+            '--' . Options::Realpath   => true,
+            '--' . Options::Step       => $step,
+            '--' . Options::Force      => true,
         ]);
     }
 

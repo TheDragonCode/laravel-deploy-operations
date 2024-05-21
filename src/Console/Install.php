@@ -1,16 +1,16 @@
 <?php
 
-namespace DragonCode\LaravelActions\Console;
+namespace DragonCode\LaravelDeployOperations\Console;
 
-use DragonCode\LaravelActions\Constants\Names;
-use DragonCode\LaravelActions\Processors\Install as InstallProcessor;
-use DragonCode\LaravelActions\Processors\Processor;
+use DragonCode\LaravelDeployOperations\Constants\Names;
+use DragonCode\LaravelDeployOperations\Processors\Install as InstallProcessor;
+use DragonCode\LaravelDeployOperations\Processors\Processor;
 
 class Install extends Command
 {
-    protected $name = Names::INSTALL;
+    protected $name = Names::Install;
 
-    protected $description = 'Create the actions repository';
+    protected $description = 'Create the deploy operations repository';
 
-    protected Processor|string $processor = InstallProcessor::class;
+    protected Processor | string $processor = InstallProcessor::class;
 }

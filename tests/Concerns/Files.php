@@ -19,7 +19,7 @@ trait Files
     protected function copyFiles(): void
     {
         File::copyDirectory(
-            __DIR__ . '/../fixtures/app/actions',
+            __DIR__ . '/../fixtures/app/operations',
             $this->targetDirectory()
         );
     }
@@ -51,7 +51,7 @@ trait Files
     protected function copySuccessFailureMethod(): void
     {
         File::copy(
-            __DIR__ . '/../fixtures/app/actions_failed/2021_12_23_165048_run_success_on_failed.php',
+            __DIR__ . '/../fixtures/app/operations_failed/2021_12_23_165048_run_success_on_failed.php',
             $this->targetDirectory('2021_12_23_165048_run_success_on_failed.php')
         );
     }
@@ -59,7 +59,7 @@ trait Files
     protected function copyFailedMethod(): void
     {
         File::copy(
-            __DIR__ . '/../fixtures/app/actions_failed/2021_12_23_184029_run_failed_failure.php',
+            __DIR__ . '/../fixtures/app/operations_failed/2021_12_23_184029_run_failed_failure.php',
             $this->targetDirectory('2021_12_23_184029_run_failed_failure.php')
         );
     }
@@ -82,7 +82,7 @@ trait Files
 
     protected function targetDirectory(?string $path = null): string
     {
-        $dir = $this->getActionsPath();
+        $dir = $this->getOperationsPath();
 
         File::ensureDirectoryExists($dir);
 
@@ -94,8 +94,8 @@ trait Files
         return base_path('stubs');
     }
 
-    protected function getActionsPath(): string
+    protected function getOperationsPath(): string
     {
-        return $this->app['config']->get('actions.path');
+        return $this->app['config']->get('deploy-operations.path');
     }
 }

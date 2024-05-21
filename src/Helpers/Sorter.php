@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Helpers;
+namespace DragonCode\LaravelDeployOperations\Helpers;
 
 use Closure;
 use DragonCode\Support\Facades\Filesystem\Path;
@@ -22,9 +22,9 @@ class Sorter
         return Arr::ksort($items, $this->callback());
     }
 
-    public function byRan(array $actions, array $completed): array
+    public function byRan(array $values, array $completed): array
     {
-        foreach ($actions as $value) {
+        foreach ($values as $value) {
             if (! in_array($value, $completed, true)) {
                 $completed[] = $value;
             }

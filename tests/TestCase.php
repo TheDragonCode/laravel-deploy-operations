@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use DragonCode\LaravelActions\Repositories\ActionRepository;
-use DragonCode\LaravelActions\ServiceProvider;
+use DragonCode\LaravelDeployOperations\Repositories\OperationsRepository;
+use DragonCode\LaravelDeployOperations\ServiceProvider;
 use Illuminate\Container\Container;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -45,8 +45,8 @@ abstract class TestCase extends BaseTestCase
         return DB::table($this->table);
     }
 
-    protected function repository(): ActionRepository
+    protected function repository(): OperationsRepository
     {
-        return Container::getInstance()->make(ActionRepository::class);
+        return Container::getInstance()->make(OperationsRepository::class);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Tests\Commands;
 
-use DragonCode\LaravelActions\Constants\Names;
+use DragonCode\LaravelDeployOperations\Constants\Names;
 use DragonCode\Support\Facades\Filesystem\File;
 use Tests\TestCase;
 
@@ -12,11 +12,11 @@ class MakeTest extends TestCase
     {
         $name = 'MakeExample';
 
-        $path = $this->getActionsPath() . '/' . date('Y_m_d_His') . '_make_example.php';
+        $path = $this->getOperationsPath() . '/' . date('Y_m_d_His') . '_make_example.php';
 
         $this->assertFileDoesNotExist($path);
 
-        $this->artisan(Names::MAKE, compact('name'))->assertExitCode(0);
+        $this->artisan(Names::Make, compact('name'))->assertExitCode(0);
 
         $this->assertFileExists($path);
 
@@ -28,11 +28,11 @@ class MakeTest extends TestCase
 
     public function testAutoName()
     {
-        $path = $this->getActionsPath() . '/' . date('Y_m_d_His') . '_auto.php';
+        $path = $this->getOperationsPath() . '/' . date('Y_m_d_His') . '_auto.php';
 
         $this->assertFileDoesNotExist($path);
 
-        $this->artisan(Names::MAKE)->assertExitCode(0);
+        $this->artisan(Names::Make)->assertExitCode(0);
 
         $this->assertFileExists($path);
     }
@@ -41,11 +41,11 @@ class MakeTest extends TestCase
     {
         $name = 'Foo/bar/QweRty';
 
-        $path = $this->getActionsPath() . '/foo/bar/' . date('Y_m_d_His') . '_qwe_rty.php';
+        $path = $this->getOperationsPath() . '/foo/bar/' . date('Y_m_d_His') . '_qwe_rty.php';
 
         $this->assertFileDoesNotExist($path);
 
-        $this->artisan(Names::MAKE, compact('name'))->assertExitCode(0);
+        $this->artisan(Names::Make, compact('name'))->assertExitCode(0);
 
         $this->assertFileExists($path);
 
@@ -59,11 +59,11 @@ class MakeTest extends TestCase
     {
         $name = 'Foo/bar/QweRty.php';
 
-        $path = $this->getActionsPath() . '/foo/bar/' . date('Y_m_d_His') . '_qwe_rty.php';
+        $path = $this->getOperationsPath() . '/foo/bar/' . date('Y_m_d_His') . '_qwe_rty.php';
 
         $this->assertFileDoesNotExist($path);
 
-        $this->artisan(Names::MAKE, compact('name'))->assertExitCode(0);
+        $this->artisan(Names::Make, compact('name'))->assertExitCode(0);
 
         $this->assertFileExists($path);
 
@@ -77,11 +77,11 @@ class MakeTest extends TestCase
     {
         $name = 'Foo\\bar\\QweRty';
 
-        $path = $this->getActionsPath() . '/foo/bar/' . date('Y_m_d_His') . '_qwe_rty.php';
+        $path = $this->getOperationsPath() . '/foo/bar/' . date('Y_m_d_His') . '_qwe_rty.php';
 
         $this->assertFileDoesNotExist($path);
 
-        $this->artisan(Names::MAKE, compact('name'))->assertExitCode(0);
+        $this->artisan(Names::Make, compact('name'))->assertExitCode(0);
 
         $this->assertFileExists($path);
 
@@ -95,11 +95,11 @@ class MakeTest extends TestCase
     {
         $name = 'Foo\\bar\\QweRty.php';
 
-        $path = $this->getActionsPath() . '/foo/bar/' . date('Y_m_d_His') . '_qwe_rty.php';
+        $path = $this->getOperationsPath() . '/foo/bar/' . date('Y_m_d_His') . '_qwe_rty.php';
 
         $this->assertFileDoesNotExist($path);
 
-        $this->artisan(Names::MAKE, compact('name'))->assertExitCode(0);
+        $this->artisan(Names::Make, compact('name'))->assertExitCode(0);
 
         $this->assertFileExists($path);
 
@@ -113,29 +113,29 @@ class MakeTest extends TestCase
     {
         $name = 'MakeExample';
 
-        $stubPath = base_path('stubs/action.stub');
+        $stubPath = base_path('stubs/deploy-operation.stub');
 
-        $actionPath = $this->getActionsPath() . '/' . date('Y_m_d_His') . '_make_example.php';
+        $operationPath = $this->getOperationsPath() . '/' . date('Y_m_d_His') . '_make_example.php';
 
         $this->assertFileDoesNotExist($stubPath);
 
         File::copy(__DIR__ . '/../fixtures/app/stubs/customized.stub', $stubPath);
 
         $this->assertFileExists($stubPath);
-        $this->assertFileDoesNotExist($actionPath);
+        $this->assertFileDoesNotExist($operationPath);
 
-        $this->artisan(Names::MAKE, compact('name'))->assertExitCode(0);
+        $this->artisan(Names::Make, compact('name'))->assertExitCode(0);
 
-        $this->assertFileExists($actionPath);
+        $this->assertFileExists($operationPath);
 
-        $content = file_get_contents($actionPath);
+        $content = file_get_contents($operationPath);
 
         $this->assertStringContainsString('Foo\\Bar\\Some', $content);
         $this->assertStringContainsString('extends Some', $content);
 
-        $this->assertStringNotContainsString('DragonCode\\LaravelActions\\Action', $content);
-        $this->assertStringNotContainsString('extends Action', $content);
-        $this->assertStringNotContainsString('Run the actions.', $content);
+        $this->assertStringNotContainsString('DragonCode\\LaravelDeployOperations\\Operation', $content);
+        $this->assertStringNotContainsString('extends Operation', $content);
+        $this->assertStringNotContainsString('Run the operations.', $content);
         $this->assertStringNotContainsString('@return void', $content);
     }
 }

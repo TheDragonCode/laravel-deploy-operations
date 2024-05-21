@@ -1,11 +1,11 @@
 # Artisan Command
 
-Quite often, when working with actions, it becomes necessary to run one or another console command, and each time you have to write the following code:
+Quite often, when working with operations, it becomes necessary to run one or another console command, and each time you have to write the following code:
 
 ```php
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 
-return new class () extends Action
+return new class () extends Operation
 {
     public function __invoke(): void
     {

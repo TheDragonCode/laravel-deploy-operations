@@ -5,10 +5,10 @@ You can also override the `success` and `failed` methods, which are called on su
 ## If Success
 
 ```php
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 use Illuminate\Support\Facade\Log;
 
-return new class () extends Action
+return new class () extends Operation
 {
     public function up(): void
     {
@@ -32,18 +32,18 @@ return new class () extends Action
 };
 ```
 
-Call the `php artisan actions` command.
+Call the `php artisan operations` command.
 
 The log file will contain two `success` entries.
 
 ## If Failed
 
 ```php
-use DragonCode\LaravelActions\Action;
+use DragonCode\LaravelDeployOperations\Operation;
 use Exeption;
 use Illuminate\Support\Facade\Log;
 
-return new class extends Action
+return new class extends Operation
 {
     public function up(): void
     {
@@ -67,6 +67,6 @@ return new class extends Action
 };
 ```
 
-Call the `php artisan actions` command.
+Call the `php artisan operations` command.
 
 The log file will contain two `failed` entries.

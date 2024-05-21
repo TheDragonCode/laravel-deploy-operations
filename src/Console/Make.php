@@ -1,29 +1,29 @@
 <?php
 
-namespace DragonCode\LaravelActions\Console;
+namespace DragonCode\LaravelDeployOperations\Console;
 
-use DragonCode\LaravelActions\Constants\Names;
-use DragonCode\LaravelActions\Constants\Options;
-use DragonCode\LaravelActions\Processors\Make as MakeProcessor;
-use DragonCode\LaravelActions\Processors\Processor;
+use DragonCode\LaravelDeployOperations\Constants\Names;
+use DragonCode\LaravelDeployOperations\Constants\Options;
+use DragonCode\LaravelDeployOperations\Processors\Make as MakeProcessor;
+use DragonCode\LaravelDeployOperations\Processors\Processor;
 
 class Make extends Command
 {
-    protected $signature = Names::MAKE;
+    protected $signature = Names::Make;
 
-    protected $description = 'Create a new action file';
+    protected $description = 'Create a new deploy operation file';
 
-    protected Processor|string $processor = MakeProcessor::class;
+    protected Processor | string $processor = MakeProcessor::class;
 
     protected array $arguments = [
-        Options::NAME,
+        Options::Name,
     ];
 
     protected array $options = [
-        Options::CONNECTION,
-        Options::FORCE,
-        Options::PATH,
-        Options::REALPATH,
-        Options::MUTE,
+        Options::Connection,
+        Options::Force,
+        Options::Path,
+        Options::Realpath,
+        Options::Mute,
     ];
 }

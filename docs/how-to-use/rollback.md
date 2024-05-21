@@ -1,44 +1,44 @@
-# Rolling Back Actions
+# Rolling Back Operations
 
-To roll back the latest action operation, you may use the `rollback` command. This command rolls back the last "batch" of actions, which may include multiple action files:
-
-```
-php artisan actions:rollback
-```
-
-You may roll back a limited number of actions by providing the `step` option to the rollback command. For example, the following command will roll back the last five actions:
+To roll back the latest operation, you may use the `rollback` command. This command rolls back the last "batch" of actions, which may include multiple action files:
 
 ```
-php artisan actions:rollback --step=5
+php artisan operations:rollback
 ```
 
-The `actions:reset` command will roll back all of your application's actions:
+You may roll back a limited number of operations by providing the `step` option to the rollback command. For example, the following command will roll back the last five actions:
 
 ```
-php artisan actions:reset
+php artisan operations:rollback --step=5
+```
+
+The `operations:reset` command will roll back all of your application's operations:
+
+```
+php artisan operations:reset
 ```
 
 For example:
 
 ```bash
-php artisan actions:rollback
-# action                    batch
+php artisan operations:rollback
+# operation                 batch
 # 2022_10_12_021837_some    1
 # 2022_10_12_021838_some    2
 # 2022_10_12_021839_some    2
 # 2022_10_12_021840_some    3  // will be canceled
 # 2022_10_12_021841_some    3  // will be canceled
 
-php artisan actions:rollback --step=1
-# action                    batch
+php artisan operations:rollback --step=1
+# operation                 batch
 # 2022_10_12_021837_some    1
 # 2022_10_12_021838_some    2
 # 2022_10_12_021839_some    2
 # 2022_10_12_021840_some    3  // will be canceled
 # 2022_10_12_021841_some    3  // will be canceled
 
-php artisan actions:rollback --step=2
-# action                    batch
+php artisan operations:rollback --step=2
+# operation                 batch
 # 2022_10_12_021837_some    1
 # 2022_10_12_021838_some    2  // will be canceled
 # 2022_10_12_021839_some    2  // will be canceled
@@ -46,25 +46,25 @@ php artisan actions:rollback --step=2
 # 2022_10_12_021841_some    3  // will be canceled
 ```
 
-## Roll Back & Action Using A Single Command
+## Roll Back & Operation Using A Single Command
 
-The `actions:refresh` command will roll back all of your actions and then execute the `actions` command. This command effectively re-creates your entire
+The `operations:refresh` command will roll back all of your actions and then execute the `actions` command. This command effectively re-creates your entire
 database:
 
 ```
-php artisan actions:refresh
+php artisan operations:refresh
 ```
 
-You may roll back & re-run a limited number of actions by providing the `step` option to the `refresh` command. For example, the following command will roll back &
-re-run the last five actions:
+You may roll back & re-run a limited number of operations by providing the `step` option to the `refresh` command. For example, the following command will roll back &
+re-run the last five operations:
 
 ```
-php artisan actions:refresh --step=5
+php artisan operations:refresh --step=5
 ```
 
-## Drop All Actions & Rerun Actions
+## Drop All & Rerun Operations
 
-The `actions:fresh` command will drop all actions records from the actions table and then execute the actions command:
+The `operations:fresh` command will drop all operations records from the operations table and then execute the operations command:
 
 ```
 php artisan actions:fresh

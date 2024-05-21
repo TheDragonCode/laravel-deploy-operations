@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Concerns;
+namespace DragonCode\LaravelDeployOperations\Concerns;
 
 use Composer\InstalledVersions;
 use DragonCode\Support\Facades\Helpers\Arr;

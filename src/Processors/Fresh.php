@@ -2,32 +2,32 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Processors;
+namespace DragonCode\LaravelDeployOperations\Processors;
 
-use DragonCode\LaravelActions\Constants\Names;
-use DragonCode\LaravelActions\Constants\Options;
+use DragonCode\LaravelDeployOperations\Constants\Names;
+use DragonCode\LaravelDeployOperations\Constants\Options;
 
 class Fresh extends Processor
 {
     public function handle(): void
     {
         $this->drop();
-        $this->actions();
+        $this->operations();
     }
 
     protected function drop(): void
     {
         if ($this->repository->repositoryExists()) {
-            $this->notification->task('Dropping all actions', fn () => $this->repository->deleteRepository());
+            $this->notification->task('Dropping all operations', fn () => $this->repository->deleteRepository());
         }
     }
 
-    protected function actions(): void
+    protected function operations(): void
     {
-        $this->runCommand(Names::ACTIONS, [
-            '--' . Options::CONNECTION => $this->options->connection,
-            '--' . Options::PATH       => $this->options->path,
-            '--' . Options::REALPATH   => true,
+        $this->runCommand(Names::Operations, [
+            '--' . Options::Connection => $this->options->connection,
+            '--' . Options::Path => $this->options->path,
+            '--' . Options::Realpath => true,
         ]);
     }
 }

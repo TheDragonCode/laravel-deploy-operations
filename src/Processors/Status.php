@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Processors;
+namespace DragonCode\LaravelDeployOperations\Processors;
 
 use DragonCode\Support\Facades\Helpers\Arr;
 
@@ -10,7 +10,7 @@ use function sprintf;
 
 class Status extends Processor
 {
-    protected string $columnName = '<fg=gray>Action name</>';
+    protected string $columnName = '<fg=gray>Operation name</>';
 
     protected string $columnStatus = '<fg=gray>Batch / Status</>';
 
@@ -27,7 +27,7 @@ class Status extends Processor
         [$files, $completed] = $this->getData();
 
         if ($this->isEmpty($files, $completed)) {
-            $this->notification->info('No actions found');
+            $this->notification->info('No operations found');
 
             return;
         }
@@ -47,31 +47,31 @@ class Status extends Processor
         $this->notification->twoColumn($this->columnName, $this->columnStatus);
     }
 
-    protected function showStatus(array $actions, array $completed): void
+    protected function showStatus(array $items, array $completed): void
     {
-        foreach ($this->merge($actions, array_keys($completed)) as $action) {
-            $status = $this->getStatusFor($completed, $action);
+        foreach ($this->merge($items, array_keys($completed)) as $item) {
+            $status = $this->getStatusFor($completed, $item);
 
-            $this->notification->twoColumn($action, $status);
+            $this->notification->twoColumn($item, $status);
         }
     }
 
-    protected function merge(array $actions, array $completed): array
+    protected function merge(array $items, array $completed): array
     {
-        return $this->sorter->byRan($actions, $completed);
+        return $this->sorter->byRan($items, $completed);
     }
 
     protected function getData(): array
     {
-        $files     = $this->getFiles($this->options->path);
+        $files = $this->getFiles($this->options->path);
         $completed = $this->getCompleted();
 
         return [$files, $completed];
     }
 
-    protected function getStatusFor(array $completed, string $action): string
+    protected function getStatusFor(array $completed, string $item): string
     {
-        if ($batch = Arr::get($completed, $action)) {
+        if ($batch = Arr::get($completed, $item)) {
             return sprintf('[%s] %s', $batch, $this->statusRan);
         }
 
@@ -81,12 +81,12 @@ class Status extends Processor
     protected function getCompleted(): array
     {
         return $this->repository->getCompleted()
-            ->pluck('batch', 'action')
-            ->toArray();
+            ->pluck('batch', 'operation')
+            ->all();
     }
 
-    protected function isEmpty(array $actions, array $completed): bool
+    protected function isEmpty(array $items, array $completed): bool
     {
-        return empty($actions) && empty($completed);
+        return empty($items) && empty($completed);
     }
 }

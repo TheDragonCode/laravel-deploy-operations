@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Processors;
+namespace DragonCode\LaravelDeployOperations\Processors;
 
 use DragonCode\Support\Facades\Filesystem\File;
 
@@ -10,7 +10,7 @@ use function base_path;
 
 class StubPublish extends Processor
 {
-    protected string $stub = __DIR__ . '/../../resources/stubs/action.stub';
+    protected string $stub = __DIR__ . '/../../resources/stubs/deploy-operation.stub';
 
     public function handle(): void
     {
@@ -31,11 +31,11 @@ class StubPublish extends Processor
 
     protected function doesntExist(): bool
     {
-        return ! File::exists($this->path());
+        return !File::exists($this->path());
     }
 
     protected function path(): string
     {
-        return base_path('stubs/action.stub');
+        return base_path('stubs/deploy-operation.stub');
     }
 }
