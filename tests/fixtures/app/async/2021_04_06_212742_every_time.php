@@ -8,8 +8,6 @@ use Ramsey\Uuid\Uuid;
 return new class extends Operation {
     protected bool $once = false;
 
-    protected bool $async = true;
-
     public function __invoke(): void
     {
         $this->table()->insert([
@@ -20,5 +18,10 @@ return new class extends Operation {
     protected function table(): Builder
     {
         return DB::table('every_time');
+    }
+
+    public function isAsync(): bool
+    {
+        return true;
     }
 };
