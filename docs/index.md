@@ -8,8 +8,8 @@
 [![Github Workflow Status][badge_build]][link_build]
 [![License][badge_license]][link_license]
 
-> Operations are like version control for your operations process,
-> allowing your team to modify and share the application's operationable schema.
+> Operations are like version control for your operation process,
+> allowing your team to modify and share the application's operational schema.
 > If you have ever had to tell a teammate to manually perform any operation on a production server,
 > you've come across an issue that operation solves.
 

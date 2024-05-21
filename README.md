@@ -1,6 +1,6 @@
-# Deploy Actions for Laravel
+# Deploy Operations for Laravel
 
-![the dragon code actions](https://preview.dragon-code.pro/the-dragon-code/deploy-actions.svg?brand=laravel)
+![the dragon code operations](https://preview.dragon-code.pro/the-dragon-code/deploy-operations.svg?brand=laravel&mode=dark)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
@@ -8,12 +8,14 @@
 [![Github Workflow Status][badge_build]][link_build]
 [![License][badge_license]][link_license]
 
-> Actions are like version control for your actions process, allowing your team to modify and share the application's actionable schema. If you have ever had to tell a teammate
-> to manually perform any action on a production server, you've come across an issue that actions solves.
+> Operations are like version control for your operation process,
+> allowing your team to modify and share the application's operational schema.
+> If you have ever had to tell a teammate to manually perform any operation on a production server,
+> you've come across an issue that operation solves.
 
 ## Documentation
 
-See the [documentation](https://actions.dragon-code.pro) for detailed installation and usage instructions.
+See the [documentation](https://deploy-operations.dragon-code.pro) for detailed installation and usage instructions.
 
 ## License
 
