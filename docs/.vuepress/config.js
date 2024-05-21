@@ -46,8 +46,8 @@ export default defineUserConfig({
     bundler: viteBundler(),
 
     lang: 'en-US',
-    title: 'Dragon Code: Deploy Operations for Laravel',
-    description: 'Performing deploy operations with saving the list of called files',
+    title: 'Deploy Operations for Laravel',
+    description: 'Run operations after deployment - just like you do it with migrations!',
 
     head: [
         ['link', {rel: 'icon', href: `https://${hostname}/images/logo.svg`}],
