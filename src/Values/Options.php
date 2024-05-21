@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Values;
+namespace DragonCode\LaravelDeployOperations\Values;
 
-use DragonCode\LaravelActions\Helpers\Config;
+use DragonCode\LaravelDeployOperations\Helpers\Config;
 use DragonCode\SimpleDataTransferObject\DataTransferObject;
 use DragonCode\Support\Facades\Helpers\Boolean;
 use DragonCode\Support\Facades\Helpers\Str;

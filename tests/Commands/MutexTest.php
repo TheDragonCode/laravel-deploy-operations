@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Commands;
 
-use DragonCode\LaravelActions\Console\Command;
-use DragonCode\LaravelActions\Constants\Options;
-use DragonCode\LaravelActions\Services\Mutex;
+use DragonCode\LaravelDeployOperations\Console\Command;
+use DragonCode\LaravelDeployOperations\Constants\Options;
+use DragonCode\LaravelDeployOperations\Services\Mutex;
 use Illuminate\Container\Container;
 use Mockery as m;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -93,7 +93,7 @@ class MutexTest extends TestCase
 
     protected function runCommand($withIsolated = true)
     {
-        $input  = new ArrayInput(['--' . Options::ISOLATED => $withIsolated]);
+        $input  = new ArrayInput(['--' . Options::Isolated => $withIsolated]);
         $output = new NullOutput();
 
         $this->command->run($input, $output);

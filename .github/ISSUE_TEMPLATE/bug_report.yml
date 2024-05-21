@@ -14,13 +14,13 @@ body:
         attributes:
             label: Environment
             description: |
-                Tip: Use the `composer info dragon-code/laravel-actions` command to get information for Laravel Lang.
+                Tip: Use the `composer info dragon-code/laravel-deploy-operations` command to get information for Laravel Lang.
                 Tip: Use the `php artisan --version` command to get information for Laravel Framework.
                 Tip: Use the `php -v` command to get information for PHP.
             value: |
                 - PHP Version:
                 - Database Driver & Version:
-                - Actions Version:
+                - Deploy Operations Version:
                 - Laravel Version:
         validations:
             required: true

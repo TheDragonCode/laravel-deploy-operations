@@ -2,8 +2,8 @@
 
 namespace Tests\Commands;
 
-use DragonCode\LaravelActions\Constants\Names;
-use DragonCode\LaravelActions\Constants\Options;
+use DragonCode\LaravelDeployOperations\Constants\Names;
+use DragonCode\LaravelDeployOperations\Constants\Options;
 use Tests\TestCase;
 
 class InstallTest extends TestCase
@@ -12,7 +12,7 @@ class InstallTest extends TestCase
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan(Names::INSTALL)->assertExitCode(0);
+        $this->artisan(Names::Install)->assertExitCode(0);
 
         $this->assertDatabaseHasTable($this->table);
     }
@@ -21,8 +21,8 @@ class InstallTest extends TestCase
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan(Names::INSTALL)->assertExitCode(0);
-        $this->artisan(Names::INSTALL)->assertExitCode(0);
+        $this->artisan(Names::Install)->assertExitCode(0);
+        $this->artisan(Names::Install)->assertExitCode(0);
 
         $this->assertDatabaseHasTable($this->table);
     }
@@ -31,7 +31,7 @@ class InstallTest extends TestCase
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan(Names::INSTALL, ['--' . Options::MUTE => true])->assertExitCode(0);
+        $this->artisan(Names::Install, ['--' . Options::Mute => true])->assertExitCode(0);
 
         $this->assertDatabaseHasTable($this->table);
     }
@@ -40,8 +40,8 @@ class InstallTest extends TestCase
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan(Names::INSTALL, ['--' . Options::MUTE => true])->assertExitCode(0);
-        $this->artisan(Names::INSTALL, ['--' . Options::MUTE => true])->assertExitCode(0);
+        $this->artisan(Names::Install, ['--' . Options::Mute => true])->assertExitCode(0);
+        $this->artisan(Names::Install, ['--' . Options::Mute => true])->assertExitCode(0);
 
         $this->assertDatabaseHasTable($this->table);
     }

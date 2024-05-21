@@ -22,9 +22,9 @@ This package is licensed under the [MIT License](LICENSE).
 
 [badge_build]:          https://img.shields.io/github/actions/workflow/status/TheDragonCode/laravel-actions/phpunit.yml?style=flat-square
 
-[badge_downloads]:      https://img.shields.io/packagist/dt/dragon-code/laravel-actions.svg?style=flat-square
+[badge_downloads]:      https://img.shields.io/packagist/dt/dragon-code/laravel-deploy-operations.svg?style=flat-square
 
-[badge_license]:        https://img.shields.io/packagist/l/dragon-code/laravel-actions.svg?style=flat-square
+[badge_license]:        https://img.shields.io/packagist/l/dragon-code/laravel-deploy-operations.svg?style=flat-square
 
 [badge_stable]:         https://img.shields.io/github/v/release/TheDragonCode/laravel-actions?label=stable&style=flat-square
 
@@ -34,4 +34,4 @@ This package is licensed under the [MIT License](LICENSE).
 
 [link_license]:         LICENSE
 
-[link_packagist]:       https://packagist.org/packages/dragon-code/laravel-actions
+[link_packagist]:       https://packagist.org/packages/dragon-code/laravel-deploy-operations

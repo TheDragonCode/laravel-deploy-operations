@@ -2,17 +2,17 @@
     "$schema": "https://laravel-ide.com/schema/laravel-ide-v2.json",
     "codeGenerations": [
         {
-            "id": "dragon-code.create-action",
-            "name": "Create Action",
-            "inputFilter": "actions",
+            "id": "dragon-code.create-deploy-operation",
+            "name": "Create Deploy Operation",
+            "inputFilter": "deploy-operations",
             "files": [
                 {
-                    "directory": "/actions",
+                    "directory": "/operations",
                     "name": "${CURRENT_TIME|format:yyyy_MM_dd_HHmmss}_${INPUT_CLASS|className|snakeCase}.php",
                     "template": {
                         "type": "stub",
-                        "path": "/stubs/action.stub",
-                        "fallbackPath": "resources/stubs/action.stub"
+                        "path": "/stubs/deploy-operation.stub",
+                        "fallbackPath": "resources/stubs/deploy-operation.stub"
                     }
                 }
             ]

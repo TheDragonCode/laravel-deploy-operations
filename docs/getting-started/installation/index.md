@@ -1,9 +1,9 @@
 # Installation
 
-To get the latest version of `Deploy Actions for Laravel`, simply require the project using [Composer](https://getcomposer.org):
+To get the latest version of `Deploy Operations for Laravel`, require the project using [Composer](https://getcomposer.org):
 
 ```bash
-composer require dragon-code/laravel-actions
+composer require dragon-code/laravel-deploy-operations
 ```
 
 Or manually update `require` block of `composer.json` and run `composer update` console command.
@@ -11,7 +11,7 @@ Or manually update `require` block of `composer.json` and run `composer update` 
 ```json
 {
     "require": {
-        "dragon-code/laravel-actions": "^5.0"
+        "dragon-code/laravel-deploy-operations": "^6.0"
     }
 }
 ```
@@ -19,5 +19,5 @@ Or manually update `require` block of `composer.json` and run `composer update` 
 If necessary, you can publish the configuration file by calling the console command:
 
 ```bash
-php artisan vendor:publish --provider="DragonCode\LaravelActions\ServiceProvider"
+php artisan vendor:publish --provider="DragonCode\LaravelDeployOperations\ServiceProvider"
 ```

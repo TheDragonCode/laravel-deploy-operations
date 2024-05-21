@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Notifications;
+namespace DragonCode\LaravelDeployOperations\Notifications;
 
 use Closure;
-use DragonCode\LaravelActions\Contracts\Notification as NotificationContract;
 use Illuminate\Console\OutputStyle;
+use Illuminate\Console\View\Components\Factory;
 use Symfony\Component\Console\Output\OutputInterface;
 
-abstract class Notification implements NotificationContract
+class Notification
 {
     protected ?OutputStyle $output = null;
 
@@ -17,17 +17,53 @@ abstract class Notification implements NotificationContract
 
     protected int $verbosity = OutputInterface::VERBOSITY_NORMAL;
 
-    abstract public function line(string $string, ?string $style = null): void;
+    protected ?Factory $components = null;
 
-    abstract public function info(string $string): void;
+    public function line(string $string, ?string $style = null): void
+    {
+        if ($this->canSpeak()) {
+            $this->components()->line($style, $string, $this->verbosity);
+        }
+    }
 
-    abstract public function warning(string $string): void;
+    public function info(string $string): void
+    {
+        if ($this->canSpeak()) {
+            $this->components()->info($string, $this->verbosity);
+        }
+    }
 
-    abstract public function task(string $description, Closure $task): void;
+    public function warning(string $string): void
+    {
+        if ($this->canSpeak()) {
+            $this->components()->warn($string, $this->verbosity);
+        }
+    }
 
-    abstract public function twoColumn(string $first, string $second): void;
+    public function task(string $description, Closure $task): void
+    {
+        if ($this->canSpeak()) {
+            $this->components()->task($description, $task);
 
-    public function setOutput(OutputStyle $output, bool $silent = false): NotificationContract
+            return;
+        }
+
+        $task();
+    }
+
+    public function twoColumn(string $first, string $second): void
+    {
+        if ($this->canSpeak()) {
+            $this->components()->twoColumnDetail($first, $second, $this->verbosity);
+        }
+    }
+
+    protected function components(): Factory
+    {
+        return $this->components ??= new Factory($this->output);
+    }
+
+    public function setOutput(OutputStyle $output, bool $silent = false): Notification
     {
         $this->output = $output;
         $this->silent = $silent;

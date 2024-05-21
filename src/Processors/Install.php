@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Processors;
+namespace DragonCode\LaravelDeployOperations\Processors;
 
 use DragonCode\Support\Facades\Filesystem\Directory;
 use DragonCode\Support\Facades\Filesystem\Path;
@@ -13,12 +13,12 @@ class Install extends Processor
     public function handle(): void
     {
         if ($this->exists()) {
-            $this->notification->info('Actions repository already exists');
+            $this->notification->info('Operations repository already exists');
 
             return;
         }
 
-        $this->notification->task('Installing the action repository', function () {
+        $this->notification->task('Installing the operation repository', function () {
             $this->create();
             $this->ensureDirectory();
         });

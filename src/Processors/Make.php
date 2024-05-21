@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Processors;
+namespace DragonCode\LaravelDeployOperations\Processors;
 
 use DragonCode\Support\Facades\Filesystem\File;
 use DragonCode\Support\Facades\Filesystem\Path;
@@ -16,11 +16,11 @@ class Make extends Processor
 {
     protected string $fallback = 'auto';
 
-    protected string $defaultStub = __DIR__ . '/../../resources/stubs/action.stub';
+    protected string $defaultStub = __DIR__ . '/../../resources/stubs/deploy-operation.stub';
 
     public function handle(): void
     {
-        $this->notification->task('Creating an action', fn () => $this->run());
+        $this->notification->task('Creating an operation', fn () => $this->run());
     }
 
     protected function run(): void
@@ -68,7 +68,7 @@ class Make extends Processor
 
     protected function stubPath(): string
     {
-        if ($path = realpath(base_path('stubs/action.stub'))) {
+        if ($path = realpath(base_path('stubs/deploy-operation.stub'))) {
             return $path;
         }
 

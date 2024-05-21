@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Console;
+namespace DragonCode\LaravelDeployOperations\Console;
 
-use DragonCode\LaravelActions\Constants\Names;
-use DragonCode\LaravelActions\Constants\Options;
-use DragonCode\LaravelActions\Processors\Processor;
-use DragonCode\LaravelActions\Processors\StubPublish as StubProcessor;
+use DragonCode\LaravelDeployOperations\Constants\Names;
+use DragonCode\LaravelDeployOperations\Constants\Options;
+use DragonCode\LaravelDeployOperations\Processors\Processor;
+use DragonCode\LaravelDeployOperations\Processors\StubPublish as StubProcessor;
 
 class StubPublish extends Command
 {
-    protected $name = Names::STUB_PUBLISH;
+    protected $name = Names::StubPublish;
 
     protected $description = 'Publish stub that are available for customization';
 
@@ -20,6 +20,6 @@ class StubPublish extends Command
     protected bool $secure = false;
 
     protected array $options = [
-        Options::FORCE,
+        Options::Force,
     ];
 }

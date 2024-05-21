@@ -40,14 +40,14 @@ function resolveNumeric(value) {
     return isNaN(num) ? value : num
 }
 
-const hostname = 'actions.dragon-code.pro'
+const hostname = 'deploy-operations.dragon-code.pro'
 
 export default defineUserConfig({
     bundler: viteBundler(),
 
     lang: 'en-US',
-    title: 'Dragon Code: Actions',
-    description: 'Performing actions with saving the list of called files',
+    title: 'Dragon Code: Deploy Operations for Laravel',
+    description: 'Performing deploy operations with saving the list of called files',
 
     head: [
         ['link', {rel: 'icon', href: `https://${hostname}/images/logo.svg`}],
@@ -60,9 +60,9 @@ export default defineUserConfig({
 
         logo: `https://${hostname}/images/logo.svg`,
 
-        repo: 'https://github.com/TheDragonCode/laravel-actions',
+        repo: 'https://github.com/TheDragonCode/laravel-deploy-operations',
         repoLabel: 'GitHub',
-        docsRepo: 'https://github.com/TheDragonCode/laravel-actions',
+        docsRepo: 'https://github.com/TheDragonCode/laravel-deploy-operations',
         docsBranch: 'main',
         docsDir: 'docs',
 
@@ -71,11 +71,12 @@ export default defineUserConfig({
 
         navbar: [
             {
-                text: '5.x',
+                text: '6.x',
                 children: [
-                    {text: '5.x', link: '/getting-started/installation/index.md'},
-                    {text: '4.x', link: 'https://github.com/TheDragonCode/laravel-actions/blob/4.x/docs/index.md'},
-                    {text: '3.x', link: 'https://github.com/TheDragonCode/laravel-actions/blob/3.x/docs/index.md'},
+                    {text: '6.x', link: '/getting-started/installation/index.md'},
+                    {text: '5.x', link: 'https://github.com/TheDragonCode/laravel-deploy-operations/blob/5.x/docs/index.md'},
+                    {text: '4.x', link: 'https://github.com/TheDragonCode/laravel-deploy-operations/blob/4.x/docs/index.md'},
+                    {text: '3.x', link: 'https://github.com/TheDragonCode/laravel-deploy-operations/blob/3.x/docs/index.md'},
                 ]
             }
         ],

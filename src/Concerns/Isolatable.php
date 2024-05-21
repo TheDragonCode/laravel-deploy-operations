@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Concerns;
+namespace DragonCode\LaravelDeployOperations\Concerns;
 
-use DragonCode\LaravelActions\Constants\Options;
-use DragonCode\LaravelActions\Services\Mutex;
+use DragonCode\LaravelDeployOperations\Constants\Options;
+use DragonCode\LaravelDeployOperations\Services\Mutex;
 
 use function is_numeric;
 
@@ -27,11 +27,11 @@ trait Isolatable
 
     protected function getIsolateOption(): bool|int
     {
-        return $this->hasIsolateOption() ? (int) $this->option(Options::ISOLATED) : false;
+        return $this->hasIsolateOption() ? (int) $this->option(Options::Isolated) : false;
     }
 
     protected function hasIsolateOption(): bool
     {
-        return $this->hasOption(Options::ISOLATED) && $this->option(Options::ISOLATED);
+        return $this->hasOption(Options::Isolated) && $this->option(Options::Isolated);
     }
 }

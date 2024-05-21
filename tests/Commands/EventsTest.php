@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Commands;
 
-use DragonCode\LaravelActions\Constants\Names;
-use DragonCode\LaravelActions\Events\ActionEnded;
-use DragonCode\LaravelActions\Events\ActionFailed;
-use DragonCode\LaravelActions\Events\ActionStarted;
+use DragonCode\LaravelDeployOperations\Constants\Names;
+use DragonCode\LaravelDeployOperations\Events\DeployOperationEnded;
+use DragonCode\LaravelDeployOperations\Events\DeployOperationFailed;
+use DragonCode\LaravelDeployOperations\Events\DeployOperationStarted;
 use Exception;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
@@ -21,12 +21,12 @@ class EventsTest extends TestCase
 
         Event::fake();
 
-        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+        $this->artisan(Names::Operations)->assertExitCode(0);
 
-        Event::assertDispatchedTimes(ActionStarted::class, 1);
-        Event::assertDispatchedTimes(ActionEnded::class, 1);
+        Event::assertDispatchedTimes(DeployOperationStarted::class, 1);
+        Event::assertDispatchedTimes(DeployOperationEnded::class, 1);
 
-        Event::assertNotDispatched(ActionFailed::class);
+        Event::assertNotDispatched(DeployOperationFailed::class);
     }
 
     public function testFailed()
@@ -39,13 +39,13 @@ class EventsTest extends TestCase
         Event::fake();
 
         try {
-            $this->artisan(Names::ACTIONS)->run();
+            $this->artisan(Names::Operations)->run();
         }
         catch (Throwable $e) {
-            Event::assertDispatchedTimes(ActionStarted::class, 1);
-            Event::assertDispatchedTimes(ActionFailed::class, 1);
+            Event::assertDispatchedTimes(DeployOperationStarted::class, 1);
+            Event::assertDispatchedTimes(DeployOperationFailed::class, 1);
 
-            Event::assertNotDispatched(ActionEnded::class);
+            Event::assertNotDispatched(DeployOperationEnded::class);
 
             throw $e;
         }

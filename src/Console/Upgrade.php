@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Console;
+namespace DragonCode\LaravelDeployOperations\Console;
 
-use DragonCode\LaravelActions\Constants\Names;
-use DragonCode\LaravelActions\Processors\Processor;
-use DragonCode\LaravelActions\Processors\Upgrade as UpgradeProcessor;
+use DragonCode\LaravelDeployOperations\Constants\Names;
+use DragonCode\LaravelDeployOperations\Processors\Processor;
+use DragonCode\LaravelDeployOperations\Processors\Upgrade as UpgradeProcessor;
 
 class Upgrade extends Command
 {
-    protected $name = Names::UPGRADE;
+    protected $name = Names::Upgrade;
 
-    protected $description = 'Action project upgrade to 5 from 4 version';
+    protected $description = 'Upgrading project files from version 5 to 6';
 
     protected Processor|string $processor = UpgradeProcessor::class;
 }

@@ -1,6 +1,6 @@
-# Deploy Actions for Laravel
+# Deploy Operations for Laravel
 
-![the dragon code actions](https://preview.dragon-code.pro/the-dragon-code/deploy-actions.svg?brand=laravel&mode=dark)
+![the dragon code operations](https://preview.dragon-code.pro/the-dragon-code/deploy-operations.svg?brand=laravel&mode=dark)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
@@ -8,13 +8,16 @@
 [![Github Workflow Status][badge_build]][link_build]
 [![License][badge_license]][link_license]
 
-> Actions are like version control for your actions process, allowing your team to modify and share the application's actionable schema. If you have ever had to tell a teammate
-> to manually perform any action on a production server, you've come across an issue that actions solves.
+> Operations are like version control for your operations process,
+> allowing your team to modify and share the application's operationable schema.
+> If you have ever had to tell a teammate to manually perform any operation on a production server,
+> you've come across an issue that operation solves.
 
 ## Table of contents
 
 * Prologue
     * [Upgrade Guide](prologue/upgrade-guide/index.md)
+        * [To 6.x from 5.x](prologue/upgrade-guide/6.x.md)
         * [To 5.x from 4.x](prologue/upgrade-guide/5.x.md)
         * [To 4.x from 3.x](prologue/upgrade-guide/4.x.md)
         * [To 3.x from 2.x](prologue/upgrade-guide/3.x.md)
@@ -22,7 +25,7 @@
     * [Installation](getting-started/installation/index.md)
     * How to use
         * [Creating](how-to-use/creating.md)
-        * [Running Actions](how-to-use/running.md)
+        * [Running Operations](how-to-use/running.md)
         * [Rolling Back](how-to-use/rollback.md)
         * [Status](how-to-use/status.md)
     * Helpers
@@ -35,18 +38,18 @@
 This package is licensed under the [MIT License](prologue/license.md).
 
 
-[badge_build]:          https://img.shields.io/github/actions/workflow/status/TheDragonCode/laravel-actions/phpunit.yml?style=flat-square
+[badge_build]:          https://img.shields.io/github/actions/workflow/status/TheDragonCode/laravel-deploy-operations/phpunit.yml?style=flat-square
 
-[badge_downloads]:      https://img.shields.io/packagist/dt/dragon-code/laravel-actions.svg?style=flat-square
+[badge_downloads]:      https://img.shields.io/packagist/dt/dragon-code/laravel-deploy-operations.svg?style=flat-square
 
-[badge_license]:        https://img.shields.io/packagist/l/dragon-code/laravel-actions.svg?style=flat-square
+[badge_license]:        https://img.shields.io/packagist/l/dragon-code/laravel-deploy-operations.svg?style=flat-square
 
-[badge_stable]:         https://img.shields.io/github/v/release/TheDragonCode/laravel-actions?label=stable&style=flat-square
+[badge_stable]:         https://img.shields.io/github/v/release/TheDragonCode/laravel-deploy-operations?label=stable&style=flat-square
 
 [badge_unstable]:       https://img.shields.io/badge/unstable-dev--main-orange?style=flat-square
 
-[link_build]:           https://github.com/TheDragonCode/laravel-actions/actions
+[link_build]:           https://github.com/TheDragonCode/laravel-deploy-operations/actions
 
 [link_license]:         prologue/license.md
 
-[link_packagist]:       https://packagist.org/packages/dragon-code/laravel-actions
+[link_packagist]:       https://packagist.org/packages/dragon-code/laravel-deploy-operations

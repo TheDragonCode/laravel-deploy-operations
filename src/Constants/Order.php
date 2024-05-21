@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Constants;
+namespace DragonCode\LaravelDeployOperations\Constants;
 
 class Order
 {
-    public const ASC  = 'asc';
-    public const DESC = 'desc';
+    public const Asc  = 'asc';
+    public const Desc = 'desc';
 }

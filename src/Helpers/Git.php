@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Helpers;
+namespace DragonCode\LaravelDeployOperations\Helpers;
 
 use DragonCode\Support\Facades\Filesystem\Directory;
 

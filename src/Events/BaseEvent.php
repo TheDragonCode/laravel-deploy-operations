@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Events;
+namespace DragonCode\LaravelDeployOperations\Events;
 
 abstract class BaseEvent
 {

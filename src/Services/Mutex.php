@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Services;
+namespace DragonCode\LaravelDeployOperations\Services;
 
 use Carbon\CarbonInterval;
-use DragonCode\LaravelActions\Console\Command;
+use DragonCode\LaravelDeployOperations\Console\Command;
 use Illuminate\Contracts\Cache\Factory as Cache;
 use Illuminate\Contracts\Cache\Repository;
 
@@ -41,6 +41,6 @@ class Mutex
 
     protected function name(Command $command): string
     {
-        return 'framework' . DIRECTORY_SEPARATOR . 'action-' . $command->getName();
+        return 'framework' . DIRECTORY_SEPARATOR . 'deploy-operation-' . $command->getName();
     }
 }

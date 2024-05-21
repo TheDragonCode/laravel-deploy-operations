@@ -2,58 +2,58 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Processors;
+namespace DragonCode\LaravelDeployOperations\Processors;
 
-use DragonCode\LaravelActions\Events\ActionEnded;
-use DragonCode\LaravelActions\Events\ActionStarted;
-use DragonCode\LaravelActions\Events\NoPendingActions;
+use DragonCode\LaravelDeployOperations\Events\DeployOperationEnded;
+use DragonCode\LaravelDeployOperations\Events\DeployOperationStarted;
+use DragonCode\LaravelDeployOperations\Events\NoPendingDeployOperations;
 
 class Rollback extends Processor
 {
     public function handle(): void
     {
         if ($this->tableNotFound() || $this->nothingToRollback()) {
-            $this->fireEvent(NoPendingActions::class, 'down');
+            $this->fireEvent(NoPendingDeployOperations::class, 'down');
 
             return;
         }
 
-        if ($actions = $this->getActions($this->options->step)) {
-            $this->fireEvent(ActionStarted::class, 'down');
+        if ($items = $this->getOperations($this->options->step)) {
+            $this->fireEvent(DeployOperationStarted::class, 'down');
 
             $this->showCaption();
-            $this->run($actions);
+            $this->run($items);
 
-            $this->fireEvent(ActionEnded::class, 'down');
+            $this->fireEvent(DeployOperationEnded::class, 'down');
 
             return;
         }
 
-        $this->fireEvent(NoPendingActions::class, 'down');
+        $this->fireEvent(NoPendingDeployOperations::class, 'down');
     }
 
     protected function showCaption(): void
     {
-        $this->notification->info('Rollback Actions');
+        $this->notification->info('Rollback Operations');
     }
 
-    protected function run(array $actions): void
+    protected function run(array $rows): void
     {
-        foreach ($actions as $row) {
-            $this->rollbackAction($row->action);
+        foreach ($rows as $row) {
+            $this->rollback($row->operation);
         }
     }
 
-    protected function getActions(?int $step): array
+    protected function getOperations(?int $step): array
     {
         return (int) $step > 0
             ? $this->repository->getByStep($step)
             : $this->repository->getLast();
     }
 
-    protected function rollbackAction(string $action): void
+    protected function rollback(string $item): void
     {
-        $this->migrator->runDown($action, $this->options);
+        $this->migrator->runDown($item, $this->options);
     }
 
     protected function nothingToRollback(): bool

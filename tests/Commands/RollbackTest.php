@@ -2,7 +2,7 @@
 
 namespace Tests\Commands;
 
-use DragonCode\LaravelActions\Constants\Names;
+use DragonCode\LaravelDeployOperations\Constants\Names;
 use Exception;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -14,42 +14,42 @@ class RollbackTest extends TestCase
     {
         $this->assertDatabaseDoesntTable($this->table);
 
-        $this->artisan(Names::INSTALL)->assertExitCode(0);
+        $this->artisan(Names::Install)->assertExitCode(0);
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 0);
 
-        $this->artisan(Names::MAKE, ['name' => 'RollbackOne'])->assertExitCode(0);
-        $this->artisan(Names::MAKE, ['name' => 'RollbackTwo'])->assertExitCode(0);
+        $this->artisan(Names::Make, ['name' => 'RollbackOne'])->assertExitCode(0);
+        $this->artisan(Names::Make, ['name' => 'RollbackTwo'])->assertExitCode(0);
 
-        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+        $this->artisan(Names::Operations)->assertExitCode(0);
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 2);
 
-        $this->assertDatabaseActionHas($this->table, 'rollback_one');
-        $this->assertDatabaseActionHas($this->table, 'rollback_two');
-        $this->assertDatabaseActionDoesntLike($this->table, 'rollback_tree');
+        $this->assertDatabaseOperationHas($this->table, 'rollback_one');
+        $this->assertDatabaseOperationHas($this->table, 'rollback_two');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'rollback_tree');
 
-        $this->artisan(Names::ROLLBACK)->assertExitCode(0);
+        $this->artisan(Names::Rollback)->assertExitCode(0);
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 0);
 
-        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+        $this->artisan(Names::Operations)->assertExitCode(0);
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 2);
 
-        $this->artisan(Names::MAKE, ['name' => 'RollbackTree'])->assertExitCode(0);
-        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+        $this->artisan(Names::Make, ['name' => 'RollbackTree'])->assertExitCode(0);
+        $this->artisan(Names::Operations)->assertExitCode(0);
 
         $this->assertDatabaseHasTable($this->table);
         $this->assertDatabaseCount($this->table, 3);
 
-        $this->assertDatabaseActionHas($this->table, 'rollback_one');
-        $this->assertDatabaseActionHas($this->table, 'rollback_two');
-        $this->assertDatabaseActionHas($this->table, 'rollback_tree');
+        $this->assertDatabaseOperationHas($this->table, 'rollback_one');
+        $this->assertDatabaseOperationHas($this->table, 'rollback_two');
+        $this->assertDatabaseOperationHas($this->table, 'rollback_tree');
     }
 
     public function testEnvironment()
@@ -58,31 +58,31 @@ class RollbackTest extends TestCase
 
         $table = 'environment';
 
-        $this->artisan(Names::INSTALL)->assertExitCode(0);
+        $this->artisan(Names::Install)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_all');
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_production');
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_testing');
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_many_environments');
-        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_on_all');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_on_production');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_on_testing');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_on_many_environments');
+        $this->artisan(Names::Operations)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 5);
         $this->assertDatabaseCount($this->table, 12);
-        $this->assertDatabaseActionHas($this->table, 'run_on_all');
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_production');
-        $this->assertDatabaseActionHas($this->table, 'run_on_testing');
-        $this->assertDatabaseActionHas($this->table, 'run_on_many_environments');
-        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+        $this->assertDatabaseOperationHas($this->table, 'run_on_all');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_on_production');
+        $this->assertDatabaseOperationHas($this->table, 'run_on_testing');
+        $this->assertDatabaseOperationHas($this->table, 'run_on_many_environments');
+        $this->artisan(Names::Operations)->assertExitCode(0);
 
-        $this->artisan(Names::ROLLBACK)->assertExitCode(0);
+        $this->artisan(Names::Rollback)->assertExitCode(0);
         $this->assertDatabaseCount($table, 10);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_all');
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_production');
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_testing');
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_on_many_environments');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_on_all');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_on_production');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_on_testing');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_on_many_environments');
     }
 
     public function testDownSuccess()
@@ -91,21 +91,21 @@ class RollbackTest extends TestCase
 
         $table = 'success';
 
-        $this->artisan(Names::INSTALL)->assertExitCode(0);
+        $this->artisan(Names::Install)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_success');
-        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_success');
+        $this->artisan(Names::Operations)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 12);
-        $this->assertDatabaseActionHas($this->table, 'run_success');
+        $this->assertDatabaseOperationHas($this->table, 'run_success');
 
-        $this->artisan(Names::ROLLBACK)->assertExitCode(0);
+        $this->artisan(Names::Rollback)->assertExitCode(0);
         $this->assertDatabaseCount($table, 4);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_success');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_success');
     }
 
     public function testDownSuccessOnFailed()
@@ -114,27 +114,27 @@ class RollbackTest extends TestCase
 
         $table = 'success';
 
-        $this->artisan(Names::INSTALL)->assertExitCode(0);
+        $this->artisan(Names::Install)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_success_on_failed');
-        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_success_on_failed');
+        $this->artisan(Names::Operations)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 12);
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_success_on_failed');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_success_on_failed');
 
         try {
             $this->copySuccessFailureMethod();
 
-            $this->table()->insert(['action' => '2021_12_23_165048_run_success_on_failed', 'batch' => 999]);
+            $this->table()->insert(['operation' => '2021_12_23_165048_run_success_on_failed', 'batch' => 999]);
 
             $this->assertDatabaseCount($table, 2);
             $this->assertDatabaseCount($this->table, 13);
-            $this->assertDatabaseActionHas($this->table, 'run_success_on_failed');
+            $this->assertDatabaseOperationHas($this->table, 'run_success_on_failed');
 
-            $this->artisan(Names::ROLLBACK)->assertExitCode(1);
+            $this->artisan(Names::Rollback)->assertExitCode(1);
         }
         catch (Throwable $e) {
             $this->assertInstanceOf(Exception::class, $e);
@@ -146,7 +146,7 @@ class RollbackTest extends TestCase
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 13);
-        $this->assertDatabaseActionHas($this->table, 'run_success_on_failed');
+        $this->assertDatabaseOperationHas($this->table, 'run_success_on_failed');
     }
 
     public function testDownFailed()
@@ -155,21 +155,21 @@ class RollbackTest extends TestCase
 
         $table = 'failed';
 
-        $this->artisan(Names::INSTALL)->assertExitCode(0);
+        $this->artisan(Names::Install)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_failed');
-        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_failed');
+        $this->artisan(Names::Operations)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 12);
-        $this->assertDatabaseActionHas($this->table, 'run_failed');
+        $this->assertDatabaseOperationHas($this->table, 'run_failed');
 
-        $this->artisan(Names::ROLLBACK)->assertExitCode(0);
+        $this->artisan(Names::Rollback)->assertExitCode(0);
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_failed');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_failed');
     }
 
     public function testUpFailedOnException()
@@ -178,23 +178,23 @@ class RollbackTest extends TestCase
 
         $table = 'failed';
 
-        $this->artisan(Names::INSTALL)->assertExitCode(0);
+        $this->artisan(Names::Install)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_failed_failure');
-        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_failed_failure');
+        $this->artisan(Names::Operations)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 12);
-        $this->assertDatabaseActionDoesntLike($this->table, 'run_failed_failure');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'run_failed_failure');
 
         try {
             $this->copyFailedMethod();
 
-            $this->table()->insert(['action' => '2021_12_23_184029_run_failed_failure', 'batch' => 999]);
+            $this->table()->insert(['operation' => '2021_12_23_184029_run_failed_failure', 'batch' => 999]);
 
-            $this->artisan(Names::ROLLBACK)->assertExitCode(0);
+            $this->artisan(Names::Rollback)->assertExitCode(0);
         }
         catch (Throwable $e) {
             $this->assertInstanceOf(Exception::class, $e);
@@ -206,7 +206,7 @@ class RollbackTest extends TestCase
 
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 13);
-        $this->assertDatabaseActionHas($this->table, 'run_failed_failure');
+        $this->assertDatabaseOperationHas($this->table, 'run_failed_failure');
     }
 
     public function testDisabledBefore()
@@ -215,26 +215,26 @@ class RollbackTest extends TestCase
 
         $table = 'before';
 
-        $this->artisan(Names::INSTALL)->assertExitCode(0);
+        $this->artisan(Names::Install)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_enabled');
-        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_disabled');
-        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+        $this->assertDatabaseOperationDoesntLike($this->table, 'test_before_enabled');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'test_before_disabled');
+        $this->artisan(Names::Operations)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 12);
-        $this->assertDatabaseActionHas($this->table, 'test_before_enabled');
-        $this->assertDatabaseActionHas($this->table, 'test_before_disabled');
-        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+        $this->assertDatabaseOperationHas($this->table, 'test_before_enabled');
+        $this->assertDatabaseOperationHas($this->table, 'test_before_disabled');
+        $this->artisan(Names::Operations)->assertExitCode(0);
 
-        $this->artisan(Names::ROLLBACK)->assertExitCode(0);
+        $this->artisan(Names::Rollback)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 4);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_enabled');
-        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_disabled');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'test_before_enabled');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'test_before_disabled');
     }
 
     public function testEnabledBefore()
@@ -243,26 +243,26 @@ class RollbackTest extends TestCase
 
         $table = 'before';
 
-        $this->artisan(Names::INSTALL)->assertExitCode(0);
+        $this->artisan(Names::Install)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_enabled');
-        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_disabled');
-        $this->artisan(Names::ACTIONS, ['--before' => true])->assertExitCode(0);
+        $this->assertDatabaseOperationDoesntLike($this->table, 'test_before_enabled');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'test_before_disabled');
+        $this->artisan(Names::Operations, ['--before' => true])->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 11);
-        $this->assertDatabaseActionHas($this->table, 'test_before_enabled');
-        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_disabled');
-        $this->artisan(Names::ACTIONS, ['--before' => true])->assertExitCode(0);
+        $this->assertDatabaseOperationHas($this->table, 'test_before_enabled');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'test_before_disabled');
+        $this->artisan(Names::Operations, ['--before' => true])->assertExitCode(0);
 
-        $this->artisan(Names::ROLLBACK)->assertExitCode(0);
+        $this->artisan(Names::Rollback)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_enabled');
-        $this->assertDatabaseActionDoesntLike($this->table, 'test_before_disabled');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'test_before_enabled');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'test_before_disabled');
     }
 
     public function testDI(): void
@@ -271,36 +271,36 @@ class RollbackTest extends TestCase
 
         $table = 'test';
 
-        $this->artisan(Names::INSTALL)->assertExitCode(0);
+        $this->artisan(Names::Install)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 0);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseActionDoesntLike($this->table, 'invoke');
-        $this->assertDatabaseActionDoesntLike($this->table, 'invoke_down');
-        $this->assertDatabaseActionDoesntLike($this->table, 'up_down');
-        $this->assertDatabaseActionDoesntLike($table, 'up_down', column: 'value');
-        $this->assertDatabaseActionDoesntLike($table, 'invoke_down', column: 'value');
-        $this->assertDatabaseActionDoesntLike($table, 'invoke', column: 'value');
-        $this->artisan(Names::ACTIONS)->assertExitCode(0);
+        $this->assertDatabaseOperationDoesntLike($this->table, 'invoke');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'invoke_down');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'up_down');
+        $this->assertDatabaseOperationDoesntLike($table, 'up_down', column: 'value');
+        $this->assertDatabaseOperationDoesntLike($table, 'invoke_down', column: 'value');
+        $this->assertDatabaseOperationDoesntLike($table, 'invoke', column: 'value');
+        $this->artisan(Names::Operations)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 3);
         $this->assertDatabaseCount($this->table, 3);
-        $this->assertDatabaseActionHas($this->table, 'invoke');
-        $this->assertDatabaseActionHas($this->table, 'invoke_down');
-        $this->assertDatabaseActionHas($this->table, 'up_down');
-        $this->assertDatabaseActionHas($table, 'up_down', column: 'value');
-        $this->assertDatabaseActionHas($table, 'invoke_down', column: 'value');
-        $this->assertDatabaseActionHas($table, 'invoke', column: 'value');
+        $this->assertDatabaseOperationHas($this->table, 'invoke');
+        $this->assertDatabaseOperationHas($this->table, 'invoke_down');
+        $this->assertDatabaseOperationHas($this->table, 'up_down');
+        $this->assertDatabaseOperationHas($table, 'up_down', column: 'value');
+        $this->assertDatabaseOperationHas($table, 'invoke_down', column: 'value');
+        $this->assertDatabaseOperationHas($table, 'invoke', column: 'value');
 
-        $this->artisan(Names::ROLLBACK)->assertExitCode(0);
+        $this->artisan(Names::Rollback)->assertExitCode(0);
 
         $this->assertDatabaseCount($table, 1);
         $this->assertDatabaseCount($this->table, 0);
-        $this->assertDatabaseActionDoesntLike($this->table, 'invoke');
-        $this->assertDatabaseActionDoesntLike($this->table, 'invoke_down');
-        $this->assertDatabaseActionDoesntLike($this->table, 'up_down');
-        $this->assertDatabaseActionDoesntLike($table, 'up_down', column: 'value');
-        $this->assertDatabaseActionDoesntLike($table, 'invoke_down', column: 'value');
-        $this->assertDatabaseActionHas($table, 'invoke', column: 'value');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'invoke');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'invoke_down');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'up_down');
+        $this->assertDatabaseOperationDoesntLike($table, 'up_down', column: 'value');
+        $this->assertDatabaseOperationDoesntLike($table, 'invoke_down', column: 'value');
+        $this->assertDatabaseOperationHas($table, 'invoke', column: 'value');
     }
 }

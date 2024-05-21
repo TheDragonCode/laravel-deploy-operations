@@ -1,27 +1,27 @@
 <?php
 
-namespace DragonCode\LaravelActions\Console;
+namespace DragonCode\LaravelDeployOperations\Console;
 
-use DragonCode\LaravelActions\Constants\Names;
-use DragonCode\LaravelActions\Constants\Options;
-use DragonCode\LaravelActions\Processors\Processor;
-use DragonCode\LaravelActions\Processors\Rollback as RollbackProcessor;
+use DragonCode\LaravelDeployOperations\Constants\Names;
+use DragonCode\LaravelDeployOperations\Constants\Options;
+use DragonCode\LaravelDeployOperations\Processors\Processor;
+use DragonCode\LaravelDeployOperations\Processors\Rollback as RollbackProcessor;
 
 class Rollback extends Command
 {
-    protected $name = Names::ROLLBACK;
+    protected $name = Names::Rollback;
 
-    protected $description = 'Rollback the last action';
+    protected $description = 'Rollback the last deploy operation';
 
     protected Processor|string $processor = RollbackProcessor::class;
 
     protected array $options = [
-        Options::CONNECTION,
-        Options::FORCE,
-        Options::PATH,
-        Options::REALPATH,
-        Options::STEP,
-        Options::MUTE,
-        Options::ISOLATED,
+        Options::Connection,
+        Options::Force,
+        Options::Path,
+        Options::Realpath,
+        Options::Step,
+        Options::Mute,
+        Options::Isolated,
     ];
 }

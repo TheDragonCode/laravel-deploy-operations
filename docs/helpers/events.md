@@ -1,36 +1,38 @@
 # Events
 
-You can also handle events when executing actions:
+You can also handle events when executing operations:
 
+```php
+DragonCode\LaravelDeployOperations\Events\DeployOperationStarted::class
+DragonCode\LaravelDeployOperations\Events\DeployOperationEnded::class
+DragonCode\LaravelDeployOperations\Events\DeployOperationFailed::class
+DragonCode\LaravelDeployOperations\Events\NoPendingDeployOperations::class
 ```
-DragonCode\LaravelActions\Events\ActionStarted
-DragonCode\LaravelActions\Events\ActionEnded
-DragonCode\LaravelActions\Events\ActionFailed
-DragonCode\LaravelActions\Events\NoPendingActions
-```
 
-If there are no action files to execute, the `NoPendingActions` event will be sent.
+If there are no operation files to execute, the `NoPendingDeployOperations` event will be sent.
 
-In other cases, the `ActionStarted` event will be sent before processing starts, and the `ActionEnded` event will be sent after processing.
+In other cases, the `DeployOperationStarted` event will be sent before processing starts,
+and the `DeployOperationEnded` event will be sent after processing.
 
 For example:
 
 ```php
 namespace App\Providers;
 
-use App\Listeners\SomeActionsListener;
-use DragonCode\LaravelActions\Events\ActionEnded;
-use DragonCode\LaravelActions\Events\ActionStarted;
-use DragonCode\LaravelActions\Events\NoPendingActions;
+use App\Listeners\SomeOperationsListener;
+use DragonCode\LaravelDeployOperations\Events\DeployOperationEnded;
+use DragonCode\LaravelDeployOperations\Events\DeployOperationFailed;
+use DragonCode\LaravelDeployOperations\Events\DeployOperationStarted;
+use DragonCode\LaravelDeployOperations\Events\NoPendingDeployOperations;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        ActionStarted::class    => [SomeActionsListener::class],
-        ActionEnded::class      => [SomeActionsListener::class],
-        ActionFailed::class     => [SomeActionsListener::class],
-        NoPendingActions::class => [SomeActionsListener::class],
+        DeployOperationStarted::class    => [SomeOperationsListener::class],
+        DeployOperationEnded::class      => [SomeOperationsListener::class],
+        DeployOperationFailed::class     => [SomeOperationsListener::class],
+        NoPendingDeployOperations::class => [SomeOperationsListener::class],
     ];
 }
 ```
@@ -38,9 +40,9 @@ class EventServiceProvider extends ServiceProvider
 ```php
 namespace App\Listeners;
 
-use DragonCode\LaravelActions\Events\BaseEvent;
+use DragonCode\LaravelDeployOperations\Events\BaseEvent;
 
-class SomeActionsListener
+class SomeOperationsListener
 {
     public function handle(BaseEvent $event): void
     {

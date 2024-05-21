@@ -1,5 +1,5 @@
 {
-    "name": "dragon-code/laravel-actions",
+    "name": "dragon-code/laravel-deploy-operations",
     "description": "Performing any actions during the deployment process",
     "license": "MIT",
     "type": "library",
@@ -58,6 +58,7 @@
     },
     "conflict": {
         "andrey-helldar/laravel-actions": "*",
+        "dragon-code/laravel-actions": "*",
         "dragon-code/laravel-migration-actions": "*"
     },
     "suggest": {
@@ -67,7 +68,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "DragonCode\\LaravelActions\\": "src/"
+            "DragonCode\\LaravelDeployOperations\\": "src/"
         }
     },
     "autoload-dev": {
@@ -88,7 +89,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "DragonCode\\LaravelActions\\ServiceProvider"
+                "DragonCode\\LaravelDeployOperations\\ServiceProvider"
             ]
         }
     }

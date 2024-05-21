@@ -1,26 +1,26 @@
 <?php
 
-namespace DragonCode\LaravelActions\Console;
+namespace DragonCode\LaravelDeployOperations\Console;
 
-use DragonCode\LaravelActions\Constants\Names;
-use DragonCode\LaravelActions\Constants\Options;
-use DragonCode\LaravelActions\Processors\Processor;
-use DragonCode\LaravelActions\Processors\Refresh as RefreshProcessor;
+use DragonCode\LaravelDeployOperations\Constants\Names;
+use DragonCode\LaravelDeployOperations\Constants\Options;
+use DragonCode\LaravelDeployOperations\Processors\Processor;
+use DragonCode\LaravelDeployOperations\Processors\Refresh as RefreshProcessor;
 
 class Refresh extends Command
 {
-    protected $name = Names::REFRESH;
+    protected $name = Names::Refresh;
 
-    protected $description = 'Reset and re-run all actions';
+    protected $description = 'Reset and re-run all deploy operations';
 
     protected Processor|string $processor = RefreshProcessor::class;
 
     protected array $options = [
-        Options::CONNECTION,
-        Options::FORCE,
-        Options::PATH,
-        Options::REALPATH,
-        Options::MUTE,
-        Options::ISOLATED,
+        Options::Connection,
+        Options::Force,
+        Options::Path,
+        Options::Realpath,
+        Options::Mute,
+        Options::Isolated,
     ];
 }

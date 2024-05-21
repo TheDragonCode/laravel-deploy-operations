@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Commands;
 
-use DragonCode\LaravelActions\Constants\Names;
+use DragonCode\LaravelDeployOperations\Constants\Names;
 use DragonCode\Support\Facades\Filesystem\File;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class StubPublishTest extends TestCase
     {
         $this->assertFileDoesNotExist($this->path());
 
-        $this->artisan(Names::STUB_PUBLISH)->assertExitCode(0);
+        $this->artisan(Names::StubPublish)->assertExitCode(0);
 
         $this->assertFileExists($this->path());
     }
@@ -31,22 +31,18 @@ class StubPublishTest extends TestCase
         $this->assertStringContainsString('Foo\\Bar\\Some', $content);
         $this->assertStringContainsString('extends Some', $content);
 
-        $this->assertStringNotContainsString('DragonCode\\LaravelActions\\Action', $content);
-        $this->assertStringNotContainsString('extends Action', $content);
-        $this->assertStringNotContainsString('Run the actions.', $content);
-        $this->assertStringNotContainsString('@return void', $content);
+        $this->assertStringNotContainsString('DragonCode\\LaravelDeployOperations\\Operation', $content);
+        $this->assertStringNotContainsString('extends Operation', $content);
 
-        $this->artisan(Names::STUB_PUBLISH)->assertExitCode(0);
+        $this->artisan(Names::StubPublish)->assertExitCode(0);
 
         $content = file_get_contents($this->path());
 
         $this->assertStringContainsString('Foo\\Bar\\Some', $content);
         $this->assertStringContainsString('extends Some', $content);
 
-        $this->assertStringNotContainsString('DragonCode\\LaravelActions\\Action', $content);
-        $this->assertStringNotContainsString('extends Action', $content);
-        $this->assertStringNotContainsString('Run the actions.', $content);
-        $this->assertStringNotContainsString('@return void', $content);
+        $this->assertStringNotContainsString('DragonCode\\LaravelDeployOperations\\Operation', $content);
+        $this->assertStringNotContainsString('extends Operation', $content);
     }
 
     public function testForce(): void
@@ -61,12 +57,10 @@ class StubPublishTest extends TestCase
         $this->assertStringContainsString('Foo\\Bar\\Some', $content);
         $this->assertStringContainsString('extends Some', $content);
 
-        $this->assertStringNotContainsString('DragonCode\\LaravelActions\\Action', $content);
-        $this->assertStringNotContainsString('extends Action', $content);
-        $this->assertStringNotContainsString('Run the actions.', $content);
-        $this->assertStringNotContainsString('@return void', $content);
+        $this->assertStringNotContainsString('DragonCode\\LaravelDeployOperations\\Operation', $content);
+        $this->assertStringNotContainsString('extends Operation', $content);
 
-        $this->artisan(Names::STUB_PUBLISH, [
+        $this->artisan(Names::StubPublish, [
             '--force' => true,
         ])->assertExitCode(0);
 
@@ -75,14 +69,12 @@ class StubPublishTest extends TestCase
         $this->assertStringNotContainsString('Foo\\Bar\\Some', $content);
         $this->assertStringNotContainsString('extends Some', $content);
 
-        $this->assertStringContainsString('DragonCode\\LaravelActions\\Action', $content);
-        $this->assertStringContainsString('extends Action', $content);
-        $this->assertStringContainsString('Run the actions.', $content);
-        $this->assertStringContainsString('@return void', $content);
+        $this->assertStringContainsString('DragonCode\\LaravelDeployOperations\\Operation', $content);
+        $this->assertStringContainsString('extends Operation', $content);
     }
 
     protected function path(): string
     {
-        return base_path('stubs/action.stub');
+        return base_path('stubs/deploy-operation.stub');
     }
 }

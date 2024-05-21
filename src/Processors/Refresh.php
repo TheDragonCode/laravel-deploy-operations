@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Processors;
+namespace DragonCode\LaravelDeployOperations\Processors;
 
-use DragonCode\LaravelActions\Constants\Names;
-use DragonCode\LaravelActions\Constants\Options;
+use DragonCode\LaravelDeployOperations\Constants\Names;
+use DragonCode\LaravelDeployOperations\Constants\Options;
 
 class Refresh extends Processor
 {
@@ -15,25 +15,25 @@ class Refresh extends Processor
         $path       = $this->options->path;
 
         $this->runReset($connection, $path);
-        $this->runActions($connection, $path);
+        $this->runOperations($connection, $path);
     }
 
     protected function runReset(?string $connection, ?string $path, bool $realPath = true): void
     {
-        $this->runCommand(Names::RESET, [
-            '--' . Options::CONNECTION => $connection,
-            '--' . Options::PATH       => $path,
-            '--' . Options::REALPATH   => $realPath,
-            '--' . Options::FORCE      => true,
+        $this->runCommand(Names::Reset, [
+            '--' . Options::Connection => $connection,
+            '--' . Options::Path       => $path,
+            '--' . Options::Realpath   => $realPath,
+            '--' . Options::Force      => true,
         ]);
     }
 
-    protected function runActions(?string $connection, ?string $path, bool $realPath = true): void
+    protected function runOperations(?string $connection, ?string $path, bool $realPath = true): void
     {
-        $this->runCommand(Names::ACTIONS, [
-            '--' . Options::CONNECTION => $connection,
-            '--' . Options::PATH       => $path,
-            '--' . Options::REALPATH   => $realPath,
+        $this->runCommand(Names::Operations, [
+            '--' . Options::Connection => $connection,
+            '--' . Options::Path       => $path,
+            '--' . Options::Realpath   => $realPath,
         ]);
     }
 }

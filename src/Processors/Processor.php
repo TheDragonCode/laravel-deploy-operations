@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace DragonCode\LaravelActions\Processors;
+namespace DragonCode\LaravelDeployOperations\Processors;
 
 use Closure;
-use DragonCode\LaravelActions\Concerns\Artisan;
-use DragonCode\LaravelActions\Contracts\Notification;
-use DragonCode\LaravelActions\Helpers\Config;
-use DragonCode\LaravelActions\Helpers\Git;
-use DragonCode\LaravelActions\Helpers\Sorter;
-use DragonCode\LaravelActions\Repositories\ActionRepository;
-use DragonCode\LaravelActions\Services\Migrator;
-use DragonCode\LaravelActions\Values\Options;
+use DragonCode\LaravelDeployOperations\Concerns\Artisan;
+use DragonCode\LaravelDeployOperations\Helpers\Config;
+use DragonCode\LaravelDeployOperations\Helpers\Git;
+use DragonCode\LaravelDeployOperations\Helpers\Sorter;
+use DragonCode\LaravelDeployOperations\Notifications\Notification;
+use DragonCode\LaravelDeployOperations\Repositories\OperationsRepository;
+use DragonCode\LaravelDeployOperations\Services\Migrator;
+use DragonCode\LaravelDeployOperations\Values\Options;
 use DragonCode\Support\Facades\Helpers\Arr;
 use DragonCode\Support\Facades\Helpers\Str;
 use DragonCode\Support\Filesystem\File;
@@ -33,7 +33,7 @@ abstract class Processor
         protected InputInterface $input,
         protected OutputStyle $output,
         protected Config $config,
-        protected ActionRepository $repository,
+        protected OperationsRepository $repository,
         protected Git $git,
         protected File $file,
         protected Migrator $migrator,
@@ -52,7 +52,10 @@ abstract class Processor
 
         $files = $this->isFile($file) ? [$file] : $this->file->names($path, $filter, true);
 
-        $files = Arr::filter($files, fn (string $path) => Str::endsWith($path, '.php') && ! Str::contains($path, $this->config->exclude()));
+        $files = Arr::filter(
+            $files,
+            fn (string $path) => Str::endsWith($path, '.php') && ! Str::contains($path, $this->config->exclude())
+        );
 
         return Arr::of($this->sorter->byValues($files))
             ->map(fn (string $value) => Str::before($value, '.php'))
@@ -67,7 +70,7 @@ abstract class Processor
     protected function tableNotFound(): bool
     {
         if (! $this->repository->repositoryExists()) {
-            $this->notification->warning('Actions table not found');
+            $this->notification->warning('Deploy operations table not found');
 
             return true;
         }
