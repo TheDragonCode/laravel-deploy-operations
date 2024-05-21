@@ -33,8 +33,6 @@ class StubPublishTest extends TestCase
 
         $this->assertStringNotContainsString('DragonCode\\LaravelDeployOperations\\Operation', $content);
         $this->assertStringNotContainsString('extends Operation', $content);
-        $this->assertStringNotContainsString('Run the operations.', $content);
-        $this->assertStringNotContainsString('@return void', $content);
 
         $this->artisan(Names::StubPublish)->assertExitCode(0);
 
@@ -45,8 +43,6 @@ class StubPublishTest extends TestCase
 
         $this->assertStringNotContainsString('DragonCode\\LaravelDeployOperations\\Operation', $content);
         $this->assertStringNotContainsString('extends Operation', $content);
-        $this->assertStringNotContainsString('Run the operations.', $content);
-        $this->assertStringNotContainsString('@return void', $content);
     }
 
     public function testForce(): void
@@ -63,8 +59,6 @@ class StubPublishTest extends TestCase
 
         $this->assertStringNotContainsString('DragonCode\\LaravelDeployOperations\\Operation', $content);
         $this->assertStringNotContainsString('extends Operation', $content);
-        $this->assertStringNotContainsString('Run the operations.', $content);
-        $this->assertStringNotContainsString('@return void', $content);
 
         $this->artisan(Names::StubPublish, [
             '--force' => true,
@@ -77,8 +71,6 @@ class StubPublishTest extends TestCase
 
         $this->assertStringContainsString('DragonCode\\LaravelDeployOperations\\Operation', $content);
         $this->assertStringContainsString('extends Operation', $content);
-        $this->assertStringContainsString('Run the operations.', $content);
-        $this->assertStringContainsString('@return void', $content);
     }
 
     protected function path(): string

@@ -2,14 +2,9 @@
 
 declare(strict_types=1);
 
-use DragonCode\LaravelDeployOperations\DeployOperation;
+use DragonCode\LaravelDeployOperations\Operation;
 
-return new class extends DeployOperation {
-    /**
-     * Run the deploy operation.
-     *
-     * @return void
-     */
+return new class extends Operation {
     public function __invoke(): void
     {
         //

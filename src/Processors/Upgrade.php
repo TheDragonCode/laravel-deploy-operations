@@ -15,7 +15,7 @@ class Upgrade extends Processor
     public function handle(): void
     {
         if ($this->alreadyUpgraded()) {
-            $this->notification->info('Action upgrade already done');
+            $this->notification->info('Operations upgrade already done');
 
             return;
         }

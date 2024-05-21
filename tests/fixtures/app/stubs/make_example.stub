@@ -5,11 +5,6 @@ declare(strict_types=1);
 use DragonCode\LaravelDeployOperations\Operation;
 
 return new class extends Operation {
-    /**
-     * Run the operation.
-     *
-     * @return void
-     */
     public function __invoke(): void
     {
         //

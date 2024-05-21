@@ -135,7 +135,5 @@ class MakeTest extends TestCase
 
         $this->assertStringNotContainsString('DragonCode\\LaravelDeployOperations\\Operation', $content);
         $this->assertStringNotContainsString('extends Operation', $content);
-        $this->assertStringNotContainsString('Run the operations.', $content);
-        $this->assertStringNotContainsString('@return void', $content);
     }
 }
