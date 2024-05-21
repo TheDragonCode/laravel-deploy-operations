@@ -220,7 +220,7 @@ return new class extends Operation
         // some code
     }
 
-    public function enabledTransactions(): bool
+    public function hasTransactions(): bool
     {
         return true;
     }

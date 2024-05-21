@@ -48,6 +48,7 @@ class Upgrade extends Processor
 
         $content = $this->replaceNamespace($content);
         $content = $this->replaceClassName($content);
+        $content = $this->replaceMethod($content);
         $content = $this->replaceDeclareStrictType($content);
         $content = $this->replaceWithInvoke($content);
 
@@ -91,6 +92,13 @@ class Upgrade extends Processor
             ->trim(';')
             ->append(';')
             ->append(PHP_EOL)
+            ->toString();
+    }
+
+    protected function replaceMethod(string $content): string
+    {
+        return Str::of($content)
+            ->replace('enabledTransactions', 'hasTransactions')
             ->toString();
     }
 
