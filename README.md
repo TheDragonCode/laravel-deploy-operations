@@ -1,27 +1,60 @@
-# Deploy Operations for Laravel
+# 🚀 Laravel Deploy Operations
 
-![the dragon code operations](https://preview.dragon-code.pro/the-dragon-code/deploy-operations.svg?brand=laravel&mode=dark)
+![the dragon code laravel deploy operations](https://preview.dragon-code.pro/the-dragon-code/deploy-operations.svg?brand=laravel&mode=dark)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Total Downloads][badge_downloads]][link_packagist]
 [![Github Workflow Status][badge_build]][link_build]
 [![License][badge_license]][link_license]
 
-> Operations are like version control for your operation process,
-> allowing your team to modify and share the application's operational schema.
-> If you have ever had to tell a teammate to manually perform any operation on a production server,
-> you've come across an issue that operation solves.
+⚡ **Performing any actions during the deployment process**
+
+Create specific classes for a one-time or more-time usage, that can be executed automatically after each deployment.
+Perfect for seeding or updating some data instantly after some database changes, feature updates, or perform any
+actions.
+
+This package is for you if...
+
+- you regularly need to update specific data after you deploy new code
+- you often perform jobs after deployment
+- you sometimes forget to execute that one specific job and stuff gets crazy
+- your code gets cluttered with jobs that are not being used anymore
+- your co-workers always need to be reminded to execute that one job after some database changes
+- you often seed or process data in a migration file (which is a big no-no!)
+
+## Installation
+
+```Bash
+composer require dragon-code/laravel-deploy-operations
+```
 
 ## Documentation
 
-See the [documentation](https://deploy-operations.dragon-code.pro) for detailed installation and usage instructions.
+📚 Read the full documentation at [deploy-operations.dragon-code.pro][link_website].
 
-## Upgrade Guide
+## Basic Usage
 
-To upgrade from `Laravel Deploy Actions` versions 4 and 5 to `Deploy Operations`, read these guides:
+Create your first operation using `php artisan make:operation` console command and define the actions it should
+perform.
 
-- [To 6.x from 5.x](https://deploy-operations.dragon-code.pro/prologue/upgrade-guide/6.x.html)
-- [To 5.x from 4.x](https://deploy-operations.dragon-code.pro/prologue/upgrade-guide/5.x.html)
+```php
+use DragonCode\LaravelDeployOperations\Operation;
+
+return new class extends Operation {
+    public function __invoke(): void
+    {
+        // any actions
+    }
+};
+```
+
+Next, you can run the console command to start operations:
+
+```Bash
+php artisan operations
+```
+
+📚 [Check out the full documentation to learn everything that Laravel Deploy Operations has to offer.][link_website]
 
 ## License
 
@@ -34,10 +67,12 @@ This package is licensed under the [MIT License](LICENSE).
 
 [badge_license]:        https://img.shields.io/packagist/l/dragon-code/laravel-deploy-operations.svg?style=flat-square
 
-[badge_stable]:         https://img.shields.io/github/v/release/TheDragonCode/laravel-actions?label=stable&style=flat-square
+[badge_stable]:         https://img.shields.io/github/v/release/TheDragonCode/laravel-actions?label=packagist&style=flat-square
 
 [link_build]:           https://github.com/TheDragonCode/laravel-actions/actions
 
 [link_license]:         LICENSE
 
 [link_packagist]:       https://packagist.org/packages/dragon-code/laravel-deploy-operations
+
+[link_website]:         https://deploy-operations.dragon-code.pro

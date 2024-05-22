@@ -16,11 +16,7 @@ function getChildren(folder, sort = 'asc') {
 
     return fs
         .readdirSync(path.join(dir))
-        .filter(item =>
-            fs.statSync(path.join(dir, item)).isFile() &&
-            !names.includes(item.toLowerCase()) &&
-            extension.includes(path.extname(item))
-        )
+        .filter(item => fs.statSync(path.join(dir, item)).isFile() && !names.includes(item.toLowerCase()) && extension.includes(path.extname(item)))
         .sort((a, b) => {
             a = resolveNumeric(a)
             b = resolveNumeric(b)
@@ -46,13 +42,10 @@ export default defineUserConfig({
     bundler: viteBundler(),
 
     lang: 'en-US',
-    title: 'Deploy Operations for Laravel',
-    description: 'Run operations after deployment - just like you do it with migrations!',
+    title: 'Laravel Deploy Operations',
+    description: 'Performing any actions during the deployment process',
 
-    head: [
-        ['link', {rel: 'icon', href: `https://${hostname}/images/logo.svg`}],
-        ['meta', {name: 'twitter:image', content: `https://${hostname}/images/logo.svg`}]
-    ],
+    head: [['link', {rel: 'icon', href: `https://${hostname}/images/logo.svg`}]],
 
     theme: defaultTheme({
         hostname,
@@ -73,55 +66,53 @@ export default defineUserConfig({
             {
                 text: '6.x',
                 children: [
-                    {text: '6.x', link: '/getting-started/installation/index.md'},
-                    {text: '5.x', link: 'https://github.com/TheDragonCode/laravel-deploy-operations/blob/5.x/docs/index.md'},
-                    {text: '4.x', link: 'https://github.com/TheDragonCode/laravel-deploy-operations/blob/4.x/docs/index.md'},
-                    {text: '3.x', link: 'https://github.com/TheDragonCode/laravel-deploy-operations/blob/3.x/docs/index.md'},
+                    {
+                        text: '6.x',
+                        link: '/getting-started/installation.md'
+                    },
+                    {
+                        text: '5.x',
+                        link: 'https://github.com/TheDragonCode/laravel-deploy-operations/blob/5.x/docs/index.md'
+                    }, {
+                        text: '4.x',
+                        link: 'https://github.com/TheDragonCode/laravel-deploy-operations/blob/4.x/docs/index.md'
+                    }, {
+                        text: '3.x',
+                        link: 'https://github.com/TheDragonCode/laravel-deploy-operations/blob/3.x/docs/index.md'
+                    },
                 ]
-            }
-        ],
+            }],
 
         sidebarDepth: 1,
 
         sidebar: [
             {
-                text: 'Prologue',
-                children: [
-                    {
-                        text: 'Upgrade Guide',
-                        link: '/prologue/upgrade-guide/index.md'
-                    },
-                    {
-                        text: 'License',
-                        link: '/prologue/license.md'
-                    }
+                text: 'Getting Started', children: [
+                    '/index.md',
+                    '/getting-started/installation.md',
+                    '/guide/basic.md',
+                    '/upgrade-guide/index.md'
                 ]
             },
-
             {
-                text: 'Getting Started',
+                text: 'Guide',
                 children: [
-                    {
-                        text: 'Installation',
-                        link: '/getting-started/installation/index.md'
-                    }
+                    '/guide/running.md',
+                    '/guide/creating.md',
+                    '/guide/status.md',
+                    '/guide/rollback.md',
+                    '/guide/customize-stub.md',
                 ]
             },
-
-            {
-                text: 'How To Use',
-                children: [
-                    '/how-to-use/running.md',
-                    '/how-to-use/creating.md',
-                    '/how-to-use/status.md',
-                    '/how-to-use/rollback.md',
-                    '/how-to-use/customize-stub.md',
-                ]
-            },
-
             {
                 text: 'Helpers',
                 children: getChildren('helpers')
+            },
+            {
+                text: 'Extras',
+                children: [
+                    '/extras/database-data-dumper.md'
+                ]
             }
         ]
     })
