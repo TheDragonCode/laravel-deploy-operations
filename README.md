@@ -3,7 +3,6 @@
 ![the dragon code operations](https://preview.dragon-code.pro/the-dragon-code/deploy-operations.svg?brand=laravel&mode=dark)
 
 [![Stable Version][badge_stable]][link_packagist]
-[![Unstable Version][badge_unstable]][link_packagist]
 [![Total Downloads][badge_downloads]][link_packagist]
 [![Github Workflow Status][badge_build]][link_build]
 [![License][badge_license]][link_license]
@@ -31,13 +30,11 @@ This package is licensed under the [MIT License](LICENSE).
 
 [badge_build]:          https://img.shields.io/github/actions/workflow/status/TheDragonCode/laravel-actions/phpunit.yml?style=flat-square
 
-[badge_downloads]:      https://img.shields.io/packagist/dt/dragon-code/laravel-deploy-operations.svg?style=flat-square
+[badge_downloads]:      https://img.shields.io/packagist/dt/dragon-code/laravel-actions.svg?style=flat-square
 
 [badge_license]:        https://img.shields.io/packagist/l/dragon-code/laravel-deploy-operations.svg?style=flat-square
 
 [badge_stable]:         https://img.shields.io/github/v/release/TheDragonCode/laravel-actions?label=stable&style=flat-square
-
-[badge_unstable]:       https://img.shields.io/badge/unstable-dev--main-orange?style=flat-square
 
 [link_build]:           https://github.com/TheDragonCode/laravel-actions/actions
 
