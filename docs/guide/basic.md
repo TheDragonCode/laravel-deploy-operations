@@ -6,6 +6,14 @@ Create your first operation using `make:operation` command and define the action
 php artisan make:operation
 ```
 
+This action will create a new file in the `/operations` folder of your application.
+
+If you are using the `git` version control system, the name of the currently active branch will be used
+as the file name suffix, otherwise the word `auto` will be used.
+
+You can also specify a name for the file yourself by specifying it with the first argument.
+For example, `php artisan make:operation qwerty`.
+
 ```php
 use DragonCode\LaravelDeployOperations\Operation;
 
