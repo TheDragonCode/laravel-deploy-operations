@@ -6,6 +6,7 @@ namespace DragonCode\LaravelDeployOperations\Processors;
 
 use DragonCode\LaravelDeployOperations\Constants\Names;
 use DragonCode\LaravelDeployOperations\Constants\Options;
+use DragonCode\LaravelDeployOperations\Enums\MethodEnum;
 use DragonCode\LaravelDeployOperations\Events\DeployOperationEnded;
 use DragonCode\LaravelDeployOperations\Events\DeployOperationFailed;
 use DragonCode\LaravelDeployOperations\Events\DeployOperationStarted;
@@ -40,19 +41,19 @@ class Operations extends Processor
     {
         try {
             if ($files = $this->getNewFiles($completed)) {
-                $this->fireEvent(DeployOperationStarted::class, 'up');
+                $this->fireEvent(DeployOperationStarted::class, MethodEnum::Up);
 
                 $this->runEach($files, $this->getBatch());
 
-                $this->fireEvent(DeployOperationEnded::class, 'up');
+                $this->fireEvent(DeployOperationEnded::class, MethodEnum::Up);
 
                 return;
             }
 
-            $this->fireEvent(NoPendingDeployOperations::class, 'up');
+            $this->fireEvent(NoPendingDeployOperations::class, MethodEnum::Up);
         }
         catch (Throwable $e) {
-            $this->fireEvent(DeployOperationFailed::class, 'up');
+            $this->fireEvent(DeployOperationFailed::class, MethodEnum::Up);
 
             throw $e;
         }

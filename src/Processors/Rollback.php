@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelDeployOperations\Processors;
 
+use DragonCode\LaravelDeployOperations\Enums\MethodEnum;
 use DragonCode\LaravelDeployOperations\Events\DeployOperationEnded;
 use DragonCode\LaravelDeployOperations\Events\DeployOperationStarted;
 use DragonCode\LaravelDeployOperations\Events\NoPendingDeployOperations;
@@ -13,23 +14,23 @@ class Rollback extends Processor
     public function handle(): void
     {
         if ($this->tableNotFound() || $this->nothingToRollback()) {
-            $this->fireEvent(NoPendingDeployOperations::class, 'down');
+            $this->fireEvent(NoPendingDeployOperations::class, MethodEnum::Down);
 
             return;
         }
 
         if ($items = $this->getOperations($this->options->step)) {
-            $this->fireEvent(DeployOperationStarted::class, 'down');
+            $this->fireEvent(DeployOperationStarted::class, MethodEnum::Down);
 
             $this->showCaption();
             $this->run($items);
 
-            $this->fireEvent(DeployOperationEnded::class, 'down');
+            $this->fireEvent(DeployOperationEnded::class, MethodEnum::Down);
 
             return;
         }
 
-        $this->fireEvent(NoPendingDeployOperations::class, 'down');
+        $this->fireEvent(NoPendingDeployOperations::class, MethodEnum::Down);
     }
 
     protected function showCaption(): void
