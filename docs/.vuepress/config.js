@@ -104,10 +104,6 @@ export default defineUserConfig({
                     {
                         text: 'Installation',
                         link: '/getting-started/installation/index.md'
-                    },
-                    {
-                        text: 'Database Dumper',
-                        link: '/getting-started/database-dumper/index.md'
                     }
                 ]
             },
