@@ -15,6 +15,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishConfig();
+            $this->publishStub();
 
             $this->registerAbout();
             $this->registerCommands();
@@ -38,7 +39,6 @@ class ServiceProvider extends BaseServiceProvider
             Console\Reset::class,
             Console\Rollback::class,
             Console\Status::class,
-            Console\StubPublish::class,
             Console\Upgrade::class,
         ]);
     }
@@ -53,6 +53,15 @@ class ServiceProvider extends BaseServiceProvider
         $this->publishes([
             __DIR__ . '/../config/deploy-operations.php' => $this->app->configPath('deploy-operations.php'),
         ], 'config');
+    }
+
+    protected function publishStub(): void
+    {
+        $this->publishes([
+            __DIR__ . '/../resources/stubs/deploy-operation.stub' => $this->app->basePath(
+                'stubs/deploy-operation.stub'
+            ),
+        ], 'stubs');
     }
 
     protected function registerConfig(): void
