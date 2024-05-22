@@ -6,6 +6,7 @@ namespace DragonCode\LaravelDeployOperations\Processors;
 
 use Closure;
 use DragonCode\LaravelDeployOperations\Concerns\Artisan;
+use DragonCode\LaravelDeployOperations\Enums\MethodEnum;
 use DragonCode\LaravelDeployOperations\Helpers\Config;
 use DragonCode\LaravelDeployOperations\Helpers\Git;
 use DragonCode\LaravelDeployOperations\Helpers\Sorter;
@@ -78,7 +79,7 @@ abstract class Processor
         return false;
     }
 
-    protected function fireEvent(string $event, string $method): void
+    protected function fireEvent(string $event, MethodEnum $method): void
     {
         $this->events->dispatch(new $event($method, $this->options->before));
     }

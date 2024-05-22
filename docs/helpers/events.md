@@ -40,13 +40,14 @@ class EventServiceProvider extends ServiceProvider
 ```php
 namespace App\Listeners;
 
+use DragonCode\LaravelDeployOperations\Enums\MethodEnum;
 use DragonCode\LaravelDeployOperations\Events\BaseEvent;
 
 class SomeOperationsListener
 {
     public function handle(BaseEvent $event): void
     {
-        $method   = $event->method; // `up` or `down` string value
+        $method   = $event->method; // MethodEnum object value
         $isBefore = $event->before; // boolean
     }
 }
