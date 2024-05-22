@@ -12,6 +12,5 @@ class Names
     public const Reset       = 'operations:reset';
     public const Rollback    = 'operations:rollback';
     public const Status      = 'operations:status';
-    public const StubPublish = 'operations:stub';
     public const Upgrade     = 'operations:upgrade';
 }
