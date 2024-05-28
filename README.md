@@ -28,6 +28,10 @@ This package is for you if...
 composer require dragon-code/laravel-deploy-operations
 ```
 
+Guidelines for upgrading from previous versions and `dragon-code/laravel-migration-actions` and
+`dragon-code/laravel-actions` packages can be found in [this section](https://deploy-operations.dragon-code.pro/upgrade-guide/) of the documentation.
+
+
 ## Documentation
 
 📚 Read the full documentation at [deploy-operations.dragon-code.pro][link_website].
