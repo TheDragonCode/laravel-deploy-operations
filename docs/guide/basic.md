@@ -15,12 +15,17 @@ You can also specify a name for the file yourself by specifying it with the firs
 For example, `php artisan make:operation qwerty`.
 
 ```php
+use App\Models\Article;
 use DragonCode\LaravelDeployOperations\Operation;
 
 return new class extends Operation {
     public function __invoke(): void
     {
-        // any actions
+        Article::query()
+            ->lazyById(chunkSize: 100, column: 'id')
+            ->each->update(['is_active' => true]);
+
+        // and/or any actions...
     }
 };
 ```
