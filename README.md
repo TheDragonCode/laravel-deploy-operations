@@ -47,7 +47,10 @@ use DragonCode\LaravelDeployOperations\Operation;
 return new class extends Operation {
     public function __invoke(): void
     {
-        // any actions
+        \App\Models\Course::lazyById(chunkSize: 100, column: 'id')
+            ->each->update(['is_active' => true]);
+
+        // any actions...
     }
 };
 ```
