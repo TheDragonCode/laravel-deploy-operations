@@ -42,15 +42,17 @@ Create your first operation using `php artisan make:operation` console command a
 perform.
 
 ```php
+use App\Models\Article;
 use DragonCode\LaravelDeployOperations\Operation;
 
 return new class extends Operation {
     public function __invoke(): void
     {
-        \App\Models\Course::lazyById(chunkSize: 100, column: 'id')
+        Article::query()
+            ->lazyById(chunkSize: 100, column: 'id')
             ->each->update(['is_active' => true]);
 
-        // any actions...
+        // and/or any actions...
     }
 };
 ```
