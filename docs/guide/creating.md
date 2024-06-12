@@ -10,6 +10,25 @@ The new operation's file will be placed in your `operations` directory in the ba
 
 Each operation file name contains a timestamp, which allows Laravel to determine the order of the operations.
 
+## Asks For File Name
+
+> The question will not be asked when calling a console command passing the `--quiet` parameter.
+
+When calling the `operations` console command without passing a name in the `name` parameter,
+you will be asked for a name for the file.
+
+```bash
+$ php artisan make:operation
+  Creating an operation 
+
+ ┌ What should the operation be named? ─────────────────────────┐
+ │ E.g. activate articles                                       │
+ └──────────────────────────────────────────────────────────────┘
+  Press Enter to autodetect
+```
+
+You can enter your own or simply press `Enter` to continue.
+In this case, automatic file name generation will be applied.
 
 ## Automatically Generate A File Name
 
@@ -66,7 +85,8 @@ php artisan make:operation foo/bar/QweRty.php
 
 ## Invokable Method
 
-By default, the new operation class will contain the `__invoke` method, but you can easily replace it with public `up` name.
+By default, the new operation class will contain the `__invoke` method, but you can easily replace it with public `up`
+name.
 
 ```php
 use DragonCode\LaravelDeployOperations\Operation;
@@ -83,7 +103,8 @@ return new class extends Operation
 > Note that the `__invoke` method has been added as a single call.
 > This means that when the operation is running, it will be called, but not when it is rolled back.
 >
-> You should also pay attention to the fact that if there is an `__invoke` method in the class, the `down` method will not be called.
+> You should also pay attention to the fact that if there is an `__invoke` method in the class, the `down` method will
+> not be called.
 
 ```php
 use DragonCode\LaravelDeployOperations\Operation;

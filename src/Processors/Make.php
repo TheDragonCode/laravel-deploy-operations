@@ -10,6 +10,7 @@ use DragonCode\Support\Facades\Helpers\Str;
 
 use function base_path;
 use function date;
+use function Laravel\Prompts\text;
 use function realpath;
 
 class Make extends Processor
@@ -53,12 +54,37 @@ class Make extends Processor
         $directory = Path::dirname($branch);
         $filename  = Path::filename($branch);
 
-        return Str::of($filename)->prepend($this->getTime())->finish('.php')->prepend($directory . '/')->toString();
+        return Str::of($filename)
+            ->snake()
+            ->prepend($this->getTime())
+            ->finish('.php')
+            ->prepend($directory . '/')
+            ->toString();
     }
 
     protected function getBranchName(): string
     {
-        return $this->options->name ?? $this->git->currentBranch() ?? $this->fallback;
+        if ($name = trim((string) $this->options->name)) {
+            return $name;
+        }
+
+        if ($name = $this->askForName()) {
+            return $name;
+        }
+
+        return $this->git->currentBranch() ?? $this->fallback;
+    }
+
+    protected function askForName(): string
+    {
+        $prompt = $this->promptForName();
+
+        return text($prompt[0], $prompt[1], hint: $prompt[2]);
+    }
+
+    protected function promptForName(): array
+    {
+        return ['What should the operation be named?', 'E.g. activate articles', 'Press Enter to autodetect'];
     }
 
     protected function getTime(): string
