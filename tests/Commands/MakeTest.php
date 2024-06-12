@@ -26,13 +26,28 @@ class MakeTest extends TestCase
         );
     }
 
+    public function testAskedName()
+    {
+        $path = $this->getOperationsPath() . '/' . date('Y_m_d_His') . '_some_name.php';
+
+        $this->assertFileDoesNotExist($path);
+
+        $this->artisan(Names::Make)
+            ->expectsQuestion('What should the operation be named?', 'Some Name')
+            ->assertExitCode(0);
+
+        $this->assertFileExists($path);
+    }
+
     public function testAutoName()
     {
         $path = $this->getOperationsPath() . '/' . date('Y_m_d_His') . '_auto.php';
 
         $this->assertFileDoesNotExist($path);
 
-        $this->artisan(Names::Make)->assertExitCode(0);
+        $this->artisan(Names::Make)
+            ->expectsQuestion('What should the operation be named?', '')
+            ->assertExitCode(0);
 
         $this->assertFileExists($path);
     }
