@@ -15,6 +15,7 @@
     </coverage>
     <php>
         <env name="APP_KEY" value="AckfSECXIvnK5r28GVIWUAxmbBSjTsmF"/>
+        <env name="APP_ENV" value="testing"/>
     </php>
     <testsuites>
         <testsuite name="Test Suite">
