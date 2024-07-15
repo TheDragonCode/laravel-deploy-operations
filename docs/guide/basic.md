@@ -61,6 +61,6 @@ For example, before and after restarting the queues:
 
 ```bash
 php artisan operations --before
-php artisn queue:restart
+php artisan queue:restart
 php artisan operations
 ```
