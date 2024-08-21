@@ -28,7 +28,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Database Transations
+    | Database Transactions
     |--------------------------------------------------------------------------
     |
     | This setting defines the rules for working with database transactions.
