@@ -61,6 +61,8 @@ class Migrator
         if ($this->hasAsync($operation, $options)) {
             OperationJob::dispatch($name);
 
+            $this->notification->twoColumn($name, '<fg=blue;options=bold>PENDING</>');
+
             return;
         }
 
