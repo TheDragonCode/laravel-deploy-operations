@@ -7,6 +7,7 @@ namespace DragonCode\LaravelDeployOperations\Processors;
 use DragonCode\Support\Facades\Filesystem\File;
 use DragonCode\Support\Facades\Filesystem\Path;
 use DragonCode\Support\Facades\Helpers\Str;
+use DragonCode\Support\Helpers\Ables\Stringable;
 
 use function base_path;
 use function date;
@@ -21,14 +22,26 @@ class Make extends Processor
 
     public function handle(): void
     {
-        $pathWithName = $this->getPath().$this->getName();
-
-        $this->notification->task('Creating an operation ['.$pathWithName.']', fn () => $this->create($pathWithName));
+        $this->notification->task($this->message(), fn () => $this->create());
     }
 
-    protected function create(string $path): void
+    protected function message(): string
     {
-        File::copy($this->stubPath(), $path);
+        return 'Operation [' . $this->displayName($this->getFullPath()) . '] created successfully';
+    }
+
+    protected function create(): void
+    {
+        File::copy($this->stubPath(), $this->getFullPath());
+    }
+
+    protected function displayName(string $path): string
+    {
+        return Str::of($path)
+            ->when(! $this->showFullPath(), fn (Stringable $str) => $str->after(base_path()))
+            ->replace('\\', '/')
+            ->ltrim('./')
+            ->toString();
     }
 
     protected function getName(): string
@@ -43,6 +56,11 @@ class Make extends Processor
         return $this->options->path;
     }
 
+    protected function getFullPath(): string
+    {
+        return $this->getPath() . $this->getName();
+    }
+
     protected function getFilename(string $branch): string
     {
         $directory = Path::dirname($branch);
@@ -53,6 +71,7 @@ class Make extends Processor
             ->prepend($this->getTime())
             ->finish('.php')
             ->prepend($directory . '/')
+            ->replace('\\', '/')
             ->ltrim('./')
             ->toString();
     }
@@ -94,5 +113,10 @@ class Make extends Processor
         }
 
         return $this->defaultStub;
+    }
+
+    protected function showFullPath(): bool
+    {
+        return $this->config->showFullPath();
     }
 }
