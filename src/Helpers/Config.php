@@ -51,6 +51,11 @@ class Config
         return base_path();
     }
 
+    public function showFullPath(): bool
+    {
+        return (bool) $this->config->get('deploy-operations.show.full_path');
+    }
+
     protected function directory(): string
     {
         return $this->config->get('deploy-operations.path', base_path('operations'));
