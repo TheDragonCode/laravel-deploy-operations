@@ -21,15 +21,9 @@ class Make extends Processor
 
     public function handle(): void
     {
-        $this->notification->task('Creating an operation', fn () => $this->run());
-    }
+        $pathWithName = $this->getPath().$this->getName();
 
-    protected function run(): void
-    {
-        $name = $this->getName();
-        $path = $this->getPath();
-
-        $this->create($path . '/' . $name);
+        $this->notification->task('Creating an operation ['.$pathWithName.']', fn () => $this->create($pathWithName));
     }
 
     protected function create(string $path): void
@@ -59,6 +53,7 @@ class Make extends Processor
             ->prepend($this->getTime())
             ->finish('.php')
             ->prepend($directory . '/')
+            ->ltrim('./')
             ->toString();
     }
 
