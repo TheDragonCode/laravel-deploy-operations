@@ -22,17 +22,19 @@ class Make extends Processor
 
     public function handle(): void
     {
-        $this->notification->task($this->message(), fn () => $this->create());
+        $fullPath = $this->getFullPath();
+
+        $this->notification->task($this->message($fullPath), fn () => $this->create($fullPath));
     }
 
-    protected function message(): string
+    protected function message(string $path): string
     {
-        return 'Operation [' . $this->displayName($this->getFullPath()) . '] created successfully';
+        return 'Operation [' . $this->displayName($path) . '] created successfully';
     }
 
-    protected function create(): void
+    protected function create(string $path): void
     {
-        File::copy($this->stubPath(), $this->getFullPath());
+        File::copy($this->stubPath(), $path);
     }
 
     protected function displayName(string $path): string
@@ -46,9 +48,9 @@ class Make extends Processor
 
     protected function getName(): string
     {
-        $branch = $this->getBranchName();
-
-        return $this->getFilename($branch);
+        return $this->getFilename(
+            $this->getBranchName()
+        );
     }
 
     protected function getPath(): string
