@@ -7,6 +7,7 @@ namespace DragonCode\LaravelDeployOperations\Processors;
 use DragonCode\Support\Facades\Filesystem\File;
 use DragonCode\Support\Facades\Filesystem\Path;
 use DragonCode\Support\Facades\Helpers\Str;
+use DragonCode\Support\Helpers\Ables\Stringable;
 
 use function base_path;
 use function date;
@@ -21,15 +22,14 @@ class Make extends Processor
 
     public function handle(): void
     {
-        $this->notification->task('Creating an operation', fn () => $this->run());
+        $fullPath = $this->getFullPath();
+
+        $this->notification->task($this->message($fullPath), fn () => $this->create($fullPath));
     }
 
-    protected function run(): void
+    protected function message(string $path): string
     {
-        $name = $this->getName();
-        $path = $this->getPath();
-
-        $this->create($path . '/' . $name);
+        return 'Operation [' . $this->displayName($path) . '] created successfully';
     }
 
     protected function create(string $path): void
@@ -37,16 +37,30 @@ class Make extends Processor
         File::copy($this->stubPath(), $path);
     }
 
+    protected function displayName(string $path): string
+    {
+        return Str::of($path)
+            ->when(! $this->showFullPath(), fn (Stringable $str) => $str->after(base_path()))
+            ->replace('\\', '/')
+            ->ltrim('./')
+            ->toString();
+    }
+
     protected function getName(): string
     {
-        $branch = $this->getBranchName();
-
-        return $this->getFilename($branch);
+        return $this->getFilename(
+            $this->getBranchName()
+        );
     }
 
     protected function getPath(): string
     {
         return $this->options->path;
+    }
+
+    protected function getFullPath(): string
+    {
+        return $this->getPath() . $this->getName();
     }
 
     protected function getFilename(string $branch): string
@@ -59,6 +73,8 @@ class Make extends Processor
             ->prepend($this->getTime())
             ->finish('.php')
             ->prepend($directory . '/')
+            ->replace('\\', '/')
+            ->ltrim('./')
             ->toString();
     }
 
@@ -99,5 +115,10 @@ class Make extends Processor
         }
 
         return $this->defaultStub;
+    }
+
+    protected function showFullPath(): bool
+    {
+        return $this->config->showFullPath();
     }
 }

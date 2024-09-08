@@ -123,4 +123,27 @@ return [
 
         'name' => env('DEPLOY_OPERATIONS_QUEUE_NAME'),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Show
+    |--------------------------------------------------------------------------
+    |
+    | This option determines the display settings for various information messages.
+    |
+    */
+
+    'show' => [
+        /*
+        |--------------------------------------------------------------------------
+        | Full Path
+        |--------------------------------------------------------------------------
+        |
+        | This parameter determines how exactly the link to the created file should
+        | be displayed - the full path to the file or a relative one.
+        |
+        */
+
+        'full_path' => env('DEPLOY_OPERATIONS_SHOW_FULL_PATH', false),
+    ],
 ];
