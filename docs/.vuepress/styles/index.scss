@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import 'fonts';
+@import "fonts";
 
 :root {
     --content-width: 800px;
@@ -10,4 +10,8 @@
     &__nav-tab {
         font-family: Nunito, system-ui, sans-serif;
     }
+}
+
+.line {
+    color: rgb(235 235 245 / 86%);
 }
