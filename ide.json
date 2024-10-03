@@ -5,10 +5,11 @@
             "id": "dragon-code.create-deploy-operation",
             "name": "Create Deploy Operation",
             "inputFilter": "deploy-operations",
+            "regex": ".+",
             "files": [
                 {
                     "directory": "/operations",
-                    "name": "${CURRENT_TIME|format:yyyy_MM_dd_HHmmss}_${INPUT_CLASS|className|snakeCase}.php",
+                    "name": "${CURRENT_TIME|format:yyyy_MM_dd_HHmmss}_${INPUT_CLASS|className|replace: ,_|upperCamelCase|snakeCase}.php",
                     "template": {
                         "type": "stub",
                         "path": "/stubs/deploy-operation.stub",
