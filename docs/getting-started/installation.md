@@ -9,7 +9,6 @@ composer require dragon-code/laravel-deploy-operations
 ```
 
 If necessary, you can publish the configuration file by calling the console command:
-В случае необходимости
 
 ```bash
 php artisan vendor:publish --tag=config --provider="DragonCode\LaravelDeployOperations\ServiceProvider"
