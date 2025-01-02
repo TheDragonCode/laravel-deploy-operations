@@ -13,6 +13,7 @@ jobs:
         with:
           fetch-depth: 0
       - uses: FantasticFiasco/action-update-license-year@v3
+        id: license
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commitTitle: 'The year in the LICENSE file has been updated'
