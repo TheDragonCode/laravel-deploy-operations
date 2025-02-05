@@ -81,15 +81,15 @@ An [upgrade](https://deploy-operations.dragon-code.pro/upgrade-guide/) section i
 This package is licensed under the [MIT License](LICENSE).
 
 
-[badge_build]:          https://img.shields.io/github/actions/workflow/status/TheDragonCode/laravel-actions/phpunit.yml?style=flat-square
+[badge_build]:          https://img.shields.io/github/actions/workflow/status/TheDragonCode/laravel-deploy-operations/phpunit.yml?style=flat-square
 
 [badge_downloads]:      https://img.shields.io/packagist/dt/dragon-code/laravel-actions.svg?style=flat-square
 
 [badge_license]:        https://img.shields.io/packagist/l/dragon-code/laravel-deploy-operations.svg?style=flat-square
 
-[badge_stable]:         https://img.shields.io/github/v/release/TheDragonCode/laravel-actions?label=packagist&style=flat-square
+[badge_stable]:         https://img.shields.io/github/v/release/TheDragonCode/laravel-deploy-operations?label=packagist&style=flat-square
 
-[link_build]:           https://github.com/TheDragonCode/laravel-actions/actions
+[link_build]:           https://github.com/TheDragonCode/laravel-deploy-operations/actions
 
 [link_license]:         LICENSE
 
