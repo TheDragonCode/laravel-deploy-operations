@@ -83,7 +83,7 @@ This package is licensed under the [MIT License](LICENSE).
 
 [badge_build]:          https://img.shields.io/github/actions/workflow/status/TheDragonCode/laravel-deploy-operations/phpunit.yml?style=flat-square
 
-[badge_downloads]:      https://img.shields.io/packagist/dt/dragon-code/laravel-actions.svg?style=flat-square
+[badge_downloads]:      https://img.shields.io/packagist/dt/dragon-code/laravel-deploy-operations.svg?style=flat-square
 
 [badge_license]:        https://img.shields.io/packagist/l/dragon-code/laravel-deploy-operations.svg?style=flat-square
 
