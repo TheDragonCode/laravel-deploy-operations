@@ -42,18 +42,18 @@
         "composer-runtime-api": "^2.2",
         "dragon-code/simple-dto": "^2.5.1",
         "dragon-code/support": "^6.6",
-        "illuminate/console": "^10.0 || ^11.0",
-        "illuminate/container": "^10.0 || ^11.0",
-        "illuminate/database": "^10.0 || ^11.0",
-        "illuminate/support": "^10.0 || ^11.0",
+        "illuminate/console": "^10.0 || ^11.0 || ^12.0",
+        "illuminate/container": "^10.0 || ^11.0 || ^12.0",
+        "illuminate/database": "^10.0 || ^11.0 || ^12.0",
+        "illuminate/support": "^10.0 || ^11.0 || ^12.0",
         "laravel/prompts": ">=0.1",
         "symfony/console": "^6.0 || ^7.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.3.1",
         "nesbot/carbon": "^2.62.1 || ^3.0",
-        "orchestra/testbench": "^8.0 || ^9.0",
-        "phpunit/phpunit": "^10.0",
+        "orchestra/testbench": "^8.0 || ^9.0 || ^10.0",
+        "phpunit/phpunit": "^10.0 || ^11.0 || ^12.0",
         "ramsey/uuid": "^4.0"
     },
     "conflict": {
