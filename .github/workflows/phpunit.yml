@@ -35,8 +35,5 @@ jobs:
                 if: matrix.laravel == '10.0'
                 run: composer require doctrine/dbal
 
-            -   name: Update PHPUnit Configuration
-                run: vendor/bin/phpunit --migrate-configuration
-
             -   name: Execute tests
                 run: sudo vendor/bin/phpunit
