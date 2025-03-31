@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Concerns;
 
 use Illuminate\Support\Facades\DB;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use DragonCode\LaravelDeployOperations\Operation;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
