@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DragonCode\LaravelDeployOperations\Services;
 
 use DragonCode\LaravelDeployOperations\Data\OptionsData;
+use DragonCode\LaravelDeployOperations\Enums\StatusEnum;
 use DragonCode\LaravelDeployOperations\Helpers\ConfigHelper;
 use DragonCode\LaravelDeployOperations\Jobs\OperationJob;
 use DragonCode\LaravelDeployOperations\Notifications\Notification;
@@ -52,7 +53,7 @@ class MigratorService
         $name      = $this->resolveOperationName($path);
 
         if (! $this->allowOperation($operation, $options)) {
-            $this->notification->twoColumn($name, '<fg=yellow;options=bold>SKIPPED</>');
+            $this->notification->twoColumn($name, StatusEnum::Skipped->toColor());
 
             return;
         }
@@ -60,7 +61,7 @@ class MigratorService
         if ($this->hasAsync($operation, $options)) {
             OperationJob::dispatch($name);
 
-            $this->notification->twoColumn($name, '<fg=blue;options=bold>PENDING</>');
+            $this->notification->twoColumn($name, StatusEnum::Pending->toColor());
 
             return;
         }
