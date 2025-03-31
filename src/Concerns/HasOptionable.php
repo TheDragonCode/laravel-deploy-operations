@@ -31,14 +31,14 @@ trait HasOptionable
     protected function getOptions(): array
     {
         return Arr::of($this->availableOptions())
-            ->filter(fn (array $option) => in_array($option[0], $this->options))
+            ->filter(fn (array $option) => in_array($option[0], $this->options, true))
             ->toArray();
     }
 
     protected function getArguments(): array
     {
         return Arr::of($this->availableArguments())
-            ->filter(fn (array $argument) => in_array($argument[0], $this->arguments))
+            ->filter(fn (array $argument) => in_array($argument[0], $this->arguments, true))
             ->toArray();
     }
 
