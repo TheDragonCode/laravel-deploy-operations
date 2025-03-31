@@ -15,6 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use function app;
 use function array_merge;
+use function sprintf;
 
 abstract class Command extends BaseCommand
 {

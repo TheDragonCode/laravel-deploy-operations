@@ -7,6 +7,7 @@ namespace DragonCode\LaravelDeployOperations\Concerns;
 use DragonCode\LaravelDeployOperations\Constants\Options;
 use DragonCode\LaravelDeployOperations\Services\MutexService;
 
+use function app;
 use function is_numeric;
 
 trait HasIsolatable

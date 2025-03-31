@@ -35,7 +35,7 @@ class SorterHelper
 
     protected function callback(): Closure
     {
-        return function (string $a, string $b): int {
+        return static function (string $a, string $b): int {
             $current = Path::filename($a);
             $next    = Path::filename($b);
 
