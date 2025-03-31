@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DragonCode\LaravelDeployOperations;
 
 use DragonCode\LaravelDeployOperations\Concerns\Artisan;
