@@ -6,6 +6,7 @@ namespace DragonCode\LaravelDeployOperations\Processors;
 
 use Closure;
 use DragonCode\LaravelDeployOperations\Concerns\HasArtisan;
+use DragonCode\LaravelDeployOperations\Data\OptionsData;
 use DragonCode\LaravelDeployOperations\Enums\MethodEnum;
 use DragonCode\LaravelDeployOperations\Helpers\ConfigHelper;
 use DragonCode\LaravelDeployOperations\Helpers\GitHelper;
@@ -13,7 +14,6 @@ use DragonCode\LaravelDeployOperations\Helpers\SorterHelper;
 use DragonCode\LaravelDeployOperations\Notifications\Notification;
 use DragonCode\LaravelDeployOperations\Repositories\OperationsRepository;
 use DragonCode\LaravelDeployOperations\Services\MigratorService;
-use DragonCode\LaravelDeployOperations\Values\OptionsData;
 use DragonCode\Support\Facades\Helpers\Arr;
 use DragonCode\Support\Facades\Helpers\Str;
 use DragonCode\Support\Filesystem\File;

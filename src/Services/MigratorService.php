@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelDeployOperations\Services;
 
+use DragonCode\LaravelDeployOperations\Data\OptionsData;
 use DragonCode\LaravelDeployOperations\Helpers\ConfigHelper;
 use DragonCode\LaravelDeployOperations\Jobs\OperationJob;
 use DragonCode\LaravelDeployOperations\Notifications\Notification;
 use DragonCode\LaravelDeployOperations\Operation;
 use DragonCode\LaravelDeployOperations\Repositories\OperationsRepository;
-use DragonCode\LaravelDeployOperations\Values\OptionsData;
 use DragonCode\Support\Exceptions\FileNotFoundException;
 use DragonCode\Support\Facades\Helpers\Str;
 use DragonCode\Support\Filesystem\File;
@@ -168,7 +168,7 @@ class MigratorService
     protected function resolveOperationName(string $path): string
     {
         return Str::of(realpath($path))
-            ->after(realpath($this->config->path()) . DIRECTORY_SEPARATOR)
+            ->after(realpath($this->config->basePath()) . DIRECTORY_SEPARATOR)
             ->replace(['\\', '/'], '/')
             ->before('.php')
             ->toString();

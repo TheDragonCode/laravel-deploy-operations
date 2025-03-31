@@ -46,9 +46,9 @@ class ConfigHelper
             ->toArray();
     }
 
-    public function path(?string $path = null): string
+    public function basePath(string $path = ''): string
     {
-        return rtrim($this->directory(), '\\/') . DIRECTORY_SEPARATOR . ltrim((string) $path, '\\/');
+        return rtrim($this->directory(), '\\/') . DIRECTORY_SEPARATOR . ltrim($path, '\\/');
     }
 
     public function gitPath(): string

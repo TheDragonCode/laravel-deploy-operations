@@ -7,8 +7,8 @@ namespace DragonCode\LaravelDeployOperations\Console;
 use DragonCode\LaravelDeployOperations\Concerns\ConfirmableTrait;
 use DragonCode\LaravelDeployOperations\Concerns\HasIsolatable;
 use DragonCode\LaravelDeployOperations\Concerns\HasOptionable;
+use DragonCode\LaravelDeployOperations\Data\OptionsData;
 use DragonCode\LaravelDeployOperations\Processors\Processor;
-use DragonCode\LaravelDeployOperations\Values\OptionsData;
 use Illuminate\Console\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -56,14 +56,14 @@ abstract class Command extends BaseCommand
     protected function resolveProcessor(): Processor
     {
         return app($this->processor, [
-            'options' => $this->getOptionsDto(),
+            'options' => $this->getOptionsData(),
             'input'   => $this->input,
             'output'  => $this->output,
         ]);
     }
 
-    protected function getOptionsDto(): OptionsData
+    protected function getOptionsData(): OptionsData
     {
-        return OptionsData::fromArray(array_merge($this->options(), $this->arguments()))->resolvePath();
+        return OptionsData::from(array_merge($this->options(), $this->arguments()));
     }
 }

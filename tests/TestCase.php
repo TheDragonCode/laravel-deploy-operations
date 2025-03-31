@@ -11,6 +11,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use Spatie\LaravelData\LaravelDataServiceProvider;
 use Tests\Concerns\AssertDatabase;
 use Tests\Concerns\Database;
 use Tests\Concerns\Files;
@@ -32,7 +33,10 @@ abstract class TestCase extends BaseTestCase
 
     protected function getPackageProviders($app): array
     {
-        return [ServiceProvider::class];
+        return [
+            ServiceProvider::class,
+            LaravelDataServiceProvider::class,
+        ];
     }
 
     protected function getEnvironmentSetUp($app): void
