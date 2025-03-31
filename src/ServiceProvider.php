@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelDeployOperations;
 
-use DragonCode\LaravelDeployOperations\Concerns\About;
+use DragonCode\LaravelDeployOperations\Concerns\HasAbout;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
 {
-    use About;
+    use HasAbout;
 
     public function boot(): void
     {
@@ -31,14 +31,14 @@ class ServiceProvider extends BaseServiceProvider
     protected function registerCommands(): void
     {
         $this->commands([
-            Console\Operations::class,
-            Console\Fresh::class,
-            Console\Install::class,
-            Console\Make::class,
-            Console\Refresh::class,
-            Console\Reset::class,
-            Console\Rollback::class,
-            Console\Status::class,
+            Console\OperationsCommand::class,
+            Console\FreshCommand::class,
+            Console\InstallCommand::class,
+            Console\MakeCommand::class,
+            Console\RefreshCommand::class,
+            Console\ResetCommand::class,
+            Console\RollbackCommand::class,
+            Console\StatusCommand::class,
         ]);
     }
 

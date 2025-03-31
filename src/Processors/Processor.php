@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace DragonCode\LaravelDeployOperations\Processors;
 
 use Closure;
-use DragonCode\LaravelDeployOperations\Concerns\Artisan;
+use DragonCode\LaravelDeployOperations\Concerns\HasArtisan;
 use DragonCode\LaravelDeployOperations\Enums\MethodEnum;
-use DragonCode\LaravelDeployOperations\Helpers\Config;
-use DragonCode\LaravelDeployOperations\Helpers\Git;
-use DragonCode\LaravelDeployOperations\Helpers\Sorter;
+use DragonCode\LaravelDeployOperations\Helpers\ConfigHelper;
+use DragonCode\LaravelDeployOperations\Helpers\GitHelper;
+use DragonCode\LaravelDeployOperations\Helpers\SorterHelper;
 use DragonCode\LaravelDeployOperations\Notifications\Notification;
 use DragonCode\LaravelDeployOperations\Repositories\OperationsRepository;
-use DragonCode\LaravelDeployOperations\Services\Migrator;
-use DragonCode\LaravelDeployOperations\Values\Options;
+use DragonCode\LaravelDeployOperations\Services\MigratorService;
+use DragonCode\LaravelDeployOperations\Values\OptionsData;
 use DragonCode\Support\Facades\Helpers\Arr;
 use DragonCode\Support\Facades\Helpers\Str;
 use DragonCode\Support\Filesystem\File;
@@ -25,22 +25,22 @@ use function array_filter;
 
 abstract class Processor
 {
-    use Artisan;
+    use HasArtisan;
 
     abstract public function handle(): void;
 
     public function __construct(
-        protected Options $options,
+        protected OptionsData $options,
         protected InputInterface $input,
         protected OutputStyle $output,
-        protected Config $config,
+        protected ConfigHelper $config,
         protected OperationsRepository $repository,
-        protected Git $git,
+        protected GitHelper $git,
         protected File $file,
-        protected Migrator $migrator,
+        protected MigratorService $migrator,
         protected Notification $notification,
         protected Dispatcher $events,
-        protected Sorter $sorter
+        protected SorterHelper $sorter
     ) {
         $this->notification->setOutput($this->output, $this->options->mute);
         $this->repository->setConnection($this->options->connection);

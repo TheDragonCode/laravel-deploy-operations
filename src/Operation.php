@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelDeployOperations;
 
-use DragonCode\LaravelDeployOperations\Concerns\Artisan;
+use DragonCode\LaravelDeployOperations\Concerns\HasArtisan;
 
 abstract class Operation
 {
-    use Artisan;
+    use HasArtisan;
 
     /**
      * Determines the type of launch of the deploy operation.

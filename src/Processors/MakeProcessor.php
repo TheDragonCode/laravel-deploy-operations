@@ -14,7 +14,7 @@ use function date;
 use function Laravel\Prompts\text;
 use function realpath;
 
-class Make extends Processor
+class MakeProcessor extends Processor
 {
     protected string $fallback = 'auto';
 

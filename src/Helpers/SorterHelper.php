@@ -10,7 +10,7 @@ use DragonCode\Support\Facades\Helpers\Arr;
 
 use function in_array;
 
-class Sorter
+class SorterHelper
 {
     public function byValues(array $items): array
     {

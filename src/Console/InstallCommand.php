@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace DragonCode\LaravelDeployOperations\Console;
 
 use DragonCode\LaravelDeployOperations\Constants\Names;
-use DragonCode\LaravelDeployOperations\Processors\Install as InstallProcessor;
+use DragonCode\LaravelDeployOperations\Processors\InstallProcessor;
 use DragonCode\LaravelDeployOperations\Processors\Processor;
 
-class Install extends Command
+class InstallCommand extends Command
 {
     protected $name = Names::Install;
 

@@ -6,10 +6,10 @@ namespace DragonCode\LaravelDeployOperations\Console;
 
 use DragonCode\LaravelDeployOperations\Constants\Names;
 use DragonCode\LaravelDeployOperations\Constants\Options;
-use DragonCode\LaravelDeployOperations\Processors\Operations as OperationsProcessor;
+use DragonCode\LaravelDeployOperations\Processors\OperationsProcessor;
 use DragonCode\LaravelDeployOperations\Processors\Processor;
 
-class Operations extends Command
+class OperationsCommand extends Command
 {
     protected $signature = Names::Operations;
 

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelDeployOperations\Services;
 
-use DragonCode\LaravelDeployOperations\Helpers\Config;
+use DragonCode\LaravelDeployOperations\Helpers\ConfigHelper;
 use DragonCode\LaravelDeployOperations\Jobs\OperationJob;
 use DragonCode\LaravelDeployOperations\Notifications\Notification;
 use DragonCode\LaravelDeployOperations\Operation;
 use DragonCode\LaravelDeployOperations\Repositories\OperationsRepository;
-use DragonCode\LaravelDeployOperations\Values\Options;
+use DragonCode\LaravelDeployOperations\Values\OptionsData;
 use DragonCode\Support\Exceptions\FileNotFoundException;
 use DragonCode\Support\Facades\Helpers\Str;
 use DragonCode\Support\Filesystem\File;
@@ -21,13 +21,13 @@ use Throwable;
 use function method_exists;
 use function realpath;
 
-class Migrator
+class MigratorService
 {
     public function __construct(
         protected File $file,
         protected Notification $notification,
         protected OperationsRepository $repository,
-        protected Config $config,
+        protected ConfigHelper $config,
         protected Container $container
     ) {}
 
@@ -45,7 +45,7 @@ class Migrator
         return $this;
     }
 
-    public function runUp(string $filename, int $batch, Options $options): void
+    public function runUp(string $filename, int $batch, OptionsData $options): void
     {
         $path      = $this->resolvePath($filename, $options->path);
         $operation = $this->resolveOperation($path);
@@ -76,7 +76,7 @@ class Migrator
         });
     }
 
-    public function runDown(string $filename, Options $options): void
+    public function runDown(string $filename, OptionsData $options): void
     {
         $path      = $this->resolvePath($filename, $options->path);
         $operation = $this->resolveOperation($path);
@@ -109,7 +109,7 @@ class Migrator
         return method_exists($operation, $method);
     }
 
-    protected function hasAsync(Operation $operation, Options $options): bool
+    protected function hasAsync(Operation $operation, OptionsData $options): bool
     {
         return ! $options->sync && $operation->shouldBeAsync();
     }
@@ -131,7 +131,7 @@ class Migrator
         $this->repository->delete($name);
     }
 
-    protected function allowOperation(Operation $operation, Options $options): bool
+    protected function allowOperation(Operation $operation, OptionsData $options): bool
     {
         if (! $operation->shouldRun()) {
             return false;
@@ -140,7 +140,7 @@ class Migrator
         return ! $this->disallowBefore($operation, $options);
     }
 
-    protected function disallowBefore(Operation $operation, Options $options): bool
+    protected function disallowBefore(Operation $operation, OptionsData $options): bool
     {
         return $options->before && ! $operation->needBefore();
     }

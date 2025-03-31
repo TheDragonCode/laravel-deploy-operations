@@ -9,7 +9,7 @@ use DragonCode\LaravelDeployOperations\Events\DeployOperationEnded;
 use DragonCode\LaravelDeployOperations\Events\DeployOperationStarted;
 use DragonCode\LaravelDeployOperations\Events\NoPendingDeployOperations;
 
-class Rollback extends Processor
+class RollbackProcessor extends Processor
 {
     public function handle(): void
     {

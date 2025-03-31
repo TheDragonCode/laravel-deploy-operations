@@ -9,7 +9,7 @@ use DragonCode\LaravelDeployOperations\Console\Command;
 use Illuminate\Contracts\Cache\Factory as Cache;
 use Illuminate\Contracts\Cache\Repository;
 
-class Mutex
+class MutexService
 {
     protected ?string $store = null;
 

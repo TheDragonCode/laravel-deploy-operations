@@ -7,22 +7,21 @@ namespace DragonCode\LaravelDeployOperations\Console;
 use DragonCode\LaravelDeployOperations\Constants\Names;
 use DragonCode\LaravelDeployOperations\Constants\Options;
 use DragonCode\LaravelDeployOperations\Processors\Processor;
-use DragonCode\LaravelDeployOperations\Processors\Rollback as RollbackProcessor;
+use DragonCode\LaravelDeployOperations\Processors\RefreshProcessor;
 
-class Rollback extends Command
+class RefreshCommand extends Command
 {
-    protected $name = Names::Rollback;
+    protected $name = Names::Refresh;
 
-    protected $description = 'Rollback the last deploy operation';
+    protected $description = 'Reset and re-run all deploy operations';
 
-    protected Processor|string $processor = RollbackProcessor::class;
+    protected Processor|string $processor = RefreshProcessor::class;
 
     protected array $options = [
         Options::Connection,
         Options::Force,
         Options::Path,
         Options::Realpath,
-        Options::Step,
         Options::Mute,
         Options::Isolated,
     ];

@@ -12,7 +12,7 @@ use function ltrim;
 use function rtrim;
 use function str_replace;
 
-class Config
+class ConfigHelper
 {
     public function __construct(
         protected Repository $config

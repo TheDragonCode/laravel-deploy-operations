@@ -14,7 +14,7 @@ use DragonCode\LaravelDeployOperations\Events\NoPendingDeployOperations;
 use DragonCode\Support\Facades\Helpers\Str;
 use Throwable;
 
-class Operations extends Processor
+class OperationsProcessor extends Processor
 {
     public function handle(): void
     {

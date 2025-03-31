@@ -7,7 +7,7 @@ namespace DragonCode\LaravelDeployOperations\Processors;
 use DragonCode\LaravelDeployOperations\Constants\Names;
 use DragonCode\LaravelDeployOperations\Constants\Options;
 
-class Reset extends Processor
+class ResetProcessor extends Processor
 {
     public function handle(): void
     {

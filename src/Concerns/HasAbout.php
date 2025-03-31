@@ -9,7 +9,7 @@ use DragonCode\Support\Facades\Helpers\Arr;
 use DragonCode\Support\Facades\Helpers\Str;
 use Illuminate\Foundation\Console\AboutCommand;
 
-trait About
+trait HasAbout
 {
     protected string $composer = __DIR__ . '/../../composer.json';
 

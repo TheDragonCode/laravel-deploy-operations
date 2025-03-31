@@ -7,7 +7,7 @@ namespace DragonCode\LaravelDeployOperations\Processors;
 use DragonCode\LaravelDeployOperations\Constants\Names;
 use DragonCode\LaravelDeployOperations\Constants\Options;
 
-class Fresh extends Processor
+class FreshProcessor extends Processor
 {
     public function handle(): void
     {

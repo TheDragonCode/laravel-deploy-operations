@@ -8,7 +8,7 @@ use DragonCode\Support\Facades\Filesystem\Directory;
 use DragonCode\Support\Facades\Filesystem\Path;
 use DragonCode\Support\Facades\Helpers\Str;
 
-class Install extends Processor
+class InstallProcessor extends Processor
 {
     public function handle(): void
     {

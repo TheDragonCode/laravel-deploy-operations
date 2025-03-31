@@ -6,7 +6,7 @@ namespace Tests\Commands;
 
 use DragonCode\LaravelDeployOperations\Console\Command;
 use DragonCode\LaravelDeployOperations\Constants\Options;
-use DragonCode\LaravelDeployOperations\Services\Mutex;
+use DragonCode\LaravelDeployOperations\Services\MutexService;
 use Illuminate\Container\Container;
 use Mockery as m;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -17,7 +17,7 @@ class MutexTest extends TestCase
 {
     protected Command $command;
 
-    protected Mutex $mutex;
+    protected MutexService $mutex;
 
     protected function setUp(): void
     {
@@ -32,10 +32,10 @@ class MutexTest extends TestCase
             }
         };
 
-        $this->mutex = m::mock(Mutex::class);
+        $this->mutex = m::mock(MutexService::class);
 
         $container = Container::getInstance();
-        $container->instance(Mutex::class, $this->mutex);
+        $container->instance(MutexService::class, $this->mutex);
         $this->command->setLaravel($container);
     }
 

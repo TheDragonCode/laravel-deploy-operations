@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Helpers;
 
-use DragonCode\LaravelDeployOperations\Helpers\Sorter;
+use DragonCode\LaravelDeployOperations\Helpers\SorterHelper;
 use Tests\TestCase;
 
 class SorterTest extends TestCase
@@ -84,8 +84,8 @@ class SorterTest extends TestCase
         $this->assertSame($expected, $this->sorter()->byRan($items, $completed));
     }
 
-    protected function sorter(): Sorter
+    protected function sorter(): SorterHelper
     {
-        return new Sorter();
+        return new SorterHelper();
     }
 }

@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace DragonCode\LaravelDeployOperations\Concerns;
 
 use DragonCode\LaravelDeployOperations\Constants\Options;
-use DragonCode\LaravelDeployOperations\Services\Mutex;
+use DragonCode\LaravelDeployOperations\Services\MutexService;
 
 use function is_numeric;
 
-trait Isolatable
+trait HasIsolatable
 {
-    protected function isolationMutex(): Mutex
+    protected function isolationMutex(): MutexService
     {
-        return app(Mutex::class);
+        return app(MutexService::class);
     }
 
     protected function isolatedStatusCode(): int
