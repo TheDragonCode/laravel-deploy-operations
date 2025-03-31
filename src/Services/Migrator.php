@@ -71,7 +71,7 @@ class Migrator
                 ? $this->runOperation($operation, '__invoke')
                 : $this->runOperation($operation, 'up');
 
-            if ($this->allowLogging($operation)) {
+            if ($operation->shouldOnce()) {
                 $this->log($name, $batch);
             }
         });
@@ -96,7 +96,7 @@ class Migrator
                 $this->runMethod(
                     $operation,
                     $method,
-                    $operation->enabledTransactions(),
+                    $operation->withinTransactions(),
                     $operation->transactionAttempts()
                 );
 
@@ -117,7 +117,7 @@ class Migrator
 
     protected function hasAsync(Operation $operation, Options $options): bool
     {
-        return ! $options->sync && $operation->isAsync();
+        return ! $options->sync && $operation->shouldBeAsync();
     }
 
     protected function runMethod(Operation $operation, string $method, bool $transactions, int $attempts): void
@@ -150,29 +150,22 @@ class Migrator
     {
         $env = $this->config->environment();
 
-        return $operation->allow()
-            && $this->onEnvironment($env, $operation->onEnvironment())
+        return $operation->shouldRun()
+            && $operation->withinEnvironment()
             && $this->exceptEnvironment($env, $operation->exceptEnvironment());
     }
 
-    protected function onEnvironment(?string $env, array $on): bool
-    {
-        return empty($on) || in_array($env, $on);
-    }
-
+    /**
+     * @deprecated
+     */
     protected function exceptEnvironment(?string $env, array $except): bool
     {
-        return empty($except) || ! in_array($env, $except);
+        return empty($except) || ! in_array($env, $except, true);
     }
 
     protected function disallowBefore(Operation $operation, Options $options): bool
     {
-        return $options->before && ! $operation->hasBefore();
-    }
-
-    protected function allowLogging(Operation $operation): bool
-    {
-        return $operation->isOnce();
+        return $options->before && ! $operation->needBefore();
     }
 
     protected function resolvePath(string $filename, string $path): string
