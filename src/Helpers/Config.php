@@ -28,6 +28,11 @@ class Config
         return $this->config->get('deploy-operations.connection');
     }
 
+    public function transactionAttempts(): int
+    {
+        return $this->config->get('deploy-operations.transactions.attempts', 1);
+    }
+
     public function table(): string
     {
         return $this->config->get('deploy-operations.table');

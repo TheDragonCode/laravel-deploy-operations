@@ -20,13 +20,13 @@ return new class extends Operation {
         ]);
     }
 
-    public function allow(): bool
-    {
-        return false;
-    }
-
     protected function table(): Builder
     {
         return DB::table('environment');
+    }
+
+    public function shouldRun(): bool
+    {
+        return false;
     }
 };

@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
 return new class extends Operation {
-    protected bool $once = false;
-
     public function up(): void
     {
         $this->table()->insert([
@@ -18,5 +16,10 @@ return new class extends Operation {
     protected function table(): Builder
     {
         return DB::table('every_time');
+    }
+
+    public function shouldOnce(): bool
+    {
+        return false;
     }
 };

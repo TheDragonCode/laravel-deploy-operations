@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
 return new class extends Operation {
-    protected array|string|null $environment = 'production';
-
     public function up(): void
     {
         $this->table()->insert([
@@ -25,5 +23,10 @@ return new class extends Operation {
     protected function table(): Builder
     {
         return DB::table('environment');
+    }
+
+    public function shouldRun(): bool
+    {
+        return app()->environment() === 'production';
     }
 };

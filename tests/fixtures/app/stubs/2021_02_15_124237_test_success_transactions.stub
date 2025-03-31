@@ -14,11 +14,6 @@ return new class extends Operation {
         ]);
     }
 
-    public function enabledTransactions(): bool
-    {
-        return true;
-    }
-
     protected function table()
     {
         return DB::table('transactions');
@@ -27,5 +22,10 @@ return new class extends Operation {
     protected function value(): array
     {
         return ['value' => Uuid::uuid4()];
+    }
+
+    public function withinTransactions(): bool
+    {
+        return true;
     }
 };
