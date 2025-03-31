@@ -6,7 +6,7 @@ namespace DragonCode\LaravelDeployOperations\Services;
 
 use Carbon\CarbonInterval;
 use DragonCode\LaravelDeployOperations\Console\Command;
-use Illuminate\Contracts\Cache\Factory as Cache;
+use Illuminate\Contracts\Cache\Factory;
 use Illuminate\Contracts\Cache\Repository;
 
 class MutexService
@@ -14,7 +14,7 @@ class MutexService
     protected ?string $store = null;
 
     public function __construct(
-        protected Cache $cache
+        protected Factory $cache
     ) {}
 
     public function create(Command $command): bool

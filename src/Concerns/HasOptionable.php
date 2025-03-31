@@ -42,6 +42,17 @@ trait HasOptionable
             ->toArray();
     }
 
+    protected function availableArguments(): array
+    {
+        return [
+            [
+                Options::Name,
+                InputArgument::OPTIONAL,
+                'The name of the operation',
+            ],
+        ];
+    }
+
     protected function availableOptions(): array
     {
         return [
@@ -101,13 +112,6 @@ trait HasOptionable
                 'Makes all operations run synchronously',
                 false,
             ],
-        ];
-    }
-
-    protected function availableArguments(): array
-    {
-        return [
-            [Options::Name, InputArgument::OPTIONAL, 'The name of the operation'],
         ];
     }
 }
