@@ -22,14 +22,14 @@ abstract class Operation
     /**
      * Determines which environment to run on.
      *
-     * @deprecated Will be removed in 7.x version. Use `withinEnvironment` method instead.
+     * @deprecated Will be removed in 7.x version. Use `shouldEnvironment` method instead.
      */
     protected array|string|null $environment = null;
 
     /**
      * Determines in which environment it should not run.
      *
-     * @deprecated Will be removed in 7.x version. Use `exceptEnvironment` method instead.
+     * @deprecated Will be removed in 7.x version. Use `shouldEnvironment` method instead.
      */
     protected array|string|null $exceptEnvironment = null;
 
@@ -103,28 +103,28 @@ abstract class Operation
     /**
      * Determines which environment to run on.
      *
-     * @deprecated Will be removed in 7.x version. Use `withinEnvironment` method instead.
+     * @deprecated Will be removed in 7.x version. Use `shouldEnvironment` method instead.
      */
     public function onEnvironment(): array
     {
         return Arr::wrap($this->environment);
     }
 
-    public function withinEnvironment(): bool
-    {
-        $env = $this->onEnvironment();
-
-        return empty($env) || in_array(app()->environment(), $env, true);
-    }
-
     /**
      * Determines in which environment it should not run.
      *
-     * @deprecated Since with version 7.0 will return `bool`.
+     * @deprecated Will be removed in 7.x version. Use `shouldEnvironment` method instead.
      */
     public function exceptEnvironment(): array
     {
         return Arr::wrap($this->exceptEnvironment);
+    }
+
+    public function shouldBeEnvironment(): bool
+    {
+        $env = $this->onEnvironment();
+
+        return empty($env) || in_array(app()->environment(), $env, true);
     }
 
     /**

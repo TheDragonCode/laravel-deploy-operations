@@ -151,7 +151,7 @@ class Migrator
         $env = $this->config->environment();
 
         return $operation->shouldRun()
-            && $operation->withinEnvironment()
+            && $operation->shouldBeEnvironment()
             && $this->exceptEnvironment($env, $operation->exceptEnvironment());
     }
 
