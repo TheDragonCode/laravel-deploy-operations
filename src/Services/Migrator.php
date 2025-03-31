@@ -92,12 +92,7 @@ class Migrator
     {
         if ($this->hasOperation($operation, $method)) {
             try {
-                $this->runMethod(
-                    $operation,
-                    $method,
-                    $operation->withinTransactions(),
-                    $operation->transactionAttempts()
-                );
+                $this->runMethod($operation, $method, $operation->withinTransactions());
 
                 $operation->success();
             }
@@ -119,11 +114,11 @@ class Migrator
         return ! $options->sync && $operation->shouldBeAsync();
     }
 
-    protected function runMethod(Operation $operation, string $method, bool $transactions, int $attempts): void
+    protected function runMethod(Operation $operation, string $method, bool $transactions): void
     {
         $callback = fn () => $this->container->call([$operation, $method]);
 
-        $transactions ? DB::transaction($callback, $attempts) : $callback();
+        $transactions ? DB::transaction($callback, $this->config->transactionAttempts()) : $callback();
     }
 
     protected function log(string $name, int $batch): void

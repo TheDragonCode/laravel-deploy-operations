@@ -18,7 +18,7 @@ return new class extends Operation {
         return DB::table('test');
     }
 
-    public function isAsync(): bool
+    public function shouldBeAsync(): bool
     {
         return true;
     }

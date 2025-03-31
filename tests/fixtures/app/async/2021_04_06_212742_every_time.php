@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
 return new class extends Operation {
-    protected bool $once = false;
-
     public function __invoke(): void
     {
         $this->table()->insert([
@@ -20,7 +18,12 @@ return new class extends Operation {
         return DB::table('every_time');
     }
 
-    public function isAsync(): bool
+    public function shouldOnce(): bool
+    {
+        return false;
+    }
+
+    public function shouldBeAsync(): bool
     {
         return true;
     }
