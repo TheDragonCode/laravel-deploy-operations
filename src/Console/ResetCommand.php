@@ -7,15 +7,15 @@ namespace DragonCode\LaravelDeployOperations\Console;
 use DragonCode\LaravelDeployOperations\Constants\Names;
 use DragonCode\LaravelDeployOperations\Constants\Options;
 use DragonCode\LaravelDeployOperations\Processors\Processor;
-use DragonCode\LaravelDeployOperations\Processors\Refresh as RefreshProcessor;
+use DragonCode\LaravelDeployOperations\Processors\ResetProcessor;
 
-class Refresh extends Command
+class ResetCommand extends Command
 {
-    protected $name = Names::Refresh;
+    protected $name = Names::Reset;
 
-    protected $description = 'Reset and re-run all deploy operations';
+    protected $description = 'Rollback all deploy operations';
 
-    protected Processor|string $processor = RefreshProcessor::class;
+    protected Processor|string $processor = ResetProcessor::class;
 
     protected array $options = [
         Options::Connection,

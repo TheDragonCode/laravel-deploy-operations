@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Helpers;
 
-use DragonCode\LaravelDeployOperations\Helpers\Git;
+use DragonCode\LaravelDeployOperations\Helpers\GitHelper;
 use Tests\TestCase;
 
 class GitTest extends TestCase
@@ -21,8 +21,8 @@ class GitTest extends TestCase
         $this->assertIsString($branch);
     }
 
-    protected function git(): Git
+    protected function git(): GitHelper
     {
-        return $this->app->make(Git::class);
+        return $this->app->make(GitHelper::class);
     }
 }

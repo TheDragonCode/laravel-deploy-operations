@@ -11,10 +11,10 @@ use function realpath;
 use function rtrim;
 use function sprintf;
 
-class Git
+class GitHelper
 {
     public function __construct(
-        protected Config $config
+        protected ConfigHelper $config
     ) {}
 
     public function currentBranch(?string $path = null): ?string

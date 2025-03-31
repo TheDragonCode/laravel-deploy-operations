@@ -7,9 +7,9 @@ namespace DragonCode\LaravelDeployOperations\Console;
 use DragonCode\LaravelDeployOperations\Constants\Names;
 use DragonCode\LaravelDeployOperations\Constants\Options;
 use DragonCode\LaravelDeployOperations\Processors\Processor;
-use DragonCode\LaravelDeployOperations\Processors\Status as StatusProcessor;
+use DragonCode\LaravelDeployOperations\Processors\StatusProcessor;
 
-class Status extends Command
+class StatusCommand extends Command
 {
     protected $name = Names::Status;
 

@@ -12,7 +12,7 @@ use Symfony\Component\Console\Input\InputOption;
 use function in_array;
 
 /** @mixin \DragonCode\LaravelDeployOperations\Console\Command */
-trait Optionable
+trait HasOptionable
 {
     protected array $arguments = [];
 

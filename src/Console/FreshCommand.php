@@ -6,10 +6,10 @@ namespace DragonCode\LaravelDeployOperations\Console;
 
 use DragonCode\LaravelDeployOperations\Constants\Names;
 use DragonCode\LaravelDeployOperations\Constants\Options;
-use DragonCode\LaravelDeployOperations\Processors\Fresh as FreshProcessor;
+use DragonCode\LaravelDeployOperations\Processors\FreshProcessor;
 use DragonCode\LaravelDeployOperations\Processors\Processor;
 
-class Fresh extends Command
+class FreshCommand extends Command
 {
     protected $name = Names::Fresh;
 

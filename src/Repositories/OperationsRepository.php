@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DragonCode\LaravelDeployOperations\Repositories;
 
 use DragonCode\LaravelDeployOperations\Constants\Order;
-use DragonCode\LaravelDeployOperations\Helpers\Config;
+use DragonCode\LaravelDeployOperations\Helpers\ConfigHelper;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\ConnectionResolverInterface as Resolver;
 use Illuminate\Database\Query\Builder as Query;
@@ -21,7 +21,7 @@ class OperationsRepository
 
     public function __construct(
         protected Resolver $resolver,
-        protected Config $config
+        protected ConfigHelper $config
     ) {}
 
     public function getCompleted(): Collection

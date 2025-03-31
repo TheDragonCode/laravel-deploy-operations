@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelDeployOperations\Values;
 
-use DragonCode\LaravelDeployOperations\Helpers\Config;
+use DragonCode\LaravelDeployOperations\Helpers\ConfigHelper;
 use DragonCode\SimpleDataTransferObject\DataTransferObject;
 use DragonCode\Support\Facades\Helpers\Boolean;
 use DragonCode\Support\Facades\Helpers\Str;
 
 use function is_numeric;
 
-class Options extends DataTransferObject
+class OptionsData extends DataTransferObject
 {
     public bool $before = false;
 
@@ -75,8 +75,8 @@ class Options extends DataTransferObject
         return is_numeric($value) ? (int) $value : null;
     }
 
-    protected function config(): Config
+    protected function config(): ConfigHelper
     {
-        return app(Config::class);
+        return app(ConfigHelper::class);
     }
 }

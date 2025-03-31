@@ -6,16 +6,20 @@ namespace DragonCode\LaravelDeployOperations\Console;
 
 use DragonCode\LaravelDeployOperations\Constants\Names;
 use DragonCode\LaravelDeployOperations\Constants\Options;
+use DragonCode\LaravelDeployOperations\Processors\MakeProcessor;
 use DragonCode\LaravelDeployOperations\Processors\Processor;
-use DragonCode\LaravelDeployOperations\Processors\Reset as ResetProcessor;
 
-class Reset extends Command
+class MakeCommand extends Command
 {
-    protected $name = Names::Reset;
+    protected $signature = Names::Make;
 
-    protected $description = 'Rollback all deploy operations';
+    protected $description = 'Create a new deploy operation file';
 
-    protected Processor|string $processor = ResetProcessor::class;
+    protected Processor|string $processor = MakeProcessor::class;
+
+    protected array $arguments = [
+        Options::Name,
+    ];
 
     protected array $options = [
         Options::Connection,
@@ -23,6 +27,5 @@ class Reset extends Command
         Options::Path,
         Options::Realpath,
         Options::Mute,
-        Options::Isolated,
     ];
 }

@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace DragonCode\LaravelDeployOperations\Console;
 
 use DragonCode\LaravelDeployOperations\Concerns\ConfirmableTrait;
-use DragonCode\LaravelDeployOperations\Concerns\Isolatable;
-use DragonCode\LaravelDeployOperations\Concerns\Optionable;
+use DragonCode\LaravelDeployOperations\Concerns\HasIsolatable;
+use DragonCode\LaravelDeployOperations\Concerns\HasOptionable;
 use DragonCode\LaravelDeployOperations\Processors\Processor;
-use DragonCode\LaravelDeployOperations\Values\Options as OptionsData;
+use DragonCode\LaravelDeployOperations\Values\OptionsData;
 use Illuminate\Console\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -19,8 +19,8 @@ use function array_merge;
 abstract class Command extends BaseCommand
 {
     use ConfirmableTrait;
-    use Isolatable;
-    use Optionable;
+    use HasIsolatable;
+    use HasOptionable;
 
     protected Processor|string $processor;
 

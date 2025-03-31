@@ -8,7 +8,7 @@ use DragonCode\Support\Facades\Helpers\Arr;
 
 use function sprintf;
 
-class Status extends Processor
+class StatusProcessor extends Processor
 {
     protected string $columnName = '<fg=gray>Operation name</>';
 
