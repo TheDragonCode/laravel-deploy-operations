@@ -5,6 +5,8 @@
 docs/ export-ignore
 tests/ export-ignore
 
+*.stub linguist-language=php
+
 .editorconfig export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
