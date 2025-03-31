@@ -22,14 +22,14 @@ abstract class Operation
     /**
      * Determines which environment to run on.
      *
-     * @deprecated Will be removed in 7.x version. Use `shouldEnvironment` method instead.
+     * @deprecated Will be removed in 7.x version. Use `shouldRun` method instead.
      */
     protected array|string|null $environment = null;
 
     /**
      * Determines in which environment it should not run.
      *
-     * @deprecated Will be removed in 7.x version. Use `shouldEnvironment` method instead.
+     * @deprecated Will be removed in 7.x version. Use `shouldRun` method instead.
      */
     protected array|string|null $exceptEnvironment = null;
 
@@ -103,7 +103,7 @@ abstract class Operation
     /**
      * Determines which environment to run on.
      *
-     * @deprecated Will be removed in 7.x version. Use `shouldEnvironment` method instead.
+     * @deprecated Will be removed in 7.x version. Use `shouldRun` method instead.
      */
     public function onEnvironment(): array
     {
@@ -113,18 +113,11 @@ abstract class Operation
     /**
      * Determines in which environment it should not run.
      *
-     * @deprecated Will be removed in 7.x version. Use `shouldEnvironment` method instead.
+     * @deprecated Will be removed in 7.x version. Use `shouldRun` method instead.
      */
     public function exceptEnvironment(): array
     {
         return Arr::wrap($this->exceptEnvironment);
-    }
-
-    public function shouldBeEnvironment(): bool
-    {
-        $env = $this->onEnvironment();
-
-        return empty($env) || in_array(app()->environment(), $env, true);
     }
 
     /**
@@ -142,7 +135,14 @@ abstract class Operation
      */
     public function shouldRun(): bool
     {
-        return $this->allow();
+        $env = app()->environment();
+
+        $on     = $this->onEnvironment();
+        $except = $this->exceptEnvironment();
+
+        return $this->allow()
+            && (empty($on) || in_array($env, $on, true))
+            && (empty($except) || ! in_array($env, $except, true));
     }
 
     /**

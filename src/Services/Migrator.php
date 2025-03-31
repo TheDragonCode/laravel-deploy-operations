@@ -18,7 +18,6 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
-use function in_array;
 use function method_exists;
 use function realpath;
 
@@ -139,28 +138,11 @@ class Migrator
 
     protected function allowOperation(Operation $operation, Options $options): bool
     {
-        if (! $this->allowEnvironment($operation)) {
+        if (! $operation->shouldRun()) {
             return false;
         }
 
         return ! $this->disallowBefore($operation, $options);
-    }
-
-    protected function allowEnvironment(Operation $operation): bool
-    {
-        $env = $this->config->environment();
-
-        return $operation->shouldRun()
-            && $operation->shouldBeEnvironment()
-            && $this->exceptEnvironment($env, $operation->exceptEnvironment());
-    }
-
-    /**
-     * @deprecated
-     */
-    protected function exceptEnvironment(?string $env, array $except): bool
-    {
-        return empty($except) || ! in_array($env, $except, true);
     }
 
     protected function disallowBefore(Operation $operation, Options $options): bool
