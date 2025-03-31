@@ -82,7 +82,7 @@ trait Files
         );
     }
 
-    protected function targetDirectory(?string $path = null): string
+    protected function targetDirectory(string $path = ''): string
     {
         $dir = $this->getOperationsPath();
 
