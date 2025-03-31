@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelDeployOperations\Processors;
 
+use DragonCode\LaravelDeployOperations\Enums\StatusEnum;
 use DragonCode\Support\Facades\Helpers\Arr;
 
 use function sprintf;
@@ -13,10 +14,6 @@ class StatusProcessor extends Processor
     protected string $columnName = '<fg=gray>Operation name</>';
 
     protected string $columnStatus = '<fg=gray>Batch / Status</>';
-
-    protected string $statusRan = '<fg=green;options=bold>Ran</>';
-
-    protected string $statusPending = '<fg=yellow;options=bold>Pending</>';
 
     public function handle(): void
     {
@@ -72,10 +69,10 @@ class StatusProcessor extends Processor
     protected function getStatusFor(array $completed, string $item): string
     {
         if ($batch = Arr::get($completed, $item)) {
-            return sprintf('[%s] %s', $batch, $this->statusRan);
+            return sprintf('[%s] %s', $batch, StatusEnum::Ran->toColor());
         }
 
-        return $this->statusPending;
+        return StatusEnum::Pending->toColor();
     }
 
     protected function getCompleted(): array
