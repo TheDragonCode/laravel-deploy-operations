@@ -19,6 +19,26 @@ class MutexTest extends TestCase
 
     protected MutexService $mutex;
 
+    protected function setUp(): void
+    {
+        $this->command = new class extends Command {
+            public int $ran = 0;
+
+            public function handle(): int
+            {
+                ++$this->ran;
+
+                return self::SUCCESS;
+            }
+        };
+
+        $this->mutex = m::mock(MutexService::class);
+
+        $container = Container::getInstance();
+        $container->instance(MutexService::class, $this->mutex);
+        $this->command->setLaravel($container);
+    }
+
     public function testCanRunIsolatedCommandIfNotBlocked()
     {
         $this->mutex->shouldReceive('create')
@@ -69,26 +89,6 @@ class MutexTest extends TestCase
         $this->runCommand(false);
 
         $this->assertEquals(1, $this->command->ran);
-    }
-
-    protected function setUp(): void
-    {
-        $this->command = new class extends Command {
-            public int $ran = 0;
-
-            public function handle(): int
-            {
-                ++$this->ran;
-
-                return self::SUCCESS;
-            }
-        };
-
-        $this->mutex = m::mock(MutexService::class);
-
-        $container = Container::getInstance();
-        $container->instance(MutexService::class, $this->mutex);
-        $this->command->setLaravel($container);
     }
 
     protected function runCommand($withIsolated = true)
