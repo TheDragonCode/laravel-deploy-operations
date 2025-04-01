@@ -18,5 +18,29 @@
                 }
             ]
         }
+    ],
+    "completions": [
+        {
+            "complete": "directoryFiles",
+            "condition": [
+                {
+                    "classFqn": [
+                        "DragonCode\\LaravelDeployOperations\\Helpers\\OperationHelper"
+                    ],
+                    "methodNames": [
+                        "run"
+                    ],
+                    "place": "parameter",
+                    "parameters": [
+                        1
+                    ]
+                }
+            ],
+            "options": {
+                "directory": "operations",
+                "suffixToClear": ".php",
+                "recursive": true
+            }
+        }
     ]
 }
