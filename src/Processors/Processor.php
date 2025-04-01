@@ -6,9 +6,9 @@ namespace DragonCode\LaravelDeployOperations\Processors;
 
 use Closure;
 use DragonCode\LaravelDeployOperations\Concerns\HasArtisan;
+use DragonCode\LaravelDeployOperations\Data\Config\ConfigData;
 use DragonCode\LaravelDeployOperations\Data\OptionsData;
 use DragonCode\LaravelDeployOperations\Enums\MethodEnum;
-use DragonCode\LaravelDeployOperations\Helpers\ConfigHelper;
 use DragonCode\LaravelDeployOperations\Helpers\GitHelper;
 use DragonCode\LaravelDeployOperations\Helpers\SorterHelper;
 use DragonCode\LaravelDeployOperations\Notifications\Notification;
@@ -33,7 +33,7 @@ abstract class Processor
         protected OptionsData $options,
         protected InputInterface $input,
         protected OutputStyle $output,
-        protected ConfigHelper $config,
+        protected ConfigData $config,
         protected OperationsRepository $repository,
         protected GitHelper $git,
         protected File $file,
@@ -55,7 +55,7 @@ abstract class Processor
 
         $files = Arr::filter(
             $files,
-            fn (string $path) => Str::endsWith($path, '.php') && ! Str::contains($path, $this->config->exclude())
+            fn (string $path) => Str::endsWith($path, '.php') && ! Str::contains($path, $this->config->exclude)
         );
 
         return Arr::of($this->sorter->byValues($files))

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelDeployOperations\Services;
 
+use DragonCode\LaravelDeployOperations\Data\Config\ConfigData;
 use DragonCode\LaravelDeployOperations\Data\OptionsData;
 use DragonCode\LaravelDeployOperations\Enums\StatusEnum;
-use DragonCode\LaravelDeployOperations\Helpers\ConfigHelper;
 use DragonCode\LaravelDeployOperations\Jobs\OperationJob;
 use DragonCode\LaravelDeployOperations\Notifications\Notification;
 use DragonCode\LaravelDeployOperations\Operation;
@@ -30,7 +30,7 @@ class MigratorService
         protected File $file,
         protected Notification $notification,
         protected OperationsRepository $repository,
-        protected ConfigHelper $config,
+        protected ConfigData $config,
         protected Container $container
     ) {}
 
@@ -121,7 +121,7 @@ class MigratorService
     {
         $callback = fn () => $this->container->call([$operation, $method]);
 
-        $transactions ? DB::transaction($callback, $this->config->transactionAttempts()) : $callback();
+        $transactions ? DB::transaction($callback, $this->config->transactions->attempts) : $callback();
     }
 
     protected function log(string $name, int $batch): void
@@ -175,7 +175,7 @@ class MigratorService
     protected function resolveOperationName(string $path): string
     {
         return Str::of(realpath($path))
-            ->after(realpath($this->config->basePath()) . DIRECTORY_SEPARATOR)
+            ->after(realpath($this->config->path) . DIRECTORY_SEPARATOR)
             ->replace(['\\', '/'], '/')
             ->before('.php')
             ->toString();

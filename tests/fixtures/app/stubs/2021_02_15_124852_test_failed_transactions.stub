@@ -1,6 +1,7 @@
 <?php
 
 use DragonCode\LaravelDeployOperations\Operation;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -16,7 +17,7 @@ return new class extends Operation {
         throw new Exception('Random message');
     }
 
-    protected function table(): void
+    protected function table(): Builder
     {
         return DB::table('transactions');
     }

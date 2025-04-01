@@ -39,11 +39,12 @@ return [
     */
 
     'transactions' => [
-        // | Determines whether the use of database transactions is enabled.
+        // Determines whether the use of database transactions is enabled.
 
         'enabled' => false,
 
-        // | The number of attempts to execute a request within a transaction before throwing an error.
+        // The number of attempts to execute a request within a transaction before throwing an error.
+
         'attempts' => 1,
     ],
 
@@ -146,6 +147,6 @@ return [
         |
         */
 
-        'full_path' => env('DEPLOY_OPERATIONS_SHOW_FULL_PATH', false),
+        'full_path' => (bool) env('DEPLOY_OPERATIONS_SHOW_FULL_PATH', false),
     ],
 ];

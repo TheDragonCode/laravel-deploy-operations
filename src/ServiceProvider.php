@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace DragonCode\LaravelDeployOperations;
 
 use DragonCode\LaravelDeployOperations\Concerns\HasAbout;
+use DragonCode\LaravelDeployOperations\Data\Config\ConfigData;
 use DragonCode\LaravelDeployOperations\Listeners\MigrationEndedListener;
 use Illuminate\Database\Events\MigrationEnded;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+
+use function config;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -16,6 +19,9 @@ class ServiceProvider extends BaseServiceProvider
 
     public function boot(): void
     {
+        $this->registerEvents();
+        $this->bootConfig();
+
         if ($this->app->runningInConsole()) {
             $this->publishConfig();
             $this->publishStub();
@@ -24,8 +30,6 @@ class ServiceProvider extends BaseServiceProvider
             $this->registerCommands();
             $this->registerMigrations();
         }
-
-        $this->registerEvents();
     }
 
     public function register(): void
@@ -76,5 +80,12 @@ class ServiceProvider extends BaseServiceProvider
     protected function registerConfig(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/deploy-operations.php', 'deploy-operations');
+    }
+
+    protected function bootConfig(): void
+    {
+        $this->app->bind(ConfigData::class, static fn () => ConfigData::from(
+            config('deploy-operations')
+        ));
     }
 }

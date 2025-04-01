@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use DragonCode\LaravelDeployOperations\Helpers\ConfigHelper;
+use DragonCode\LaravelDeployOperations\Data\Config\ConfigData;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -49,6 +49,6 @@ return new class extends Migration {
 
     protected function table(): string
     {
-        return app(ConfigHelper::class)->table();
+        return app(ConfigData::class)->table;
     }
 };

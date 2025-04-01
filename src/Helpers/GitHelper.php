@@ -6,6 +6,7 @@ namespace DragonCode\LaravelDeployOperations\Helpers;
 
 use DragonCode\Support\Facades\Filesystem\Directory;
 
+use function base_path;
 use function exec;
 use function realpath;
 use function rtrim;
@@ -13,10 +14,6 @@ use function sprintf;
 
 class GitHelper
 {
-    public function __construct(
-        protected ConfigHelper $config
-    ) {}
-
     public function currentBranch(?string $path = null): ?string
     {
         if ($this->hasGitDirectory($path)) {
@@ -42,6 +39,6 @@ class GitHelper
 
     protected function resolvePath(?string $path = null): string
     {
-        return realpath($path ?: $this->config->gitPath());
+        return realpath($path ?: base_path());
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Commands;
 
 use DragonCode\LaravelDeployOperations\Constants\Names;
+use DragonCode\LaravelDeployOperations\Data\Config\ConfigData;
 use DragonCode\LaravelDeployOperations\Jobs\OperationJob;
 use Exception;
 use Illuminate\Database\Console\Migrations\RollbackCommand;
@@ -569,6 +570,8 @@ class OperationsTest extends TestCase
 
         $this->app['config']->set('deploy-operations.exclude', 'sub_path');
 
+        $this->app->forgetInstance(ConfigData::class);
+
         $table = 'every_time';
 
         $this->artisan(Names::Install)->assertExitCode(0);
@@ -618,6 +621,8 @@ class OperationsTest extends TestCase
         $this->copyFiles();
 
         $this->app['config']->set('deploy-operations.exclude', 'sub_path/2021_12_15_205804_baz');
+
+        $this->app->forgetInstance(ConfigData::class);
 
         $table = 'every_time';
 

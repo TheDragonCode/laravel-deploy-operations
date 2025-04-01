@@ -119,6 +119,6 @@ class MakeProcessor extends Processor
 
     protected function showFullPath(): bool
     {
-        return $this->config->showFullPath();
+        return $this->config->show->fullPath;
     }
 }
