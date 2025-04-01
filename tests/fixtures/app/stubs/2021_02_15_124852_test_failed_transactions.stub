@@ -16,7 +16,7 @@ return new class extends Operation {
         throw new Exception('Random message');
     }
 
-    protected function table()
+    protected function table(): void
     {
         return DB::table('transactions');
     }

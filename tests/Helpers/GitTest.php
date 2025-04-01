@@ -9,12 +9,12 @@ use Tests\TestCase;
 
 class GitTest extends TestCase
 {
-    public function testCurrentBranchNull()
+    public function testCurrentBranchNull(): void
     {
         $this->assertNull($this->git()->currentBranch(__DIR__));
     }
 
-    public function testCurrentBranch()
+    public function testCurrentBranch(): void
     {
         $branch = $this->git()->currentBranch(__DIR__ . '/../../');
 

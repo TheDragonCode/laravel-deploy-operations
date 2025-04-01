@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class MakeTest extends TestCase
 {
-    public function testMakingFiles()
+    public function testMakingFiles(): void
     {
         $name = 'MakeExample';
 
@@ -28,7 +28,7 @@ class MakeTest extends TestCase
         );
     }
 
-    public function testAskedName()
+    public function testAskedName(): void
     {
         $path = $this->getOperationsPath() . '/' . date('Y_m_d_His') . '_some_name.php';
 
@@ -41,7 +41,7 @@ class MakeTest extends TestCase
         $this->assertFileExists($path);
     }
 
-    public function testAutoName()
+    public function testAutoName(): void
     {
         $path = $this->getOperationsPath() . '/' . date('Y_m_d_His') . '_auto.php';
 
@@ -54,7 +54,7 @@ class MakeTest extends TestCase
         $this->assertFileExists($path);
     }
 
-    public function testNestedRightSlashWithoutExtension()
+    public function testNestedRightSlashWithoutExtension(): void
     {
         $name = 'Foo/bar/QweRty';
 
@@ -72,7 +72,7 @@ class MakeTest extends TestCase
         );
     }
 
-    public function testNestedRightSlashWithExtension()
+    public function testNestedRightSlashWithExtension(): void
     {
         $name = 'Foo/bar/QweRty.php';
 
@@ -90,7 +90,7 @@ class MakeTest extends TestCase
         );
     }
 
-    public function testNestedLeftSlashWithoutExtension()
+    public function testNestedLeftSlashWithoutExtension(): void
     {
         $name = 'Foo\\bar\\QweRty';
 
@@ -108,7 +108,7 @@ class MakeTest extends TestCase
         );
     }
 
-    public function testNestedLeftSlashWithExtension()
+    public function testNestedLeftSlashWithExtension(): void
     {
         $name = 'Foo\\bar\\QweRty.php';
 
@@ -126,7 +126,7 @@ class MakeTest extends TestCase
         );
     }
 
-    public function testFromCustomizedStub()
+    public function testFromCustomizedStub(): void
     {
         $name = 'MakeExample';
 

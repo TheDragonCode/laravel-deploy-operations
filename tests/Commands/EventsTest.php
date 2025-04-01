@@ -15,7 +15,7 @@ use Throwable;
 
 class EventsTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $this->copyFiles();
 
@@ -29,7 +29,7 @@ class EventsTest extends TestCase
         Event::assertNotDispatched(DeployOperationFailed::class);
     }
 
-    public function testFailed()
+    public function testFailed(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Custom exception');

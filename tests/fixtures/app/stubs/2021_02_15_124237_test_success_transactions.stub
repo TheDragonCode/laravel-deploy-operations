@@ -14,7 +14,7 @@ return new class extends Operation {
         ]);
     }
 
-    protected function table()
+    protected function table(): void
     {
         return DB::table('transactions');
     }

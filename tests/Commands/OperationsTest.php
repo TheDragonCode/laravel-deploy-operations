@@ -16,7 +16,7 @@ use Throwable;
 
 class OperationsTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $this->assertDatabaseDoesntTable($this->table);
 
@@ -32,7 +32,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationHas($this->table, 'test_migration');
     }
 
-    public function testSameName()
+    public function testSameName(): void
     {
         $this->assertDatabaseDoesntTable($this->table);
 
@@ -52,7 +52,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationHas($this->table, 'test_migration');
     }
 
-    public function testOnce()
+    public function testOnce(): void
     {
         $this->copyFiles();
 
@@ -85,7 +85,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationDoesntLike($this->table, $table);
     }
 
-    public function testSuccessTransaction()
+    public function testSuccessTransaction(): void
     {
         $this->copySuccessTransaction();
 
@@ -103,7 +103,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationHas($this->table, $table);
     }
 
-    public function testFailedTransaction()
+    public function testFailedTransaction(): void
     {
         $this->copyFailedTransaction();
 
@@ -128,7 +128,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationDoesntLike($this->table, $table);
     }
 
-    public function testSingleEnvironment()
+    public function testSingleEnvironment(): void
     {
         $this->copyFiles();
 
@@ -163,7 +163,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationDoesntLike($this->table, 'run_except_testing');
     }
 
-    public function testManyEnvironments()
+    public function testManyEnvironments(): void
     {
         $this->copyFiles();
 
@@ -204,7 +204,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationDoesntLike($this->table, 'run_except_many_environments');
     }
 
-    public function testAllow()
+    public function testAllow(): void
     {
         $this->copyFiles();
 
@@ -230,7 +230,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationDoesntLike($this->table, 'run_disallow');
     }
 
-    public function testUpSuccess()
+    public function testUpSuccess(): void
     {
         $this->copyFiles();
 
@@ -248,7 +248,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationHas($this->table, 'run_success');
     }
 
-    public function testUpSuccessOnFailed()
+    public function testUpSuccessOnFailed(): void
     {
         $this->copyFiles();
 
@@ -283,7 +283,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationDoesntLike($this->table, 'run_success_on_failed');
     }
 
-    public function testUpFailed()
+    public function testUpFailed(): void
     {
         $this->copyFiles();
 
@@ -301,7 +301,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationHas($this->table, 'run_failed');
     }
 
-    public function testUpFailedOnException()
+    public function testUpFailedOnException(): void
     {
         $this->copyFiles();
 
@@ -336,7 +336,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationDoesntLike($this->table, 'run_failed_failure');
     }
 
-    public function testPathAsFileWithExtension()
+    public function testPathAsFileWithExtension(): void
     {
         $this->copyFiles();
 
@@ -358,7 +358,7 @@ class OperationsTest extends TestCase
         $this->assertSame('sub_path/2021_12_15_205804_baz', $this->table()->first()->operation);
     }
 
-    public function testPathAsFileWithoutExtension()
+    public function testPathAsFileWithoutExtension(): void
     {
         $this->copyFiles();
 
@@ -380,7 +380,7 @@ class OperationsTest extends TestCase
         $this->assertSame($path, $this->table()->first()->operation);
     }
 
-    public function testPathAsDirectory()
+    public function testPathAsDirectory(): void
     {
         $this->copyFiles();
 
@@ -402,7 +402,7 @@ class OperationsTest extends TestCase
         $this->assertSame('sub_path/2021_12_15_205804_baz', $this->table()->first()->operation);
     }
 
-    public function testOperationsNotFound()
+    public function testOperationsNotFound(): void
     {
         $this->assertDatabaseDoesntTable($this->table);
 
@@ -413,7 +413,7 @@ class OperationsTest extends TestCase
         $this->artisan(Names::Status)->assertExitCode(0);
     }
 
-    public function testDisabledBefore()
+    public function testDisabledBefore(): void
     {
         $this->copyFiles();
 
@@ -439,7 +439,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationHas($this->table, 'test_before_disabled');
     }
 
-    public function testEnabledBefore()
+    public function testEnabledBefore(): void
     {
         $this->copyFiles();
 
@@ -465,7 +465,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationDoesntLike($this->table, 'test_before_disabled');
     }
 
-    public function testMixedBefore()
+    public function testMixedBefore(): void
     {
         $this->copyFiles();
 
@@ -563,7 +563,7 @@ class OperationsTest extends TestCase
         $this->assertSame($files, $records);
     }
 
-    public function testDirectoryExclusion()
+    public function testDirectoryExclusion(): void
     {
         $this->copyFiles();
 
@@ -613,7 +613,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationDoesntLike($this->table, 'sub_path/2022_10_27_230732_foo');
     }
 
-    public function testFileExclusion()
+    public function testFileExclusion(): void
     {
         $this->copyFiles();
 
@@ -658,7 +658,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationHas($this->table, 'sub_path/2022_10_27_230732_foo');
     }
 
-    public function testEmptyDirectory()
+    public function testEmptyDirectory(): void
     {
         $this->copyEmptyDirectory();
 
@@ -675,7 +675,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseCount($this->table, 0);
     }
 
-    public function testAsync()
+    public function testAsync(): void
     {
         $this->copyAsync();
 
@@ -711,7 +711,7 @@ class OperationsTest extends TestCase
         ]));
     }
 
-    public function testSync()
+    public function testSync(): void
     {
         $this->copyAsync();
 
@@ -748,7 +748,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationDoesntLike($this->table, 'every_time');
     }
 
-    public function testViaMigrationMethod()
+    public function testViaMigrationMethod(): void
     {
         $this->copyViaMigrations();
 
