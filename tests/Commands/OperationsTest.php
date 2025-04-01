@@ -7,7 +7,7 @@ namespace Tests\Commands;
 use DragonCode\LaravelDeployOperations\Constants\Names;
 use DragonCode\LaravelDeployOperations\Jobs\OperationJob;
 use Exception;
-use Illuminate\Database\Console\Migrations\MigrateCommand;
+use Illuminate\Database\Console\Migrations\RollbackCommand;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Str;
@@ -750,8 +750,6 @@ class OperationsTest extends TestCase
 
     public function testViaMigrationMethod()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../fixtures/migrations_with_operations');
-
         $this->copyViaMigrations();
 
         $table = 'test';
@@ -767,7 +765,7 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationDoesntLike($table, 'invoke', column: 'value');
         $this->assertDatabaseOperationDoesntLike($table, 'up_down', column: 'value');
 
-        $this->artisan(MigrateCommand::class)->assertExitCode(0);
+        $this->loadMigrationsFrom(__DIR__ . '/../fixtures/migrations_with_operations');
 
         $this->assertDatabaseCount($table, 2);
         $this->assertDatabaseCount($this->table, 2);
@@ -777,5 +775,19 @@ class OperationsTest extends TestCase
         $this->assertDatabaseOperationDoesntLike($table, 'custom', column: 'value');
         $this->assertDatabaseOperationHas($table, 'invoke', column: 'value');
         $this->assertDatabaseOperationHas($table, 'up_down', column: 'value');
+
+        $this->artisan(RollbackCommand::class, [
+            '--path'     => __DIR__ . '/../fixtures/migrations_with_operations',
+            '--realpath' => true,
+        ])->assertSuccessful();
+
+        $this->assertDatabaseCount($table, 1);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseOperationDoesntLike($this->table, 'custom');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'invoke');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'up_down');
+        $this->assertDatabaseOperationDoesntLike($table, 'custom', column: 'value');
+        $this->assertDatabaseOperationHas($table, 'invoke', column: 'value');
+        $this->assertDatabaseOperationDoesntLike($table, 'up_down', column: 'value');
     }
 }
