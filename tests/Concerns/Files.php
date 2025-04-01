@@ -50,6 +50,14 @@ trait Files
         );
     }
 
+    protected function copyViaMigrations(): void
+    {
+        File::copyDirectory(
+            __DIR__ . '/../fixtures/app/via_migrations',
+            $this->targetDirectory()
+        );
+    }
+
     protected function copySuccessFailureMethod(): void
     {
         File::copy(

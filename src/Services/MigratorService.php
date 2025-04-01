@@ -19,6 +19,8 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
+use function file_exists;
+use function is_file;
 use function method_exists;
 use function realpath;
 
@@ -148,6 +150,10 @@ class MigratorService
 
     protected function resolvePath(string $filename, string $path): string
     {
+        if (file_exists($path) && is_file($path)) {
+            return $path;
+        }
+
         $withExtension = Str::finish($filename, '.php');
 
         if ($this->file->exists($withExtension) && $this->file->isFile($withExtension)) {

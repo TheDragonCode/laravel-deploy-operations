@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace DragonCode\LaravelDeployOperations;
 
 use DragonCode\LaravelDeployOperations\Concerns\HasAbout;
+use DragonCode\LaravelDeployOperations\Listeners\MigrationEndedListener;
+use Illuminate\Database\Events\MigrationEnded;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
@@ -21,6 +24,8 @@ class ServiceProvider extends BaseServiceProvider
             $this->registerCommands();
             $this->registerMigrations();
         }
+
+        $this->registerEvents();
     }
 
     public function register(): void
@@ -40,6 +45,11 @@ class ServiceProvider extends BaseServiceProvider
             Console\RollbackCommand::class,
             Console\StatusCommand::class,
         ]);
+    }
+
+    protected function registerEvents(): void
+    {
+        Event::listen(MigrationEnded::class, MigrationEndedListener::class);
     }
 
     protected function registerMigrations(): void

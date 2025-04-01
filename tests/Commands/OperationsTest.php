@@ -7,6 +7,7 @@ namespace Tests\Commands;
 use DragonCode\LaravelDeployOperations\Constants\Names;
 use DragonCode\LaravelDeployOperations\Jobs\OperationJob;
 use Exception;
+use Illuminate\Database\Console\Migrations\RollbackCommand;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Str;
@@ -745,5 +746,48 @@ class OperationsTest extends TestCase
         $this->assertDatabaseCount($this->table, 1);
         $this->assertDatabaseOperationHas($this->table, 'foo_bar');
         $this->assertDatabaseOperationDoesntLike($this->table, 'every_time');
+    }
+
+    public function testViaMigrationMethod()
+    {
+        $this->copyViaMigrations();
+
+        $table = 'test';
+
+        $this->artisan(Names::Install)->assertExitCode(0);
+
+        $this->assertDatabaseCount($table, 0);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseOperationDoesntLike($this->table, 'custom');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'invoke');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'up_down');
+        $this->assertDatabaseOperationDoesntLike($table, 'custom', column: 'value');
+        $this->assertDatabaseOperationDoesntLike($table, 'invoke', column: 'value');
+        $this->assertDatabaseOperationDoesntLike($table, 'up_down', column: 'value');
+
+        $this->loadMigrationsFrom(__DIR__ . '/../fixtures/migrations_with_operations');
+
+        $this->assertDatabaseCount($table, 2);
+        $this->assertDatabaseCount($this->table, 2);
+        $this->assertDatabaseOperationDoesntLike($this->table, 'custom');
+        $this->assertDatabaseOperationHas($this->table, 'invoke');
+        $this->assertDatabaseOperationHas($this->table, 'up_down');
+        $this->assertDatabaseOperationDoesntLike($table, 'custom', column: 'value');
+        $this->assertDatabaseOperationHas($table, 'invoke', column: 'value');
+        $this->assertDatabaseOperationHas($table, 'up_down', column: 'value');
+
+        $this->artisan(RollbackCommand::class, [
+            '--path'     => __DIR__ . '/../fixtures/migrations_with_operations',
+            '--realpath' => true,
+        ])->assertSuccessful();
+
+        $this->assertDatabaseCount($table, 1);
+        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseOperationDoesntLike($this->table, 'custom');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'invoke');
+        $this->assertDatabaseOperationDoesntLike($this->table, 'up_down');
+        $this->assertDatabaseOperationDoesntLike($table, 'custom', column: 'value');
+        $this->assertDatabaseOperationHas($table, 'invoke', column: 'value');
+        $this->assertDatabaseOperationDoesntLike($table, 'up_down', column: 'value');
     }
 }
