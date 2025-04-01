@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace DragonCode\LaravelDeployOperations;
 
 use DragonCode\LaravelDeployOperations\Concerns\HasArtisan;
+use DragonCode\LaravelDeployOperations\Data\Config\ConfigData;
+
+use function app;
 
 abstract class Operation
 {
@@ -26,7 +29,7 @@ abstract class Operation
      */
     public function withinTransactions(): bool
     {
-        return (bool) config('deploy-operations.transactions.enabled');
+        return app(ConfigData::class)->transactions->enabled;
     }
 
     /**
@@ -50,7 +53,7 @@ abstract class Operation
      */
     public function shouldBeAsync(): bool
     {
-        return (bool) config('deploy-operations.async');
+        return app(ConfigData::class)->async;
     }
 
     /**

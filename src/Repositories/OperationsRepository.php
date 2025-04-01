@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DragonCode\LaravelDeployOperations\Repositories;
 
 use DragonCode\LaravelDeployOperations\Constants\Order;
-use DragonCode\LaravelDeployOperations\Helpers\ConfigHelper;
+use DragonCode\LaravelDeployOperations\Data\Config\ConfigData;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\ConnectionResolverInterface as Resolver;
 use Illuminate\Database\Query\Builder as Query;
@@ -21,7 +21,7 @@ class OperationsRepository
 
     public function __construct(
         protected Resolver $resolver,
-        protected ConfigHelper $config
+        protected ConfigData $config,
     ) {}
 
     public function getCompleted(): Collection
@@ -67,7 +67,7 @@ class OperationsRepository
 
     public function createRepository(): void
     {
-        $this->schema()->create($this->config->table(), function (Blueprint $table) {
+        $this->schema()->create($this->config->table, function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->string('operation');
@@ -78,12 +78,12 @@ class OperationsRepository
 
     public function repositoryExists(): bool
     {
-        return $this->schema()->hasTable($this->config->table());
+        return $this->schema()->hasTable($this->config->table);
     }
 
     public function deleteRepository(): void
     {
-        $this->schema()->dropIfExists($this->config->table());
+        $this->schema()->dropIfExists($this->config->table);
     }
 
     /**
@@ -112,13 +112,13 @@ class OperationsRepository
 
     protected function table(): Query
     {
-        return $this->getConnection()->table($this->config->table())->useWritePdo();
+        return $this->getConnection()->table($this->config->table)->useWritePdo();
     }
 
     protected function getConnection(): ConnectionInterface
     {
         return $this->resolver->connection(
-            $this->connection ?: $this->config->connection()
+            $this->connection ?: $this->config->connection
         );
     }
 

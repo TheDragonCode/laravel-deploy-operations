@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelDeployOperations\Data\Casts;
 
-use DragonCode\LaravelDeployOperations\Helpers\ConfigHelper;
+use DragonCode\LaravelDeployOperations\Data\Config\ConfigData;
 use Illuminate\Support\Str;
 use Spatie\LaravelData\Casts\Cast;
 use Spatie\LaravelData\Support\Creation\CreationContext;
@@ -17,7 +17,7 @@ class PathCast implements Cast
 {
     public function cast(DataProperty $property, mixed $value, array $properties, CreationContext $context): string
     {
-        $path = $this->config()->basePath((string) $value);
+        $path = $this->config()->path . $value;
 
         if ($properties['realpath'] ?? false) {
             return $value ?: $path;
@@ -31,8 +31,8 @@ class PathCast implements Cast
         return realpath(Str::finish($path, '.php'));
     }
 
-    protected function config(): ConfigHelper
+    protected function config(): ConfigData
     {
-        return app(ConfigHelper::class);
+        return app(ConfigData::class);
     }
 }
