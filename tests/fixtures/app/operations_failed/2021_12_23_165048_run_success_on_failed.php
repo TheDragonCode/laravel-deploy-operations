@@ -5,7 +5,7 @@ declare(strict_types=1);
 use DragonCode\LaravelDeployOperations\Operation;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
-use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Str;
 
 return new class extends Operation {
     public function up(): void
@@ -21,7 +21,7 @@ return new class extends Operation {
     public function success(): void
     {
         $this->table()->insert([
-            'value' => Uuid::uuid4(),
+            'value' => Str::random(4),
         ]);
     }
 
