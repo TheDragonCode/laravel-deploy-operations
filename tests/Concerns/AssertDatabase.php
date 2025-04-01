@@ -24,8 +24,12 @@ trait AssertDatabase
         );
     }
 
-    protected function assertDatabaseOperationHas(string $table, $value, $connection = null, string $column = 'operation'): void
-    {
+    protected function assertDatabaseOperationHas(
+        string $table,
+        $value,
+        $connection = null,
+        string $column = 'operation'
+    ): void {
         $this->assertDatabaseHasLike($table, $column, $value, $connection);
     }
 
@@ -39,8 +43,12 @@ trait AssertDatabase
         $this->assertTrue($exists);
     }
 
-    protected function assertDatabaseOperationDoesntLike(string $table, $value, $connection = null, string $column = 'operation'): void
-    {
+    protected function assertDatabaseOperationDoesntLike(
+        string $table,
+        $value,
+        $connection = null,
+        string $column = 'operation'
+    ): void {
         $this->assertDatabaseDoesntLike($table, $column, $value, $connection);
     }
 

@@ -2,7 +2,7 @@
 
 use DragonCode\LaravelDeployOperations\Operation;
 use Illuminate\Support\Facades\DB;
-use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Str;
 
 return new class extends Operation {
     public function up(): void
@@ -23,7 +23,7 @@ return new class extends Operation {
 
     protected function value(): array
     {
-        return ['value' => Uuid::uuid4()];
+        return ['value' => Str::random(4)];
     }
 
     public function withinTransactions(): bool
