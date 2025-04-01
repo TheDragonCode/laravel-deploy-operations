@@ -18,7 +18,7 @@ class StatusTest extends TestCase
         $this->assertDatabaseDoesntTable($this->table);
     }
 
-    public function testStatusCommand()
+    public function testStatusCommand(): void
     {
         $this->assertDatabaseDoesntTable($this->table);
 

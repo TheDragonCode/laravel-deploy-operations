@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class ResetTest extends TestCase
 {
-    public function testResetCommand()
+    public function testResetCommand(): void
     {
         $this->assertDatabaseDoesntTable($this->table);
 

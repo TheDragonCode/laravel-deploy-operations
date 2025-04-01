@@ -12,7 +12,7 @@ use Throwable;
 
 class RollbackTest extends TestCase
 {
-    public function testRollbackCommand()
+    public function testRollbackCommand(): void
     {
         $this->assertDatabaseDoesntTable($this->table);
 
@@ -54,7 +54,7 @@ class RollbackTest extends TestCase
         $this->assertDatabaseOperationHas($this->table, 'rollback_tree');
     }
 
-    public function testEnvironment()
+    public function testEnvironment(): void
     {
         $this->copyFiles();
 
@@ -87,7 +87,7 @@ class RollbackTest extends TestCase
         $this->assertDatabaseOperationDoesntLike($this->table, 'run_on_many_environments');
     }
 
-    public function testDownSuccess()
+    public function testDownSuccess(): void
     {
         $this->copyFiles();
 
@@ -110,7 +110,7 @@ class RollbackTest extends TestCase
         $this->assertDatabaseOperationDoesntLike($this->table, 'run_success');
     }
 
-    public function testDownSuccessOnFailed()
+    public function testDownSuccessOnFailed(): void
     {
         $this->copyFiles();
 
@@ -151,7 +151,7 @@ class RollbackTest extends TestCase
         $this->assertDatabaseOperationHas($this->table, 'run_success_on_failed');
     }
 
-    public function testDownFailed()
+    public function testDownFailed(): void
     {
         $this->copyFiles();
 
@@ -174,7 +174,7 @@ class RollbackTest extends TestCase
         $this->assertDatabaseOperationDoesntLike($this->table, 'run_failed');
     }
 
-    public function testUpFailedOnException()
+    public function testUpFailedOnException(): void
     {
         $this->copyFiles();
 
@@ -211,7 +211,7 @@ class RollbackTest extends TestCase
         $this->assertDatabaseOperationHas($this->table, 'run_failed_failure');
     }
 
-    public function testDisabledBefore()
+    public function testDisabledBefore(): void
     {
         $this->copyFiles();
 
@@ -239,7 +239,7 @@ class RollbackTest extends TestCase
         $this->assertDatabaseOperationDoesntLike($this->table, 'test_before_disabled');
     }
 
-    public function testEnabledBefore()
+    public function testEnabledBefore(): void
     {
         $this->copyFiles();
 

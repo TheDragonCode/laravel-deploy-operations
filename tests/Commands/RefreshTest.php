@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class RefreshTest extends TestCase
 {
-    public function testRefreshCommand()
+    public function testRefreshCommand(): void
     {
         $this->assertDatabaseDoesntTable($this->table);
 

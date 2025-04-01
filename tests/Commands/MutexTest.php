@@ -39,7 +39,7 @@ class MutexTest extends TestCase
         $this->command->setLaravel($container);
     }
 
-    public function testCanRunIsolatedCommandIfNotBlocked()
+    public function testCanRunIsolatedCommandIfNotBlocked(): void
     {
         $this->mutex->shouldReceive('create')
             ->andReturn(true)
@@ -53,7 +53,7 @@ class MutexTest extends TestCase
         $this->assertSame(1, $this->command->ran);
     }
 
-    public function testCannotRunIsolatedCommandIfBlocked()
+    public function testCannotRunIsolatedCommandIfBlocked(): void
     {
         $this->mutex->shouldReceive('create')
             ->andReturn(false)
@@ -67,7 +67,7 @@ class MutexTest extends TestCase
         $this->assertSame(0, $this->command->ran);
     }
 
-    public function testCanRunCommandAgainAfterOtherCommandFinished()
+    public function testCanRunCommandAgainAfterOtherCommandFinished(): void
     {
         $this->mutex->shouldReceive('create')
             ->andReturn(true)
@@ -82,7 +82,7 @@ class MutexTest extends TestCase
         $this->assertEquals(2, $this->command->ran);
     }
 
-    public function testCanRunCommandAgainNonAutomated()
+    public function testCanRunCommandAgainNonAutomated(): void
     {
         $this->mutex->shouldNotHaveBeenCalled();
 
