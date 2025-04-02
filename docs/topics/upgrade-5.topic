@@ -52,13 +52,7 @@
                 }
             </code-block>
 
-            <p>
-                Then you need to update the dependencies:
-            </p>
-
-            <code-block lang="bash">
-                composer update
-            </code-block>
+            <include from="snippets_composer.topic" element-id="update" />
         </chapter>
     </chapter>
 </topic>

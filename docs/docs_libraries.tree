@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="docs_libraries"
+                  name="docs_libraries" is-library="true" start-page="snippets_composer.topic">
+
+    <toc-element topic="snippets_composer.topic" />
+</instance-profile>
