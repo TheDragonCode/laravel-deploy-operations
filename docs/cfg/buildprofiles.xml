@@ -21,6 +21,9 @@
         <!-- <analytics-head-script-file> -->
         <!--     analytics.html -->
         <!-- </analytics-head-script-file> -->
+        <versions-switcher>
+            https://raw.githubusercontent.com/TheDragonCode/laravel-deploy-operations/refs/heads/main/docs/versions.json
+        </versions-switcher>
     </variables>
     <build-profile instance="do">
         <variables>

@@ -1,0 +1,27 @@
+[
+    {
+        "version": "7.x",
+        "url": "https://deploy-operations.dragon-code.pro",
+        "isCurrent": true
+    },
+    {
+        "version": "6.x",
+        "url": "https://github.com/TheDragonCode/laravel-deploy-operations/tree/6.x/docs",
+        "isCurrent": false
+    },
+    {
+        "version": "5.x",
+        "url": "https://github.com/TheDragonCode/laravel-deploy-operations/tree/5.x/docs",
+        "isCurrent": false
+    },
+    {
+        "version": "4.x",
+        "url": "https://github.com/TheDragonCode/laravel-deploy-operations/tree/4.x/docs",
+        "isCurrent": false
+    },
+    {
+        "version": "3.x",
+        "url": "https://github.com/TheDragonCode/laravel-deploy-operations/tree/3.x/docs",
+        "isCurrent": false
+    }
+]
