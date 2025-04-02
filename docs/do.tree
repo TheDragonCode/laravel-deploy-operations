@@ -29,6 +29,7 @@
     </toc-element>
     <toc-element toc-title="Helpers">
         <toc-element topic="artisan-commands.topic" />
+        <toc-element topic="operation-helper.topic" />
         <toc-element topic="events.topic" />
         <toc-element topic="execution-status.topic" />
     </toc-element>
