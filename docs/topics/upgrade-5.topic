@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Upgrading To 5.x from 4.x" id="upgrade-5">
+
+    <link-summary>Guide for upgrading to version 5.x from 4.x</link-summary>
+    <card-summary>Guide for upgrading to version 5.x from 4.x</card-summary>
+    <web-summary>Guide for upgrading to version 5.x from 4.x</web-summary>
+
+    <show-structure depth="2" />
+
+    <procedure title="High-Impact Changes" id="high_impact_changes">
+        <step><a href="#updating_dependencies" /></step>
+    </procedure>
+
+    <chapter title="Updating Dependencies" id="updating_dependencies">
+        <chapter title="PHP 8.2+ Required" id="php_8_2_required">
+            <format style="bold">Deploy Actions</format>
+            now requires PHP 8.2.0 or greater.
+        </chapter>
+
+        <chapter title="Laravel 10+ Required" id="laravel_10_required">
+            <p>
+                <format style="bold">Deploy Actions</format>
+                now requires Laravel 10.0 or greater.
+            </p>
+
+            <tip>
+                <p>
+                    If you are using Laravel 10, then you need to install the dependency:
+                </p>
+
+                <code-block lang="bash">
+                    composer require doctrine/dbal
+                </code-block>
+            </tip>
+        </chapter>
+
+        <chapter title="Composer Dependencies" id="composer_dependencies">
+            <p>
+                You should update the following dependencies in your application's <code>composer.json</code> file:
+            </p>
+
+            <code-block lang="json">
+                {
+                    "require": {
+                        "dragon-code/laravel-actions": "^5.0"
+                    }
+                }
+            </code-block>
+
+            <p>
+                Then you need to update the dependencies:
+            </p>
+
+            <code-block lang="bash">
+                composer update
+            </code-block>
+        </chapter>
+    </chapter>
+</topic>

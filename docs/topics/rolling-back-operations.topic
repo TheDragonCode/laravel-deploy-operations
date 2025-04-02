@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Rolling Back Operations" id="rolling-back-operations">
+
+    <link-summary>Information on how to roll back operations</link-summary>
+    <card-summary>Information on how to roll back operations</card-summary>
+    <web-summary>Information on how to roll back operations</web-summary>
+
+    <show-structure depth="2" />
+
+    <p>
+        To roll back the latest operation, you may use the <code>%command_rollback%</code> command.
+        This command rolls back the last "batch" of operations, which may include multiple operation files:
+    </p>
+
+    <code-block lang="bash">
+        %artisan% %command_rollback%
+    </code-block>
+
+    <p>
+        You may roll back a limited number of operations by providing the
+        <code>step</code> option to the rollback command.
+        For example, the following command will roll back the last five operations:
+    </p>
+
+    <code-block lang="bash">
+        %artisan% %command_rollback% --step=5
+    </code-block>
+
+    <p>
+        The <code>%command_reset%</code> command will roll back all of your application's operations:
+    </p>
+
+    <code-block lang="bash">
+        %artisan% %command_reset%
+    </code-block>
+
+    <p>
+        For example:
+    </p>
+
+    <code-block lang="bash" src="rollback.sh" />
+
+    <chapter
+        title="Roll Back &amp; Operation Using A Single Command"
+        id="roll_back_amp_operation_using_a_single_command"
+    >
+        <p>
+            The
+            <code>%command_refresh%</code> command will roll back all of your operations and then execute the operations command.
+            This command effectively re-creates your entire database:
+        </p>
+
+        <code-block lang="bash">
+            %artisan% %command_refresh%
+        </code-block>
+
+        <p>
+            You may roll back and re-run a limited number of operations by providing the <code>step</code> option to the
+            <code>%command_refresh%</code> command.
+            For example, the following command will roll back and re-run the last five operations:
+        </p>
+
+        <code-block lang="bash">
+            %artisan% %command_refresh% --step=5
+        </code-block>
+    </chapter>
+
+    <chapter title="Drop All &amp; Rerun Operations" id="drop_all_amp_rerun_operations">
+        <p>
+            The
+            <code>%command_fresh%</code> command will drop all operation records from the operation table and then execute the operations command:
+        </p>
+
+        <code-block lang="bash">
+            %artisan% %command_fresh%
+        </code-block>
+    </chapter>
+</topic>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Operations Status" id="operations-status">
+
+    <link-summary>Information on how to view the status of performed operations</link-summary>
+    <card-summary>Information on how to view the status of performed operations</card-summary>
+    <web-summary>Information on how to view the status of performed operations</web-summary>
+
+    <show-structure depth="2" />
+
+    <p>
+        The <code>%command_status%</code> command displays the execution status of operations.
+        In it you can see which operations were executed and which were not:
+    </p>
+
+    <code-block lang="bash">
+        %artisan% %command_status%
+    </code-block>
+</topic>

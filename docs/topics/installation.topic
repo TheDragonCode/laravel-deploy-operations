@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Installation" id="installation">
+
+    <link-summary>Installation and configuration</link-summary>
+    <card-summary>Installation and configuration</card-summary>
+    <web-summary>Installation and configuration</web-summary>
+
+    <show-structure depth="2" />
+
+    <p>
+        To get the latest version of
+        <format style="bold">%product_short%</format>
+        , simply require the project using
+        <a href="https://getcomposer.org">Composer</a>:
+    </p>
+
+    <code-block lang="bash">
+    composer require %package_name%
+    </code-block>
+
+    <p>
+        If necessary, you can publish the configuration file by calling the console command:
+    </p>
+
+    <code-block lang="bash">
+        %publish_files%
+    </code-block>
+
+    <p>
+        Now you can
+        <a href="creating-operations.topic">
+            <format style="bold">create</format>
+        </a>
+        new operations.
+    </p>
+</topic>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Running Operations" id="running-operations">
+
+    <link-summary>Information on how to invoke operations during a deployment</link-summary>
+    <card-summary>Information on how to invoke operations during a deployment</card-summary>
+    <web-summary>Information on how to invoke operations during a deployment</web-summary>
+
+    <show-structure depth="2" />
+
+    <snippet id="run_all">
+
+        <p>
+            To run all of your outstanding operations, execute the <code>%command_run%</code> artisan command:
+        </p>
+
+        <code-block lang="bash">
+            %artisan% %command_run%
+        </code-block>
+
+        <p>
+            The order in which operations are called is checked by file name in alphabetical order, without taking into account directory names:
+        </p>
+
+        <code-block lang="bash" src="actual_file_names.sh" />
+        <code-block lang="bash" src="order_running_operations.sh" />
+    </snippet>
+
+    <chapter title="Isolating Operations Execution" id="isolating_operations_execution">
+        <p>
+            If you are deploying your application across multiple servers and running operations as part of your deployment process,
+            you likely do not want two servers attempting to run the database at the same time.
+            To avoid this, you may use the <code>isolated</code> option when invoking the
+            <code>%command_run%</code> command.
+        </p>
+
+        <code-block lang="bash">
+            %artisan% %command_run% --isolated
+        </code-block>
+    </chapter>
+
+    <chapter title="Split Launch Option" id="split_launch_option">
+        <p>
+            Sometimes it becomes necessary to launch operations separately, for example, to notify about the successful deployment of a project.
+        </p>
+
+        <p>
+            There is a <code>before</code> option for this when calling operations:
+        </p>
+
+        <code-block lang="bash">
+            %artisan% %command_run% --before
+        </code-block>
+
+        <p>
+            When you call the <code>%command_run%</code> command with the <code>before</code> parameter,
+            the script will only perform operations for which the <code>needBefore</code> method is <code>true</code>.
+        </p>
+
+        <p>
+            For backwards compatibility, the <code>needBefore</code> method returns <code>true</code> by default,
+            but operations will only be executed if the option is explicitly passed.
+        </p>
+
+        <code-block lang="php" src="need_before.php" include-lines="5-" />
+
+        <p>
+            For example, you need to call operations when deploying an application. Some operations should be run after the operations are deployed, and others after the application is fully launched.
+        </p>
+
+        <p>
+            To run, you need to pass the <code>before</code> parameter.
+            For example, when using
+            <a href="https://github.com/deployphp/deployer">Deployer</a> it would look like this:
+        </p>
+
+        <code-block lang="php" src="deployer.php" include-lines="5-" />
+
+        <p>
+            Thus, when <code>%command_run%</code> is called, all operations whose
+            <code>before</code> parameter is <code>true</code> will be executed,
+            and after that, the remaining tasks will be executed.
+        </p>
+
+        <note>
+            If you call the <code>%command_run%</code> command without the <code>before</code> parameter,
+            then all tasks will be executed regardless of the value of the
+            <code>needBefore</code> method inside the operation class.
+        </note>
+    </chapter>
+
+    <chapter title="Forcing Operations To Run In Production" id="forcing_operations_to_run_in_production">
+        <tip>
+            Some commands cannot be executed in production without confirmation.
+            These include all commands except <code>%command_status%</code> and <code>%command_run%</code>.
+        </tip>
+
+        <p>
+            Some operations are destructive, which means they may cause you to lose data.
+            In order to protect you from running these commands against your production database,
+            you will be prompted for confirmation before the commands are executed.
+            To force the commands to run without a prompt, use the <code>--force</code> flag:
+        </p>
+
+        <code-block lang="bash">
+            %artisan% %command_install% --force
+        </code-block>
+    </chapter>
+
+    <chapter title="Execution Every Time" id="execution_every_time">
+        <p>
+            In some cases, you need to call the code every time you deploy the application. For example, to call reindexing.
+        </p>
+
+        <p>
+            To do this, override the <code>shouldOnce</code> method in the operation file:
+        </p>
+
+        <code-block lang="php" src="once_method.php" include-lines="5-" />
+
+        <p>
+            If the value is <code>shouldOnce</code> is <code>false</code>,
+            the up method will be called every time the <code>%command_run%</code> command called.
+        </p>
+
+        <p>
+            In this case, information about it will not be written to the
+            <code>%table%</code> table and, therefore, the
+            <code>down</code> method will not be called when the rollback command is called.
+        </p>
+
+        <note>
+            When using the <code>before</code> parameter to run command,
+            it is recommended to override the value of the <code>needBefore</code> method to <code>false</code>,
+            otherwise this operation will be executed twice.
+        </note>
+    </chapter>
+
+    <chapter title="Execution In A Specific Environment" id="execution_in_a_specific_environment">
+        <note>
+            By default, the operation will run in all environments.
+        </note>
+
+        <p>
+            In some cases, it becomes necessary to execute an operation in a specific environment.
+            For example <code>production</code>.
+        </p>
+
+        <p>
+            For this you can override the <code>shouldRun</code> method:
+        </p>
+
+        <code-block lang="php" src="on_environment.php" include-lines="5-" />
+
+        <p>
+            You can also specify multiple environment names:
+        </p>
+
+        <code-block lang="php" src="on_environments.php" include-lines="5-" />
+
+        <p>
+            You can work with exceptions in the same way:
+        </p>
+
+        <code-block lang="php" src="except_environment.php" include-lines="5-" />
+    </chapter>
+
+    <chapter title="Database Transactions" id="database_transactions">
+        <p>
+            In some cases, it becomes necessary to undo previously performed operations in the database.
+            For example, when code execution throws an error. To do this, the code must be wrapped in a transaction.
+        </p>
+
+        <p>
+            By setting the <code>withinTransactions</code> to <code>true</code> parameter,
+            you will ensure that your code is wrapped in a transaction without having to manually call the
+            <code>DB::transaction()</code> method.
+            This will reduce the time it takes to create the operation.
+        </p>
+
+        <code-block lang="php" src="within_transactions.php" include-lines="5-" />
+    </chapter>
+
+    <chapter title="Asynchronous Call" id="asynchronous_call">
+        <p>
+            In some cases, it becomes necessary to execute operations in an asynchronous manner without delaying the deployment process.
+        </p>
+
+        <p>
+            To do this, you need to override the <code>shouldBeAsync</code> method in the operation class:
+        </p>
+
+        <code-block lang="php" src="async.php" include-lines="5-" />
+
+        <p>
+            In this case, the operation file that defines this parameter will run asynchronously using the
+            <code>DragonCode\LaravelDeployOperations\Jobs\OperationJob</code> class.
+        </p>
+
+        <p>
+            The name of the connection and queue can be changed through the <a href="%config_url%">settings</a>.
+        </p>
+
+        <note>
+            We remind you that in this case the
+            <a href="https://laravel.com/docs/queues">queuing system</a> must work in your application.
+        </note>
+    </chapter>
+</topic>

@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Upgrading To 6.x from 5.x" id="upgrade-6">
+
+    <link-summary>Guide for upgrading to version 6.x from 5.x</link-summary>
+    <card-summary>Guide for upgrading to version 6.x from 5.x</card-summary>
+    <web-summary>Guide for upgrading to version 6.x from 5.x</web-summary>
+
+    <show-structure depth="2" />
+
+    <procedure title="High-Impact Changes" id="high_impact_changes" type="choices">
+        <step><a href="#updating_dependencies" /></step>
+        <step><a href="#changed_the_namespace" /></step>
+        <step><a href="#changed_the_name_of_the_main_class" /></step>
+        <step><a href="#changed_names_of_console_commands" /></step>
+        <step><a href="#changed_event_names" /></step>
+        <step><a href="#configuration_file_name_changed" /></step>
+    </procedure>
+
+    <procedure title="Minor-Impact Changes" id="minor_impact_changes">
+        <step><a href="#changed_directory_location" /></step>
+        <step><a href="#database_transactions" /></step>
+        <step><a href="#removed_async_property" /></step>
+        <step><a href="#changed_property_typing_for_events" /></step>
+        <step><a href="#removed_operations_stub_command" /></step>
+    </procedure>
+
+    <procedure title="Low-Impact Changes" id="low_impact_changes">
+        <step><a href="#stub_name_changed" /></step>
+    </procedure>
+
+    <chapter title="The Easiest way to upgrade" id="the_easiest_way_to_upgrade">
+        <note>
+            If you used inheritance of actions from other actions, then you will need to process these files manually.
+        </note>
+
+        <p>
+            For your convenience, we have created an <code>operations:upgrade</code> console command:
+        </p>
+
+        <code-block lang="bash">
+            composer remove dragon-code/laravel-actions
+            composer require dragon-code/laravel-deploy-operations:^6.0
+            
+            %artisan% operations:upgrade
+            %artisan% migrate
+        </code-block>
+
+        <p>
+            It will do the following:
+        </p>
+
+        <list>
+            <li>Changing the old namespace of “actions” to a new one</li>
+            <li>Moves files to a new location</li>
+            <li>Updates the configuration file</li>
+            <li>Rename the stub file (if published)</li>
+        </list>
+
+        <p>
+            Please note that the script allows you to automate most of the actions, but may not complete them completely.
+            Therefore, you will need to manually check the result of the upgrade by checking this guide.
+        </p>
+    </chapter>
+
+    <chapter title="Updating Dependencies" id="updating_dependencies">
+        <p>
+            You should change the package name in the <code>composer.json</code> file from
+            <code>dragon-code/laravel-actions</code> to
+            <code>dragon-code/laravel-deploy-operations</code>, and also change its version to <code>^6.0</code>:
+        </p>
+
+        <code-block lang="json">
+            {
+                "require": {
+                    "dragon-code/laravel-deploy-operations": "^6.0"
+                }
+            }
+        </code-block>
+
+        <p>
+            Then you need to update the dependencies:
+        </p>
+
+        <code-block lang="bash">
+            composer update
+        </code-block>
+    </chapter>
+
+    <chapter title="Changed the namespace" id="changed_the_namespace">
+        <p>
+            The namespace has been changed from <code>DragonCode\LaravelActions</code> to
+            <code>DragonCode\LaravelDeployOperations</code>.
+        </p>
+
+        You need to replace it in all actions of your application, as well as when using
+        <a href="events.topic" />.
+    </chapter>
+
+    <chapter title="Changed the name of the main class" id="changed_the_name_of_the_main_class">
+        You should replace <code>DragonCode\LaravelActions\Action</code> namespace with
+        <code>DragonCode\LaravelDeployOperations\Operation</code>.
+    </chapter>
+
+    <chapter title="Changed names of console commands" id="changed_names_of_console_commands">
+        <table>
+            <tr>
+                <td>New Name</td>
+                <td>Old Name</td>
+            </tr>
+            <tr>
+                <td>make:operation</td>
+                <td>make:action</td>
+            </tr>
+            <tr>
+                <td>operations</td>
+                <td>actions</td>
+            </tr>
+            <tr>
+                <td>operations:fresh</td>
+                <td>actions:fresh</td>
+            </tr>
+            <tr>
+                <td>operations:install</td>
+                <td>actions:install</td>
+            </tr>
+            <tr>
+                <td>operations:refresh</td>
+                <td>actions:refresh</td>
+            </tr>
+            <tr>
+                <td>operations:reset</td>
+                <td>actions:reset</td>
+            </tr>
+            <tr>
+                <td>operations:rollback</td>
+                <td>actions:rollback</td>
+            </tr>
+            <tr>
+                <td>operations:status</td>
+                <td>actions:status</td>
+            </tr>
+            <tr>
+                <td>operations:stub</td>
+                <td>actions:stub</td>
+            </tr>
+            <tr>
+                <td>operations:upgrade</td>
+                <td>actions:upgrade</td>
+            </tr>
+        </table>
+    </chapter>
+
+    <chapter title="Changed event names" id="changed_event_names">
+        <table>
+            <tr>
+                <td>New Name</td>
+                <td>Old Name</td>
+            </tr>
+
+            <tr>
+                <td>DeployOperationStarted</td>
+                <td>ActionStarted</td>
+            </tr>
+            <tr>
+                <td>DeployOperationEnded</td>
+                <td>ActionEnded</td>
+            </tr>
+            <tr>
+                <td>DeployOperationFailed</td>
+                <td>ActionFailed</td>
+            </tr>
+            <tr>
+                <td>NoPendingDeployOperations</td>
+                <td>NoPendingActions</td>
+            </tr>
+        </table>
+
+        <p>
+            Don't forget to also change the namespace from <code>DragonCode\LaravelActions\Events</code> to
+            <code>DragonCode\LaravelDeployOperations\Events</code>.
+        </p>
+    </chapter>
+
+    <chapter title="Changed property typing for events" id="changed_property_typing_for_events">
+        <p>
+            The type of the <code>method</code> property for events has been changed.
+        </p>
+
+        <chapter title="Before" id="before">
+            <code-block lang="php">
+                use DragonCode\LaravelActions\Events\ActionEnded;
+                use DragonCode\LaravelDeployOperations\Enums\MethodEnum;
+
+                /** @var ActionEnded */
+                $event->method; // is string
+            </code-block>
+        </chapter>
+
+        <chapter title="After" id="after">
+            <code-block lang="php">
+                use DragonCode\LaravelDeployOperations\Enums\MethodEnum;
+                use DragonCode\LaravelDeployOperations\Events\DeployOperationEnded;
+
+                /** @var DeployOperationEnded */
+                $event->method; // is MethodEnum
+            </code-block>
+        </chapter>
+    </chapter>
+
+    <chapter title="Configuration file name changed" id="configuration_file_name_changed">
+        <p>
+            We recommend that you delete the old configuration file
+            <code>config/actions.php</code> and publish a new one.
+            This way you will see the changes made to it.
+        </p>
+
+        <code-block lang="bash">
+            %artisan% vendor:publish --provider="DragonCode\LaravelDeployOperations\ServiceProvider"
+        </code-block>
+    </chapter>
+
+    <chapter title="Changed names of constants" id="changed_names_of_constants">
+        <p>
+            If you use package constant references, you must also rename them.
+        </p>
+
+        <p>
+            The old name was in <code>UPPER_CASE</code>, the new one was in <code>PascalCase</code>.
+        </p>
+
+        <p>
+            For example:
+        </p>
+
+        <code-block lang="php">
+            // Old
+            class Names
+            {
+                public const ACTIONS = 'actions';
+                public const FRESH   = 'actions:fresh';
+                // ...
+            }
+        </code-block>
+        <code-block lang="php">
+            // New
+            class Names
+            {
+                public const Fresh      = 'operations:fresh';
+                public const Operations = 'operations';
+                // ...
+            }
+        </code-block>
+    </chapter>
+
+    <chapter title="Changed directory location" id="changed_directory_location">
+        File storage directory changed to <code>/operations</code> from <code>/actions</code>.
+    </chapter>
+
+    <chapter title="Database transactions" id="database_transactions">
+        <p>
+            The following properties have been removed:
+        </p>
+
+        <list>
+            <li><code>$transactions</code></li>
+            <li><code>$transactionAttempts</code></li>
+        </list>
+
+        <p>
+            Instead, you can use the <code>hasTransactions</code> and <code>transactionAttempts</code> methods.
+        </p>
+
+        <p>
+            The <code>enabledTransactions</code> method has been renamed to <code>hasTransactions</code>.
+        </p>
+    </chapter>
+
+    <chapter title="Removed $async property" id="removed_async_property">
+        The <code>$async</code> property has been removed from the base class.
+        You can use the previously available <code>isAsync</code> method instead.
+    </chapter>
+
+    <chapter title="Stub name changed" id="stub_name_changed">
+        If you published a stub file, then you also need to rename it from <code>stubs/action.stub</code> to
+        <code>stubs/deploy-operation.stub</code> and make changes to its structure.
+    </chapter>
+
+    <chapter title="Removed operations:stub command" id="removed_operations_stub_command">
+        <p>
+            The <code>%artisan% operations:stub</code> console command has been removed. Use another command instead:
+        </p>
+
+        <code-block lang="bash">
+            %artisan% vendor:publish --tag=stubs --provider="DragonCode\LaravelDeployOperations\ServiceProvider"
+        </code-block>
+    </chapter>
+</topic>

@@ -65,7 +65,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../config/deploy-operations.php' => $this->app->configPath('deploy-operations.php'),
-        ], 'config');
+        ], ['config', 'deploy-operations']);
     }
 
     protected function publishStub(): void
@@ -74,7 +74,7 @@ class ServiceProvider extends BaseServiceProvider
             __DIR__ . '/../resources/stubs/deploy-operation.stub' => $this->app->basePath(
                 'stubs/deploy-operation.stub'
             ),
-        ], 'stubs');
+        ], ['stubs', 'deploy-operations']);
     }
 
     protected function registerConfig(): void

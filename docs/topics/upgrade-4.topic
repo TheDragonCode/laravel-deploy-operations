@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Upgrading To 4.x from 3.x" id="upgrade-4">
+
+    <link-summary>Guide for upgrading to version 4.x from 3.x</link-summary>
+    <card-summary>Guide for upgrading to version 4.x from 3.x</card-summary>
+    <web-summary>Guide for upgrading to version 4.x from 3.x</web-summary>
+
+    <show-structure depth="2" />
+
+    <procedure title="High-Impact Changes" id="high_impact_changes">
+        <step><a href="#updating_dependencies" /></step>
+        <step><a href="#rename_package_name" /></step>
+        <step><a href="#changing_the_names_of_console_commands" /></step>
+    </procedure>
+
+    <procedure title="Minor-Impact Changes" id="minor_impact_changes">
+        <step><a href="#names_migrate_constant_name_changed" /></step>
+    </procedure>
+
+    <procedure title="Low-Impact Changes" id="low_impact_changes">
+        <step><a href="#changed_the_default_name_of_the_table_for_storing_actions" /></step>
+    </procedure>
+
+    <chapter title="The easiest way to upgrade" id="the_easiest_way_to_upgrade">
+        <note>
+            If you used inheritance of actions from other actions, then you will need to process these files manually.
+        </note>
+
+        <p>
+            For your convenience, we have created an `upgrade` console command:
+        </p>
+
+        <code-block lang="bash">
+            composer remove dragon-code/laravel-migration-actions
+            composer require dragon-code/laravel-actions:^4.0
+
+            %artisan% actions:upgrade
+            %artisan% migrate
+        </code-block>
+
+        <p>
+            It will do the following:
+        </p>
+
+        <list>
+            <li>Renaming manually invoked commands in a project to a new name</li>
+        </list>
+    </chapter>
+
+    <chapter title="Updating Dependencies" id="updating_dependencies">
+        <chapter title="Rename package name" id="rename_package_name">
+            <p>
+                You should update the following dependency in your application's <code>composer.json</code> file:
+            </p>
+
+            <p>
+                Replace:
+            </p>
+
+            <code-block lang="json">
+                {
+                    "require": {
+                        "dragon-code/laravel-migration-actions": "^3.0"
+                    }
+                }
+            </code-block>
+
+            <p>
+                with:
+            </p>
+
+            <code-block lang="json">
+                {
+                    "require": {
+                        "dragon-code/laravel-actions": "^4.0"
+                    }
+                }
+            </code-block>
+
+            <p>
+                Then you need to update the dependencies:
+            </p>
+
+            <code-block lang="bash">
+                composer update
+            </code-block>
+        </chapter>
+    </chapter>
+
+    <chapter title="Changing the names of console commands" id="changing_the_names_of_console_commands">
+        <table>
+            <tr>
+                <td>New Name</td>
+                <td>Old Name</td>
+            </tr>
+            <tr>
+                <td>%artisan% make:action</td>
+                <td>%artisan% make:migration:action</td>
+            </tr>
+            <tr>
+                <td>%artisan% actions</td>
+                <td>%artisan% migrate:actions</td>
+            </tr>
+            <tr>
+                <td>%artisan% actions:install</td>
+                <td>%artisan% migrate:actions:install</td>
+            </tr>
+            <tr>
+                <td>%artisan% actions:fresh</td>
+                <td>%artisan% migrate:actions:fresh</td>
+            </tr>
+            <tr>
+                <td>%artisan% actions:refresh</td>
+                <td>%artisan% migrate:actions:refresh</td>
+            </tr>
+            <tr>
+                <td>%artisan% actions:reset</td>
+                <td>%artisan% migrate:actions:reset</td>
+            </tr>
+            <tr>
+                <td>%artisan% actions:rollback</td>
+                <td>%artisan% migrate:actions:rollback</td>
+            </tr>
+            <tr>
+                <td>%artisan% actions:status</td>
+                <td>%artisan% migrate:actions:status</td>
+            </tr>
+            <tr>
+                <td>%artisan% actions:upgrade</td>
+                <td>%artisan% migrate:actions:upgrade</td>
+            </tr>
+        </table>
+    </chapter>
+
+    <chapter title="Names::MIGRATE constant name changed" id="names_migrate_constant_name_changed">
+        Replace <code>DragonCode\LaravelActions\Constants\Names::MIGRATE</code>
+        with <code>DragonCode\LaravelActions\Constants\Names::ACTIONS</code>
+    </chapter>
+
+    <chapter
+        title="Changed the default name of the table for storing actions"
+        id="changed_the_default_name_of_the_table_for_storing_actions">
+        <p>
+            The new table name is `actions`.
+        </p>
+
+        <p>
+            You can also specify any name in the application
+            <a href="https://github.com/TheDragonCode/laravel-deploy-operations/blob/4.x/config/actions.php">settings</a> file.
+        </p>
+    </chapter>
+</topic>

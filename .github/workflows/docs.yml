@@ -1,0 +1,124 @@
+name: Documentation
+
+on:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+
+permissions:
+    id-token: write
+    pages: write
+
+env:
+    COMPOSER_TOKEN: ${{ secrets.COMPOSER_TOKEN }}
+    ARTIFACT_DOCS: webHelpDO2-all.zip
+    INSTANCE: docs/do
+    DOMAIN_NAME: deploy-operations.dragon-code.pro
+    BUILDER_VERSION: 2025.03.8312
+
+jobs:
+    build:
+        name: Build application
+        runs-on: ubuntu-latest
+
+        steps:
+            -   uses: actions/checkout@v4
+                with:
+                    fetch-depth: 0
+
+            -   name: Build documentation
+                uses: JetBrains/writerside-github-action@v4
+                with:
+                    instance: ${{ env.INSTANCE }}
+                    artifact: ${{ env.ARTIFACT_DOCS }}
+                    docker-version: ${{ env.BUILDER_VERSION }}
+
+            -   name: Upload artifacts
+                uses: actions/upload-artifact@v4
+                with:
+                    name: docs
+                    path: |
+                        artifacts/${{ env.ARTIFACT_DOCS }}
+                        artifacts/report.json
+                    retention-days: 7
+
+    test:
+        needs: build
+        name: Testing
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Download docs artifact
+                uses: actions/download-artifact@v4
+                with:
+                    name: docs
+                    path: artifacts
+
+            -   name: Test documentation
+                uses: JetBrains/writerside-checker-action@v1
+                with:
+                    instance: ${{ env.INSTANCE }}
+
+    robots:
+        needs: build
+        name: Generate robots.txt
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Create robots.txt
+                run: |
+                    touch robots.txt
+                    echo "User-Agent: *" >> robots.txt
+                    echo "Disallow: " >> robots.txt
+                    echo "Host: https://${{ env.DOMAIN_NAME }}" >> robots.txt
+                    echo "Sitemap: https://${{ env.DOMAIN_NAME }}/sitemap.xml" >> robots.txt
+
+            -   name: Upload artifacts
+                uses: actions/upload-artifact@v4
+                with:
+                    name: robots
+                    path: robots.txt
+                    retention-days: 7
+
+    deploy-pages:
+        environment:
+            name: deploy
+            url: ${{ steps.deployment.outputs.page_url }}
+
+        needs:
+            - test
+            - robots
+
+        name: Deploy to pages
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Download docs artifact
+                uses: actions/download-artifact@v4
+                with:
+                    name: docs
+
+            -   name: Download robots artifact
+                uses: actions/download-artifact@v4
+                with:
+                    name: robots
+
+            -   name: Unzip artifact
+                run: unzip -O UTF-8 -qq '${{ env.ARTIFACT_DOCS }}' -d dir
+
+            -   name: Move robots
+                run: |
+                    sudo mv robots.txt dir/robots.txt
+
+            -   name: Setup Pages
+                uses: actions/configure-pages@v5
+
+            -   name: Upload artifact
+                uses: actions/upload-pages-artifact@v3
+                with:
+                    path: dir
+
+            -   name: Deploy to GitHub Pages
+                id: deployment
+                uses: actions/deploy-pages@v4

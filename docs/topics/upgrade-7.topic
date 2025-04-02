@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Upgrading To 7.x from 6.x" id="upgrade-7">
+
+    <link-summary>Guide for upgrading to version 7.x from 6.x</link-summary>
+    <card-summary>Guide for upgrading to version 7.x from 6.x</card-summary>
+    <web-summary>Guide for upgrading to version 7.x from 6.x</web-summary>
+
+    <show-structure depth="2" />
+
+    <procedure title="High-Impact Changes" id="high_impact_changes" type="choices">
+        <step><a href="#aaaaaaaaa" /></step>
+    </procedure>
+
+    <procedure title="Minor-Impact Changes" id="minor_impact_changes">
+        <step><a href="#aaaaaaaaa" /></step>
+    </procedure>
+
+    <procedure title="Low-Impact Changes" id="low_impact_changes">
+        <step><a href="#aaaaaaaaa" /></step>
+    </procedure>
+</topic>

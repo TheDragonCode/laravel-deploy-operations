@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Introduction" id="introduction">
+
+    <section-starting-page>
+        <title>%product%</title>
+
+        <description>
+            ⚡ Performing any actions during the deployment process
+        </description>
+
+        <spotlight>
+            <a href="installation.topic" type="development" />
+            <a href="usage.topic" type="integration" />
+        </spotlight>
+
+        <primary>
+            <title>Guide</title>
+
+            <a href="running-operations.topic" type="academy" />
+            <a href="creating-operations.topic" type="world" />
+            <a href="rolling-back-operations.topic" type="navigation" />
+            <a href="operations-status.topic" type="library" />
+        </primary>
+
+        <secondary>
+            <title>Helpers</title>
+
+            <a href="artisan-commands.topic" />
+            <a href="events.topic" />
+            <a href="execution-status.topic" />
+        </secondary>
+
+        <misc>
+            <cards>
+                <title>Extras</title>
+
+                <a href="database-data-dumper.topic" />
+            </cards>
+        </misc>
+    </section-starting-page>
+</topic>

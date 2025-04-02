@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Events" id="events">
+
+    <link-summary>Information about events sent when operations are running</link-summary>
+    <card-summary>Information about events sent when operations are running</card-summary>
+    <web-summary>Information about events sent when operations are running</web-summary>
+
+    <show-structure depth="2" />
+
+    <p>
+        You can also handle events when executing operations:
+    </p>
+
+    <code-block lang="php" src="events_list.php" include-lines="5-" />
+
+    <p>
+        If there are no operation files to execute, the <code>NoPendingDeployOperations</code> event will be sent.
+    </p>
+
+    <p>
+        In other cases, the <code>DeployOperationStarted</code> event will be sent before processing starts,
+        and the <code>DeployOperationEnded</code> event will be sent after processing.
+    </p>
+
+    <p>
+        For example:
+    </p>
+
+
+    <code-block lang="php" src="event_service_provider.php" include-lines="5-" />
+    <code-block lang="php" src="some_listener.php" include-lines="5-" />
+
+    <p>
+        It is also possible to subscribe to events manually:
+    </p>
+
+    <code-block lang="php" src="listen_events.php" include-lines="5-" />
+</topic>

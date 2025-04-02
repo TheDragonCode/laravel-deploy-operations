@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE vars SYSTEM "https://resources.jetbrains.com/writerside/1.0/vars.dtd">
+<vars>
+    <var name="product" value="🚀 Laravel Deploy Operations" />
+    <var name="product_short" value="Deploy Operations" />
+
+    <var name="package_name" value="dragon-code/laravel-deploy-operations" />
+
+    <var name="command_make" value="make:operation" />
+    <var name="command_run" value="operations" />
+    <var name="command_refresh" value="operations:refresh" />
+    <var name="command_reset" value="operations:reset" />
+    <var name="command_fresh" value="operations:fresh" />
+    <var name="command_rollback" value="operations:rollback" />
+    <var name="command_status" value="operations:status" />
+    <var name="command_install" value="operations:install" />
+
+    <var name="artisan" value="php artisan" />
+
+    <var name="publish_files" value="php artisan vendor:publish --tag deploy-operations" />
+
+    <var name="config_filename" value="config/localization.php" />
+    <var name="directory" value="/operations" />
+    <var name="table" value="operations" />
+
+    <var name="badge_not_supported" value="badge-not-supported.svg" />
+    <var name="badge_supported" value="badge-supported.svg" />
+
+    <var
+            name="config_url"
+            value="https://github.com/TheDragonCode/laravel-deploy-operations/blob/main/config/deploy-operations.php"
+    />
+
+    <var name="year" value="2025" />
+</vars>
