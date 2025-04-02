@@ -135,14 +135,6 @@
                 <td><code>Commands\Fresh</code></td>
             </tr>
             <tr>
-                <td><code>Commands\RefreshCommand</code></td>
-                <td><code>Commands\Refresh</code></td>
-            </tr>
-            <tr>
-                <td><code>Commands\ResetCommand</code></td>
-                <td><code>Commands\Reset</code></td>
-            </tr>
-            <tr>
                 <td><code>Commands\RollbackCommand</code></td>
                 <td><code>Commands\Rollback</code></td>
             </tr>
@@ -165,14 +157,6 @@
             <tr>
                 <td><code>Processors\OperationsProcessor</code></td>
                 <td><code>Processors\Operations</code></td>
-            </tr>
-            <tr>
-                <td><code>Processors\RefreshProcessor</code></td>
-                <td><code>Processors\Refresh</code></td>
-            </tr>
-            <tr>
-                <td><code>Processors\ResetProcessor</code></td>
-                <td><code>Processors\Reset</code></td>
             </tr>
             <tr>
                 <td><code>Processors\RollbackProcessor</code></td>
