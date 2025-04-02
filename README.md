@@ -24,13 +24,11 @@ This package is for you if...
 
 ## Installation
 
+To get the latest version of **Deploy Operations**, simply require the project using [Composer](https://getcomposer.org):
+
 ```Bash
 composer require dragon-code/laravel-deploy-operations
 ```
-
-Guidelines for upgrading from previous versions and `dragon-code/laravel-migration-actions` and
-`dragon-code/laravel-actions` packages can be found in [this section](https://deploy-operations.dragon-code.pro/upgrade-guide/) of the documentation.
-
 
 ## Documentation
 
@@ -74,7 +72,7 @@ This project has gone the way of several names, and here are the number of downl
 - ![](https://img.shields.io/packagist/dt/dragon-code/laravel-migration-actions?style=flat-square&label=dragon-code%2Flaravel-migration-actions)
 - ![](https://img.shields.io/packagist/dt/andrey-helldar/laravel-actions?style=flat-square&label=andrey-helldar%2Flaravel-actions)
 
-An [upgrade](https://deploy-operations.dragon-code.pro/upgrade-guide/) section is available in the documentation for upgrading to a new version.
+An [upgrade](https://deploy-operations.dragon-code.pro/upgrade-7.html) section is available in the documentation for upgrading to a new version.
 
 ## License
 
