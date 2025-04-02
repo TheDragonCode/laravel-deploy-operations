@@ -44,8 +44,6 @@ class ServiceProvider extends BaseServiceProvider
             Console\FreshCommand::class,
             Console\InstallCommand::class,
             Console\MakeCommand::class,
-            Console\RefreshCommand::class,
-            Console\ResetCommand::class,
             Console\RollbackCommand::class,
             Console\StatusCommand::class,
         ]);

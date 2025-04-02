@@ -32,43 +32,10 @@
     </code-block>
 
     <p>
-        The <code>%command_reset%</code> command will roll back all of your application's operations:
-    </p>
-
-    <code-block lang="bash">
-        %artisan% %command_reset%
-    </code-block>
-
-    <p>
         For example:
     </p>
 
     <code-block lang="bash" src="rollback.sh" />
-
-    <chapter
-        title="Roll Back &amp; Operation Using A Single Command"
-        id="roll_back_amp_operation_using_a_single_command"
-    >
-        <p>
-            The
-            <code>%command_refresh%</code> command will roll back all of your operations and then execute the operations command.
-            This command effectively re-creates your entire database:
-        </p>
-
-        <code-block lang="bash">
-            %artisan% %command_refresh%
-        </code-block>
-
-        <p>
-            You may roll back and re-run a limited number of operations by providing the <code>step</code> option to the
-            <code>%command_refresh%</code> command.
-            For example, the following command will roll back and re-run the last five operations:
-        </p>
-
-        <code-block lang="bash">
-            %artisan% %command_refresh% --step=5
-        </code-block>
-    </chapter>
 
     <chapter title="Drop All &amp; Rerun Operations" id="drop_all_amp_rerun_operations">
         <p>

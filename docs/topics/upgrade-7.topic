@@ -21,6 +21,8 @@
     <procedure title="Minor-Impact Changes" id="minor_impact_changes">
         <step><a href="#laravel_10_is_now_unsupported" /></step>
         <step><a href="#removed_operations_upgrade_console_command" /></step>
+        <step><a href="#removed_operations_refresh_console_command" /></step>
+        <step><a href="#removed_operations_reset_console_command" /></step>
     </procedure>
 
     <procedure title="Low-Impact Changes" id="low_impact_changes">
@@ -54,6 +56,16 @@
 
     <chapter title="Removed `operations:upgrade` console command" id="removed_operations_upgrade_console_command">
         We decided to drop support for the <code>php artisan operations:upgrade</code> console command.
+        It does not exist now.
+    </chapter>
+
+    <chapter title="Removed `operations:refresh` console command" id="removed_operations_refresh_console_command">
+        We decided to drop support for the <code>php artisan operations:refresh</code> console command.
+        It does not exist now.
+    </chapter>
+
+    <chapter title="Removed `operations:reset` console command" id="removed_operations_reset_console_command">
+        We decided to drop support for the <code>php artisan operations:reset</code> console command.
         It does not exist now.
     </chapter>
 

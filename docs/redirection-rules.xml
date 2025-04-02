@@ -9,10 +9,6 @@
         <description>Created after removal of "Running Operations" from Deploy Operations</description>
         <accepts>guide/basic.html</accepts>
     </rule>
-    <rule id="upgrade_guide">
-        <description>Created after removal of "Running Operations" from Deploy Operations</description>
-        <accepts>upgrade-guide/</accepts>
-    </rule>
     <rule id="guide_running">
         <description>Created after removal of "Running Operations" from Deploy Operations</description>
         <accepts>guide/running.html</accepts>
