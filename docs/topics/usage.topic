@@ -12,39 +12,11 @@
 
     <show-structure depth="2" />
 
-    <p>
-        Create your first operation using <code>%command_make%</code> command and define the actions it should perform.
-    </p>
+    <chapter title="Creating Operation" id="creating_operation">
+        <include from="creating-operations.topic" element-id="creating" />
+    </chapter>
 
-    <code-block lang="bash">
-        %artisan% %command_make%
-    </code-block>
-
-    <p>
-        This action will create a new file in the <code>%directory%</code> folder of your application.
-    </p>
-
-    <p>
-        If you are using the <code>git</code> version control system,
-        the name of the currently active branch will be used as the file name suffix,
-        otherwise the word <code>auto</code> will be used.
-    </p>
-
-    <p>
-        You can also specify a name for the file yourself by specifying it with the first argument.
-        For example, <code>%artisan% %command_make% qwerty</code>.
-    </p>
-
-    <code-block lang="php" src="example.php" include-lines="5-" />
-
-    <include from="running-operations.topic" element-id="run_all" />
-
-    <p>
-        In addition to other options described in the
-        <a href="running-operations.topic">
-            <format style="bold">Guide</format>
-        </a> section, you can divide the execution of operations into "before" and "after" certain actions. For example, before and after restarting the queues:
-    </p>
-
-    <code-block lang="bash" src="before_after.sh" />
+    <chapter title="Running Operation" id="running_operation">
+        <include from="running-operations.topic" element-id="run_all" />
+    </chapter>
 </topic>

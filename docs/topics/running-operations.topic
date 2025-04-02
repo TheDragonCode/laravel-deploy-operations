@@ -30,7 +30,7 @@
         <code-block lang="bash" src="order_running_operations.sh" />
     </snippet>
 
-    <chapter title="Isolating Operations Execution" id="isolating_operations_execution">
+    <chapter title="Isolating Execution" id="isolating_execution">
         <p>
             If you are deploying your application across multiple servers and running operations as part of your deployment process,
             you likely do not want two servers attempting to run the database at the same time.
@@ -43,7 +43,7 @@
         </code-block>
     </chapter>
 
-    <chapter title="Split Launch Option" id="split_launch_option">
+    <chapter title="Split Execution" id="split_execution">
         <p>
             Sometimes it becomes necessary to launch operations separately, for example, to notify about the successful deployment of a project.
         </p>
@@ -93,7 +93,7 @@
         </note>
     </chapter>
 
-    <chapter title="Forcing Operations To Run In Production" id="forcing_operations_to_run_in_production">
+    <chapter title="Forcing Operations" id="forcing_operations">
         <tip>
             Some commands cannot be executed in production without confirmation.
             These include all commands except <code>%command_status%</code> and <code>%command_run%</code>.
@@ -111,7 +111,7 @@
         </code-block>
     </chapter>
 
-    <chapter title="Execution Every Time" id="execution_every_time">
+    <chapter title="Every Time" id="every_time">
         <p>
             In some cases, you need to call the code every time you deploy the application. For example, to call reindexing.
         </p>
@@ -140,7 +140,7 @@
         </note>
     </chapter>
 
-    <chapter title="Execution In A Specific Environment" id="execution_in_a_specific_environment">
+    <chapter title="Specific Environment" id="specific_environment">
         <note>
             By default, the operation will run in all environments.
         </note>
@@ -183,6 +183,16 @@
         </p>
 
         <code-block lang="php" src="within_transactions.php" include-lines="5-" />
+
+        <tip>
+            <p>
+                The number of code execution attempts in case of transaction errors is set in the
+                <a href="%config_url%">settings</a> file.
+            </p>
+            <p>
+                By default, the number of attempts is %transactions_attempts%.
+            </p>
+        </tip>
     </chapter>
 
     <chapter title="Asynchronous Call" id="asynchronous_call">
@@ -198,7 +208,7 @@
 
         <p>
             In this case, the operation file that defines this parameter will run asynchronously using the
-            <code>DragonCode\LaravelDeployOperations\Jobs\OperationJob</code> class.
+            <code>DragonCode\LaravelDeployOperations\Jobs\OperationJob</code> job.
         </p>
 
         <p>

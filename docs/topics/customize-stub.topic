@@ -19,12 +19,12 @@
     </p>
 
     <code-block lang="bash">
-        %publish_files%
+        %vendor_publish%
     </code-block>
 
     <p>
-        As a result, the file <code>stubs/deploy-operation.stub</code> will be created in the root of the project,
-        which you can change for yourself.
+        This will create the file <code>stubs/deploy-operation.stub</code>, which you can modify to suit you.
+
     </p>
 
     <code-block

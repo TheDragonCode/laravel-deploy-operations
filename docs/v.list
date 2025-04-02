@@ -17,11 +17,12 @@
 
     <var name="artisan" value="php artisan" />
 
-    <var name="publish_files" value="php artisan vendor:publish --tag deploy-operations" />
+    <var name="vendor_publish" value="%artisan% vendor:publish --tag deploy-operations" />
 
-    <var name="config_filename" value="config/localization.php" />
+    <var name="config" value="config/localization.php" />
     <var name="directory" value="/operations" />
     <var name="table" value="operations" />
+    <var name="transactions_attempts" value="1" />
 
     <var name="badge_not_supported" value="badge-not-supported.svg" />
     <var name="badge_supported" value="badge-supported.svg" />

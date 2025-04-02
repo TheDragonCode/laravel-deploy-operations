@@ -12,21 +12,29 @@
 
     <show-structure depth="2" />
 
-    <p>
-        To create an operation use the <code>%command_make%</code> artisan command:
-    </p>
+    <snippet id="creating">
+        <p>
+            To create an operation use the <code>%command_make%</code> artisan command:
+        </p>
 
-    <code-block lang="bash">
+        <code-block lang="bash">
         %artisan% %command_make% some_name
     </code-block>
 
-    <p>
-        The new operation's file will be placed in your <code>%directory%</code> directory in the base path of your app.
-    </p>
+        <p>
+            The new operation's file will be placed in your
+            <code>%directory%</code> directory in the base path of your app.
+        </p>
 
-    <p>
-        Each operation file name contains a timestamp, which allows Laravel to determine the order of the operations.
-    </p>
+        <p>
+            Each operation file name contains a timestamp, which allows Laravel to determine the order of the operations.
+            For example,
+        </p>
+
+        <code-block lang="bash">
+            2025_04_02_121627_some_name.php
+        </code-block>
+    </snippet>
 
     <chapter title="Asks For File Name" id="asks_for_file_name">
         <tip>
@@ -52,11 +60,16 @@
             then the file name will be generated automatically according to the rule:
         </p>
 
-        <tip>
-            git branch name ?: 'auto'
-        </tip>
-
         <code-block lang="bash" src="make_auto.sh" />
+
+        <tip>
+            <p>
+                The name for the file will be automatically obtained from the currently active git repository branch at the root of the project.
+            </p>
+            <p>
+                If the branch name cannot be determined, the word “auto” will be used.
+            </p>
+        </tip>
     </chapter>
 
     <chapter title="Nested Files" id="nested_files">

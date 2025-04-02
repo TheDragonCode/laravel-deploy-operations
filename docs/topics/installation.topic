@@ -28,7 +28,7 @@
     </p>
 
     <code-block lang="bash">
-        %publish_files%
+        %vendor_publish%
     </code-block>
 
     <p>

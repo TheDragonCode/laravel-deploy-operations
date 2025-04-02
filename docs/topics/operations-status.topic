@@ -20,4 +20,10 @@
     <code-block lang="bash">
         %artisan% %command_status%
     </code-block>
+
+    <p>
+        For example,
+    </p>
+
+    <code-block lang="bash" src="operations_status.sh" />
 </topic>
