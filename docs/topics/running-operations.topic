@@ -220,4 +220,47 @@
             <a href="https://laravel.com/docs/queues">queuing system</a> must work in your application.
         </note>
     </chapter>
+
+    <chapter title="Interaction with migrations" id="interaction_with_migrations">
+        <p>
+            Operations can also be invoked when Laravel migrations are completed (<code>php artisan migrate</code>).
+            The Laravel event system is used for this purpose.
+        </p>
+
+        <p>
+            To do this, add a <code>withOperation</code> public method to your migration file that
+            will return the name of the file or folder to call.
+            For example:
+        </p>
+
+        <code-block lang="php" src="with_operation.php" include-lines="5-" />
+
+        <p>
+            Now, once the migration is done, Laravel will send a <code>MigrationEnded</code> event, catching which the
+            <code>%artisan% %command_run%</code> console command will be called passing this parameter.
+        </p>
+
+        <p>
+            The same thing will happen if you invoke the following console command:
+        </p>
+
+        <code-block lang="bash">
+            %artisan% %command_run% --path="foo/2022_10_14_000002_test2"
+        </code-block>
+
+        <p>
+            This method works with all three migration methods: <code>up</code>, <code>down</code> and
+            <code>__invoke</code>.
+        </p>
+
+        <p>
+            When the <code>%artisan% migrate</code> console command is called,
+            the operation will call the <code>up</code> or <code>__invoke</code> method.
+        </p>
+
+        <p>
+            When the <code>%artisan% migrate:rollback</code> console command is called,
+            the operation will call the <code>down</code> method if it exists in the operation file.
+        </p>
+    </chapter>
 </topic>
