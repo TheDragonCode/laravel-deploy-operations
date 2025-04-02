@@ -3,7 +3,7 @@
         SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
 
 <instance-profile id="do"
-                  name="🚀 Laravel Deploy Operations"
+                  name="Laravel Deploy Operations"
                   start-page="introduction.topic">
 
     <toc-element toc-title="Prologue">
