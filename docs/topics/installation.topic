@@ -38,4 +38,69 @@
         </a>
         new operations.
     </p>
+
+    <chapter title="Compatibility Table" id="compatibility_table">
+        <table>
+            <tr>
+                <td>PHP</td>
+                <td>Laravel</td>
+                <td>Package</td>
+                <td>Documentation</td>
+                <td>Status</td>
+            </tr>
+            <tr>
+                <td>^8.2</td>
+                <td>11, 12</td>
+                <td>^7.0</td>
+                <td><a href="introduction.topic" /></td>
+                <td><img src="%badge_supported%" alt="supported" /></td>
+            </tr>
+            <tr>
+                <td>^8.2</td>
+                <td>10, 11, 12</td>
+                <td>^6.0</td>
+                <td><a href="https://github.com/TheDragonCode/laravel-deploy-operations/tree/6.x/docs">Documentation</a>
+                </td>
+                <td><img src="%badge_not_supported%" alt="not supported" /></td>
+            </tr>
+            <tr>
+                <td>^8.2</td>
+                <td>10, 11</td>
+                <td>^5.0</td>
+                <td><a href="https://github.com/TheDragonCode/laravel-deploy-operations/tree/5.x/docs">Documentation</a>
+                </td>
+                <td><img src="%badge_not_supported%" alt="not supported" /></td>
+            </tr>
+            <tr>
+                <td>^8.0</td>
+                <td>7, 8, 9, 10, 11</td>
+                <td>^4.0</td>
+                <td><a href="https://github.com/TheDragonCode/laravel-deploy-operations/tree/4.x/docs">Documentation</a>
+                </td>
+                <td><img src="%badge_not_supported%" alt="not supported" /></td>
+            </tr>
+            <tr>
+                <td>^8.0</td>
+                <td>7, 8, 9</td>
+                <td>^3.0</td>
+                <td><a href="https://github.com/TheDragonCode/laravel-deploy-operations/tree/3.x/docs">Documentation</a>
+                </td>
+                <td><img src="%badge_not_supported%" alt="not supported" /></td>
+            </tr>
+            <tr>
+                <td>^7.3, ^8.0</td>
+                <td>6, 7, 8, 9</td>
+                <td>^2.0</td>
+                <td>---</td>
+                <td><img src="%badge_not_supported%" alt="not supported" /></td>
+            </tr>
+            <tr>
+                <td>^7.3, ^8.0</td>
+                <td>6, 7, 8</td>
+                <td>^1.0</td>
+                <td>---</td>
+                <td><img src="%badge_not_supported%" alt="not supported" /></td>
+            </tr>
+        </table>
+    </chapter>
 </topic>
