@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Upgrading To 7.x from 6.x" id="upgrade-7">
+
+    <link-summary>Guide for upgrading to version 7.x from 6.x</link-summary>
+    <card-summary>Guide for upgrading to version 7.x from 6.x</card-summary>
+    <web-summary>Guide for upgrading to version 7.x from 6.x</web-summary>
+
+    <show-structure depth="2" />
+
+    <procedure title="High-Impact Changes" id="high_impact_changes" type="choices">
+        <step><a href="#updating_dependencies" /></step>
+        <step><a href="#strict_typification" /></step>
+        <step><a href="#removed_deprecated_methods_and_properties" /></step>
+    </procedure>
+
+    <procedure title="Minor-Impact Changes" id="minor_impact_changes">
+        <step><a href="#laravel_10_is_now_unsupported" /></step>
+        <step><a href="#removed_operations_upgrade_console_command" /></step>
+    </procedure>
+
+    <procedure title="Low-Impact Changes" id="low_impact_changes">
+        <step><a href="#added_suffixes_for_classes" /></step>
+        <step><a href="#renamed_traits" /></step>
+        <step><a href="#replaced_config_helper_with_config_data" /></step>
+        <step><a href="#replaced_dragon_code_simple_dto_with_spatie_laravel_data" /></step>
+    </procedure>
+
+    <chapter title="Updating Dependencies" id="updating_dependencies">
+        <p>
+            You should update the following dependencies in your application's <code>composer.json</code> file:
+        </p>
+
+        <code-block lang="json">
+            {
+                "require": {
+                    "dragon-code/laravel-deploy-operations": "^7.0"
+                }
+            }
+        </code-block>
+
+        <include from="snippets_composer.topic" element-id="update" />
+    </chapter>
+
+    <chapter title="Laravel 10 is now unsupported" id="laravel_10_is_now_unsupported">
+        Laravel 10 version is no longer supported due to the lack of event classes required for
+        <format style="bold">%product_short%</format>
+        .
+    </chapter>
+
+    <chapter title="Removed `operations:upgrade` console command" id="removed_operations_upgrade_console_command">
+        We decided to drop support for the <code>php artisan operations:upgrade</code> console command.
+        It does not exist now.
+    </chapter>
+
+    <chapter title="Strict typification" id="strict_typification">
+        <p>
+            A strict typification has been added to all the project files.
+        </p>
+
+        <code-block lang="php">
+            declare(strict_types=1);
+        </code-block>
+    </chapter>
+
+    <chapter title="Replaced `ConfigHelper` with `ConfigData`" id="replaced_config_helper_with_config_data">
+        <p>
+            The <code>DragonCode\LaravelDeployOperations\Helpers\ConfigHelper</code> class has been removed and
+            <code>DragonCode\LaravelDeployOperations\Data\Config\ConfigData</code>, which is a Data object, is now used instead.
+        </p>
+
+        <p>
+            For example,
+        </p>
+
+        <code-block lang="diff">
+            - $this->config->path('some'); // /operations/some
+            - config('deploy-operations.transactions.enabled'); // false
+            - config('deploy-operations.async'); // false
+            
+            + $this->config->path . 'some'; // /operations/some
+            + $this->config->transactions->enabled; // false
+            + $this->config->async; // false
+        </code-block>
+    </chapter>
+
+    <chapter
+        title="Replaced `dragon-code/simple-dto` with `spatie/laravel-data
+    `" id="replaced_dragon_code_simple_dto_with_spatie_laravel_data">
+        <p>
+            This tidied up the handling of settings and options.
+        </p>
+        <p>
+            If you used a direct reference to the <code>Helpers/Config</code> and
+            <code>Values/Options</code> classes, update your code.
+        </p>
+    </chapter>
+
+    <chapter title="Added suffixes for classes" id="added_suffixes_for_classes">
+        <table>
+            <tr>
+                <td>New Name</td>
+                <td>Old Name</td>
+            </tr>
+            <tr>
+                <td><code>Commands\InstallCommand</code></td>
+                <td><code>Commands\Install</code></td>
+            </tr>
+            <tr>
+                <td><code>Commands\MakeCommand</code></td>
+                <td><code>Commands\Make</code></td>
+            </tr>
+            <tr>
+                <td><code>Commands\OperationsCommand</code></td>
+                <td><code>Commands\Operations</code></td>
+            </tr>
+            <tr>
+                <td><code>Commands\FreshCommand</code></td>
+                <td><code>Commands\Fresh</code></td>
+            </tr>
+            <tr>
+                <td><code>Commands\RefreshCommand</code></td>
+                <td><code>Commands\Refresh</code></td>
+            </tr>
+            <tr>
+                <td><code>Commands\ResetCommand</code></td>
+                <td><code>Commands\Reset</code></td>
+            </tr>
+            <tr>
+                <td><code>Commands\RollbackCommand</code></td>
+                <td><code>Commands\Rollback</code></td>
+            </tr>
+            <tr>
+                <td><code>Commands\StatusCommand</code></td>
+                <td><code>Commands\Status</code></td>
+            </tr>
+            <tr>
+                <td><code>Processors\FreshProcessor</code></td>
+                <td><code>Processors\Fresh</code></td>
+            </tr>
+            <tr>
+                <td><code>Processors\InstallProcessor</code></td>
+                <td><code>Processors\Install</code></td>
+            </tr>
+            <tr>
+                <td><code>Processors\MakeProcessor</code></td>
+                <td><code>Processors\Make</code></td>
+            </tr>
+            <tr>
+                <td><code>Processors\OperationsProcessor</code></td>
+                <td><code>Processors\Operations</code></td>
+            </tr>
+            <tr>
+                <td><code>Processors\RefreshProcessor</code></td>
+                <td><code>Processors\Refresh</code></td>
+            </tr>
+            <tr>
+                <td><code>Processors\ResetProcessor</code></td>
+                <td><code>Processors\Reset</code></td>
+            </tr>
+            <tr>
+                <td><code>Processors\RollbackProcessor</code></td>
+                <td><code>Processors\Rollback</code></td>
+            </tr>
+            <tr>
+                <td><code>Processors\StatusProcessor</code></td>
+                <td><code>Processors\Status</code></td>
+            </tr>
+            <tr>
+                <td><code>Helpers\GitHelper</code></td>
+                <td><code>Helpers\Git</code></td>
+            </tr>
+            <tr>
+                <td><code>Helpers\SorterHelper</code></td>
+                <td><code>Helpers\Sorter</code></td>
+            </tr>
+            <tr>
+                <td><code>Services\MigratorService</code></td>
+                <td><code>Services\Migrator</code></td>
+            </tr>
+            <tr>
+                <td><code>Services\MutexService</code></td>
+                <td><code>Services\Mutex</code></td>
+            </tr>
+            <tr>
+                <td><code>Values\OptionsData</code></td>
+                <td><code>Values\Options</code></td>
+            </tr>
+        </table>
+    </chapter>
+
+    <chapter title="Renamed traits" id="renamed_traits">
+        <table>
+            <tr>
+                <td>New Name</td>
+                <td>Old Name</td>
+            </tr>
+            <tr>
+                <td><code>Concerns\HasAbout</code></td>
+                <td><code>Concerns\About</code></td>
+            </tr>
+            <tr>
+                <td><code>Concerns\HasArtisan</code></td>
+                <td><code>Concerns\Artisan</code></td>
+            </tr>
+            <tr>
+                <td><code>Concerns\HasIsolatable</code></td>
+                <td><code>Concerns\Isolatable</code></td>
+            </tr>
+            <tr>
+                <td><code>Concerns\HasOptionable</code></td>
+                <td><code>Concerns\Optionable</code></td>
+            </tr>
+        </table>
+    </chapter>
+
+    <chapter title="Removed deprecated methods and properties" id="removed_deprecated_methods_and_properties">
+        <p>
+            The following properties and methods have been removed from the
+            <code>DragonCode\LaravelDeployOperations\Operation</code>
+            class:
+        </p>
+
+        <table>
+            <tr>
+                <td>Removed</td>
+                <td>Use Instead</td>
+            </tr>
+            <tr>
+                <td><code>protected bool $once</code></td>
+                <td><code>protected bool shouldOnce(): bool</code></td>
+            </tr>
+            <tr>
+                <td><code>protected array|string|null $environment</code></td>
+                <td><code>protected bool shouldRun(): bool</code></td>
+            </tr>
+            <tr>
+                <td><code>protected array|string|null $exceptEnvironment</code></td>
+                <td><code>protected bool shouldRun(): bool</code></td>
+            </tr>
+            <tr>
+                <td><code>protected bool $before</code></td>
+                <td><code>protected bool needBefore(): bool</code></td>
+            </tr>
+            <tr>
+                <td><code>public function getConnection(): ?string</code></td>
+                <td>Not used</td>
+            </tr>
+            <tr>
+                <td><code>public function isOnce(): bool</code></td>
+                <td><code>protected bool shouldOnce(): bool</code></td>
+            </tr>
+            <tr>
+                <td><code>public function enabledTransactions(): bool</code></td>
+                <td><code>public function withinTransactions(): bool</code></td>
+            </tr>
+            <tr>
+                <td><code>public function transactionAttempts(): int</code></td>
+                <td>It is indicated in the settings</td>
+            </tr>
+            <tr>
+                <td><code>public function onEnvironment(): array</code></td>
+                <td><code>protected bool shouldRun(): bool</code></td>
+            </tr>
+            <tr>
+                <td><code>public function exceptEnvironment(): array</code></td>
+                <td><code>protected bool shouldRun(): bool</code></td>
+            </tr>
+            <tr>
+                <td><code>public function allow(): bool</code></td>
+                <td><code>protected bool shouldRun(): bool</code></td>
+            </tr>
+            <tr>
+                <td><code>public function hasBefore(): bool</code></td>
+                <td><code>protected bool needBefore(): bool</code></td>
+            </tr>
+            <tr>
+                <td><code>public function isAsync(): bool</code></td>
+                <td><code>protected bool needAsync(): bool</code></td>
+            </tr>
+        </table>
+    </chapter>
+</topic>

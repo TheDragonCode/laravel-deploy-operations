@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE buildprofiles SYSTEM "https://resources.jetbrains.com/writerside/1.0/build-profiles.dtd">
+<buildprofiles xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <variables>
+        <generate-canonicals>true</generate-canonicals>
+        <locale-code>en_US</locale-code>
+        <header-logo>logo.svg</header-logo>
+        <!-- <og-image> -->
+        <!--     https://raw.githubusercontent.com/Laravel-Lang/docs/main/docs/images/social-logo.png -->
+        <!-- </og-image> -->
+        <web-root>https://deploy-operations.dragon-code.pro</web-root>
+        <enable-contribution>true</enable-contribution>
+        <contribute-url>
+            https://github.com/TheDragonCode/laravel-deploy-operations/edit/main/docs/
+        </contribute-url>
+        <custom-favicons>
+            logo.svg,logo.svg,logo.svg,logo.svg
+        </custom-favicons>
+        <!-- <analytics-head-script-file> -->
+        <!--     analytics.html -->
+        <!-- </analytics-head-script-file> -->
+        <versions-switcher>
+            https://raw.githubusercontent.com/TheDragonCode/laravel-deploy-operations/refs/heads/main/docs/versions.json
+        </versions-switcher>
+    </variables>
+    <build-profile instance="do">
+        <variables>
+            <product-web-url>https://deploy-operations.dragon-code.pro/</product-web-url>
+            <noindex-content>false</noindex-content>
+            <!-- <og-image> -->
+            <!--     https://raw.githubusercontent.com/TheDragonCode/laravel-deploy-operations/main/docs/images/social-logo.png -->
+            <!-- </og-image> -->
+        </variables>
+    </build-profile>
+    <sitemap priority="0.5" change-frequency="weekly" />
+    <footer>
+        <social type="github" href="https://github.com/TheDragonCode">
+            GitHub
+        </social>
+        <link href="https://boosty.to/dragon-code">
+            Boosty
+        </link>
+        <link href="https://github.com/TheDragonCode/laravel-deploy-operations/issues">
+            Issues
+        </link>
+    </footer>
+</buildprofiles>

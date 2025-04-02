@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Operation Helper" id="operation-helper">
+
+    <link-summary>Information about launching operations with the help of the helper</link-summary>
+    <card-summary>Information about launching operations with the help of the helper</card-summary>
+    <web-summary>Information about launching operations with the help of the helper</web-summary>
+
+    <show-structure depth="2" />
+
+    <p>
+        To quickly call operations from other code, you can use the <code>OperationHelper</code> helper function.
+    </p>
+
+    <chapter title="Execution of all" id="execution_of_all">
+        <p>
+            This will execute any operations not performed earlier:
+        </p>
+
+        <code-block lang="php" src="operation_helper_all.php" include-lines="5-" />
+
+        <p>
+            For example,
+        </p>
+
+        <code-block lang="bash" src="operations_helper.sh" />
+    </chapter>
+
+    <chapter title="Performing operations in a folder" id="performing_operations_in_a_folder">
+        <p>
+            This will execute all previously unexecuted operations in the specified folder:
+        </p>
+
+        <code-block lang="php" src="operation_helper_directory.php" include-lines="5-" />
+
+        <p>
+            For example,
+        </p>
+
+        <code-block lang="bash" src="operations_helper.sh" include-lines="2-3" />
+    </chapter>
+
+    <chapter title="Performing a specific operation" id="performing_a_specific_operation">
+        <warning>
+            This will execute the defined operation file even if it was previously called.
+            Be careful about calling it again.
+        </warning>
+
+        <code-block lang="php" src="operation_helper_file.php" include-lines="5-" />
+
+        <p>
+            For example,
+        </p>
+
+        <code-block lang="bash" src="operations_helper.sh" include-lines="2" />
+    </chapter>
+</topic>

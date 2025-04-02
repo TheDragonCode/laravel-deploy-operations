@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="do"
+                  name="Laravel Deploy Operations"
+                  start-page="introduction.topic">
+
+    <toc-element toc-title="Prologue">
+        <toc-element topic="introduction.topic" />
+        <toc-element toc-title="Upgrade Guide">
+            <toc-element topic="upgrade-7.topic" toc-title="Upgrade to 7.x" />
+            <toc-element topic="upgrade-6.topic" toc-title="Upgrade to 6.x" />
+            <toc-element topic="upgrade-5.topic" toc-title="Upgrade to 5.x" />
+            <toc-element topic="upgrade-4.topic" toc-title="Upgrade to 4.x" />
+            <toc-element topic="upgrade-3.topic" toc-title="Upgrade to 3.x" />
+        </toc-element>
+    </toc-element>
+    <toc-element toc-title="Getting Started">
+        <toc-element topic="installation.topic" />
+        <toc-element topic="usage.topic" />
+    </toc-element>
+    <toc-element toc-title="Guide">
+        <toc-element topic="running-operations.topic" />
+        <toc-element topic="creating-operations.topic" />
+        <toc-element topic="rolling-back-operations.topic" />
+        <toc-element topic="operations-status.topic" />
+        <toc-element topic="customize-stub.topic" />
+    </toc-element>
+    <toc-element toc-title="Helpers">
+        <toc-element topic="artisan-commands.topic" />
+        <toc-element topic="operation-helper.topic" />
+        <toc-element topic="events.topic" />
+        <toc-element topic="execution-status.topic" />
+    </toc-element>
+    <toc-element toc-title="Extras">
+        <toc-element topic="database-data-dumper.topic" />
+    </toc-element>
+</instance-profile>

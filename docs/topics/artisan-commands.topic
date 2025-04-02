@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Artisan Commands" id="artisan-commands">
+
+    <link-summary>Information on how to call Artisan commands from operations</link-summary>
+    <card-summary>Information on how to call Artisan commands from operations</card-summary>
+    <web-summary>Information on how to call Artisan commands from operations</web-summary>
+
+    <show-structure depth="2" />
+
+    <p>
+        Quite often, when working with operations, it becomes necessary to run one or another console command, and each time you have to write the following code:
+    </p>
+
+    <code-block lang="php" src="example_artisan.php" include-lines="5-" />
+</topic>

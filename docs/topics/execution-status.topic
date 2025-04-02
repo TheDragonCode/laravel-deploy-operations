@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Execution Status" id="execution-status">
+
+    <link-summary>Information about the execution of actions during successful and unsuccessful operation launches</link-summary>
+    <card-summary>Information about the execution of actions during successful and unsuccessful operation launches</card-summary>
+    <web-summary>Information about the execution of actions during successful and unsuccessful operation launches</web-summary>
+
+    <show-structure depth="2" />
+
+    <p>
+        You can also override the <code>success</code> and <code>failed</code> methods,
+        which are called on success or failure processing.
+    </p>
+
+    <chapter title="Success" id="success">
+        <code-block lang="php" src="success_status.php" include-lines="5-" />
+
+        <p>
+            Call the <code>%artisan% %command_run%</code> command.
+        </p>
+
+        <p>
+            The log file will contain one <code>success</code> record.
+        </p>
+    </chapter>
+
+    <chapter title="Failed" id="failed">
+        <code-block lang="php" src="failed_status.php" include-lines="5-" />
+
+        <p>
+            Call the <code>%artisan% %command_run%</code> command.
+        </p>
+
+        <p>
+            The log file will contain one <code>failed</code> record.
+        </p>
+    </chapter>
+
+    <chapter title="Invokable" id="invokable">
+        <p>
+            The methods will work in the same way in conjunction with the <code>__invoke</code> magic method.
+            The only difference is that in this case the down method will not be executed.
+        </p>
+
+        <code-block lang="php" src="invokable_status.php" include-lines="5-" />
+    </chapter>
+</topic>

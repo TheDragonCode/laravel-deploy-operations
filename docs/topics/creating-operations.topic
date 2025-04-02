@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Creating Operations" id="creating-operations" help-id="creating-operations">
+
+    <link-summary>Information on how to create operations</link-summary>
+    <card-summary>Information on how to create operations</card-summary>
+    <web-summary>Information on how to create operations</web-summary>
+
+    <show-structure depth="2" />
+
+    <snippet id="creating">
+        <p>
+            To create an operation use the <code>%command_make%</code> artisan command:
+        </p>
+
+        <code-block lang="bash">
+        %artisan% %command_make% some_name
+    </code-block>
+
+        <p>
+            The new operation's file will be placed in your
+            <code>%directory%</code> directory in the base path of your app.
+        </p>
+
+        <p>
+            Each operation file name contains a timestamp, which allows Laravel to determine the order of the operations.
+            For example,
+        </p>
+
+        <code-block lang="bash">
+            2025_04_02_121627_some_name.php
+        </code-block>
+    </snippet>
+
+    <chapter title="Asks For File Name" id="asks_for_file_name">
+        <tip>
+            The question will not be asked when calling a console command passing the <code>--quiet</code> parameter.
+        </tip>
+
+        <p>
+            When calling the <code>%command_run%</code> console command without passing a name in the name parameter,
+            you will be asked for a <code>name</code> for the file.
+        </p>
+
+        <code-block lang="bash" src="ask.sh" />
+
+        <p>
+            You can enter your own or simply press <code>Enter</code> to continue.
+            In this case, automatic file name generation will be applied
+        </p>
+    </chapter>
+
+    <chapter title="Automatically Generate A File Name" id="automatically_generate_a_file_name">
+        <p>
+            If you do not specify the <code>name</code> attribute,
+            then the file name will be generated automatically according to the rule:
+        </p>
+
+        <code-block lang="bash" src="make_auto.sh" />
+
+        <tip>
+            <p>
+                The name for the file will be automatically obtained from the currently active git repository branch at the root of the project.
+            </p>
+            <p>
+                If the branch name cannot be determined, the word “auto” will be used.
+            </p>
+        </tip>
+    </chapter>
+
+    <chapter title="Nested Files" id="nested_files">
+        <p>
+            You can use nested paths to create operations:
+        </p>
+
+        <code-block lang="bash" src="nested.sh" />
+
+        <p>
+            All of these commands will create a file called <code>%directory%/foo/bar/Y_m_d_His_qwe_rty.php.</code>
+        </p>
+
+        <p>
+            For example:
+        </p>
+
+        <code-block lang="bash" src="nested_example.sh" />
+    </chapter>
+
+    <chapter title="Invokable Method" id="invokable_method">
+        <p>
+            By default, the new operation class will contain the <code>__invoke</code> method,
+            but you can easily replace it with public <code>up</code> name.
+        </p>
+
+        <code-block lang="php" src="empty.php" include-lines="5-" />
+
+        <note>
+            <p>
+                Note that the <code>__invoke</code> method has been added as a single call.
+                This means that when the operation is running, it will be called, but not when it is rolled back.
+            </p>
+
+            <p>
+                You should also pay attention to the fact that if there is an <code>__invoke</code> method in the class,
+                the <code>down</code> method will not be called.
+            </p>
+        </note>
+
+        <code-block lang="php" src="invoke_and_down.php" include-lines="5-" />
+    </chapter>
+
+    <chapter title="Dependency Injection" id="dependency_injection">
+        <p>
+            You can also use the dependency injection with <code>__invoke</code>, <code>up</code> and
+            <code>down</code> methods:
+        </p>
+
+        <code-block lang="php" src="di_invoke.php" include-lines="5-" />
+        <code-block lang="php" src="di_up_down.php" include-lines="5-" />
+    </chapter>
+</topic>

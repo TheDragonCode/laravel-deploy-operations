@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rules SYSTEM "https://resources.jetbrains.com/writerside/1.0/redirection-rules.dtd">
+<rules>
+    <!-- format is as follows
+    <rule id="<unique id>">
+        <accepts>page.html</accepts>
+    </rule>
+    -->
+    <rule id="1bcc9e2a">
+        <description>Created after removal of "About Deploy Operations" from Deploy Operations</description>
+        <accepts>starter-topic.html</accepts>
+    </rule>
+    <rule id="33a6d1d0">
+        <description>Created after removal of "Running Operations" from Deploy Operations</description>
+        <accepts>guide-running-operations.html</accepts>
+    </rule>
+    <rule id="54ead075">
+        <description>Created after removal of "Running operations" from Deploy Operations</description>
+        <accepts>running-operations.html</accepts>
+    </rule>
+    <rule id="4195a4d">
+        <description>Created after removal of "Creation Operations" from Deploy Operations</description>
+        <accepts>creation-operations.html</accepts>
+    </rule>
+    <rule id="46593472">
+        <description>Created after removal of "Operations Status" from Deploy Operations</description>
+        <accepts>operations-status.html</accepts>
+    </rule>
+    <rule id="27586ab9">
+        <description>Created after removal of "Helpers" from Deploy Operations</description>
+        <accepts>Helpers.html</accepts>
+    </rule>
+    <rule id="3db5de6a">
+        <description>Created after removal of "Rolling Back Operations" from Deploy Operations</description>
+        <accepts>Rolling-Back-Operations.html</accepts>
+    </rule>
+    <rule id="702c2c89">
+        <description>Created after removal of "Artisan Command" from Deploy Operations</description>
+        <accepts>artisan-command.html</accepts>
+    </rule>
+    <rule id="61d0bb17">
+        <description>Created after removal of "Events" from Deploy Operations</description>
+        <accepts>events.html</accepts>
+    </rule>
+    <rule id="5ebc6059">
+        <description>Created after removal of "Execution Status" from Deploy Operations</description>
+        <accepts>execution-status.html</accepts>
+    </rule>
+</rules>
