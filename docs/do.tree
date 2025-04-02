@@ -18,22 +18,22 @@
     </toc-element>
     <toc-element toc-title="Getting Started">
         <toc-element topic="installation.topic" />
-        <toc-element topic="usage.topic" accepts-web-file-names-ref="guide_basic" />
+        <toc-element topic="usage.topic" />
     </toc-element>
     <toc-element toc-title="Guide">
-        <toc-element topic="running-operations.topic" accepts-web-file-names-ref="guide_running" />
-        <toc-element topic="creating-operations.topic" accepts-web-file-names-ref="guide_creating" />
-        <toc-element topic="rolling-back-operations.topic" accepts-web-file-names-ref="guide_rollback" />
-        <toc-element topic="operations-status.topic" accepts-web-file-names-ref="guide_status" />
-        <toc-element topic="customize-stub.topic" accepts-web-file-names-ref="guide_customize_stub" />
+        <toc-element topic="running-operations.topic" />
+        <toc-element topic="creating-operations.topic" />
+        <toc-element topic="rolling-back-operations.topic" />
+        <toc-element topic="operations-status.topic" />
+        <toc-element topic="customize-stub.topic" />
     </toc-element>
     <toc-element toc-title="Helpers">
-        <toc-element topic="artisan-commands.topic" accepts-web-file-names-ref="helpers_artisan" />
+        <toc-element topic="artisan-commands.topic" />
         <toc-element topic="operation-helper.topic" />
-        <toc-element topic="events.topic" accepts-web-file-names-ref="helpers_events" />
-        <toc-element topic="execution-status.topic" accepts-web-file-names-ref="helpers_execution_status" />
+        <toc-element topic="events.topic" />
+        <toc-element topic="execution-status.topic" />
     </toc-element>
     <toc-element toc-title="Extras">
-        <toc-element topic="database-data-dumper.topic" accepts-web-file-names-ref="extras_database_data_dumper" />
+        <toc-element topic="database-data-dumper.topic" />
     </toc-element>
 </instance-profile>
