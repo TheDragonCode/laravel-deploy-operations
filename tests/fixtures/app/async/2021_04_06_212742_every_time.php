@@ -25,7 +25,7 @@ return new class extends Operation {
         return false;
     }
 
-    public function shouldBeAsync(): bool
+    public function needAsync(): bool
     {
         return true;
     }
