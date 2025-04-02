@@ -6,7 +6,7 @@
     <variables>
         <generate-canonicals>true</generate-canonicals>
         <locale-code>en_US</locale-code>
-        <!-- <header-logo>logo.svg</header-logo> -->
+        <header-logo>logo.svg</header-logo>
         <!-- <og-image> -->
         <!--     https://raw.githubusercontent.com/Laravel-Lang/docs/main/docs/images/social-logo.png -->
         <!-- </og-image> -->
@@ -15,9 +15,9 @@
         <contribute-url>
             https://github.com/TheDragonCode/laravel-deploy-operations/edit/main/docs/
         </contribute-url>
-        <!-- <custom-favicons> -->
-        <!--     favicon.svg,favicon.svg,favicon.svg,favicon.svg -->
-        <!-- </custom-favicons> -->
+        <custom-favicons>
+            logo.svg,logo.svg,logo.svg,logo.svg
+        </custom-favicons>
         <!-- <analytics-head-script-file> -->
         <!--     analytics.html -->
         <!-- </analytics-head-script-file> -->
