@@ -32,7 +32,7 @@ composer require dragon-code/laravel-deploy-operations
 
 ## Documentation
 
-📚 Read the full documentation at [deploy-operations.dragon-code.pro][link_website].
+📚 [Check out the full documentation to learn everything that Laravel Deploy Operations has to offer.][link_website]
 
 ## Basic Usage
 
@@ -60,8 +60,6 @@ Next, you can run the console command to start operations:
 ```Bash
 php artisan operations
 ```
-
-📚 [Check out the full documentation to learn everything that Laravel Deploy Operations has to offer.][link_website]
 
 ## Downloads Stats
 
