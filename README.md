@@ -70,8 +70,6 @@ This project has gone the way of several names, and here are the number of downl
 - ![](https://img.shields.io/packagist/dt/dragon-code/laravel-migration-actions?style=flat-square&label=dragon-code%2Flaravel-migration-actions)
 - ![](https://img.shields.io/packagist/dt/andrey-helldar/laravel-actions?style=flat-square&label=andrey-helldar%2Flaravel-actions)
 
-An [upgrade](https://deploy-operations.dragon-code.pro/upgrade-7.html) section is available in the documentation for upgrading to a new version.
-
 ## License
 
 This package is licensed under the [MIT License](LICENSE).
