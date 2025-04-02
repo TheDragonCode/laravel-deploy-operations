@@ -8,12 +8,12 @@ use Illuminate\Support\Facade\Log;
 return new class extends Operation {
     public function up(): void
     {
-        //
+        // some
     }
 
     public function down(): void
     {
-        //
+        // some
     }
 
     public function success(): void

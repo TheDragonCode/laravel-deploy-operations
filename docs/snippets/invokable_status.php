@@ -8,7 +8,7 @@ use Illuminate\Support\Facade\Log;
 return new class extends Operation {
     public function __invoke(): void
     {
-        //
+        // some
     }
 
     public function success(): void
