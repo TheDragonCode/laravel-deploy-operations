@@ -2,8 +2,6 @@ name: Documentation
 
 on:
     push:
-        branches:
-            - main
     workflow_dispatch:
 
 permissions:
@@ -64,6 +62,7 @@ jobs:
         needs: build
         name: Generate robots.txt
         runs-on: ubuntu-latest
+        if: github.ref == 'refs/heads/main'
 
         steps:
             -   name: Create robots.txt
@@ -92,6 +91,7 @@ jobs:
 
         name: Deploy to pages
         runs-on: ubuntu-latest
+        if: github.ref == 'refs/heads/main'
 
         steps:
             -   name: Download docs artifact
