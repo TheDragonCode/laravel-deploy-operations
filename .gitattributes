@@ -1,7 +1,6 @@
 * text=auto
 
 .github/ export-ignore
-.run/ export-ignore
 docs/ export-ignore
 tests/ export-ignore
 
