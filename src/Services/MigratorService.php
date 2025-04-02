@@ -60,7 +60,7 @@ class MigratorService
             return;
         }
 
-        if ($this->hasAsync($operation, $options)) {
+        if ($this->needAsync($operation, $options)) {
             OperationJob::dispatch($name);
 
             $this->notification->twoColumn($name, StatusEnum::Pending->toColor());
@@ -69,7 +69,7 @@ class MigratorService
         }
 
         $this->notification->task($name, function () use ($operation, $name, $batch) {
-            $this->hasOperation($operation, '__invoke')
+            $this->hasMethod($operation, '__invoke')
                 ? $this->runOperation($operation, '__invoke')
                 : $this->runOperation($operation, 'up');
 
@@ -93,7 +93,7 @@ class MigratorService
 
     protected function runOperation(Operation $operation, string $method): void
     {
-        if ($this->hasOperation($operation, $method)) {
+        if ($this->hasMethod($operation, $method)) {
             try {
                 $this->runMethod($operation, $method, $operation->withinTransactions());
 
@@ -107,14 +107,14 @@ class MigratorService
         }
     }
 
-    protected function hasOperation(Operation $operation, string $method): bool
+    protected function hasMethod(Operation $operation, string $method): bool
     {
         return method_exists($operation, $method);
     }
 
-    protected function hasAsync(Operation $operation, OptionsData $options): bool
+    protected function needAsync(Operation $operation, OptionsData $options): bool
     {
-        return ! $options->sync && $operation->shouldBeAsync();
+        return ! $options->sync && $operation->needAsync();
     }
 
     protected function runMethod(Operation $operation, string $method, bool $transactions): void

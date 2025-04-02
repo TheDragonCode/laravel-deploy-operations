@@ -51,7 +51,7 @@ abstract class Operation
     /**
      * Defines whether the operation will run synchronously or asynchronously.
      */
-    public function shouldBeAsync(): bool
+    public function needAsync(): bool
     {
         return app(ConfigData::class)->async;
     }

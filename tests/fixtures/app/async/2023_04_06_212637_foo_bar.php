@@ -20,7 +20,7 @@ return new class extends Operation {
         return DB::table('test');
     }
 
-    public function shouldBeAsync(): bool
+    public function needAsync(): bool
     {
         return true;
     }
