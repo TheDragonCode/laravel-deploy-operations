@@ -8,8 +8,6 @@
 
     <var name="command_make" value="make:operation" />
     <var name="command_run" value="operations" />
-    <var name="command_refresh" value="operations:refresh" />
-    <var name="command_reset" value="operations:reset" />
     <var name="command_fresh" value="operations:fresh" />
     <var name="command_rollback" value="operations:rollback" />
     <var name="command_status" value="operations:status" />
