@@ -272,7 +272,7 @@
                 then autocomplete will be available to you:
             </p>
             <p>
-                To avoid entering file names manually, you can use the <code>deploy_operation</code> helper function.
+                To avoid entering file names manually, you can use the <code>operation</code> helper function.
                 All it does is to suggest IDE paths to operation files with recursive search.
             </p>
 
