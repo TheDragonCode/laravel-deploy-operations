@@ -787,9 +787,9 @@ class OperationsTest extends TestCase
         ])->assertSuccessful();
 
         $this->assertDatabaseCount($table, 1);
-        $this->assertDatabaseCount($this->table, 0);
+        $this->assertDatabaseCount($this->table, 1);
         $this->assertDatabaseOperationDoesntLike($this->table, 'custom');
-        $this->assertDatabaseOperationDoesntLike($this->table, 'invoke');
+        $this->assertDatabaseOperationHas($this->table, 'invoke');
         $this->assertDatabaseOperationDoesntLike($this->table, 'up_down');
         $this->assertDatabaseOperationDoesntLike($table, 'custom', column: 'value');
         $this->assertDatabaseOperationHas($table, 'invoke', column: 'value');

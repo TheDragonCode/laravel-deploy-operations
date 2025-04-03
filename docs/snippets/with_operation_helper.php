@@ -7,12 +7,8 @@ use Illuminate\Database\Migrations\Migration;
 use function DragonCode\LaravelDeployOperations\operation;
 
 return new class extends Migration {
-    public function up(): void {}
-
-    public function down(): void {}
-
     public function withOperation(): string
     {
-        return operation('2025_03_31_234312_up_down');
+        return operation('foo/2022_10_14_000002_test2');
     }
 };

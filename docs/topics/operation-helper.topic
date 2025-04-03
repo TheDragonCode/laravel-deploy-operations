@@ -58,4 +58,16 @@
 
         <code-block lang="bash" src="operations_helper.sh" include-lines="2" />
     </chapter>
+
+    <chapter title="Laravel Idea support" id="laravel_idea_support">
+        <p>
+            If you are using
+            <a href="https://www.jetbrains.com/phpstorm/">JetBrains PhpStorm</a>
+            with the
+            <a href="https://laravel-idea.com">Laravel Idea</a> plugin installed,
+            you can use the <code>operation</code> function to autocomplete.
+        </p>
+
+        <img src="operation_helper_class.png" alt="operation helper" />
+    </chapter>
 </topic>
