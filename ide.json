@@ -30,6 +30,9 @@
                     "methodNames": [
                         "run"
                     ],
+                    "functionFqn": [
+                        "DragonCode\\LaravelDeployOperations\\operation"
+                    ],
                     "place": "parameter",
                     "parameters": [
                         1

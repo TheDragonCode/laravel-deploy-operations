@@ -262,5 +262,23 @@
             When the <code>%artisan% migrate:rollback</code> console command is called,
             the operation will call the <code>down</code> method if it exists in the operation file.
         </p>
+
+        <chapter title="Laravel Idea support" id="laravel_idea_support">
+            <p>
+                If you are using
+                <a href="https://www.jetbrains.com/phpstorm/">JetBrains PhpStorm</a>
+                with the
+                <a href="https://laravel-idea.com">Laravel Idea</a> plugin installed,
+                then autocomplete will be available to you:
+            </p>
+            <p>
+                To avoid entering file names manually, you can use the <code>deploy_operation</code> helper function.
+                All it does is to suggest IDE paths to operation files with recursive search.
+            </p>
+
+            <code-block lang="php" src="with_operation_helper.php" include-lines="7-" />
+
+            <img src="operations_helper_function.png" alt="operation helper"/>
+        </chapter>
     </chapter>
 </topic>
