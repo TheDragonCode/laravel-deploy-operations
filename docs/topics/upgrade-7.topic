@@ -127,6 +127,7 @@
                 Processors\Operations
                 Processors\Rollback
                 Processors\Status
+                Helpers\Config
                 Helpers\Git
                 Helpers\Sorter
                 Services\Migrator
@@ -146,11 +147,12 @@
                 Processors\OperationsProcessor
                 Processors\RollbackProcessor
                 Processors\StatusProcessor
+                Data\Config\ConfigData
                 Helpers\GitHelper
                 Helpers\SorterHelper
                 Services\MigratorService
                 Services\MutexService
-                Values\OptionsData
+                Data\OptionsData
             </code-block>
         </compare>
     </chapter>
