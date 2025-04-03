@@ -113,105 +113,63 @@
     </chapter>
 
     <chapter title="Added suffixes for classes" id="added_suffixes_for_classes">
-        <table>
-            <tr>
-                <td>New Name</td>
-                <td>Old Name</td>
-            </tr>
-            <tr>
-                <td><code>Commands\InstallCommand</code></td>
-                <td><code>Commands\Install</code></td>
-            </tr>
-            <tr>
-                <td><code>Commands\MakeCommand</code></td>
-                <td><code>Commands\Make</code></td>
-            </tr>
-            <tr>
-                <td><code>Commands\OperationsCommand</code></td>
-                <td><code>Commands\Operations</code></td>
-            </tr>
-            <tr>
-                <td><code>Commands\FreshCommand</code></td>
-                <td><code>Commands\Fresh</code></td>
-            </tr>
-            <tr>
-                <td><code>Commands\RollbackCommand</code></td>
-                <td><code>Commands\Rollback</code></td>
-            </tr>
-            <tr>
-                <td><code>Commands\StatusCommand</code></td>
-                <td><code>Commands\Status</code></td>
-            </tr>
-            <tr>
-                <td><code>Processors\FreshProcessor</code></td>
-                <td><code>Processors\Fresh</code></td>
-            </tr>
-            <tr>
-                <td><code>Processors\InstallProcessor</code></td>
-                <td><code>Processors\Install</code></td>
-            </tr>
-            <tr>
-                <td><code>Processors\MakeProcessor</code></td>
-                <td><code>Processors\Make</code></td>
-            </tr>
-            <tr>
-                <td><code>Processors\OperationsProcessor</code></td>
-                <td><code>Processors\Operations</code></td>
-            </tr>
-            <tr>
-                <td><code>Processors\RollbackProcessor</code></td>
-                <td><code>Processors\Rollback</code></td>
-            </tr>
-            <tr>
-                <td><code>Processors\StatusProcessor</code></td>
-                <td><code>Processors\Status</code></td>
-            </tr>
-            <tr>
-                <td><code>Helpers\GitHelper</code></td>
-                <td><code>Helpers\Git</code></td>
-            </tr>
-            <tr>
-                <td><code>Helpers\SorterHelper</code></td>
-                <td><code>Helpers\Sorter</code></td>
-            </tr>
-            <tr>
-                <td><code>Services\MigratorService</code></td>
-                <td><code>Services\Migrator</code></td>
-            </tr>
-            <tr>
-                <td><code>Services\MutexService</code></td>
-                <td><code>Services\Mutex</code></td>
-            </tr>
-            <tr>
-                <td><code>Values\OptionsData</code></td>
-                <td><code>Values\Options</code></td>
-            </tr>
-        </table>
+        <compare>
+            <code-block lang="php">
+                Commands\Install
+                Commands\Make
+                Commands\Operations
+                Commands\Fresh
+                Commands\Rollback
+                Commands\Status
+                Processors\Fresh
+                Processors\Install
+                Processors\Make
+                Processors\Operations
+                Processors\Rollback
+                Processors\Status
+                Helpers\Git
+                Helpers\Sorter
+                Services\Migrator
+                Services\Mutex
+                Values\Options
+            </code-block>
+            <code-block lang="php">
+                Commands\InstallCommand
+                Commands\MakeCommand
+                Commands\OperationsCommand
+                Commands\FreshCommand
+                Commands\RollbackCommand
+                Commands\StatusCommand
+                Processors\FreshProcessor
+                Processors\InstallProcessor
+                Processors\MakeProcessor
+                Processors\OperationsProcessor
+                Processors\RollbackProcessor
+                Processors\StatusProcessor
+                Helpers\GitHelper
+                Helpers\SorterHelper
+                Services\MigratorService
+                Services\MutexService
+                Values\OptionsData
+            </code-block>
+        </compare>
     </chapter>
 
     <chapter title="Renamed traits" id="renamed_traits">
-        <table>
-            <tr>
-                <td>New Name</td>
-                <td>Old Name</td>
-            </tr>
-            <tr>
-                <td><code>Concerns\HasAbout</code></td>
-                <td><code>Concerns\About</code></td>
-            </tr>
-            <tr>
-                <td><code>Concerns\HasArtisan</code></td>
-                <td><code>Concerns\Artisan</code></td>
-            </tr>
-            <tr>
-                <td><code>Concerns\HasIsolatable</code></td>
-                <td><code>Concerns\Isolatable</code></td>
-            </tr>
-            <tr>
-                <td><code>Concerns\HasOptionable</code></td>
-                <td><code>Concerns\Optionable</code></td>
-            </tr>
-        </table>
+        <compare>
+            <code-block lang="php">
+                Concerns\About
+                Concerns\Artisan
+                Concerns\Isolatable
+                Concerns\Optionable
+            </code-block>
+            <code-block lang="php">
+                Concerns\HasAbout
+                Concerns\HasArtisan
+                Concerns\HasIsolatable
+                Concerns\HasOptionable
+            </code-block>
+        </compare>
     </chapter>
 
     <chapter title="Removed deprecated methods and properties" id="removed_deprecated_methods_and_properties">
@@ -221,63 +179,37 @@
             class:
         </p>
 
-        <table>
-            <tr>
-                <td>Removed</td>
-                <td>Use Instead</td>
-            </tr>
-            <tr>
-                <td><code>protected bool $once</code></td>
-                <td><code>protected bool shouldOnce(): bool</code></td>
-            </tr>
-            <tr>
-                <td><code>protected array|string|null $environment</code></td>
-                <td><code>protected bool shouldRun(): bool</code></td>
-            </tr>
-            <tr>
-                <td><code>protected array|string|null $exceptEnvironment</code></td>
-                <td><code>protected bool shouldRun(): bool</code></td>
-            </tr>
-            <tr>
-                <td><code>protected bool $before</code></td>
-                <td><code>protected bool needBefore(): bool</code></td>
-            </tr>
-            <tr>
-                <td><code>public function getConnection(): ?string</code></td>
-                <td>Not used</td>
-            </tr>
-            <tr>
-                <td><code>public function isOnce(): bool</code></td>
-                <td><code>protected bool shouldOnce(): bool</code></td>
-            </tr>
-            <tr>
-                <td><code>public function enabledTransactions(): bool</code></td>
-                <td><code>public function withinTransactions(): bool</code></td>
-            </tr>
-            <tr>
-                <td><code>public function transactionAttempts(): int</code></td>
-                <td>It is indicated in the settings</td>
-            </tr>
-            <tr>
-                <td><code>public function onEnvironment(): array</code></td>
-                <td><code>protected bool shouldRun(): bool</code></td>
-            </tr>
-            <tr>
-                <td><code>public function exceptEnvironment(): array</code></td>
-                <td><code>protected bool shouldRun(): bool</code></td>
-            </tr>
-            <tr>
-                <td><code>public function allow(): bool</code></td>
-                <td><code>protected bool shouldRun(): bool</code></td>
-            </tr>
-            <tr>
-                <td><code>public function hasBefore(): bool</code></td>
-                <td><code>protected bool needBefore(): bool</code></td>
-            </tr>
-            <tr>
-                <td><code>public function isAsync(): bool</code></td>
-                <td><code>protected bool needAsync(): bool</code></td>
-            </tr>
-        </table>
+        <compare>
+            <code-block lang="php">
+                protected bool $once
+                protected array|string | null $environment
+                protected array|string | null $exceptEnvironment
+                protected bool $before
+                public function getConnection(): ?string
+                public function isOnce(): bool
+                public function enabledTransactions(): bool
+                public function transactionAttempts(): int
+                public function onEnvironment(): array
+                public function exceptEnvironment(): array
+                public function allow(): bool
+                public function hasBefore(): bool
+                public function isAsync(): bool
+            </code-block>
+            <code-block lang="php">
+                protected bool shouldOnce(): bool
+                protected bool shouldRun(): bool
+                protected bool shouldRun(): bool
+                protected bool needBefore(): bool
+                Not used
+                protected bool shouldOnce(): bool
+                public function withinTransactions(): bool
+                It is indicated in the settings
+                protected bool shouldRun(): bool
+                protected bool shouldRun(): bool
+                protected bool shouldRun(): bool
+                protected bool needBefore(): bool
+                protected bool needAsync(): bool
+            </code-block>
+        </compare>
     </chapter>
 </topic>
