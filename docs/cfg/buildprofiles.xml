@@ -25,7 +25,7 @@
             https://raw.githubusercontent.com/TheDragonCode/laravel-deploy-operations/refs/heads/main/docs/versions.json
         </versions-switcher>
         <content-max-width>
-            1920
+            1280
         </content-max-width>
     </variables>
     <build-profile instance="do">
