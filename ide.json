@@ -40,7 +40,7 @@
                 }
             ],
             "options": {
-                "directory": "operations",
+                "directory": "/operations",
                 "suffixToClear": ".php",
                 "recursive": true
             }
