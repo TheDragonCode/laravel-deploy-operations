@@ -12,6 +12,7 @@
         <!-- </og-image> -->
         <web-root>https://deploy-operations.dragon-code.pro</web-root>
         <enable-contribution>true</enable-contribution>
+        <code-soft-wrap>true</code-soft-wrap>
         <contribute-url>
             https://github.com/TheDragonCode/laravel-deploy-operations/edit/main/docs/
         </contribute-url>
