@@ -13,7 +13,7 @@ env:
     ARTIFACT_DOCS: webHelpDO2-all.zip
     INSTANCE: docs/do
     DOMAIN_NAME: deploy-operations.dragon-code.pro
-    BUILDER_VERSION: 2025.03.8312
+    BUILDER_VERSION: 2025.04.8412
 
 jobs:
     build:
