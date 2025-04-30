@@ -5,22 +5,5 @@ on: [ push, pull_request ]
 permissions: write-all
 
 jobs:
-    style:
-        runs-on: ubuntu-latest
-
-        steps:
-            -   name: Checkout code
-                uses: actions/checkout@v4
-
-            -   name: Detect job name
-                id: detect
-                run: |
-                    [[ ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }} ]] && NAME="Fix" || NAME="Check"
-
-                    echo "name=${NAME}" >> $GITHUB_OUTPUT
-
-            -   name: ${{ steps.detect.outputs.name }} the code style
-                uses: TheDragonCode/codestyler@v5
-                with:
-                    github_token: ${{ secrets.COMPOSER_TOKEN }}
-                    fix: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    check:
+        uses: TheDragonCode/.github/.github/workflows/code-style.yml@main
