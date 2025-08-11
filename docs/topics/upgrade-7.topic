@@ -115,12 +115,12 @@
     <chapter title="Added suffixes for classes" id="added_suffixes_for_classes">
         <compare>
             <code-block lang="php">
-                Commands\Install
-                Commands\Make
-                Commands\Operations
-                Commands\Fresh
-                Commands\Rollback
-                Commands\Status
+                Console\Install
+                Console\Make
+                Console\Operations
+                Console\Fresh
+                Console\Rollback
+                Console\Status
                 Processors\Fresh
                 Processors\Install
                 Processors\Make
@@ -135,12 +135,12 @@
                 Values\Options
             </code-block>
             <code-block lang="php">
-                Commands\InstallCommand
-                Commands\MakeCommand
-                Commands\OperationsCommand
-                Commands\FreshCommand
-                Commands\RollbackCommand
-                Commands\StatusCommand
+                Console\InstallCommand
+                Console\MakeCommand
+                Console\OperationsCommand
+                Console\FreshCommand
+                Console\RollbackCommand
+                Console\StatusCommand
                 Processors\FreshProcessor
                 Processors\InstallProcessor
                 Processors\MakeProcessor
