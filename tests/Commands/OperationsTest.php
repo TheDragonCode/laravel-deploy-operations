@@ -118,8 +118,7 @@ class OperationsTest extends TestCase
 
         try {
             $this->artisan(Names::Operations)->assertExitCode(0);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             $this->assertSame(Exception::class, get_class($e));
             $this->assertSame('Random message', $e->getMessage());
         }
@@ -270,8 +269,7 @@ class OperationsTest extends TestCase
             $this->copySuccessFailureMethod();
 
             $this->artisan(Names::Operations)->assertExitCode(0);
-        }
-        catch (Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertInstanceOf(Exception::class, $e);
 
             $this->assertSame('Custom exception', $e->getMessage());
@@ -323,8 +321,7 @@ class OperationsTest extends TestCase
             $this->copyFailedMethod();
 
             $this->artisan(Names::Operations)->assertExitCode(0);
-        }
-        catch (Throwable $e) {
+        } catch (Throwable $e) {
             $this->assertInstanceOf(Exception::class, $e);
 
             $this->assertSame('Custom exception', $e->getMessage());

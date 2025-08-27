@@ -51,8 +51,7 @@ class OperationsProcessor extends Processor
             }
 
             $this->fireEvent(NoPendingDeployOperations::class, MethodEnum::Up);
-        }
-        catch (Throwable $e) {
+        } catch (Throwable $e) {
             $this->fireEvent(DeployOperationFailed::class, MethodEnum::Up);
 
             throw $e;

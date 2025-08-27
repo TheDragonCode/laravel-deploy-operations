@@ -40,8 +40,7 @@ class EventsTest extends TestCase
 
         try {
             $this->artisan(Names::Operations)->run();
-        }
-        catch (Throwable $e) {
+        } catch (Throwable $e) {
             Event::assertDispatchedTimes(DeployOperationStarted::class, 1);
             Event::assertDispatchedTimes(DeployOperationFailed::class, 1);
 

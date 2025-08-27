@@ -79,6 +79,7 @@
             "dragon-code/codestyler": true,
             "ergebnis/composer-normalize": true,
             "friendsofphp/php-cs-fixer": true,
+            "laravel/pint": true,
             "symfony/thanks": true
         },
         "preferred-install": "dist",

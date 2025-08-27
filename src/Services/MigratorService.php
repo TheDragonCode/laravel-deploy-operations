@@ -98,8 +98,7 @@ class MigratorService
                 $this->runMethod($operation, $method, $operation->withinTransactions());
 
                 $operation->success();
-            }
-            catch (Throwable $e) {
+            } catch (Throwable $e) {
                 $operation->failed();
 
                 throw $e;

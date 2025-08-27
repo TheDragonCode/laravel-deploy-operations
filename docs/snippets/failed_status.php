@@ -8,12 +8,12 @@ use Illuminate\Support\Facade\Log;
 return new class extends Operation {
     public function up(): void
     {
-        throw new Exeption();
+        throw new Exeption;
     }
 
     public function down(): void
     {
-        throw new Exeption();
+        throw new Exeption;
     }
 
     public function success(): void
