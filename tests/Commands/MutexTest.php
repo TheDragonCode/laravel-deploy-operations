@@ -26,7 +26,7 @@ class MutexTest extends TestCase
 
             public function handle(): int
             {
-                ++$this->ran;
+                $this->ran++;
 
                 return self::SUCCESS;
             }
@@ -94,7 +94,7 @@ class MutexTest extends TestCase
     protected function runCommand($withIsolated = true)
     {
         $input  = new ArrayInput(['--' . Options::Isolated => $withIsolated]);
-        $output = new NullOutput();
+        $output = new NullOutput;
 
         $this->command->run($input, $output);
     }

@@ -46,8 +46,7 @@ abstract class Command extends BaseCommand
 
         try {
             return parent::execute($input, $output);
-        }
-        finally {
+        } finally {
             if ($this->getIsolateOption() !== false) {
                 $this->isolationMutex()->forget($this);
             }

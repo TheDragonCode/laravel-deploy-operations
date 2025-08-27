@@ -13,7 +13,7 @@ class OperationHelper
 {
     public static function run(?string $path = null, ?bool $realpath = null): void
     {
-        $parameters = (new Collection())
+        $parameters = (new Collection)
             ->when($path, fn (Collection $items) => $items->put('--' . Options::Path, $path))
             ->when($realpath, fn (Collection $items) => $items->put('--' . Options::Realpath, true))
             ->all();

@@ -86,6 +86,6 @@ class SorterTest extends TestCase
 
     protected function sorter(): SorterHelper
     {
-        return new SorterHelper();
+        return new SorterHelper;
     }
 }
