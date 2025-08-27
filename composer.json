@@ -24,8 +24,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/TheDragonCode/laravel-actions/issues",
-        "source": "https://github.com/TheDragonCode/laravel-actions"
+        "issues": "https://github.com/TheDragonCode/laravel-deploy-operations/issues",
+        "source": "https://github.com/TheDragonCode/laravel-deploy-operations"
     },
     "funding": [
         {
@@ -76,9 +76,7 @@
     },
     "config": {
         "allow-plugins": {
-            "dragon-code/codestyler": true,
             "ergebnis/composer-normalize": true,
-            "friendsofphp/php-cs-fixer": true,
             "laravel/pint": true,
             "symfony/thanks": true
         },
