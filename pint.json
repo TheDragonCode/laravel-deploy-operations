@@ -1,5 +1,8 @@
 {
     "preset": "laravel",
+    "exclude": [
+        "tests/Fixtures"
+    ],
     "rules": {
         "@PHP71Migration": true,
         "@PHP73Migration": true,
