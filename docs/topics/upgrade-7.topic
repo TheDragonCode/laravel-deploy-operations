@@ -196,19 +196,19 @@
                 public function isAsync(): bool
             </code-block>
             <code-block lang="php">
-                protected bool shouldOnce(): bool
-                protected bool shouldRun(): bool
-                protected bool shouldRun(): bool
-                protected bool needBefore(): bool
+                public function shouldOnce(): bool
+                public function shouldRun(): bool
+                public function shouldRun(): bool
+                public function needBefore(): bool
                 Not used
-                protected bool shouldOnce(): bool
+                public bool shouldOnce(): bool
                 public function withinTransactions(): bool
                 It is indicated in the settings
-                protected bool shouldRun(): bool
-                protected bool shouldRun(): bool
-                protected bool shouldRun(): bool
-                protected bool needBefore(): bool
-                protected bool needAsync(): bool
+                public function shouldRun(): bool
+                public function shouldRun(): bool
+                public function shouldRun(): bool
+                public function needBefore(): bool
+                public function needAsync(): bool
             </code-block>
         </compare>
     </chapter>
