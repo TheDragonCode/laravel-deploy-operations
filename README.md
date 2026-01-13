@@ -1,8 +1,8 @@
 # 🚀 Laravel Deploy Operations
 
 <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://banners.beyondco.de/Laravel%20Deploy%20Operations.png?theme=dark&pattern=topography&style=style_2&fontSize=100px&images=code&packageManager=composer+require&packageName=dragon-code%2Flaravel-deploy-operations&description=Performing+any+actions+during+the+deployment+process">
-    <img src="https://banners.beyondco.de/Laravel%20Deploy%20Operations.png?theme=light&pattern=topography&style=style_2&fontSize=100px&images=code&packageManager=composer+require&packageName=dragon-code%2Flaravel-deploy-operations&description=Performing+any+actions+during+the+deployment+process" alt="Laravel Deploy Operations">
+    <source media="(prefers-color-scheme: dark)" srcset="https://banners.beyondco.de/Deploy%20Operations.png?theme=dark&pattern=topography&style=style_2&fontSize=100px&images=code&packageManager=composer+require&packageName=dragon-code%2Flaravel-deploy-operations&description=Performing+any+actions+during+the+deployment+process">
+    <img src="https://banners.beyondco.de/Deploy%20Operations.png?theme=light&pattern=topography&style=style_2&fontSize=100px&images=code&packageManager=composer+require&packageName=dragon-code%2Flaravel-deploy-operations&description=Performing+any+actions+during+the+deployment+process" alt="Deploy Operations">
 </picture>
 
 [![Stable Version][badge_stable]][link_packagist]
