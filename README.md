@@ -1,6 +1,9 @@
 # 🚀 Laravel Deploy Operations
 
-![the dragon code laravel deploy operations](https://banners.beyondco.de/Deploy%20Operations.png?theme=light&packageManager=composer+require&packageName=dragon-code%2Flaravel-deploy-operations&pattern=topography&style=style_2&description=by+The+Dragon+Code&md=1&showWatermark=1&fontSize=100px&images=https%3A%2F%2Flaravel.com%2Fimg%2Flogomark.min.svg)
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://banners.beyondco.de/Laravel%20Deploy%20Operations.png?theme=dark&pattern=topography&style=style_2&fontSize=100px&images=code&packageManager=composer+require&packageName=dragon-code%2Flaravel-deploy-operations&description=Performing+any+actions+during+the+deployment+process">
+    <img src="https://banners.beyondco.de/Laravel%20Deploy%20Operations.png?theme=light&pattern=topography&style=style_2&fontSize=100px&images=code&packageManager=composer+require&packageName=dragon-code%2Flaravel-deploy-operations&description=Performing+any+actions+during+the+deployment+process" alt="Laravel Deploy Operations">
+</picture>
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Total Downloads][badge_downloads]][link_packagist]
