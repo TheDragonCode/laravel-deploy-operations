@@ -19,6 +19,6 @@ jobs:
                     fetch-depth: 0
 
             -   name: Update banner
-                uses: TheDragonCode/preview-updater@v1
+                uses: TheDragonCode/github-preview-updater@v1
                 with:
                     token: ${{ secrets.GITHUB_TOKEN }}
