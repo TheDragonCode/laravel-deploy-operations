@@ -64,9 +64,12 @@
             "sort_algorithm": "alpha"
         },
         "phpdoc_line_span": {
+            "case": "single",
+            "class": "single",
             "const": "single",
-            "method": "multi",
-            "property": "single"
+            "method": "single",
+            "property": "single",
+            "other": "single"
         },
         "return_assignment": true,
         "simplified_if_return": true,

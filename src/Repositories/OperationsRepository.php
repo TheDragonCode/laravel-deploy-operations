@@ -86,9 +86,7 @@ class OperationsRepository
         $this->schema()->dropIfExists($this->config->table);
     }
 
-    /**
-     * @return array<int>
-     */
+    /** @return array<int> */
     protected function getBatchNumbers(int $steps): array
     {
         return $this->sortedTable(Order::Desc)
