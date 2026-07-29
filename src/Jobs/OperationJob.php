@@ -24,11 +24,15 @@ class OperationJob implements ShouldBeUnique, ShouldQueue
     use Queueable;
     use SerializesModels;
 
+    public ?int $uniqueFor = null;
+
     public function __construct(
         public string $filename,
     ) {
         $this->onConnection($this->config()->queue->connection);
         $this->onQueue($this->config()->queue->name);
+
+        $this->uniqueFor = $this->config()->queue->uniqueFor;
     }
 
     public function handle(): void
