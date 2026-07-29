@@ -91,11 +91,56 @@ class MutexTest extends TestCase
         $this->assertEquals(1, $this->command->ran);
     }
 
-    protected function runCommand($withIsolated = true)
+    public function testBareIsolatedOptionEnablesMutex(): void
+    {
+        $this->mutex->shouldReceive('create')
+            ->andReturn(true)
+            ->once();
+
+        $this->mutex->shouldReceive('forget')
+            ->once();
+
+        $status = $this->runCommand(null);
+
+        $this->assertSame(1, $this->command->ran);
+        $this->assertSame(0, $status);
+    }
+
+    public function testBlockedBareIsolatedOptionExitsSuccessfully(): void
+    {
+        $this->mutex->shouldReceive('create')
+            ->andReturn(false)
+            ->once();
+
+        $this->mutex->shouldReceive('forget')
+            ->never();
+
+        $status = $this->runCommand(null);
+
+        $this->assertSame(0, $this->command->ran);
+        $this->assertSame(0, $status);
+    }
+
+    public function testBlockedNumericIsolatedOptionExitsWithThatCode(): void
+    {
+        $this->mutex->shouldReceive('create')
+            ->andReturn(false)
+            ->once();
+
+        $this->mutex->shouldReceive('forget')
+            ->never();
+
+        $status = $this->runCommand('12');
+
+        $this->assertSame(0, $this->command->ran);
+        $this->assertSame(12, $status);
+    }
+
+    protected function runCommand($withIsolated = true): int
     {
         $input  = new ArrayInput(['--' . Options::Isolated => $withIsolated]);
         $output = new NullOutput;
 
-        $this->command->run($input, $output);
+        return $this->command->run($input, $output);
     }
 }
