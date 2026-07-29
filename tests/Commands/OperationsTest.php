@@ -711,6 +711,22 @@ class OperationsTest extends TestCase
             'foo_bar',
             'every_time',
         ]));
+
+        Queue::assertPushed(OperationJob::class, fn (OperationJob $job) => $job->uniqueFor === null);
+    }
+
+    public function testAsyncUniqueFor(): void
+    {
+        $this->copyAsync();
+
+        config(['deploy-operations.queue.unique_for' => 3600]);
+
+        Queue::fake();
+
+        $this->artisan(Names::Install)->assertExitCode(0);
+        $this->artisan(Names::Operations)->assertExitCode(0);
+
+        Queue::assertPushed(OperationJob::class, fn (OperationJob $job) => $job->uniqueFor === 3600);
     }
 
     public function testSync(): void
