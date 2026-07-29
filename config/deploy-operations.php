@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use DragonCode\LaravelDeployOperations\Jobs\OperationJob;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -125,6 +127,20 @@ return [
         */
 
         'name' => env('DEPLOY_OPERATIONS_QUEUE_NAME'),
+
+        /*
+        |--------------------------------------------------------------------------
+        | Job
+        |--------------------------------------------------------------------------
+        |
+        | This parameter specifies the job class that will be dispatched for
+        | asynchronous operations. Override it with a subclass of the default
+        | job to customize queue behaviour, for example to add a `failed`
+        | callback or a `uniqueFor` value.
+        |
+        */
+
+        'job' => OperationJob::class,
     ],
 
     /*
