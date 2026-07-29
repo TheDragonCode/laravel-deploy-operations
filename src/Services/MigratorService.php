@@ -7,7 +7,6 @@ namespace DragonCode\LaravelDeployOperations\Services;
 use DragonCode\LaravelDeployOperations\Data\Config\ConfigData;
 use DragonCode\LaravelDeployOperations\Data\OptionsData;
 use DragonCode\LaravelDeployOperations\Enums\StatusEnum;
-use DragonCode\LaravelDeployOperations\Jobs\OperationJob;
 use DragonCode\LaravelDeployOperations\Notifications\Notification;
 use DragonCode\LaravelDeployOperations\Operation;
 use DragonCode\LaravelDeployOperations\Repositories\OperationsRepository;
@@ -61,7 +60,7 @@ class MigratorService
         }
 
         if ($this->needAsync($operation, $options)) {
-            OperationJob::dispatch($name);
+            $this->dispatchJob($name);
 
             $this->notification->twoColumn($name, StatusEnum::Pending->toColor());
 
@@ -114,6 +113,13 @@ class MigratorService
     protected function needAsync(Operation $operation, OptionsData $options): bool
     {
         return ! $options->sync && $operation->needAsync();
+    }
+
+    protected function dispatchJob(string $name): void
+    {
+        $job = $this->config->queue->job;
+
+        $job::dispatch($name);
     }
 
     protected function runMethod(Operation $operation, string $method, bool $transactions): void

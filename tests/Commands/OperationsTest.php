@@ -12,6 +12,7 @@ use Illuminate\Database\Console\Migrations\RollbackCommand;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Str;
+use Tests\Jobs\CustomOperationJob;
 use Tests\TestCase;
 use Throwable;
 
@@ -727,6 +728,21 @@ class OperationsTest extends TestCase
         $this->artisan(Names::Operations)->assertExitCode(0);
 
         Queue::assertPushed(OperationJob::class, fn (OperationJob $job) => $job->uniqueFor === 3600);
+    }
+
+    public function testAsyncCustomJob(): void
+    {
+        $this->copyAsync();
+
+        config(['deploy-operations.queue.job' => CustomOperationJob::class]);
+
+        Queue::fake();
+
+        $this->artisan(Names::Install)->assertExitCode(0);
+        $this->artisan(Names::Operations)->assertExitCode(0);
+
+        Queue::assertPushed(CustomOperationJob::class, 2);
+        Queue::assertNotPushed(OperationJob::class);
     }
 
     public function testSync(): void
