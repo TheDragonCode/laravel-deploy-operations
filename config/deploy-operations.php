@@ -141,6 +141,21 @@ return [
         */
 
         'job' => OperationJob::class,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Uniqueness Lock Duration
+        |--------------------------------------------------------------------------
+        |
+        | This parameter specifies the number of seconds after which the job's
+        | uniqueness lock expires, allowing the operation to be dispatched
+        | again if a previously dispatched job was never processed.
+        |
+        | When `null`, the lock is only released when the job is processed.
+        |
+        */
+
+        'unique_for' => env('DEPLOY_OPERATIONS_QUEUE_UNIQUE_FOR'),
     ],
 
     /*

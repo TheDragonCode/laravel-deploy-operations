@@ -19,20 +19,18 @@ trait HasIsolatable
 
     protected function isolatedStatusCode(): int
     {
-        if ($isolate = $this->getIsolateOption()) {
-            return is_numeric($isolate) ? $isolate : self::SUCCESS;
-        }
+        $isolate = $this->getIsolateOption();
 
-        return self::SUCCESS;
+        return is_numeric($isolate) ? (int) $isolate : self::SUCCESS;
     }
 
-    protected function getIsolateOption(): bool|int
+    protected function getIsolateOption(): bool|int|string
     {
-        return $this->hasIsolateOption() ? (int) $this->option(Options::Isolated) : false;
+        return $this->hasIsolateOption() ? ($this->option(Options::Isolated) ?? true) : false;
     }
 
     protected function hasIsolateOption(): bool
     {
-        return $this->hasOption(Options::Isolated) && $this->option(Options::Isolated);
+        return $this->hasOption(Options::Isolated) && $this->option(Options::Isolated) !== false;
     }
 }

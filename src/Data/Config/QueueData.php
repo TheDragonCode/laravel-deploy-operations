@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DragonCode\LaravelDeployOperations\Data\Config;
 
 use DragonCode\LaravelDeployOperations\Jobs\OperationJob;
+use Spatie\LaravelData\Attributes\MapInputName;
 use Spatie\LaravelData\Data;
 
 class QueueData extends Data
@@ -15,4 +16,7 @@ class QueueData extends Data
 
     /** @var class-string<OperationJob> */
     public string $job = OperationJob::class;
+
+    #[MapInputName('unique_for')]
+    public ?int $uniqueFor = null;
 }
