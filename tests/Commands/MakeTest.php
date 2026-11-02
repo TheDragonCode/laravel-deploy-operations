@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Commands;
 
 use DragonCode\LaravelDeployOperations\Constants\Names;
-use DragonCode\Support\Facades\Filesystem\File;
+use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
 class MakeTest extends TestCase
@@ -136,6 +136,7 @@ class MakeTest extends TestCase
 
         $this->assertFileDoesNotExist($stubPath);
 
+        File::ensureDirectoryExists(File::dirname($stubPath));
         File::copy(__DIR__ . '/../fixtures/app/stubs/customized.stub', $stubPath);
 
         $this->assertFileExists($stubPath);

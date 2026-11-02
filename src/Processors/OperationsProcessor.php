@@ -11,7 +11,7 @@ use DragonCode\LaravelDeployOperations\Events\DeployOperationEnded;
 use DragonCode\LaravelDeployOperations\Events\DeployOperationFailed;
 use DragonCode\LaravelDeployOperations\Events\DeployOperationStarted;
 use DragonCode\LaravelDeployOperations\Events\NoPendingDeployOperations;
-use DragonCode\Support\Facades\Helpers\Str;
+use Illuminate\Support\Str;
 use Throwable;
 
 class OperationsProcessor extends Processor

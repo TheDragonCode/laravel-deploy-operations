@@ -10,12 +10,12 @@ use DragonCode\LaravelDeployOperations\Enums\StatusEnum;
 use DragonCode\LaravelDeployOperations\Notifications\Notification;
 use DragonCode\LaravelDeployOperations\Operation;
 use DragonCode\LaravelDeployOperations\Repositories\OperationsRepository;
-use DragonCode\Support\Exceptions\FileNotFoundException;
-use DragonCode\Support\Facades\Helpers\Str;
-use DragonCode\Support\Filesystem\File;
 use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Throwable;
 
 use function file_exists;
@@ -26,7 +26,7 @@ use function realpath;
 class MigratorService
 {
     public function __construct(
-        protected File $file,
+        protected Filesystem $file,
         protected Notification $notification,
         protected OperationsRepository $repository,
         protected ConfigData $config,
@@ -170,11 +170,11 @@ class MigratorService
 
     protected function resolveOperation(string $path): Operation
     {
-        if ($this->file->exists($path)) {
+        if ($this->file->isFile($path)) {
             return require $path;
         }
 
-        throw new FileNotFoundException($path);
+        throw new FileNotFoundException('File "' . $path . '" does not exist.');
     }
 
     protected function resolveOperationName(string $path): string

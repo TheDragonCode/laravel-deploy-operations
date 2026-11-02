@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DragonCode\LaravelDeployOperations\Processors;
 
 use DragonCode\LaravelDeployOperations\Enums\StatusEnum;
-use DragonCode\Support\Facades\Helpers\Arr;
+use Illuminate\Support\Arr;
 
 use function sprintf;
 

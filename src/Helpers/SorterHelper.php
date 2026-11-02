@@ -5,21 +5,39 @@ declare(strict_types=1);
 namespace DragonCode\LaravelDeployOperations\Helpers;
 
 use Closure;
-use DragonCode\Support\Facades\Filesystem\Path;
-use DragonCode\Support\Facades\Helpers\Arr;
 
 use function in_array;
+use function is_array;
+use function pathinfo;
+use function uksort;
+use function usort;
 
 class SorterHelper
 {
     public function byValues(array $items): array
     {
-        return Arr::sort($items, $this->callback());
+        usort($items, $this->callback());
+
+        foreach ($items as $key => $value) {
+            if (is_array($value)) {
+                $items[$key] = $this->byValues($value);
+            }
+        }
+
+        return $items;
     }
 
     public function byKeys(array $items): array
     {
-        return Arr::ksort($items, $this->callback());
+        uksort($items, $this->callback());
+
+        foreach ($items as $key => $value) {
+            if (is_array($value)) {
+                $items[$key] = $this->byKeys($value);
+            }
+        }
+
+        return $items;
     }
 
     public function byRan(array $values, array $completed): array
@@ -36,8 +54,8 @@ class SorterHelper
     protected function callback(): Closure
     {
         return static function (string $a, string $b): int {
-            $current = Path::filename($a);
-            $next    = Path::filename($b);
+            $current = pathinfo($a, PATHINFO_FILENAME);
+            $next    = pathinfo($b, PATHINFO_FILENAME);
 
             if ($current === $next) {
                 return 0;

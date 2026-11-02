@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelDeployOperations\Helpers;
 
-use DragonCode\Support\Facades\Filesystem\Directory;
-
 use function base_path;
 use function exec;
+use function is_dir;
 use function realpath;
 use function rtrim;
 use function sprintf;
@@ -31,7 +30,7 @@ class GitHelper
     protected function hasGitDirectory(?string $path = null): bool
     {
         if ($path = rtrim($this->resolvePath($path), '/\\')) {
-            return Directory::exists($path . DIRECTORY_SEPARATOR . '.git');
+            return is_dir($path . DIRECTORY_SEPARATOR . '.git');
         }
 
         return false;
