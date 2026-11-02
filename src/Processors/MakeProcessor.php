@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelDeployOperations\Processors;
 
-use DragonCode\Support\Facades\Filesystem\File;
-use DragonCode\Support\Facades\Filesystem\Path;
-use DragonCode\Support\Facades\Helpers\Str;
-use DragonCode\Support\Helpers\Ables\Stringable;
+use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 
 use function base_path;
 use function date;
@@ -34,7 +32,8 @@ class MakeProcessor extends Processor
 
     protected function create(string $path): void
     {
-        File::copy($this->stubPath(), $path);
+        $this->file->ensureDirectoryExists($this->file->dirname($path), 0o755);
+        $this->file->copy($this->stubPath(), $path);
     }
 
     protected function displayName(string $path): string
@@ -65,8 +64,8 @@ class MakeProcessor extends Processor
 
     protected function getFilename(string $branch): string
     {
-        $directory = Path::dirname($branch);
-        $filename  = Path::filename($branch);
+        $directory = $this->file->dirname($branch);
+        $filename  = $this->file->name($branch);
 
         return Str::of($filename)
             ->snake()

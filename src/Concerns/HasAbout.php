@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace DragonCode\LaravelDeployOperations\Concerns;
 
 use Composer\InstalledVersions;
-use DragonCode\Support\Facades\Helpers\Str;
 use Illuminate\Foundation\Console\AboutCommand;
+use Illuminate\Support\Str;
 
 trait HasAbout
 {

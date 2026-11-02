@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Concerns;
 
-use DragonCode\Support\Facades\Filesystem\Directory;
 use Illuminate\Support\Facades\File;
 
 /** @mixin \Tests\TestCase */
@@ -12,10 +11,8 @@ trait Files
 {
     protected function freshFiles(): void
     {
-        Directory::ensureDelete([
-            $this->targetDirectory(),
-            $this->stubsDirectory(),
-        ]);
+        File::deleteDirectory($this->targetDirectory());
+        File::deleteDirectory($this->stubsDirectory());
     }
 
     protected function copyFiles(): void

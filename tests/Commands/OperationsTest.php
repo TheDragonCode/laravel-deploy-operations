@@ -10,6 +10,7 @@ use DragonCode\LaravelDeployOperations\Jobs\OperationJob;
 use Exception;
 use Illuminate\Database\Console\Migrations\RollbackCommand;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Str;
 use Tests\Jobs\CustomOperationJob;
@@ -560,6 +561,38 @@ class OperationsTest extends TestCase
         $records = DB::table($this->table)->orderBy('id')->pluck('operation')->all();
 
         $this->assertSame($files, $records);
+    }
+
+    public function testRecursiveDiscoveryIncludesHiddenFilesAndSkipsCompletedOperations(): void
+    {
+        $files = [
+            '.2020_01_04_000000_dot_file',
+            '.hidden/nested/2020_01_01_000000_hidden',
+            '.git/nested/2020_01_02_000000_vcs',
+            'nested/2020_01_03_000000_regular',
+        ];
+
+        foreach (array_reverse($files) as $file) {
+            $path = $this->targetDirectory($file . '.php');
+
+            File::ensureDirectoryExists(dirname($path));
+            File::copy(__DIR__ . '/../fixtures/app/operations/2020_12_07_153105_foo_bar.php', $path);
+        }
+
+        File::copy(
+            __DIR__ . '/../fixtures/app/operations/2020_12_07_153105_foo_bar.php',
+            $this->targetDirectory('nested/2020_01_05_000000_ignored.txt')
+        );
+
+        $this->artisan(Names::Operations)->assertExitCode(0);
+
+        $this->assertSame($files, DB::table($this->table)->orderBy('id')->pluck('operation')->all());
+        $this->assertDatabaseCount('test', 4);
+
+        $this->artisan(Names::Operations)->assertExitCode(0);
+
+        $this->assertDatabaseCount($this->table, 4);
+        $this->assertDatabaseCount('test', 4);
     }
 
     public function testDirectoryExclusion(): void

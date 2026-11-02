@@ -55,6 +55,54 @@ class SorterTest extends TestCase
         $this->assertSame($expected, $this->sorter()->byKeys($values));
     }
 
+    public function testByValuesReindexesKeysAndKeepsEqualBasenamesInOrder(): void
+    {
+        $values = [
+            10    => 'foo/2022_10_13_013322_test.php',
+            'bar' => 'bar/2022_10_13_013322_test.php',
+            20    => '2022_10_13_013321_test.php',
+        ];
+
+        $this->assertSame([
+            '2022_10_13_013321_test.php',
+            'foo/2022_10_13_013322_test.php',
+            'bar/2022_10_13_013322_test.php',
+        ], $this->sorter()->byValues($values));
+    }
+
+    public function testByKeysSortsNestedArraysAndKeepsEqualBasenamesInOrder(): void
+    {
+        $values = [
+            'foo/2022_10_13_013322_test.php' => [
+                '2022_10_13_013322_test.php' => 2,
+                '2022_10_13_013321_test.php' => 1,
+            ],
+            'bar/2022_10_13_013322_test.php' => 3,
+            '2022_10_13_013321_test.php'     => 4,
+        ];
+
+        $this->assertSame([
+            '2022_10_13_013321_test.php'     => 4,
+            'foo/2022_10_13_013322_test.php' => [
+                '2022_10_13_013321_test.php' => 1,
+                '2022_10_13_013322_test.php' => 2,
+            ],
+            'bar/2022_10_13_013322_test.php' => 3,
+        ], $this->sorter()->byKeys($values));
+    }
+
+    public function testByValuesSortsNestedArrays(): void
+    {
+        $this->assertSame([
+            ['2022_10_13_013321_test.php', 'foo/2022_10_13_013322_test.php'],
+        ], $this->sorter()->byValues([
+            [
+                20 => 'foo/2022_10_13_013322_test.php',
+                10 => '2022_10_13_013321_test.php',
+            ],
+        ]));
+    }
+
     public function testByRan(): void
     {
         $items = [

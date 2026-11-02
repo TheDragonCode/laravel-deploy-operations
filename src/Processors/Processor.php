@@ -14,14 +14,18 @@ use DragonCode\LaravelDeployOperations\Helpers\SorterHelper;
 use DragonCode\LaravelDeployOperations\Notifications\Notification;
 use DragonCode\LaravelDeployOperations\Repositories\OperationsRepository;
 use DragonCode\LaravelDeployOperations\Services\MigratorService;
-use DragonCode\Support\Facades\Helpers\Arr;
-use DragonCode\Support\Facades\Helpers\Str;
-use DragonCode\Support\Filesystem\File;
 use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 
 use function array_filter;
+use function realpath;
 
 abstract class Processor
 {
@@ -36,7 +40,7 @@ abstract class Processor
         protected ConfigData $config,
         protected OperationsRepository $repository,
         protected GitHelper $git,
-        protected File $file,
+        protected Filesystem $file,
         protected MigratorService $migrator,
         protected Notification $notification,
         protected Dispatcher $events,
@@ -51,16 +55,27 @@ abstract class Processor
     {
         $file = Str::finish($path, '.php');
 
-        $files = $this->isFile($file) ? [$file] : $this->file->names($path, $filter, true);
+        $files = $this->isFile($file) ? [$file] : $this->getFileNames($path, $filter);
 
-        $files = Arr::filter(
+        $files = Arr::where(
             $files,
             fn (string $path) => Str::endsWith($path, '.php') && ! Str::contains($path, $this->config->exclude)
         );
 
-        return Arr::of($this->sorter->byValues($files))
-            ->map(fn (string $value) => Str::before($value, '.php'))
-            ->toArray();
+        return Arr::map($this->sorter->byValues($files), fn (string $value) => Str::before($value, '.php'));
+    }
+
+    protected function getFileNames(string $path, ?Closure $filter = null): array
+    {
+        $files = Finder::create()->files()->ignoreDotFiles(false)->ignoreVCS(false)->followLinks()->in($path);
+
+        return (new Collection($files))
+            ->map(fn (SplFileInfo $file) => $file->getRealPath())
+            ->filter($filter)
+            ->sort()
+            ->map(fn (string $file) => Str::of($file)->after(realpath($path))->trim('\\/')->toString())
+            ->values()
+            ->all();
     }
 
     protected function runCommand(string $command, array $options = []): void

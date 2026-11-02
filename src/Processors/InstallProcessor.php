@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelDeployOperations\Processors;
 
-use DragonCode\Support\Facades\Filesystem\Directory;
-use DragonCode\Support\Facades\Filesystem\Path;
-use DragonCode\Support\Facades\Helpers\Str;
+use Illuminate\Support\Str;
 
 class InstallProcessor extends Processor
 {
@@ -42,7 +40,7 @@ class InstallProcessor extends Processor
     protected function ensureDirectory(): void
     {
         $this->isFile($this->options->path)
-            ? Directory::ensureDirectory(Path::dirname($this->options->path))
-            : Directory::ensureDirectory($this->options->path);
+            ? $this->file->ensureDirectoryExists($this->file->dirname($this->options->path), 0o755)
+            : $this->file->ensureDirectoryExists($this->options->path, 0o755);
     }
 }

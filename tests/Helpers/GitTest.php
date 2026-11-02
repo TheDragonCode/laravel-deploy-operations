@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Helpers;
 
 use DragonCode\LaravelDeployOperations\Helpers\GitHelper;
-use Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class GitTest extends TestCase
 {
@@ -23,6 +23,6 @@ class GitTest extends TestCase
 
     protected function git(): GitHelper
     {
-        return $this->app->make(GitHelper::class);
+        return new GitHelper;
     }
 }

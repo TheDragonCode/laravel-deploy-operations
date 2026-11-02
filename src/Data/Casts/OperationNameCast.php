@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DragonCode\LaravelDeployOperations\Data\Casts;
 
-use DragonCode\Support\Facades\Helpers\Str;
+use Illuminate\Support\Str;
 use Spatie\LaravelData\Casts\Cast;
 use Spatie\LaravelData\Support\Creation\CreationContext;
 use Spatie\LaravelData\Support\DataProperty;
@@ -22,7 +22,6 @@ class OperationNameCast implements Cast
             ->replace('.php', '')
             ->explode('/')
             ->map(fn (string $path) => Str::snake($path))
-            ->implode(DIRECTORY_SEPARATOR)
-            ->toString();
+            ->implode(DIRECTORY_SEPARATOR);
     }
 }

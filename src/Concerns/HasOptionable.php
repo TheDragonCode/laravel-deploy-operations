@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DragonCode\LaravelDeployOperations\Concerns;
 
 use DragonCode\LaravelDeployOperations\Constants\Options;
-use DragonCode\Support\Facades\Helpers\Arr;
+use Illuminate\Support\Arr;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -30,16 +30,12 @@ trait HasOptionable
 
     protected function getOptions(): array
     {
-        return Arr::of($this->availableOptions())
-            ->filter(fn (array $option) => in_array($option[0], $this->options, true))
-            ->toArray();
+        return Arr::where($this->availableOptions(), fn (array $option) => in_array($option[0], $this->options, true));
     }
 
     protected function getArguments(): array
     {
-        return Arr::of($this->availableArguments())
-            ->filter(fn (array $argument) => in_array($argument[0], $this->arguments, true))
-            ->toArray();
+        return Arr::where($this->availableArguments(), fn (array $argument) => in_array($argument[0], $this->arguments, true));
     }
 
     protected function availableArguments(): array
